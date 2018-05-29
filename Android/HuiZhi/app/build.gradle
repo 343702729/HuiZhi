@@ -1,0 +1,79 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        keystore {
+            storeFile file('D:/WorkSpace/Android/keystore/keystore.keystore')
+            storePassword '123456'
+            keyAlias 'keystore'
+            keyPassword '123456'
+        }
+    }
+    compileSdkVersion 26
+    useLibrary 'org.apache.http.legacy'
+    defaultConfig {
+        applicationId "com.huizhi.manage"
+        minSdkVersion 16
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.keystore
+        }
+        debug {
+            signingConfig signingConfigs.keystore
+        }
+    }
+    buildscript {
+        repositories {
+            mavenCentral()
+        }
+    }
+    allprojects {
+        repositories {
+            mavenCentral()
+        }
+    }
+    productFlavors {
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    buildToolsVersion '26.0.2'
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:27.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation files('libs/TencentLocationSdk_v6.2.5.3_r15b3b3cc_20171103_115903.jar')
+    implementation files('libs/TencentMapSDK_Raster_v_1.2.8.1.c02ec64.jar')
+    implementation project(':IMKit')
+    implementation 'com.google.code.gson:gson:2.2.4'
+    implementation 'com.android.support:support-v4:27.0.0'
+    //    compile 'com.qiniu:qiniu-android-sdk:7.3.+'
+    compile 'fm.jiecao:jiecaovideoplayer:5.5.2'
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    implementation files('libs/jpush-android-3.1.1.jar')
+    implementation files('libs/jcore-android-1.1.9.jar')
+    //    compile 'com.mcxiaoke.volley:library:1.0.+'
+    implementation files('libs/Volley.jar')
+    implementation files('libs/qiniu-android-sdk-7.2.0.jar')
+    implementation files('libs/okhttp-3.2.0.jar')
+    implementation files('libs/okio-1.6.0.jar')
+    implementation files('libs/happy-dns-0.2.3.2.jar')
+    compile 'com.jaeger.statusbarutil:library:1.4.0'
+    //    compile project(':IMKit')
+    implementation files('libs/org.apache.http.legacy.jar')
+}

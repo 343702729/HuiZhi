@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/frame_gradation">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_height">
+            <TextView
+                android:id="@+id/title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="任务标题"
+                android:textSize="@dimen/title_text"
+                android:textColor="@android:color/white"/>
+            <ImageButton
+                android:id="@+id/back_btn"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/icon_back"
+                android:background="@null"/>
+        </FrameLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/frame_task_bg"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/dialog_content_et"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:textColor="@color/dark_gray"
+            android:padding="5dp"
+            android:textSize="18sp"
+            android:gravity="top|left"
+            android:layout_margin="30dp"
+            android:background="@drawable/frame_darkgray"/>
+
+        <Button
+            android:id="@+id/dialog_sure_btn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/frame_login"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text="确定"
+            android:textSize="18sp"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+</LinearLayout>

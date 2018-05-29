@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="app_bg">#EDF2F5</color>
+    <color name="dialg_outside_bg">#B0000000</color>
+    <color name="app_foot_item_fc">#168DD4</color>
+    <color name="text_light_blue">#018BD6</color>
+    <color name="app_foot_item">#9FA6B5</color>
+    <color name="text_light_black">#9FA6B5</color>
+    <color name="light_gray">#CBC7C8</color>
+    <color name="dark_gray">#666666</color>
+    <color name="light_black">#535354</color>
+    <color name="red">#FF1F00</color>
+    <color name="light_red">#E22C6D</color>
+    <color name="light_s_red">#EA6F9A</color>
+    <color name="light_d_red">#E5286C</color>
+    <color name="light_green">#66BB72</color>
+    <color name="task_status_cl">#EB7B58</color>
+    <color name="light_yellow">#FF9500</color>
+    <color name="orange">#EC7B54</color>
+    <color name="task_status_sh">#869FDF</color>
+    <color name="task_status_wc">#66BB72</color>
+    <color name="task_status_jj">#993333</color>
+    <color name="task_status_gb">#666666</color>
+    <color name="task_level_h">#E45488</color>
+    <color name="task_level_m">#87BCE4</color>
+    <color name="light_blue">#87BCE4</color>
+    <color name="blue">#0075FF</color>
+    <color name="light_blue_d">#1AA1E6</color>
+    <color name="task_level_l">#72C59C</color>
+    <color name="gradation_left">#987CFB</color>
+    <color name="gradation_right">#57B9FC</color>
+    <color name="gray">#A6A6A0</color>
+    <color name="lightgray">#F5F5F5</color>
+
+    <color name="text1">#59B29C</color>
+    <color name="text2">#333333</color>
+    <color name="split_line">#11112233</color>
+</resources>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:orientation="horizontal"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:id="@+id/new_item1_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:visibility="invisible"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:background="@drawable/select_button_wg"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/new1_item_iv"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:scaleType="fitXY"/>
+        
+        <TextView
+            android:id="@+id/new1_title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="5dp"
+            android:text="每个学期，都是一场新的退不。"
+            android:textColor="@color/dark_gray"
+            android:textSize="16sp"/>
+        <TextView
+            android:id="@+id/new1_time_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2017-10-29"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/new_item2_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:visibility="invisible"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:background="@drawable/select_button_wg"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/new2_item_iv"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:scaleType="fitXY"/>
+
+        <TextView
+            android:id="@+id/new2_title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="5dp"
+            android:text="每个学期，都是一场新的退不。"
+            android:textColor="@color/dark_gray"
+            android:textSize="16sp"/>
+        <TextView
+            android:id="@+id/new2_time_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2017-10-29"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp"/>
+    </LinearLayout>
+</LinearLayout>

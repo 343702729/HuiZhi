@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/task_pending_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:paddingLeft="7dp"
+        android:paddingRight="7dp"
+        android:paddingTop="1dp"
+        android:paddingBottom="1dp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="待处理"
+        android:textSize="12sp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/frame_task_status1"/>
+
+    <TextView
+        android:id="@+id/task_audit_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:paddingLeft="7dp"
+        android:paddingRight="7dp"
+        android:paddingTop="1dp"
+        android:paddingBottom="1dp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="待审核"
+        android:textSize="12sp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/frame_task_status2"/>
+
+    <TextView
+        android:id="@+id/task_complete_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:paddingLeft="7dp"
+        android:paddingRight="7dp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="已完成"
+        android:textSize="12sp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/frame_task_status3"/>
+
+    <TextView
+        android:id="@+id/task_refused_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:paddingLeft="7dp"
+        android:paddingRight="7dp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="已拒绝"
+        android:textSize="12sp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/frame_task_status4"/>
+
+    <TextView
+        android:id="@+id/task_close_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:paddingLeft="7dp"
+        android:paddingRight="7dp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="已关闭"
+        android:textSize="12sp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/frame_task_status5"/>
+</RelativeLayout>

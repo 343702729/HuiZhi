@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/level_h_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:paddingTop="1dp"
+        android:paddingBottom="1dp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="高"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:background="@drawable/frame_task_level1"/>
+
+    <TextView
+        android:id="@+id/level_m_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:paddingTop="1dp"
+        android:paddingBottom="1dp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="中"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:background="@drawable/frame_task_level2"/>
+
+    <TextView
+        android:id="@+id/level_l_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="低"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:background="@drawable/frame_task_level3"/>
+
+</FrameLayout>
