@@ -162,7 +162,7 @@ public class MainActivity extends FragmentActivity {
     }
 
     /**
-     * 将所有的Fragment都置为隐藏状态
+     * 将所有的Fragment都置为隐藏状态 test
      * @param transaction
      */
     private void hideFragment(FragmentTransaction transaction){
