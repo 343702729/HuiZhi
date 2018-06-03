@@ -19,6 +19,8 @@
     <color name="light_s_red">#EA6F9A</color>
     <color name="light_d_red">#E5286C</color>
     <color name="light_green">#66BB72</color>
+    <color name="green">#00FF00</color>
+    <color name="dark_green">#238E23</color>
     <color name="task_status_cl">#EB7B58</color>
     <color name="light_yellow">#FF9500</color>
     <color name="orange">#EC7B54</color>
