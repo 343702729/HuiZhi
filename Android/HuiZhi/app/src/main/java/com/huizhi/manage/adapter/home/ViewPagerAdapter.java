@@ -11,10 +11,10 @@ import java.util.List;
  * Created by CL on 2017/12/20.
  */
 
-public class TaskMouldPagerAdapter extends PagerAdapter {
+public class ViewPagerAdapter extends PagerAdapter {
     private List<View> views;
 
-    public TaskMouldPagerAdapter(List<View> views){
+    public ViewPagerAdapter(List<View> views){
         this.views = views;
     }
 

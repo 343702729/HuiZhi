@@ -359,6 +359,17 @@
             </intent-filter>
         </activity>
 
+        <!--course setting 课程信息设置 -->
+        <activity
+            android:name=".activity.home.course.CourseSettingActivity"
+            android:windowSoftInputMode="stateHidden|stateUnchanged"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <!-- ******************** Material ******************** -->
         <!-- material files 文件列表 -->
         <activity

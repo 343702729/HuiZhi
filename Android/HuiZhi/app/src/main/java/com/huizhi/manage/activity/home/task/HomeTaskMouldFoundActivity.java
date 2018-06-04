@@ -19,15 +19,13 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.huizhi.manage.R;
-import com.huizhi.manage.adapter.home.TaskMouldPagerAdapter;
-import com.huizhi.manage.base.BackCliclListener;
+import com.huizhi.manage.adapter.home.ViewPagerAdapter;
 import com.huizhi.manage.base.BaseInfoUpdate;
 import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.dialog.JudgeDialog;
 import com.huizhi.manage.dialog.LoadingProgress;
 import com.huizhi.manage.node.TaskMouldNode;
-import com.huizhi.manage.node.TaskNode;
 import com.huizhi.manage.request.home.HomeTaskGetRequest;
 import com.huizhi.manage.request.home.HomeTaskPostRequest;
 import com.huizhi.manage.util.AppUtil;
@@ -172,7 +170,7 @@ public class HomeTaskMouldFoundActivity extends Activity{
 //        View staffV = inflater.inflate(R.layout.item_user_task_mould_staff, null);
         views.add(taskV);
         views.add(staffV);
-        TaskMouldPagerAdapter pagerAdapter = new TaskMouldPagerAdapter(views);
+        ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(views);
         viewPager.setAdapter(pagerAdapter);
     }
 
