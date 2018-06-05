@@ -15,17 +15,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/name_tv"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="意向绘画5班"
+                android:maxLines="1"
                 android:textColor="@color/dark_gray"
                 android:textSize="16sp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="right">
+                android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -33,10 +34,10 @@
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
                 <TextView
+                    android:id="@+id/time_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="2017-07-25 12:00"
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
             </LinearLayout>
@@ -65,10 +66,10 @@
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
                 <TextView
+                    android:id="@+id/all_stu_count_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="32"
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
             </LinearLayout>
@@ -90,10 +91,10 @@
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
                 <TextView
+                    android:id="@+id/sign_count_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="32"
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
             </LinearLayout>
@@ -115,10 +116,10 @@
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
                 <TextView
+                    android:id="@+id/leave_stu_count_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="32"
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
             </LinearLayout>
@@ -147,10 +148,10 @@
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
                 <TextView
+                    android:id="@+id/work_count_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="32"
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
             </LinearLayout>
@@ -172,10 +173,10 @@
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
                 <TextView
+                    android:id="@+id/comment_count_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="32"
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
             </LinearLayout>
@@ -197,10 +198,10 @@
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
                 <TextView
+                    android:id="@+id/complete_rate_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="32"
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
             </LinearLayout>

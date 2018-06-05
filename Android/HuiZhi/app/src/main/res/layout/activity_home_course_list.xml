@@ -57,14 +57,14 @@
                 android:layout_marginRight="50dp"
                 android:layout_gravity="center_vertical"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:max="100"
-                android:progress="80"
+                android:max="0"
+                android:progress="0"
                 android:progressDrawable="@drawable/progress_bar_blue"/>
             <TextView
+                android:id="@+id/lesson_tv"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
-                android:text="80%"
                 android:textColor="@color/light_blue_d"
                 android:textSize="16sp"/>
         </FrameLayout>
@@ -108,14 +108,14 @@
                     android:layout_marginRight="50dp"
                     android:layout_gravity="center_vertical"
                     style="?android:attr/progressBarStyleHorizontal"
-                    android:max="100"
-                    android:progress="80"
+                    android:max="0"
+                    android:progress="0"
                     android:progressDrawable="@drawable/progress_bar_green"/>
                 <TextView
+                    android:id="@+id/comment_tv"
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|center_vertical"
-                    android:text="80%"
                     android:textColor="@color/light_green"
                     android:textSize="16sp"/>
             </FrameLayout>

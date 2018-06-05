@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseInfoActivity extends Activity {
+    private String lessonNum;
     private ViewPager viewPager;
     private LinearLayout signSelLL;
     private TextView standardTV, signTV;
@@ -32,7 +33,12 @@ public class CourseInfoActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_course_info);
+        initDatas();
         initViews();
+    }
+
+    private void initDatas(){
+        lessonNum = getIntent().getStringExtra("LessonNum");
     }
 
     private void initViews() {

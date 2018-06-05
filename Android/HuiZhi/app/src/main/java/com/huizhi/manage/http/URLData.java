@@ -157,6 +157,9 @@ public class URLData {
     private static final String URL_USER_PASSWORD_EDIT = "/service/UserService.ashx";
     public static final String METHORD_USER_PASSWORD_EDIT = "changePassword";
 
+    private static final String URL_HOME_COURSE_LIST = "/service/TeacherService.ashx";
+    public static final String METHORD_HOME_COURSE_LIST = "getLessonList";
+
     /**
      * 用户登录
      * @return
@@ -572,5 +575,13 @@ public class URLData {
      */
     public static String getUrlUserPasswordEdit(){
         return URL_HOST + URL_USER_PASSWORD_EDIT;
+    }
+
+    /**
+     * 获取课程列表
+     * @return
+     */
+    public static String getUrlHomeCourseList(){
+        return  URL_HOST + URL_HOME_COURSE_LIST;
     }
 }

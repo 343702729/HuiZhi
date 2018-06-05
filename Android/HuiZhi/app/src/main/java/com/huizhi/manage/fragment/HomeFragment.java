@@ -24,6 +24,7 @@ import com.huizhi.manage.activity.home.HomeEmailInfoActivity;
 import com.huizhi.manage.activity.home.HomeFileMenuActivity;
 import com.huizhi.manage.activity.home.HomeMessageActivity;
 import com.huizhi.manage.activity.home.HomeNewsActivity;
+import com.huizhi.manage.activity.home.course.CourseListActivity;
 import com.huizhi.manage.activity.home.task.HomeTaskAgencyActivity;
 import com.huizhi.manage.activity.home.task.HomeTaskAllocationActivity;
 import com.huizhi.manage.activity.home.HomeWorkDailyActivity;
@@ -118,6 +119,9 @@ public class HomeFragment extends Fragment {
         //工作日志
         LinearLayout rzLL = (LinearLayout)messageLayout.findViewById(R.id.user_rz_ll);
         rzLL.setOnClickListener(itemOnClick);
+        //课程列表
+        LinearLayout kcLL = (LinearLayout)messageLayout.findViewById(R.id.user_kc_ll);
+        kcLL.setOnClickListener(itemOnClick);
 
         if(UserInfo.getInstance().getUser().isAdmin()){
             //任务管理
@@ -262,6 +266,11 @@ public class HomeFragment extends Fragment {
                 case R.id.user_rz_ll:
                     intent = new Intent();
                     intent.setClass(activity, HomeWorkDailyActivity.class);
+                    activity.startActivity(intent);
+                    break;
+                case R.id.user_kc_ll:
+                    intent = new Intent();
+                    intent.setClass(activity, CourseListActivity.class);
                     activity.startActivity(intent);
                     break;
             }
