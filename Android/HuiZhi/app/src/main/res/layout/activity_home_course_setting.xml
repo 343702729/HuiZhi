@@ -29,7 +29,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="10dp"
         android:background="@color/white"
         android:orientation="vertical">
@@ -52,7 +52,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp">
+            android:paddingRight="20dp"
+            android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -60,7 +61,48 @@
                 android:text="课程内容"
                 android:textSize="16sp"
                 android:textColor="@color/light_black"/>
+            
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:gravity="top"
+                android:padding="5dp"
+                android:textSize="14sp"
+                android:textColor="@color/light_black"
+                android:background="@drawable/frame_gray"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="重点难点"
+                android:textSize="16sp"
+                android:textColor="@color/light_black"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                android:textSize="14sp"
+                android:textColor="@color/light_black"
+                android:gravity="top"
+                android:background="@drawable/frame_gray"/>
         </LinearLayout>
+
+        <Button
+            android:id="@+id/submit_btn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/frame_light_green"
+            android:orientation="horizontal"
+            android:text="保存"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
 
     </LinearLayout>
 </LinearLayout>

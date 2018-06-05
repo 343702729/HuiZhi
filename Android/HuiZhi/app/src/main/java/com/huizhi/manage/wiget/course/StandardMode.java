@@ -2,12 +2,17 @@ package com.huizhi.manage.wiget.course;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.huizhi.manage.R;
+import com.huizhi.manage.activity.home.course.CourseReleaseActivity;
 import com.huizhi.manage.adapter.home.StandardModeAdapter;
 import com.huizhi.manage.node.StandardNode;
 
@@ -48,6 +53,20 @@ public class StandardMode extends LinearLayout {
         nodes.add(new StandardNode());
         standardModeAdapter = new StandardModeAdapter(context, nodes);
         listView.setAdapter(standardModeAdapter);
+        listView.setOnItemClickListener(itemClickListener);
     }
+
+    private AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            StandardNode node = (StandardNode)standardModeAdapter.getItem(i);
+            Intent intent = new Intent();
+            intent.setClass(context, CourseReleaseActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("Node", node);
+            intent.putExtras(intent);
+            context.startActivity(intent);
+        }
+    };
 
 }

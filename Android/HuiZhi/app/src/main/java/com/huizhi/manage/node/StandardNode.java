@@ -1,4 +1,6 @@
 package com.huizhi.manage.node;
 
-public class StandardNode {
+import java.io.Serializable;
+
+public class StandardNode implements Serializable {
 }
