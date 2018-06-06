@@ -14,26 +14,28 @@ import android.widget.ListView;
 import com.huizhi.manage.R;
 import com.huizhi.manage.adapter.home.SignModeAdapter;
 import com.huizhi.manage.dialog.SignDialog;
-import com.huizhi.manage.node.SignNode;
+import com.huizhi.manage.node.StudentNode;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SignMode extends LinearLayout {
     private Activity context;
+    private String lessonNum;
     private ListView listView;
     private SignModeAdapter signModeAdapter;
+    private List<StudentNode> studentNodes;
 
-    public SignMode(Activity context){
+    public SignMode(Activity context, String lessonNum){
         super(context);
         this.context = context;
+        this.lessonNum = lessonNum;
         initViews();
     }
 
-    public SignMode(Activity context, AttributeSet attrs){
-        super(context, attrs);
-        this.context = context;
-        initViews();
+    public void setDatas(List<StudentNode> studentNodes){
+        this.studentNodes = studentNodes;
+        signModeAdapter.updateViewsData(studentNodes);
     }
 
     public void initViews(){
@@ -41,15 +43,9 @@ public class SignMode extends LinearLayout {
         inflater.inflate(R.layout.item_course_mode_sign, this);
         Button submitBtn = findViewById(R.id.submit_btn);
         submitBtn.setOnClickListener(submitBtnClick);
+
         listView = findViewById(R.id.listview);
-        List<SignNode> nodes = new ArrayList<>();
-        nodes.add(new SignNode());
-        nodes.add(new SignNode());
-        nodes.add(new SignNode());
-        nodes.add(new SignNode());
-        nodes.add(new SignNode());
-        nodes.add(new SignNode());
-        signModeAdapter = new SignModeAdapter(context, nodes);
+        signModeAdapter = new SignModeAdapter(context, null);
         listView.setAdapter(signModeAdapter);
 
         CheckBox allCheck = findViewById(R.id.all_check);
@@ -59,7 +55,10 @@ public class SignMode extends LinearLayout {
     private OnClickListener submitBtnClick = new OnClickListener() {
         @Override
         public void onClick(View view) {
-            SignDialog signDialog = new SignDialog(context, null);
+            if(signModeAdapter==null)
+                return;
+            List<StudentNode> nodes = signModeAdapter.getSignNodes();
+            SignDialog signDialog = new SignDialog(context, lessonNum, studentNodes, nodes,null);
             signDialog.showView(view);
         }
     };

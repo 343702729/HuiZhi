@@ -1,6 +1,9 @@
 package com.huizhi.manage.node;
 
+import java.util.List;
+
 public class CourseNode {
+    private String lessonNum;
     private String lessonName;
     private String lessonTime;
     private int allStuCount;
@@ -9,6 +12,15 @@ public class CourseNode {
     private int publishWorkCount;
     private int commentedCount;
     private String completionRate;
+    private List<StudentNode> studentNodes;
+
+    public String getLessonNum() {
+        return lessonNum;
+    }
+
+    public void setLessonNum(String lessonNum) {
+        this.lessonNum = lessonNum;
+    }
 
     public String getLessonName() {
         return lessonName;
@@ -72,5 +84,13 @@ public class CourseNode {
 
     public void setCompletionRate(String completionRate) {
         this.completionRate = completionRate;
+    }
+
+    public List<StudentNode> getStudentNodes() {
+        return studentNodes;
+    }
+
+    public void setStudentNodes(List<StudentNode> studentNodes) {
+        this.studentNodes = studentNodes;
     }
 }

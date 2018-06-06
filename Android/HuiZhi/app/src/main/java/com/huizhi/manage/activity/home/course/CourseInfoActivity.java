@@ -3,6 +3,8 @@ package com.huizhi.manage.activity.home.course;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -14,6 +16,10 @@ import android.widget.TextView;
 import com.huizhi.manage.R;
 import com.huizhi.manage.adapter.home.ViewPagerAdapter;
 import com.huizhi.manage.base.BackCliclListener;
+import com.huizhi.manage.data.Constants;
+import com.huizhi.manage.data.UserInfo;
+import com.huizhi.manage.node.CourseNode;
+import com.huizhi.manage.request.home.HomeCourseGetRequest;
 import com.huizhi.manage.util.AppUtil;
 import com.huizhi.manage.wiget.course.SignMode;
 import com.huizhi.manage.wiget.course.StandardMode;
@@ -35,6 +41,7 @@ public class CourseInfoActivity extends Activity {
         setContentView(R.layout.activity_home_course_info);
         initDatas();
         initViews();
+        getDatas();
     }
 
     private void initDatas(){
@@ -58,12 +65,18 @@ public class CourseInfoActivity extends Activity {
         initPageView();
     }
 
+    private void getDatas(){
+        HomeCourseGetRequest getRequest = new HomeCourseGetRequest();
+
+        getRequest.getCourseInfo(UserInfo.getInstance().getUser().getTeacherName(), lessonNum, handler);
+    }
+
     private void initPageView(){
         viewPager = findViewById(R.id.viewpager);
         LayoutInflater inflater = getLayoutInflater();
         List<View> views = new ArrayList<>();
         standardMode = new StandardMode(this);
-        signMode = new SignMode(this);
+        signMode = new SignMode(this, lessonNum);
         views.add(standardMode);
         views.add(signMode);
         ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(views);
@@ -110,4 +123,42 @@ public class CourseInfoActivity extends Activity {
             }
         }
     };
+
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case Constants.MSG_SUCCESS:
+                    CourseNode node = (CourseNode)msg.obj;
+                    setViewsData(node);
+                    break;
+            }
+        }
+    };
+
+    private void setViewsData(CourseNode node){
+        if(node==null)
+            return;
+        TextView titleTV = findViewById(R.id.title_tv);
+        TextView allstuTV = findViewById(R.id.allstu_tv);
+        TextView signedTV = findViewById(R.id.signed_tv);
+        TextView leavestuTV = findViewById(R.id.leavestu_tv);
+        TextView publishwTV = findViewById(R.id.publishwork_tv);
+        TextView commentedTV = findViewById(R.id.commented_tv);
+        TextView completionrTV = findViewById(R.id.completionrate_tv);
+
+        titleTV.setText(node.getLessonName());
+        allstuTV.setText(String.valueOf(node.getAllStuCount()));
+        signedTV.setText(String.valueOf(node.getSignedCount()));
+        leavestuTV.setText(String.valueOf(node.getLeaveStuCount()));
+        publishwTV.setText(String.valueOf(node.getPublishWorkCount()));
+        commentedTV.setText(String.valueOf(node.getCommentedCount()));
+        completionrTV.setText(node.getCompletionRate());
+
+        if(standardMode!=null)
+            standardMode.setDatas(node.getStudentNodes());
+        if(signMode!=null)
+            signMode.setDatas(node.getStudentNodes());
+    }
 }

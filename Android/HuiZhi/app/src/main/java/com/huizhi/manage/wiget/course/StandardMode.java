@@ -15,6 +15,7 @@ import com.huizhi.manage.R;
 import com.huizhi.manage.activity.home.course.CourseReleaseActivity;
 import com.huizhi.manage.adapter.home.StandardModeAdapter;
 import com.huizhi.manage.node.StandardNode;
+import com.huizhi.manage.node.StudentNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +24,17 @@ public class StandardMode extends LinearLayout {
     private Activity context;
     private ListView listView;
     private StandardModeAdapter standardModeAdapter;
+    private List<StudentNode> studentNodes;
 
     public StandardMode(Activity context){
         super(context);
         this.context = context;
         initViews();
+    }
+
+    public void setDatas(List<StudentNode> studentNodes){
+        this.studentNodes = studentNodes;
+        standardModeAdapter.updateViewsData(studentNodes);
     }
 
     public StandardMode(Activity context, AttributeSet attrs){
@@ -40,18 +47,7 @@ public class StandardMode extends LinearLayout {
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.item_course_mode_standard, this);
         listView = findViewById(R.id.listview);
-        List<StandardNode> nodes = new ArrayList<>();
-        nodes.add(new StandardNode());
-        nodes.add(new StandardNode());
-        nodes.add(new StandardNode());
-        nodes.add(new StandardNode());
-        nodes.add(new StandardNode());
-        nodes.add(new StandardNode());
-        nodes.add(new StandardNode());
-        nodes.add(new StandardNode());
-        nodes.add(new StandardNode());
-        nodes.add(new StandardNode());
-        standardModeAdapter = new StandardModeAdapter(context, nodes);
+        standardModeAdapter = new StandardModeAdapter(context, null);
         listView.setAdapter(standardModeAdapter);
         listView.setOnItemClickListener(itemClickListener);
     }
@@ -59,7 +55,7 @@ public class StandardMode extends LinearLayout {
     private AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            StandardNode node = (StandardNode)standardModeAdapter.getItem(i);
+            StudentNode node = (StudentNode)standardModeAdapter.getItem(i);
             Intent intent = new Intent();
             intent.setClass(context, CourseReleaseActivity.class);
             Bundle bundle = new Bundle();

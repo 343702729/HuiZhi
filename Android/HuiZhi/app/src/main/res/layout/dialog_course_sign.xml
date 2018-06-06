@@ -16,13 +16,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="45dp">
+            android:layout_marginBottom="45dp"
+            android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:paddingTop="10dp"
-                android:paddingBottom="5dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="10dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:orientation="horizontal">
@@ -33,10 +34,11 @@
                     android:textSize="14sp"
                     android:textColor="@color/light_black"/>
                 <TextView
+                    android:id="@+id/yd_count_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="32"
+                    android:text="0"
                     android:textSize="14sp"
                     android:textColor="@color/light_black"/>
 
@@ -48,14 +50,24 @@
                     android:textSize="14sp"
                     android:textColor="@color/light_black"/>
                 <TextView
+                    android:id="@+id/sd_count_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="30"
+                    android:text="0"
                     android:textSize="14sp"
                     android:textColor="@color/light_black"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/app_bg"/>
 
+            <ListView
+                android:id="@+id/listview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

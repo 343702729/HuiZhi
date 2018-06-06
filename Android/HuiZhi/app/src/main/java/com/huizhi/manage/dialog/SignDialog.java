@@ -3,30 +3,57 @@ package com.huizhi.manage.dialog;
 import android.app.ActionBar;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.huizhi.manage.R;
+import com.huizhi.manage.adapter.home.StandardModeAdapter;
 import com.huizhi.manage.base.BaseInfoUpdate;
+import com.huizhi.manage.data.Constants;
+import com.huizhi.manage.node.StudentNode;
+import com.huizhi.manage.request.home.HomeCoursePostRequest;
+
+import java.util.List;
 
 public class SignDialog {
     private Context context;
     private BaseInfoUpdate infoUpdate;
     private PopupWindow popupWindow;
     private View contentView;
+    private String lessonNum;
+    private List<StudentNode> allStus;
+    private List<StudentNode> signStus;
+    private ListView listView;
 
-    public SignDialog(Context context, BaseInfoUpdate infoUpdate){
+    public SignDialog(Context context, String lessonNum, List<StudentNode> allStus, List<StudentNode> signStus, BaseInfoUpdate infoUpdate){
         this.context = context;
+        this.lessonNum = lessonNum;
+        this.allStus = allStus;
+        this.signStus = signStus;
         this.infoUpdate = infoUpdate;
         initViews();
     }
 
     public void initViews(){
         contentView = View.inflate(context, R.layout.dialog_course_sign, null);
+        TextView ydCountTV = contentView.findViewById(R.id.yd_count_tv);
+        TextView sdCountTV = contentView.findViewById(R.id.sd_count_tv);
+        if(allStus!=null)
+            ydCountTV.setText(String.valueOf(allStus.size()));
+        if(signStus!=null)
+            sdCountTV.setText(String.valueOf(signStus.size()));
+
+        listView = contentView.findViewById(R.id.listview);
+        StandardModeAdapter adapter = new StandardModeAdapter(context, signStus, true);
+        listView.setAdapter(adapter);
+
         Button cancelBtn = contentView.findViewById(R.id.cancel_btn);
         cancelBtn.setOnClickListener(itemBtnClick);
         Button sureBtn = contentView.findViewById(R.id.sure_btn);
@@ -54,7 +81,21 @@ public class SignDialog {
             if(view.getId()==R.id.cancel_btn){
                 popupWindow.dismiss();
             }else if(view.getId()==R.id.sure_btn){
-                popupWindow.dismiss();
+//                popupWindow.dismiss();
+                HomeCoursePostRequest postRequest = new HomeCoursePostRequest();
+                postRequest.postStudentsSignInfo(lessonNum, "", handler);
+            }
+        }
+    };
+
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case Constants.MSG_SUCCESS:
+
+                    break;
             }
         }
     };

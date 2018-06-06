@@ -16,6 +16,7 @@
             android:layout_marginTop="@dimen/navigation_padding"
             android:orientation="horizontal">
             <TextView
+                android:id="@+id/title_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -105,10 +106,10 @@
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
                 <TextView
+                    android:id="@+id/allstu_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="32"
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
             </LinearLayout>
@@ -130,10 +131,10 @@
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
                 <TextView
+                    android:id="@+id/signed_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="32"
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
             </LinearLayout>
@@ -155,10 +156,10 @@
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
                 <TextView
+                    android:id="@+id/leavestu_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="32"
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
             </LinearLayout>
@@ -187,10 +188,10 @@
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
                 <TextView
+                    android:id="@+id/publishwork_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="32"
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
             </LinearLayout>
@@ -212,10 +213,10 @@
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
                 <TextView
+                    android:id="@+id/commented_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="32"
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
             </LinearLayout>
@@ -237,10 +238,10 @@
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
                 <TextView
+                    android:id="@+id/completionrate_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="32"
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
             </LinearLayout>

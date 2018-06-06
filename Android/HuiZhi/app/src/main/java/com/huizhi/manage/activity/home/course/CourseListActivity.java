@@ -58,8 +58,7 @@ public class CourseListActivity extends Activity {
 
     private void getDatas(){
         HomeCourseGetRequest getRequest = new HomeCourseGetRequest();
-        //UserInfo.getInstance().getUser().getTeacherName()
-        getRequest.getCourseList("朱虹", handler);
+        getRequest.getCourseList(UserInfo.getInstance().getUser().getTeacherName(), handler);
     }
 
     private AdapterView.OnItemClickListener courseItemClick = new AdapterView.OnItemClickListener() {
@@ -68,7 +67,7 @@ public class CourseListActivity extends Activity {
             CourseNode node = (CourseNode)courseAdapter.getItem(i);
             Intent intent = new Intent();
             intent.setClass(CourseListActivity.this, CourseInfoActivity.class);
-            intent.putExtra("LessonNum", "037670");
+            intent.putExtra("LessonNum", node.getLessonNum());
             startActivity(intent);
         }
     };

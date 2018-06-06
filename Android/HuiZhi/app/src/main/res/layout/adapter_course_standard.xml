@@ -16,10 +16,10 @@
         android:background="@mipmap/user_icon"/>
 
     <TextView
+        android:id="@+id/name_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:text="韩雪"
         android:textColor="@color/light_black"
         android:textSize="15sp"/>
     <LinearLayout
@@ -28,10 +28,20 @@
         android:gravity="right|center_vertical">
 
         <TextView
+            android:id="@+id/sign_status_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="已签到"
             android:textSize="14sp"
             android:textColor="@color/app_green"/>
+
+        <ImageView
+            android:id="@+id/publish_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/icon_publish_undo"/>
     </LinearLayout>
 </LinearLayout>

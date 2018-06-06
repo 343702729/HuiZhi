@@ -119,7 +119,7 @@
                                 <ImageView
                                     android:layout_width="16dp"
                                     android:layout_height="16dp"
-                                    android:src="@mipmap/icon_file_delet"/>
+                                    android:src="@mipmap/icon_pic_delet"/>
                             </LinearLayout>
                         </FrameLayout>
                         <FrameLayout
@@ -164,7 +164,7 @@
                                 <ImageView
                                     android:layout_width="16dp"
                                     android:layout_height="16dp"
-                                    android:src="@mipmap/icon_file_delet"/>
+                                    android:src="@mipmap/icon_pic_delet"/>
                             </LinearLayout>
                         </FrameLayout>
                         <FrameLayout
