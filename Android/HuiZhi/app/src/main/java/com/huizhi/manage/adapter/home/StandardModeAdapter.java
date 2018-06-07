@@ -9,10 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.huizhi.manage.R;
-import com.huizhi.manage.node.CourseNode;
-import com.huizhi.manage.node.StandardNode;
 import com.huizhi.manage.node.StudentNode;
-import com.huizhi.manage.wiget.course.StandardMode;
 
 import java.util.ArrayList;
 import java.util.List;

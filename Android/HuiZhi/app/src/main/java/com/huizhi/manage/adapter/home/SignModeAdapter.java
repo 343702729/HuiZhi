@@ -12,8 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.huizhi.manage.R;
-import com.huizhi.manage.node.SignNode;
-import com.huizhi.manage.node.StandardNode;
 import com.huizhi.manage.node.StudentNode;
 
 import java.util.ArrayList;
@@ -66,7 +64,8 @@ public class SignModeAdapter extends BaseAdapter {
             //全选
             signNodes.clear();
             for (StudentNode node:nodes){
-                signNodes.add(node);
+                if(node.getStuStatus()!=1)
+                    signNodes.add(node);
             }
         }else {
             //全不选
@@ -103,6 +102,7 @@ public class SignModeAdapter extends BaseAdapter {
             viewItem.signSTV.setTextColor(context.getResources().getColor(R.color.dark_gray));
         }else if(node.getStuStatus()==1){
             viewItem.signSTV.setTextColor(context.getResources().getColor(R.color.app_green));
+            viewItem.signIV.setBackgroundResource(R.mipmap.user_check_fc);
         }
         viewItem.signSTV.setText(node.getStrStuStatus());
         return view;
@@ -126,6 +126,8 @@ public class SignModeAdapter extends BaseAdapter {
 
         @Override
         public void onClick(View view) {
+            if(studentNode.getStuStatus()==1)
+                return;
             if(signNodes.contains(studentNode)){
                 signNodes.remove(studentNode);
                 imageView.setBackgroundResource(R.mipmap.user_check_bg);

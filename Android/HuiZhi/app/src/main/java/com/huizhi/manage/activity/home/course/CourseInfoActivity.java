@@ -109,13 +109,13 @@ public class CourseInfoActivity extends Activity {
             View signV = findViewById(R.id.sign_v);
 
             if(index==0){
-                signSelLL.setVisibility(View.GONE);
+//                signSelLL.setVisibility(View.GONE);
                 standardTV.setTextColor(getResources().getColor(R.color.light_blue_d));
                 standardV.setBackgroundColor(getResources().getColor(R.color.light_blue_d));
                 signTV.setTextColor(getResources().getColor(R.color.dark_gray));
                 signV.setBackgroundColor(getResources().getColor(R.color.white));
             }else if(index==1){
-                signSelLL.setVisibility(View.VISIBLE);
+//                signSelLL.setVisibility(View.VISIBLE);
                 standardTV.setTextColor(getResources().getColor(R.color.dark_gray));
                 standardV.setBackgroundColor(getResources().getColor(R.color.white));
                 signTV.setTextColor(getResources().getColor(R.color.light_blue_d));

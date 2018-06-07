@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.huizhi.manage.R;
 import com.huizhi.manage.adapter.home.StandardModeAdapter;
@@ -19,6 +20,7 @@ import com.huizhi.manage.base.BaseInfoUpdate;
 import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.node.StudentNode;
 import com.huizhi.manage.request.home.HomeCoursePostRequest;
+import com.huizhi.manage.util.AppUtil;
 
 import java.util.List;
 
@@ -45,10 +47,15 @@ public class SignDialog {
         contentView = View.inflate(context, R.layout.dialog_course_sign, null);
         TextView ydCountTV = contentView.findViewById(R.id.yd_count_tv);
         TextView sdCountTV = contentView.findViewById(R.id.sd_count_tv);
+        int count = 0;
+        for(StudentNode node:allStus){
+            if(node.getStuStatus()==1)
+                count++;
+        }
         if(allStus!=null)
             ydCountTV.setText(String.valueOf(allStus.size()));
         if(signStus!=null)
-            sdCountTV.setText(String.valueOf(signStus.size()));
+            sdCountTV.setText(String.valueOf(count));
 
         listView = contentView.findViewById(R.id.listview);
         StandardModeAdapter adapter = new StandardModeAdapter(context, signStus, true);
@@ -82,8 +89,14 @@ public class SignDialog {
                 popupWindow.dismiss();
             }else if(view.getId()==R.id.sure_btn){
 //                popupWindow.dismiss();
+                if(signStus==null||signStus.size()==0)
+                    return;
+                String stuNums = "";
+                for(StudentNode node:signStus){
+                    stuNums = stuNums + node.getStuNum() + ",";
+                }
                 HomeCoursePostRequest postRequest = new HomeCoursePostRequest();
-                postRequest.postStudentsSignInfo(lessonNum, "", handler);
+                postRequest.postStudentsSignInfo(lessonNum, stuNums, handler);
             }
         }
     };
@@ -94,7 +107,11 @@ public class SignDialog {
             super.handleMessage(msg);
             switch (msg.what){
                 case Constants.MSG_SUCCESS:
-
+                    popupWindow.dismiss();
+                    break;
+                case Constants.MSG_FAILURE:
+                    String mesg = (String)msg.obj;
+                    Toast.makeText(context, mesg, Toast.LENGTH_SHORT).show();
                     break;
             }
         }

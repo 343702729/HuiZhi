@@ -87,6 +87,7 @@
                     </LinearLayout>
                 </LinearLayout>
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -97,97 +98,15 @@
                     android:gravity="center_vertical"
                     android:orientation="vertical"
                     android:padding="15dp">
-                    <LinearLayout
+
+                    <com.huizhi.manage.wiget.MyGridView
+                        android:id="@+id/gridview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <FrameLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="5dp"
-                            android:layout_weight="1">
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="100dp"
-                                android:background="@mipmap/icon_pic_bg"/>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="20dp"
-                                android:layout_gravity="bottom"
-                                android:gravity="center"
-                                android:background="@color/transparent_bg">
-                                <ImageView
-                                    android:layout_width="16dp"
-                                    android:layout_height="16dp"
-                                    android:src="@mipmap/icon_pic_delet"/>
-                            </LinearLayout>
-                        </FrameLayout>
-                        <FrameLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:layout_weight="1">
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="100dp"
-                                android:background="@mipmap/icon_pic_bg"/>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="20dp"
-                                android:layout_gravity="bottom"
-                                android:gravity="center"
-                                android:background="@color/transparent_bg">
+                        android:verticalSpacing="5dp"
+                        android:horizontalSpacing="5dp"
+                        android:numColumns="2"/>
 
-                            </LinearLayout>
-                        </FrameLayout>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal">
-                        <FrameLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="5dp"
-                            android:layout_weight="1">
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="100dp"
-                                android:background="@mipmap/icon_pic_bg"/>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="20dp"
-                                android:layout_gravity="bottom"
-                                android:gravity="center"
-                                android:background="@color/transparent_bg">
-                                <ImageView
-                                    android:layout_width="16dp"
-                                    android:layout_height="16dp"
-                                    android:src="@mipmap/icon_pic_delet"/>
-                            </LinearLayout>
-                        </FrameLayout>
-                        <FrameLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:layout_weight="1">
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="100dp"
-                                android:visibility="gone"
-                                android:background="@mipmap/icon_pic_bg"/>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="20dp"
-                                android:layout_gravity="bottom"
-                                android:gravity="center"
-                                android:visibility="gone"
-                                android:background="@color/transparent_bg">
-
-                            </LinearLayout>
-                        </FrameLayout>
-                    </LinearLayout>
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
@@ -227,11 +146,14 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1">
                 <LinearLayout
+                    android:id="@+id/submit_ll"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
+                    android:focusable="true"
+                    android:clickable="true"
                     android:gravity="center"
                     android:layout_marginRight="5dp"
                     android:background="@drawable/frame_bg_s_red_c">
@@ -253,6 +175,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1">
                 <Button
+                    android:id="@+id/save_btn"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"

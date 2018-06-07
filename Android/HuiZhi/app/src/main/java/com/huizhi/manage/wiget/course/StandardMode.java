@@ -14,7 +14,6 @@ import android.widget.ListView;
 import com.huizhi.manage.R;
 import com.huizhi.manage.activity.home.course.CourseReleaseActivity;
 import com.huizhi.manage.adapter.home.StandardModeAdapter;
-import com.huizhi.manage.node.StandardNode;
 import com.huizhi.manage.node.StudentNode;
 
 import java.util.ArrayList;
