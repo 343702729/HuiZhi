@@ -104,6 +104,12 @@ public class HomeCourseGetRequest {
         }
     }
 
+    /**
+     * 取课程详情
+     * @param teacherName
+     * @param LessonNum
+     * @param handler
+     */
     public void getCourseInfo(String teacherName, String LessonNum, Handler handler){
         List<BasicNameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("Method", URLData.METHORD_HOME_COURSE_INFO));
@@ -176,6 +182,74 @@ public class HomeCourseGetRequest {
                     }
                     node.setStudentNodes(studentNodes);
                 }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return node;
+        }
+    }
+
+    /**
+     * 取学生作品信息
+     * @param lessonNum
+     * @param stuNum
+     * @param handler
+     */
+    public void getCourseStuInfo(String lessonNum, String stuNum, Handler handler){
+        List<BasicNameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("Method", URLData.METHORD_HOME_COURSE_STU_INFO));
+        params.add(new BasicNameValuePair("LessonNum", lessonNum));
+        params.add(new BasicNameValuePair("StuNum", stuNum));
+        ThreadPoolDo.getInstance().executeThread(new CourseStuInfoThread(params, handler));
+    }
+
+    private class CourseStuInfoThread extends Thread{
+        private List<BasicNameValuePair> params;
+        private Handler handler;
+
+        public CourseStuInfoThread(List<BasicNameValuePair> params, Handler handler) {
+            this.params = params;
+            this.handler = handler;
+        }
+
+        @Override
+        public void run() {
+            super.run();
+            try {
+                String result = HttpConnect.getHttpConnect(URLData.getUrlHomeCourseStuInfo(), params);
+                Log.i("HuiZhi", "The result:" + result);
+                if(TextUtils.isEmpty(result))
+                    return;
+                ResultNode resultNode = JSONUtil.parseResult(result);
+                Log.i("HuiZhi", "The result:" + resultNode.getResult() + "  message:" + resultNode.getMessage() + "  returnObj:" + resultNode.getReturnObj());
+                if(resultNode == null)
+                    return;
+                if(resultNode.getResult() == Constants.RESULT_SUCCESS) {
+                    StudentNode node = parseReturn(resultNode.getReturnObj());
+                    handler.sendMessage(handler.obtainMessage(Constants.MSG_SUCCESS, node));
+                }else
+                    handler.sendMessage(handler.obtainMessage(Constants.MSG_FAILURE, resultNode.getMessage()));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        private StudentNode parseReturn(String jsonStr){
+            if(TextUtils.isEmpty(jsonStr))
+                return null;
+            StudentNode node = new StudentNode();
+            try {
+                JSONObject jsonOb = new JSONObject(jsonStr);
+                node.setLessonNum(JSONUtil.parseString(jsonOb, "LessonNum"));
+                node.setStuNum(JSONUtil.parseString(jsonOb, "StuNum"));
+                node.setStuName(JSONUtil.parseString(jsonOb, "StuName"));
+                node.setStuStatus(JSONUtil.parseInt(jsonOb, "StuStatus"));
+                node.setStrStuStatus(JSONUtil.parseString(jsonOb, "StrStuStatus"));
+                node.setWorkID(JSONUtil.parseString(jsonOb, "WorkID"));
+                node.setTitle(JSONUtil.parseString(jsonOb, "Title"));
+                node.setWorksPic(JSONUtil.parseString(jsonOb, "WorksPic"));
+                node.setComment(JSONUtil.parseString(jsonOb, "Comment"));
+                node.setPublished(JSONUtil.parseBoolean(jsonOb, "IsPublished"));
             }catch (Exception e){
                 e.printStackTrace();
             }

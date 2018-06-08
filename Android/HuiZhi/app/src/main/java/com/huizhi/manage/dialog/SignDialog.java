@@ -106,8 +106,10 @@ public class SignDialog {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what){
-                case Constants.MSG_SUCCESS:
+                case Constants.MSG_SUCCESS_ONE:
                     popupWindow.dismiss();
+                    if(infoUpdate!=null)
+                        infoUpdate.update(true);
                     break;
                 case Constants.MSG_FAILURE:
                     String mesg = (String)msg.obj;

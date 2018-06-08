@@ -24,10 +24,12 @@ public class StandardMode extends LinearLayout {
     private ListView listView;
     private StandardModeAdapter standardModeAdapter;
     private List<StudentNode> studentNodes;
+    private String lessonNum;
 
-    public StandardMode(Activity context){
+    public StandardMode(Activity context, String lessonNum){
         super(context);
         this.context = context;
+        this.lessonNum = lessonNum;
         initViews();
     }
 
@@ -57,6 +59,8 @@ public class StandardMode extends LinearLayout {
             StudentNode node = (StudentNode)standardModeAdapter.getItem(i);
             Intent intent = new Intent();
             intent.setClass(context, CourseReleaseActivity.class);
+            intent.putExtra("LessonNum", lessonNum);
+            intent.putExtra("StuNum", node.getStuNum());
             Bundle bundle = new Bundle();
             bundle.putSerializable("Node", node);
             intent.putExtras(intent);

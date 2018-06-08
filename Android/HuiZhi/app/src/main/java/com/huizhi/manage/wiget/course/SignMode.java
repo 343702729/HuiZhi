@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import com.huizhi.manage.R;
 import com.huizhi.manage.adapter.home.SignModeAdapter;
+import com.huizhi.manage.base.BaseInfoUpdate;
 import com.huizhi.manage.dialog.SignDialog;
 import com.huizhi.manage.node.StudentNode;
 
@@ -25,17 +26,22 @@ public class SignMode extends LinearLayout {
     private ListView listView;
     private SignModeAdapter signModeAdapter;
     private List<StudentNode> studentNodes;
+    private BaseInfoUpdate infoUpdate;
+    private CheckBox allCheck;
 
-    public SignMode(Activity context, String lessonNum){
+    public SignMode(Activity context, String lessonNum, BaseInfoUpdate infoUpdate){
         super(context);
         this.context = context;
         this.lessonNum = lessonNum;
+        this.infoUpdate = infoUpdate;
         initViews();
     }
 
     public void setDatas(List<StudentNode> studentNodes){
         this.studentNodes = studentNodes;
         signModeAdapter.updateViewsData(studentNodes);
+        if(allCheck!=null)
+            allCheck.setChecked(false);
     }
 
     public void initViews(){
@@ -48,7 +54,7 @@ public class SignMode extends LinearLayout {
         signModeAdapter = new SignModeAdapter(context, null);
         listView.setAdapter(signModeAdapter);
 
-        CheckBox allCheck = findViewById(R.id.all_check);
+        allCheck = findViewById(R.id.all_check);
         allCheck.setOnCheckedChangeListener(checkedChangeListener);
     }
 
@@ -58,7 +64,7 @@ public class SignMode extends LinearLayout {
             if(signModeAdapter==null)
                 return;
             List<StudentNode> nodes = signModeAdapter.getSignNodes();
-            SignDialog signDialog = new SignDialog(context, lessonNum, studentNodes, nodes,null);
+            SignDialog signDialog = new SignDialog(context, lessonNum, studentNodes, nodes,infoUpdate);
             signDialog.showView(view);
         }
     };

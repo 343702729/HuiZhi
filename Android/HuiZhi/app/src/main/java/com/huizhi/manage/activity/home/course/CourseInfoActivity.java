@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,8 +17,10 @@ import android.widget.TextView;
 import com.huizhi.manage.R;
 import com.huizhi.manage.adapter.home.ViewPagerAdapter;
 import com.huizhi.manage.base.BackCliclListener;
+import com.huizhi.manage.base.BaseInfoUpdate;
 import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.data.UserInfo;
+import com.huizhi.manage.dialog.CourseFilterDialog;
 import com.huizhi.manage.node.CourseNode;
 import com.huizhi.manage.request.home.HomeCourseGetRequest;
 import com.huizhi.manage.util.AppUtil;
@@ -34,6 +37,7 @@ public class CourseInfoActivity extends Activity {
     private TextView standardTV, signTV;
     private StandardMode standardMode;
     private SignMode signMode;
+    private View lineV;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,6 +45,12 @@ public class CourseInfoActivity extends Activity {
         setContentView(R.layout.activity_home_course_info);
         initDatas();
         initViews();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         getDatas();
     }
 
@@ -54,6 +64,11 @@ public class CourseInfoActivity extends Activity {
         backBtn.setOnClickListener(new BackCliclListener(this));
         ImageButton settingIB = findViewById(R.id.setting_ib);
         settingIB.setOnClickListener(settingBtnClick);
+
+        Button filterBtn = findViewById(R.id.filter_btn);
+        filterBtn.setOnClickListener(filterBtnClick);
+
+        lineV = findViewById(R.id.line_v);
 
         signSelLL = findViewById(R.id.sign_type_ll);
 
@@ -75,8 +90,8 @@ public class CourseInfoActivity extends Activity {
         viewPager = findViewById(R.id.viewpager);
         LayoutInflater inflater = getLayoutInflater();
         List<View> views = new ArrayList<>();
-        standardMode = new StandardMode(this);
-        signMode = new SignMode(this, lessonNum);
+        standardMode = new StandardMode(this, lessonNum);
+        signMode = new SignMode(this, lessonNum, infoUpdate);
         views.add(standardMode);
         views.add(signMode);
         ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(views);
@@ -89,6 +104,14 @@ public class CourseInfoActivity extends Activity {
             Intent intent = new Intent();
             intent.setClass(CourseInfoActivity.this, CourseSettingActivity.class);
             startActivity(intent);
+        }
+    };
+
+    private View.OnClickListener filterBtnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            CourseFilterDialog filterDialog = new CourseFilterDialog(CourseInfoActivity.this, null);
+            filterDialog.showView(view);
         }
     };
 
@@ -121,6 +144,17 @@ public class CourseInfoActivity extends Activity {
                 signTV.setTextColor(getResources().getColor(R.color.light_blue_d));
                 signV.setBackgroundColor(getResources().getColor(R.color.light_blue_d));
             }
+        }
+    };
+
+    private BaseInfoUpdate infoUpdate = new BaseInfoUpdate() {
+        @Override
+        public void update(Object object) {
+            if(object==null)
+                return;
+            boolean flage = (boolean)object;
+            if(flage)
+                getDatas();
         }
     };
 

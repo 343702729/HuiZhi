@@ -166,6 +166,9 @@ public class URLData {
     private static final String URL_HOME_COURSE_STU_SIGN = "/service/TeacherService.ashx";
     public static final String METHORD_HOME_COURSE_STU_SIGN = "studentSign";
 
+    private static final String URL_HOME_COURSE_STU_INFO = "/service/TeacherService.ashx";
+    public static final String METHORD_HOME_COURSE_STU_INFO = "getStuWorksInfo";
+
     /**
      * 用户登录
      * @return
@@ -605,6 +608,14 @@ public class URLData {
      */
     public static String getUrlHomeCourseStuSign(){
         return  URL_HOST + URL_HOME_COURSE_STU_SIGN;
+    }
+
+    /**
+     * 取学生作品信息
+     * @return
+     */
+    public static String getUrlHomeCourseStuInfo(){
+        return URL_HOST + URL_HOME_COURSE_STU_INFO;
     }
 
 }

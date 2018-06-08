@@ -48,7 +48,7 @@ public class HomeCoursePostRequest {
                 if(resultNode == null)
                     return;
                 if(resultNode.getResult() == Constants.RESULT_SUCCESS) {
-                    handler.sendMessage(handler.obtainMessage(Constants.MSG_SUCCESS, resultNode.getMessage()));
+                    handler.sendMessage(handler.obtainMessage(Constants.MSG_SUCCESS_ONE, resultNode.getMessage()));
                 }else
                     handler.sendMessage(handler.obtainMessage(Constants.MSG_FAILURE, resultNode.getMessage()));
             }catch (Exception e){
