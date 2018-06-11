@@ -6,6 +6,7 @@ package com.huizhi.manage.node;
 
 public class PictureNode {
     private String path;
+    private String url;
     private String description;
 
     public String getPath() {
@@ -14,6 +15,14 @@ public class PictureNode {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getDescription() {

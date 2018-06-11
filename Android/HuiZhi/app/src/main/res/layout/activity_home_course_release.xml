@@ -125,6 +125,7 @@
                         android:layout_marginTop="10dp"
                         android:orientation="horizontal">
                         <CheckBox
+                            android:id="@+id/publish_cb"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:button="@drawable/frame_checkbox_sign_sel"

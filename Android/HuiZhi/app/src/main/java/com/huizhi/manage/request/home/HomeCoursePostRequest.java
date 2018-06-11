@@ -18,6 +18,35 @@ import java.util.List;
 
 public class HomeCoursePostRequest {
 
+    /**
+     * 发布作品
+     * @param TeacherName
+     * @param LessonNum
+     * @param StuNum
+     * @param WorksPic
+     * @param Title
+     * @param Comment
+     * @param IsPublish
+     * @param handler
+     */
+    public void postPublish(String teacherName, String lessonNum, String stuNums, String worksPic, String title, String comment, int isPublish, Handler handler){
+        List<BasicNameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("Method", URLData.METHORD_HOME_COURSE_STU_SIGN));
+        params.add(new BasicNameValuePair("TeacherName", teacherName));
+        params.add(new BasicNameValuePair("LessonNum", lessonNum));
+        params.add(new BasicNameValuePair("StuNums", stuNums));
+        params.add(new BasicNameValuePair("WorksPic", worksPic));
+        params.add(new BasicNameValuePair("Title", title));
+        params.add(new BasicNameValuePair("Comment", comment));
+        params.add(new BasicNameValuePair("IsPublish", String.valueOf(isPublish)));
+    }
+
+    /**
+     * 学生签到
+     * @param lessonNum
+     * @param stuNums
+     * @param handler
+     */
     public void postStudentsSignInfo(String lessonNum, String stuNums, Handler handler){
         List<BasicNameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("Method", URLData.METHORD_HOME_COURSE_STU_SIGN));

@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.huizhi.manage.R;
 import com.huizhi.manage.node.PictureNode;
+import com.huizhi.manage.util.PictureUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,16 +58,19 @@ public class CoursePictureAdapter extends BaseAdapter {
         if(view==null) {
             viewItem = new ViewItem();
             view = layoutInflater.inflate(R.layout.adapter_course_picture, null);
+            viewItem.pictureIV = view.findViewById(R.id.picture_iv);
             viewItem.deleteIV = view.findViewById(R.id.delete_iv);
             view.setTag(viewItem);
         }else{
             viewItem = (ViewItem)view.getTag();
         }
+        viewItem.pictureIV.setImageBitmap(PictureUtil.getimage(node.getPath()));
         viewItem.deleteIV.setOnClickListener(new DeleteItemListener(node));
         return view;
     }
 
     private class ViewItem{
+        ImageView pictureIV;
         ImageView deleteIV;
     }
 
