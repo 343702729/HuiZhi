@@ -164,6 +164,8 @@ public class HomeCourseGetRequest {
                 node.setPublishWorkCount(JSONUtil.parseInt(lessonJS, "PublishWorkCount"));
                 node.setCommentedCount(JSONUtil.parseInt(lessonJS, "CommentedCount"));
                 node.setCompletionRate(JSONUtil.parseString(lessonJS, "CompletionRate"));
+                node.setSignInTeacher(JSONUtil.parseBoolean(lessonJS, "IsSignInTeacher"));
+                node.setSignInTutor(JSONUtil.parseBoolean(lessonJS, "IsSignInTutor"));
 
                 JSONArray studentsJS = jsonOb.getJSONArray("Students");
                 if(studentsJS!=null){

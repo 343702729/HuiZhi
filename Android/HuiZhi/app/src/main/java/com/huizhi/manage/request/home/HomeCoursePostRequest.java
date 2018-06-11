@@ -20,13 +20,13 @@ public class HomeCoursePostRequest {
 
     /**
      * 发布作品
-     * @param TeacherName
-     * @param LessonNum
-     * @param StuNum
-     * @param WorksPic
-     * @param Title
-     * @param Comment
-     * @param IsPublish
+     * @param teacherName
+     * @param lessonNum
+     * @param stuNums
+     * @param worksPic
+     * @param title
+     * @param comment
+     * @param isPublish
      * @param handler
      */
     public void postPublish(String teacherName, String lessonNum, String stuNums, String worksPic, String title, String comment, int isPublish, Handler handler){
@@ -39,6 +39,95 @@ public class HomeCoursePostRequest {
         params.add(new BasicNameValuePair("Title", title));
         params.add(new BasicNameValuePair("Comment", comment));
         params.add(new BasicNameValuePair("IsPublish", String.valueOf(isPublish)));
+    }
+
+    /**
+     * 教师签到
+     * @param lessonNum
+     * @param handler
+     */
+    public void postTeacherSign(String lessonNum, Handler handler){
+        List<BasicNameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("Method", URLData.METHORD_HOME_COURSE_SIGN_TEACHER));
+        params.add(new BasicNameValuePair("LessonNum", lessonNum));
+        ThreadPoolDo.getInstance().executeThread(new TeacherSignThread(params, handler));
+    }
+
+    private class TeacherSignThread extends Thread{
+        private List<BasicNameValuePair> params;
+        private Handler handler;
+
+        public TeacherSignThread(List<BasicNameValuePair> params, Handler handler) {
+            this.params = params;
+            this.handler = handler;
+        }
+
+        @Override
+        public void run() {
+            super.run();
+            try {
+                String result = HttpConnect.getHttpConnect(URLData.getUrlHomeCourseSignTeacher(), params);
+                Log.i("HuiZhi", "The result:" + result);
+                if(TextUtils.isEmpty(result))
+                    return;
+                ResultNode resultNode = JSONUtil.parseResult(result);
+                Log.i("HuiZhi", "The result:" + resultNode.getResult() + "  message:" + resultNode.getMessage() + "  returnObj:" + resultNode.getReturnObj());
+                if(resultNode == null)
+                    return;
+                if(resultNode.getResult() == Constants.RESULT_SUCCESS) {
+                    handler.sendMessage(handler.obtainMessage(Constants.MSG_SUCCESS_ONE, resultNode.getMessage()));
+                }else {
+                    handler.sendMessage(handler.obtainMessage(Constants.MSG_FAILURE, resultNode.getMessage()));
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    /**
+     * 助教签到
+     * @param lessonNum
+     * @param handler
+     */
+    public void postTutorSign(String lessonNum, Handler handler){
+        List<BasicNameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("Method", URLData.METHORD_HOME_COURSE_SIGN_TUTOR));
+        params.add(new BasicNameValuePair("LessonNum", lessonNum));
+        ThreadPoolDo.getInstance().executeThread(new TutorSignThread(params, handler));
+    }
+
+    private class TutorSignThread extends Thread{
+        private List<BasicNameValuePair> params;
+        private Handler handler;
+
+        public TutorSignThread(List<BasicNameValuePair> params, Handler handler) {
+            this.params = params;
+            this.handler = handler;
+        }
+
+        @Override
+        public void run() {
+            super.run();
+            try {
+                String result = HttpConnect.getHttpConnect(URLData.getUrlHomeCourseSignTutor(), params);
+                Log.i("HuiZhi", "The result:" + result);
+                if(TextUtils.isEmpty(result))
+                    return;
+                ResultNode resultNode = JSONUtil.parseResult(result);
+                Log.i("HuiZhi", "The result:" + resultNode.getResult() + "  message:" + resultNode.getMessage() + "  returnObj:" + resultNode.getReturnObj());
+                if(resultNode == null)
+                    return;
+                if(resultNode.getResult() == Constants.RESULT_SUCCESS) {
+                    handler.sendMessage(handler.obtainMessage(Constants.MSG_SUCCESS_TWO, resultNode.getMessage()));
+                }else {
+                    handler.sendMessage(handler.obtainMessage(Constants.MSG_FAILURE, resultNode.getMessage()));
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 
     /**

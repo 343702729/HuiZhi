@@ -12,6 +12,8 @@ public class CourseNode {
     private int publishWorkCount;
     private int commentedCount;
     private String completionRate;
+    private boolean isSignInTeacher;
+    private boolean isSignInTutor;
     private List<StudentNode> studentNodes;
 
     public String getLessonNum() {
@@ -84,6 +86,22 @@ public class CourseNode {
 
     public void setCompletionRate(String completionRate) {
         this.completionRate = completionRate;
+    }
+
+    public boolean isSignInTeacher() {
+        return isSignInTeacher;
+    }
+
+    public void setSignInTeacher(boolean signInTeacher) {
+        isSignInTeacher = signInTeacher;
+    }
+
+    public boolean isSignInTutor() {
+        return isSignInTutor;
+    }
+
+    public void setSignInTutor(boolean signInTutor) {
+        isSignInTutor = signInTutor;
     }
 
     public List<StudentNode> getStudentNodes() {

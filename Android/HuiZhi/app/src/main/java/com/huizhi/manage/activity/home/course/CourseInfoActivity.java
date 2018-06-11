@@ -7,12 +7,15 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.huizhi.manage.R;
 import com.huizhi.manage.adapter.home.ViewPagerAdapter;
@@ -23,6 +26,7 @@ import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.dialog.CourseFilterDialog;
 import com.huizhi.manage.node.CourseNode;
 import com.huizhi.manage.request.home.HomeCourseGetRequest;
+import com.huizhi.manage.request.home.HomeCoursePostRequest;
 import com.huizhi.manage.util.AppUtil;
 import com.huizhi.manage.wiget.course.SignMode;
 import com.huizhi.manage.wiget.course.StandardMode;
@@ -38,6 +42,8 @@ public class CourseInfoActivity extends Activity {
     private StandardMode standardMode;
     private SignMode signMode;
     private View lineV;
+    private CourseNode courseNode;
+    private Button teacherSignBtn, assistantSignBtn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,6 +74,12 @@ public class CourseInfoActivity extends Activity {
         Button filterBtn = findViewById(R.id.filter_btn);
         filterBtn.setOnClickListener(filterBtnClick);
 
+        teacherSignBtn = findViewById(R.id.teacher_sign_btn);
+        assistantSignBtn = findViewById(R.id.assistant_sign_btn);
+        teacherSignBtn.setOnClickListener(signBtnClick);
+        assistantSignBtn.setOnClickListener(signBtnClick);
+
+
         lineV = findViewById(R.id.line_v);
 
         signSelLL = findViewById(R.id.sign_type_ll);
@@ -82,7 +94,6 @@ public class CourseInfoActivity extends Activity {
 
     private void getDatas(){
         HomeCourseGetRequest getRequest = new HomeCourseGetRequest();
-
         getRequest.getCourseInfo(UserInfo.getInstance().getUser().getTeacherName(), lessonNum, handler);
     }
 
@@ -112,6 +123,26 @@ public class CourseInfoActivity extends Activity {
         public void onClick(View view) {
             CourseFilterDialog filterDialog = new CourseFilterDialog(CourseInfoActivity.this, null);
             filterDialog.showView(view);
+        }
+    };
+
+    private View.OnClickListener signBtnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Log.i("HuiZhi", "Come into sign click");
+            if(courseNode==null)
+                return;
+            if(view.getId()==R.id.teacher_sign_btn){
+                if(courseNode.isSignInTeacher())
+                    return;
+                HomeCoursePostRequest postRequest = new HomeCoursePostRequest();
+                postRequest.postTeacherSign(lessonNum, handler);
+            }else if(view.getId()==R.id.assistant_sign_btn){
+                if(courseNode.isSignInTutor())
+                    return;
+                HomeCoursePostRequest postRequest = new HomeCoursePostRequest();
+                postRequest.postTutorSign(lessonNum, handler);
+            }
         }
     };
 
@@ -162,10 +193,37 @@ public class CourseInfoActivity extends Activity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            String mesg;
             switch (msg.what){
                 case Constants.MSG_SUCCESS:
-                    CourseNode node = (CourseNode)msg.obj;
-                    setViewsData(node);
+                    courseNode = (CourseNode)msg.obj;
+                    setViewsData(courseNode);
+                    break;
+                case Constants.MSG_SUCCESS_ONE:
+                    mesg = (String)msg.obj;
+                    if(!TextUtils.isEmpty(mesg)){
+                        if(courseNode!=null)
+                            courseNode.setSignInTeacher(true);
+                        teacherSignBtn.setBackgroundResource(R.drawable.frame_bg_s_red);
+                        teacherSignBtn.setTextColor(getResources().getColor(R.color.white));
+                        Toast.makeText(CourseInfoActivity.this, mesg, Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case Constants.MSG_SUCCESS_TWO:
+                    mesg = (String)msg.obj;
+                    if(!TextUtils.isEmpty(mesg)){
+                        if(courseNode!=null)
+                            courseNode.setSignInTutor(true);
+                        assistantSignBtn.setBackgroundResource(R.drawable.frame_bg_s_red);
+                        assistantSignBtn.setTextColor(getResources().getColor(R.color.white));
+                        Toast.makeText(CourseInfoActivity.this, mesg, Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case Constants.MSG_FAILURE:
+                    mesg = (String)msg.obj;
+                    if(!TextUtils.isEmpty(mesg)){
+                        Toast.makeText(CourseInfoActivity.this, mesg, Toast.LENGTH_SHORT).show();
+                    }
                     break;
             }
         }
@@ -189,6 +247,16 @@ public class CourseInfoActivity extends Activity {
         publishwTV.setText(String.valueOf(node.getPublishWorkCount()));
         commentedTV.setText(String.valueOf(node.getCommentedCount()));
         completionrTV.setText(node.getCompletionRate());
+
+        if(node.isSignInTeacher()){
+            teacherSignBtn.setBackgroundResource(R.drawable.frame_bg_s_red);
+            teacherSignBtn.setTextColor(getResources().getColor(R.color.white));
+        }
+
+        if(node.isSignInTutor()){
+            assistantSignBtn.setBackgroundResource(R.drawable.frame_bg_s_red);
+            assistantSignBtn.setTextColor(getResources().getColor(R.color.white));
+        }
 
         if(standardMode!=null)
             standardMode.setDatas(node.getStudentNodes());

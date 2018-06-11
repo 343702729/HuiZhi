@@ -260,15 +260,17 @@
         android:background="@color/white"
         android:orientation="horizontal">
         <Button
+            android:id="@+id/teacher_sign_btn"
             android:layout_width="100dp"
             android:layout_height="35dp"
             android:gravity="center"
-            android:background="@drawable/frame_bg_s_red"
+            android:background="@drawable/frame_bg_s_red_c"
             android:text="老师签到"
             android:textSize="14sp"
-            android:textColor="@color/white"/>
+            android:textColor="@color/light_red"/>
 
         <Button
+            android:id="@+id/assistant_sign_btn"
             android:layout_width="100dp"
             android:layout_height="35dp"
             android:layout_marginLeft="15dp"
