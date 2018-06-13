@@ -45,4 +45,10 @@
     <color name="text1">#59B29C</color>
     <color name="text2">#333333</color>
     <color name="split_line">#11112233</color>
+
+    <color name="black_light">#535354</color>
+    <color name="gray_light">#EDECF2</color>
+    <color name="gray_text">#9FA6B5</color>
+    <color name="blue_light">#3EB4FE</color>
+    <color name="gray_dark_text">#666666</color>
 </resources>

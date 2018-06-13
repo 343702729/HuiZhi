@@ -24,11 +24,13 @@ import com.huizhi.manage.fragment.MaterialFragment;
 import com.huizhi.manage.fragment.TaskFragment;
 import com.huizhi.manage.fragment.UserFragment;
 import com.huizhi.manage.login.LoginActivity;
+import com.huizhi.manage.node.VersionNode;
 import com.huizhi.manage.request.common.FileGetRequest;
 import com.huizhi.manage.request.main.MainRequest;
 import com.huizhi.manage.util.AppUtil;
 import com.huizhi.manage.util.NavigationBarUtil;
 import com.huizhi.manage.util.RongUtil;
+import com.huizhi.manage.version.VersionUtil;
 
 import io.rong.imkit.RongIM;
 import io.rong.imkit.manager.IUnReadMessageObserver;
@@ -48,6 +50,13 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 //        ((MainApplication)getApplication()).setRongInit(UserInfo.getInstance().getUser().getAppKey());
+
+        VersionNode versionNode = new VersionNode();
+        versionNode.setVersionCode(2);
+        versionNode.setVersionName("2.0");
+        versionNode.setDownloadUrl("http://hzapp.dewinfo.com/app_upgrade/app-release.apk");
+        checkVersion(versionNode);
+
         communicateIMConnect();
         initDates();
         initViews();
@@ -370,4 +379,14 @@ public class MainActivity extends FragmentActivity {
 
         }
     };
+
+    /**
+     * 版本更新检测
+     */
+    private void checkVersion(VersionNode node){
+        if(node==null)
+            return;
+        VersionUtil versionUtil = new VersionUtil();
+        boolean flage = versionUtil.checkVersion(this, node);
+    }
 }

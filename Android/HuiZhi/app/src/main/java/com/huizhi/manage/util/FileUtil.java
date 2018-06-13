@@ -17,12 +17,36 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by CL on 2018/1/13.
  */
 
 public class FileUtil {
+
+    /***
+     * 保存应用文件
+     */
+    public static File createFile(String name, String localPath) {
+        if (android.os.Environment.MEDIA_MOUNTED.equals(android.os.Environment
+                .getExternalStorageState())) {
+            File updateDir = new File(localPath);
+            File updateFile = new File(updateDir + File.separator + name + ".apk");
+            if (!updateDir.exists()) {
+                updateDir.mkdirs();
+            }
+            if (!updateFile.exists()) {
+                try {
+                    updateFile.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return updateFile;
+        }
+        return null;
+    }
 
     /**
      * Try to return the absolute file path from the given Uri

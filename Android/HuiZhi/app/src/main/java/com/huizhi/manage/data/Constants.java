@@ -33,4 +33,6 @@ public class Constants {
     public static final String PATH_VIDEO = Path + "system/.Video/";
     public static final String PATH_WORD = Path + "system/.Word/";
     public static final String PATH_DOWNLOAD = Environment.getExternalStorageDirectory().toString() + "/Download/";     ///mnt/sdcard/Download/
+
+    public static String DOWNLOAD_URL = "";
 }

@@ -110,6 +110,7 @@
                         android:numColumns="2"/>
 
                     <EditText
+                        android:id="@+id/comment_et"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
                         android:layout_marginTop="10dp"

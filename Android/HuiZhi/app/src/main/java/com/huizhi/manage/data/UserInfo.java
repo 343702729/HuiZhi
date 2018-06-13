@@ -21,6 +21,7 @@ public class UserInfo {
     private final int phoneType = 2;
     private boolean isLogin = false;
     private BaseInfoUpdate taskCreatInfo, communicateInfo;
+    private BaseInfoUpdate appDownloadUpdate;
 
     private UserInfo(){
         userNode = new UserNode();
@@ -118,5 +119,13 @@ public class UserInfo {
 
     public void setCommunicateInfo(BaseInfoUpdate communicateInfo) {
         this.communicateInfo = communicateInfo;
+    }
+
+    public BaseInfoUpdate getAppDownloadUpdate() {
+        return appDownloadUpdate;
+    }
+
+    public void setAppDownloadUpdate(BaseInfoUpdate appDownloadUpdate) {
+        this.appDownloadUpdate = appDownloadUpdate;
     }
 }

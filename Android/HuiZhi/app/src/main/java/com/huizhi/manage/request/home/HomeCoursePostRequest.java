@@ -29,7 +29,7 @@ public class HomeCoursePostRequest {
      * @param isPublish
      * @param handler
      */
-    public void postPublish(String teacherName, String lessonNum, String stuNums, String worksPic, String title, String comment, int isPublish, Handler handler){
+    public void postPublish(String teacherName, String lessonNum, String stuNums, String worksPic, String title, String comment, int isPublish, String worksId, Handler handler){
         List<BasicNameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("Method", URLData.METHORD_HOME_COURSE_STU_SIGN));
         params.add(new BasicNameValuePair("TeacherName", teacherName));
@@ -39,6 +39,40 @@ public class HomeCoursePostRequest {
         params.add(new BasicNameValuePair("Title", title));
         params.add(new BasicNameValuePair("Comment", comment));
         params.add(new BasicNameValuePair("IsPublish", String.valueOf(isPublish)));
+        params.add(new BasicNameValuePair("WorksId", worksId));
+        ThreadPoolDo.getInstance().executeThread(new PublishThread(params, handler));
+    }
+
+    private class PublishThread extends Thread{
+        private List<BasicNameValuePair> params;
+        private Handler handler;
+
+        public PublishThread(List<BasicNameValuePair> params, Handler handler) {
+            this.params = params;
+            this.handler = handler;
+        }
+
+        @Override
+        public void run() {
+            super.run();
+            try {
+                String result = HttpConnect.getHttpConnect(URLData.getUrlHomeCourseSignTeacher(), params);
+                Log.i("HuiZhi", "The result:" + result);
+                if(TextUtils.isEmpty(result))
+                    return;
+                ResultNode resultNode = JSONUtil.parseResult(result);
+                Log.i("HuiZhi", "The result:" + resultNode.getResult() + "  message:" + resultNode.getMessage() + "  returnObj:" + resultNode.getReturnObj());
+                if(resultNode == null)
+                    return;
+                if(resultNode.getResult() == Constants.RESULT_SUCCESS) {
+                    handler.sendMessage(handler.obtainMessage(Constants.MSG_SUCCESS_TWO, resultNode.getMessage()));
+                }else {
+                    handler.sendMessage(handler.obtainMessage(Constants.MSG_FAILURE, resultNode.getMessage()));
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 
     /**

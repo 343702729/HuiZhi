@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ import com.huizhi.manage.adapter.home.CoursePictureAdapter;
 import com.huizhi.manage.base.BackCliclListener;
 import com.huizhi.manage.base.BaseInfoUpdate;
 import com.huizhi.manage.data.Constants;
+import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.dialog.PictureSelDialog;
 import com.huizhi.manage.http.AsyncFileUpload;
 import com.huizhi.manage.node.PictureNode;
@@ -41,6 +43,9 @@ import com.huizhi.manage.request.home.HomeCoursePostRequest;
 import com.huizhi.manage.util.AppUtil;
 import com.huizhi.manage.util.FileUtil;
 import com.huizhi.manage.wiget.MyGridView;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -52,6 +57,7 @@ public class CourseReleaseActivity extends Activity {
     private MyGridView gridView;
     private TextView signSTV;
     private Button signBtn;
+    private EditText commentET;
     private CoursePictureAdapter pictureAdapter;
     private StudentNode studentNode;
     private List<PictureNode> picNodes = new ArrayList<>();
@@ -77,6 +83,8 @@ public class CourseReleaseActivity extends Activity {
 
         signSTV = findViewById(R.id.sign_status_tv);
         signBtn = findViewById(R.id.sign_btn);
+
+        commentET = findViewById(R.id.comment_et);
 
 
         gridView = findViewById(R.id.gridview);
@@ -169,7 +177,38 @@ public class CourseReleaseActivity extends Activity {
         @Override
         public void onClick(View view) {
             Log.i("HuiZhi", "The pic size is:" + picNodes.size());
-            CheckBox publisCB = findViewById(R.id.publish_cb);
+            CheckBox publishCB = findViewById(R.id.publish_cb);
+            boolean isPublish = publishCB.isChecked();
+            int status = 0;
+            if(isPublish)
+                status = 1;
+
+            String comment = commentET.getText().toString();
+
+            HomeCoursePostRequest postRequest = new HomeCoursePostRequest();
+            postRequest.postPublish(UserInfo.getInstance().getUser().getTeacherName(), lessonNum, stuNum, getPicsJson(), "", comment, status, "", handler);
+        }
+
+        private String getPicsJson(){
+            if(picNodes==null||picNodes.size()==0)
+                return "";
+            JSONArray jsonAr = new JSONArray();
+            try {
+                for (PictureNode picNode:picNodes){
+                    JSONObject jsonOb = new JSONObject();
+                    jsonOb.put("ImageUrl", picNode.getUrl());
+                    jsonOb.put("ImageSize", "");
+                    jsonOb.put("FileSize", "");
+                    jsonAr.put(jsonOb);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+
+            String pics = jsonAr.toString();
+            Log.i("HuiZhi", "The json pics is:" + pics);
+            return pics;
         }
     };
 
@@ -190,6 +229,15 @@ public class CourseReleaseActivity extends Activity {
                         studentNode.setStuStatus(1);
                         studentNode.setStrStuStatus("已签到");
                     }
+                    break;
+                case Constants.MSG_SUCCESS_TWO:
+                    String successMsg = (String)msg.obj;
+                    Toast.makeText(CourseReleaseActivity.this, successMsg, Toast.LENGTH_SHORT).show();
+                    finish();
+                    break;
+                case Constants.MSG_FAILURE:
+                    String failMsg = (String)msg.obj;
+                    Toast.makeText(CourseReleaseActivity.this, failMsg, Toast.LENGTH_SHORT).show();
                     break;
             }
         }
@@ -305,5 +353,35 @@ public class CourseReleaseActivity extends Activity {
         node.setUrl(picUrl);
         picNodes.add(node);
         pictureAdapter.updateViewsData(picNodes);
+    }
+
+    private class ItemNode {
+        String ImageUrl;
+        String ImageSize;
+        String FileSize;
+
+        public String getImageUrl() {
+            return ImageUrl;
+        }
+
+        public void setImageUrl(String imageUrl) {
+            ImageUrl = imageUrl;
+        }
+
+        public String getImageSize() {
+            return ImageSize;
+        }
+
+        public void setImageSize(String imageSize) {
+            ImageSize = imageSize;
+        }
+
+        public String getFileSize() {
+            return FileSize;
+        }
+
+        public void setFileSize(String fileSize) {
+            FileSize = fileSize;
+        }
     }
 }
