@@ -489,7 +489,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="课程列表"
+                        android:text="家校互联"
                         android:textSize="16sp"
                         android:textColor="@color/light_black"/>
                     <LinearLayout

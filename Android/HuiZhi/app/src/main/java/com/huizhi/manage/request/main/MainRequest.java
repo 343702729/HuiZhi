@@ -1,13 +1,16 @@
 package com.huizhi.manage.request.main;
 
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.http.HttpConnect;
 import com.huizhi.manage.http.URLData;
 import com.huizhi.manage.node.ResultNode;
 import com.huizhi.manage.node.UserNode;
+import com.huizhi.manage.node.VersionNode;
 import com.huizhi.manage.util.JSONUtil;
 import com.huizhi.manage.base.ThreadPoolDo;
 
@@ -17,7 +20,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Handler;
 
 /**
  * Created by CL on 2018/1/6.
@@ -167,6 +169,65 @@ public class MainRequest {
             }catch (Exception e){
 
             }
+        }
+    }
+
+    /**
+     * 获取新版本
+     * @param versioncode
+     * @param handler
+     */
+    public void getVersion(int versioncode, Handler handler){
+        List<BasicNameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("Method", URLData.METHORD_VERSION));
+        params.add(new BasicNameValuePair("VersionCode", String.valueOf(versioncode)));
+        ThreadPoolDo.getInstance().executeThread(new VersionGetThread(params, handler));
+    }
+
+    private class VersionGetThread extends Thread{
+        private List<BasicNameValuePair> params;
+        private Handler handler;
+
+        public VersionGetThread(List<BasicNameValuePair> params, Handler handler){
+            this.params = params;
+            this.handler = handler;
+        }
+
+        @Override
+        public void run() {
+            super.run();
+            try {
+                String result = HttpConnect.getHttpConnect(URLData.getUrlVersion(), params);
+                Log.i("HuiZhi", "The result:" + result);
+                if(TextUtils.isEmpty(result))
+                    return;
+                ResultNode resultNode = JSONUtil.parseResult(result);
+                Log.i("HuiZhi", "The result:" + resultNode.getResult() + "  message:" + resultNode.getMessage() + "  returnObj:" + resultNode.getReturnObj());
+                if(resultNode == null)
+                    return;
+                if(resultNode.getResult() == Constants.RESULT_SUCCESS) {
+                    VersionNode node = parseReturn(resultNode.getReturnObj());
+                    handler.sendMessage(handler.obtainMessage(Constants.MSG_SUCCESS, node));
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        private VersionNode parseReturn(String jsonStr){
+            if(TextUtils.isEmpty(jsonStr))
+                return null;
+            VersionNode node = new VersionNode();
+            try {
+                JSONObject jsonOb = new JSONObject(jsonStr);
+                node.setVersionCode(JSONUtil.parseInt(jsonOb, "VersionCode"));
+                node.setVersionName(JSONUtil.parseString(jsonOb, "VersionName"));
+                node.setVersionDetail(JSONUtil.parseString(jsonOb, "VersionDetail"));
+                node.setDownloadUrl(JSONUtil.parseString(jsonOb, "DownloadUrl"));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return node;
         }
     }
 }

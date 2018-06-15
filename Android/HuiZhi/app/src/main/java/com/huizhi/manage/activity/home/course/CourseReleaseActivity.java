@@ -197,8 +197,8 @@ public class CourseReleaseActivity extends Activity {
                 for (PictureNode picNode:picNodes){
                     JSONObject jsonOb = new JSONObject();
                     jsonOb.put("ImageUrl", picNode.getUrl());
-                    jsonOb.put("ImageSize", "");
-                    jsonOb.put("FileSize", "");
+                    jsonOb.put("ImageSize", "1");
+                    jsonOb.put("FileSize", "1");
                     jsonAr.put(jsonOb);
                 }
             }catch (Exception e){
@@ -258,6 +258,8 @@ public class CourseReleaseActivity extends Activity {
         }else if(node.getStuStatus()==1){
             signSTV.setTextColor(getResources().getColor(R.color.app_green));
         }
+        picNodes.addAll(node.getPictures());
+        pictureAdapter.updateViewsData(picNodes);
     }
 
     private class SignBtnClick implements View.OnClickListener{

@@ -31,11 +31,11 @@ public class HomeCoursePostRequest {
      */
     public void postPublish(String teacherName, String lessonNum, String stuNums, String worksPic, String title, String comment, int isPublish, String worksId, Handler handler){
         List<BasicNameValuePair> params = new ArrayList<>();
-        params.add(new BasicNameValuePair("Method", URLData.METHORD_HOME_COURSE_STU_SIGN));
+        params.add(new BasicNameValuePair("Method", URLData.METHORD_HOME_COURSE_STU_PUBLISH));
         params.add(new BasicNameValuePair("TeacherName", teacherName));
         params.add(new BasicNameValuePair("LessonNum", lessonNum));
-        params.add(new BasicNameValuePair("StuNums", stuNums));
-        params.add(new BasicNameValuePair("WorksPic", worksPic));
+        params.add(new BasicNameValuePair("StuNum", stuNums));
+        params.add(new BasicNameValuePair("Images", worksPic));
         params.add(new BasicNameValuePair("Title", title));
         params.add(new BasicNameValuePair("Comment", comment));
         params.add(new BasicNameValuePair("IsPublish", String.valueOf(isPublish)));
@@ -56,7 +56,7 @@ public class HomeCoursePostRequest {
         public void run() {
             super.run();
             try {
-                String result = HttpConnect.getHttpConnect(URLData.getUrlHomeCourseSignTeacher(), params);
+                String result = HttpConnect.getHttpConnect(URLData.getUrlHomeCourseStuPublish(), params);
                 Log.i("HuiZhi", "The result:" + result);
                 if(TextUtils.isEmpty(result))
                     return;

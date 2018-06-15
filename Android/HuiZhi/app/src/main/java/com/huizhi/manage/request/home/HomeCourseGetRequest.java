@@ -11,6 +11,7 @@ import com.huizhi.manage.http.URLData;
 import com.huizhi.manage.node.CourseInfoNode;
 import com.huizhi.manage.node.CourseNode;
 import com.huizhi.manage.node.MessageNode;
+import com.huizhi.manage.node.PictureNode;
 import com.huizhi.manage.node.ResultNode;
 import com.huizhi.manage.node.StudentNode;
 import com.huizhi.manage.util.JSONUtil;
@@ -252,6 +253,25 @@ public class HomeCourseGetRequest {
                 node.setWorksPic(JSONUtil.parseString(jsonOb, "WorksPic"));
                 node.setComment(JSONUtil.parseString(jsonOb, "Comment"));
                 node.setPublished(JSONUtil.parseBoolean(jsonOb, "IsPublished"));
+                JSONArray jsonAr = jsonOb.getJSONArray("Pictures"); //PictureNode
+                if(jsonAr==null||jsonAr.length()==0)
+                    return node;
+                List<PictureNode> picNodes = new ArrayList<>();
+                PictureNode picNode;
+                JSONObject picJs;
+                for (int i=0; i<jsonAr.length(); i++){
+                    picNode = new PictureNode();
+                    picJs = jsonAr.getJSONObject(i);
+                    picNode.setServer(true);
+                    picNode.setImageId(JSONUtil.parseString(picJs, "ImageId"));
+                    picNode.setWorksId(JSONUtil.parseString(picJs, "WorksId"));
+                    picNode.setUrl(JSONUtil.parseString(picJs, "ImageUrl"));
+                    picNode.setFullImageUrl(JSONUtil.parseString(picJs, "FullImageUrl"));
+                    picNode.setThumbImageUrl190(JSONUtil.parseString(picJs, "ThumbImageUrl190"));
+                    picNode.setThumbImageUrl400(JSONUtil.parseString(picJs, "ThumbImageUrl400"));
+                    picNodes.add(picNode);
+                }
+                node.setPictures(picNodes);
             }catch (Exception e){
                 e.printStackTrace();
             }

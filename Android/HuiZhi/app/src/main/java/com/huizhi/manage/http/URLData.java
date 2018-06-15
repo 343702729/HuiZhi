@@ -40,6 +40,9 @@ public class URLData {
     private static final String URL_TALK_USERS = "/service/UserService.ashx";
     public static final String METHORD_TALK_USERS = "getTalkUserList";
 
+    private static final String URL_VERSION = "/service/ClientUpgradeService.ashx";
+    public static final String METHORD_VERSION = "GetNewVersion";
+
     private static final String URL_NEWS_BANNER = "/service/HZNewsService.ashx";
     public static final String METHORD_NEWS_BANNER = "getNewsBannerList";
 
@@ -175,6 +178,9 @@ public class URLData {
     private static final String URL_HOME_COURSE_SIGN_TUTOR = "/service/TeacherService.ashx";
     public static final String METHORD_HOME_COURSE_SIGN_TUTOR = "TutorSignIn";
 
+    private static final String URL_HOME_COURSE_STU_PUBLISH = "/service/TeacherService.ashx";
+    public static final String METHORD_HOME_COURSE_STU_PUBLISH = "publishStuWorks";
+
     /**
      * 用户登录
      * @return
@@ -278,6 +284,14 @@ public class URLData {
      */
     public static String getUrlTalkUsers(){
         return URL_HOST + URL_TALK_USERS;
+    }
+
+    /**
+     * 获取新版本
+     * @return
+     */
+    public static String getUrlVersion(){
+        return URL_HOST +URL_VERSION;
     }
 
     /**
@@ -639,4 +653,13 @@ public class URLData {
     public static String getUrlHomeCourseSignTutor(){
         return URL_HOST + URL_HOME_COURSE_SIGN_TUTOR;
     }
+
+    /**
+     * 发布作品
+     * @return
+     */
+    public static String getUrlHomeCourseStuPublish(){
+        return URL_HOST + URL_HOME_COURSE_STU_PUBLISH;
+    }
+
 }

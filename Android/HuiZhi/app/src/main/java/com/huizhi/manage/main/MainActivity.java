@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.huizhi.manage.R;
+import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.fragment.CommunicateListFragment;
 import com.huizhi.manage.fragment.HomeFragment;
@@ -51,11 +52,7 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
 //        ((MainApplication)getApplication()).setRongInit(UserInfo.getInstance().getUser().getAppKey());
 
-        VersionNode versionNode = new VersionNode();
-        versionNode.setVersionCode(2);
-        versionNode.setVersionName("2.0");
-        versionNode.setDownloadUrl("http://hzapp.dewinfo.com/app_upgrade/app-release.apk");
-        checkVersion(versionNode);
+        getDatas();
 
         communicateIMConnect();
         initDates();
@@ -96,8 +93,11 @@ public class MainActivity extends FragmentActivity {
         communicateV.setOnClickListener(itemBtnClick);
         userV = (LinearLayout)findViewById(R.id.user_btn);
         userV.setOnClickListener(itemBtnClick);
+    }
 
-
+    public void getDatas(){
+        MainRequest mainRequest = new MainRequest();
+        mainRequest.getVersion(((MainApplication)getApplication()).localVersion, handler);
     }
 
     private void setTabSelection(int index){
@@ -307,6 +307,9 @@ public class MainActivity extends FragmentActivity {
                 setCommunicateCountStatus(count);
             }else if(msg.what==3){
                 communicateIMConnect();
+            }else if(msg.what== Constants.MSG_SUCCESS){
+                VersionNode versionNode = (VersionNode)msg.obj;
+                checkVersion(versionNode);
             }
         }
     };
