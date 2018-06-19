@@ -58,6 +58,7 @@ public class CourseReleaseActivity extends Activity {
     private TextView signSTV;
     private Button signBtn;
     private EditText commentET;
+    private CheckBox publishCB;
     private CoursePictureAdapter pictureAdapter;
     private StudentNode studentNode;
     private List<PictureNode> picNodes = new ArrayList<>();
@@ -85,6 +86,8 @@ public class CourseReleaseActivity extends Activity {
         signBtn = findViewById(R.id.sign_btn);
 
         commentET = findViewById(R.id.comment_et);
+
+        publishCB = findViewById(R.id.publish_cb);
 
 
         gridView = findViewById(R.id.gridview);
@@ -177,7 +180,6 @@ public class CourseReleaseActivity extends Activity {
         @Override
         public void onClick(View view) {
             Log.i("HuiZhi", "The pic size is:" + picNodes.size());
-            CheckBox publishCB = findViewById(R.id.publish_cb);
             boolean isPublish = publishCB.isChecked();
             int status = 0;
             if(isPublish)
@@ -258,8 +260,12 @@ public class CourseReleaseActivity extends Activity {
         }else if(node.getStuStatus()==1){
             signSTV.setTextColor(getResources().getColor(R.color.app_green));
         }
-        picNodes.addAll(node.getPictures());
-        pictureAdapter.updateViewsData(picNodes);
+        if(node.getPictures()!=null){
+            picNodes.addAll(node.getPictures());
+            pictureAdapter.updateViewsData(picNodes);
+        }
+        commentET.setText(node.getComment());
+        publishCB.setChecked(node.isPublished());
     }
 
     private class SignBtnClick implements View.OnClickListener{
@@ -279,7 +285,7 @@ public class CourseReleaseActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == Constants.TAKE_PICTURE){
+        if(requestCode == Constants.TAKE_PICTURE&&resultCode == Activity.RESULT_OK){
             String[] pojo = {MediaStore.Images.Media.DATA};
             Cursor cursor = managedQuery(photoUri, pojo, null, null, null);
             if (cursor != null) {
@@ -355,6 +361,8 @@ public class CourseReleaseActivity extends Activity {
         node.setUrl(picUrl);
         picNodes.add(node);
         pictureAdapter.updateViewsData(picNodes);
+//        pictureAdapter = new CoursePictureAdapter(this, picNodes);
+//        gridView.setAdapter(pictureAdapter);
     }
 
     private class ItemNode {

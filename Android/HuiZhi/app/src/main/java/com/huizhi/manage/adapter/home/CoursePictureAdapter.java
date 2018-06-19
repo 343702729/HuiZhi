@@ -2,6 +2,7 @@ package com.huizhi.manage.adapter.home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,21 +87,18 @@ public class CoursePictureAdapter extends BaseAdapter {
             view = layoutInflater.inflate(R.layout.adapter_course_picture, null);
             viewItem.pictureIV = view.findViewById(R.id.picture_iv);
             viewItem.deleteIV = view.findViewById(R.id.delete_iv);
+            viewItem.localPicIV = view.findViewById(R.id.local_pic_iv);
             viewItem.pictureIV.setTag(node.getUrl());
             view.setTag(viewItem);
         }else{
             viewItem = (ViewItem)view.getTag();
         }
         if(node.isServer()){
+            Log.i("HuiZhi", "Come into load server imag:" + i + "  url:" + node.getUrl());
             viewItem.pictureIV.setImageUrl(AsyncFileUpload.getInstance().getFileUrl(node.getThumbImageUrl190()), mImageLoader);
-            try{
-
-//                asyncBitmapLoader.showPicByVolleyRequest(context, node.getThumbImageUrl190(), viewItem.pictureIV);
-            }catch (Exception e){
-                e.printStackTrace();
-            }
         }else {
-            viewItem.pictureIV.setImageBitmap(PictureUtil.getimage(node.getPath()));
+            Log.i("HuiZhi", "Come into load local imag:" + i + "  url:" + node.getPath());
+            viewItem.localPicIV.setImageBitmap(PictureUtil.getimage(node.getPath()));
         }
         viewItem.pictureIV.setOnClickListener(new ItemShowListener(node, i));
         viewItem.deleteIV.setOnClickListener(new DeleteItemListener(node));
@@ -108,6 +106,7 @@ public class CoursePictureAdapter extends BaseAdapter {
     }
 
     private class ViewItem{
+        ImageView localPicIV;
         NetworkImageView pictureIV;
         ImageView deleteIV;
     }

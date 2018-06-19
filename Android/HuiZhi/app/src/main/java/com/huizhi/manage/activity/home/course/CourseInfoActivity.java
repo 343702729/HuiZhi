@@ -9,9 +9,12 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -44,6 +47,8 @@ public class CourseInfoActivity extends Activity {
     private View lineV;
     private CourseNode courseNode;
     private Button teacherSignBtn, assistantSignBtn;
+    private String stuName;
+    private String status = "0";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,6 +79,9 @@ public class CourseInfoActivity extends Activity {
         Button filterBtn = findViewById(R.id.filter_btn);
         filterBtn.setOnClickListener(filterBtnClick);
 
+        EditText searchET = findViewById(R.id.search_et);
+        searchET.setOnEditorActionListener(searchETSearch);
+
         teacherSignBtn = findViewById(R.id.teacher_sign_btn);
         assistantSignBtn = findViewById(R.id.assistant_sign_btn);
         teacherSignBtn.setOnClickListener(signBtnClick);
@@ -94,7 +102,7 @@ public class CourseInfoActivity extends Activity {
 
     private void getDatas(){
         HomeCourseGetRequest getRequest = new HomeCourseGetRequest();
-        getRequest.getCourseInfo(UserInfo.getInstance().getUser().getTeacherName(), lessonNum, handler);
+        getRequest.getCourseInfo(UserInfo.getInstance().getUser().getTeacherName(), lessonNum,stuName, status,  handler);
     }
 
     private void initPageView(){
@@ -121,8 +129,32 @@ public class CourseInfoActivity extends Activity {
     private View.OnClickListener filterBtnClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            CourseFilterDialog filterDialog = new CourseFilterDialog(CourseInfoActivity.this, null);
+            CourseFilterDialog filterDialog = new CourseFilterDialog(CourseInfoActivity.this, status, statusInfoUpdate);
             filterDialog.showView(view);
+        }
+
+        private BaseInfoUpdate statusInfoUpdate = new BaseInfoUpdate() {
+            @Override
+            public void update(Object object) {
+                if(object==null)
+                    return;
+                status = (String)object;
+                getDatas();
+            }
+        };
+    };
+
+    private TextView.OnEditorActionListener searchETSearch = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                //TODO 回车键按下时要执行的操作
+                stuName = textView.getText().toString();
+                Log.i("HuiZhi", "The search str is:" + stuName);
+                getDatas();
+
+            }
+            return false;
         }
     };
 

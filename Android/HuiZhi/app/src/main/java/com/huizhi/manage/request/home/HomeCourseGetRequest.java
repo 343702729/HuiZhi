@@ -108,14 +108,16 @@ public class HomeCourseGetRequest {
     /**
      * 取课程详情
      * @param teacherName
-     * @param LessonNum
+     * @param lessonNum
      * @param handler
      */
-    public void getCourseInfo(String teacherName, String LessonNum, Handler handler){
+    public void getCourseInfo(String teacherName, String lessonNum, String stuName, String status, Handler handler){
         List<BasicNameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("Method", URLData.METHORD_HOME_COURSE_INFO));
         params.add(new BasicNameValuePair("TeacherName", teacherName));
-        params.add(new BasicNameValuePair("LessonNum", LessonNum));
+        params.add(new BasicNameValuePair("LessonNum", lessonNum));
+        params.add(new BasicNameValuePair("StuName", stuName));
+        params.add(new BasicNameValuePair("Status", status));
         ThreadPoolDo.getInstance().executeThread(new CourseInfoThread(params, handler));
     }
 

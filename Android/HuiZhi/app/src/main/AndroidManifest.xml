@@ -373,7 +373,7 @@
         <!--course release 发布作品 -->
         <activity
             android:name=".activity.home.course.CourseReleaseActivity"
-            android:windowSoftInputMode="stateHidden|stateUnchanged"
+            android:windowSoftInputMode="stateHidden|adjustPan"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.ApplicationActivity" />

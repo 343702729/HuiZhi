@@ -9,9 +9,49 @@
         android:background="@color/dialg_outside_bg">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="20dp"
             android:background="@color/white">
+            <Button
+                android:id="@+id/status_all_btn"
+                android:layout_width="70dp"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:background="@drawable/frame_blue"
+                android:text="全部"
+                android:textColor="@color/light_blue_d"
+                android:textSize="14sp"/>
+            <Button
+                android:id="@+id/status_wqd_btn"
+                android:layout_width="70dp"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/frame_gray"
+                android:text="未签到"
+                android:textColor="@color/gray"
+                android:textSize="14sp"/>
+            <Button
+                android:id="@+id/status_yqd_btn"
+                android:layout_width="70dp"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/frame_gray"
+                android:text="已签到"
+                android:textColor="@color/gray"
+                android:textSize="14sp"/>
+            <Button
+                android:id="@+id/status_qj_btn"
+                android:layout_width="70dp"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/frame_gray"
+                android:text="请假"
+                android:textColor="@color/gray"
+                android:textSize="14sp"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

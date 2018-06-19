@@ -37,11 +37,12 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
             android:scrollbars="none">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="50dp"
+
                 android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -116,6 +117,8 @@
                         android:layout_marginTop="10dp"
                         android:padding="5dp"
                         android:textSize="14sp"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
                         android:textColor="@color/light_black"
                         android:gravity="top"
                         android:background="@drawable/frame_gray"/>
