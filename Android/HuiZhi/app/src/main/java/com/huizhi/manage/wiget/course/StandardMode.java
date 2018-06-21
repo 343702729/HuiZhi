@@ -14,6 +14,7 @@ import android.widget.ListView;
 import com.huizhi.manage.R;
 import com.huizhi.manage.activity.home.course.CourseReleaseActivity;
 import com.huizhi.manage.adapter.home.StandardModeAdapter;
+import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.node.StudentNode;
 
 import java.util.ArrayList;
@@ -65,6 +66,7 @@ public class StandardMode extends LinearLayout {
             bundle.putSerializable("Node", node);
             intent.putExtras(intent);
             context.startActivity(intent);
+            context.startActivityForResult(intent, Constants.REQUEST_CODE);
         }
     };
 

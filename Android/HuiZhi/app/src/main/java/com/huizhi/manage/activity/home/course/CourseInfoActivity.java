@@ -56,13 +56,13 @@ public class CourseInfoActivity extends Activity {
         setContentView(R.layout.activity_home_course_info);
         initDatas();
         initViews();
-
+        getDatas();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        getDatas();
+//        getDatas();
     }
 
     private void initDatas(){
@@ -294,5 +294,13 @@ public class CourseInfoActivity extends Activity {
             standardMode.setDatas(node.getStudentNodes());
         if(signMode!=null)
             signMode.setDatas(node.getStudentNodes());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == Constants.REQUEST_CODE && resultCode == Constants.RESULT_CODE){
+            getDatas();
+        }
     }
 }

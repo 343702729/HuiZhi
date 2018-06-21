@@ -235,6 +235,8 @@ public class CourseReleaseActivity extends Activity {
                 case Constants.MSG_SUCCESS_TWO:
                     String successMsg = (String)msg.obj;
                     Toast.makeText(CourseReleaseActivity.this, successMsg, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent();
+                    setResult(Constants.RESULT_CODE, intent);
                     finish();
                     break;
                 case Constants.MSG_FAILURE:
