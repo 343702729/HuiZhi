@@ -109,6 +109,10 @@ public class CourseReleaseActivity extends Activity {
     private View.OnClickListener submitLLClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            if(studentNode.getStuStatus()!=1){
+                Toast.makeText(CourseReleaseActivity.this, "请先给学员签到，再上传作品", Toast.LENGTH_SHORT).show();
+                return;
+            }
             if(picNodes.size()>=4){
                 Toast.makeText(CourseReleaseActivity.this, "最多上传4张", Toast.LENGTH_SHORT).show();
                 return;
