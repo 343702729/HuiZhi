@@ -7,6 +7,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +37,7 @@ import com.huizhi.manage.base.BaseInfoUpdate;
 import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.dialog.PictureSelDialog;
+import com.huizhi.manage.http.AsyncBitmapLoader;
 import com.huizhi.manage.http.AsyncFileUpload;
 import com.huizhi.manage.node.PictureNode;
 import com.huizhi.manage.node.StudentNode;
@@ -42,6 +45,7 @@ import com.huizhi.manage.request.home.HomeCourseGetRequest;
 import com.huizhi.manage.request.home.HomeCoursePostRequest;
 import com.huizhi.manage.util.AppUtil;
 import com.huizhi.manage.util.FileUtil;
+import com.huizhi.manage.util.PictureUtil;
 import com.huizhi.manage.wiget.MyGridView;
 
 import org.json.JSONArray;
@@ -254,6 +258,21 @@ public class CourseReleaseActivity extends Activity {
     private void setViewsData(StudentNode node){
         if(node==null)
             return;
+        ImageView userIV = findViewById(R.id.user_iv);
+        try {
+            AsyncBitmapLoader asyncBitmapLoader = new AsyncBitmapLoader();
+            Bitmap bitmap = asyncBitmapLoader.loadBitmapFromServer(userIV, node.getFullHeadImgUrl(), new AsyncBitmapLoader.ImageCallBack() {
+                @Override
+                public void imageLoad(ImageView imageView, Bitmap bitmap) {
+                    imageView.setImageBitmap(PictureUtil.toRoundBitmap(bitmap));
+                }
+            });
+            if(bitmap!=null){
+                userIV.setImageBitmap(PictureUtil.toRoundBitmap(bitmap));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         TextView nameTV = findViewById(R.id.name_tv);
         nameTV.setText(node.getStuName());
         signBtn.setOnClickListener(new SignBtnClick(node.getStuNum()));

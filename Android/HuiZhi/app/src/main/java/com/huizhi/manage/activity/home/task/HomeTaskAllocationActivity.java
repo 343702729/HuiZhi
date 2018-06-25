@@ -25,9 +25,11 @@ import com.huizhi.manage.base.BackCliclListener;
 import com.huizhi.manage.base.BaseInfoUpdate;
 import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.data.UserInfo;
+import com.huizhi.manage.dialog.SchoolSelDialog;
 import com.huizhi.manage.dialog.TaskFilterDialog;
 import com.huizhi.manage.dialog.TaskSortDialog;
 import com.huizhi.manage.fragment.TaskFragment;
+import com.huizhi.manage.node.SchoolNode;
 import com.huizhi.manage.node.TaskNode;
 import com.huizhi.manage.node.TaskPageNode;
 import com.huizhi.manage.request.home.HomeTaskGetRequest;
@@ -61,6 +63,8 @@ public class HomeTaskAllocationActivity extends Activity {
 //    private int priority = 0, createtime = 0, completetime = 0, limittime = 0;
     private int prioritySort = -1, creatTimeSort = -1, endTimeSort = -1, limitTimeSort = -1;
     private String isLimtTime, createTime, userSel;
+    private String schoolId;
+    private SchoolNode schoolNode;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -87,6 +91,13 @@ public class HomeTaskAllocationActivity extends Activity {
         AppUtil.setNavigationBar(this);
         ImageButton backBtn = (ImageButton)findViewById(R.id.back_btn);
         backBtn.setOnClickListener(new BackCliclListener(this));
+
+        schoolId = UserInfo.getInstance().getUser().getSchoolId();
+        schoolNode = UserInfo.getInstance().getSwitchSchool();
+
+        Button switchBtn = findViewById(R.id.switch_btn);
+        switchBtn.setOnClickListener(switchSchoolBtnClick);
+
         Button sortBtn = findViewById(R.id.sort_btn);
         sortBtn.setOnClickListener(itemBtnClick);
         ImageView sortIV = findViewById(R.id.sort_iv);
@@ -107,6 +118,23 @@ public class HomeTaskAllocationActivity extends Activity {
         listView.setAdapter(taskAdapter);
         listView.setOnItemClickListener(taskItemClick);
     }
+
+    private View.OnClickListener switchSchoolBtnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            SchoolSelDialog schoolSelDialog = new SchoolSelDialog(HomeTaskAllocationActivity.this, schoolId, infoUpdate);
+            schoolSelDialog.showView(view);
+        }
+
+        BaseInfoUpdate infoUpdate = new BaseInfoUpdate() {
+            @Override
+            public void update(Object object) {
+                if(object==null)
+                    return;
+                schoolNode = (SchoolNode)object;
+            }
+        };
+    };
 
     private BaseInfoUpdate taskCreateInfo = new BaseInfoUpdate() {
         @Override

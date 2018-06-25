@@ -8,7 +8,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
+import com.android.volley.toolbox.Volley;
 import com.huizhi.manage.R;
+import com.huizhi.manage.base.BitmapCache;
+import com.huizhi.manage.http.AsyncFileUpload;
 import com.huizhi.manage.node.StudentNode;
 
 import java.util.ArrayList;
@@ -19,6 +25,7 @@ public class StandardModeAdapter extends BaseAdapter{
     private List<StudentNode> nodes;
     private LayoutInflater layoutInflater;
     private boolean isSign = false;
+    private ImageLoader mImageLoader;
 
     public StandardModeAdapter(Context context, List<StudentNode> nodes){
         this.context = context;
@@ -27,6 +34,8 @@ public class StandardModeAdapter extends BaseAdapter{
         else
             this.nodes = nodes;
         layoutInflater = LayoutInflater.from(context);
+        RequestQueue queue = Volley.newRequestQueue(context);
+        mImageLoader = new ImageLoader(queue, new BitmapCache());
     }
 
     public StandardModeAdapter(Context context, List<StudentNode> nodes, boolean isSign){
@@ -72,6 +81,8 @@ public class StandardModeAdapter extends BaseAdapter{
             viewItem.nameTV = view.findViewById(R.id.name_tv);
             viewItem.signSTV = view.findViewById(R.id.sign_status_tv);
             viewItem.publishIV = view.findViewById(R.id.publish_iv);
+            viewItem.userIV = view.findViewById(R.id.user_iv);
+            viewItem.userIV.setTag(node.getFullHeadImgUrl());
             view.setTag(viewItem);
         }else{
             viewItem = (ViewItem)view.getTag();
@@ -92,6 +103,7 @@ public class StandardModeAdapter extends BaseAdapter{
         }else {
             viewItem.publishIV.setImageResource(R.mipmap.icon_publish_undo);
         }
+        viewItem.userIV.setImageUrl(AsyncFileUpload.getInstance().getFileUrl(node.getFullHeadImgUrl()), mImageLoader);
         return view;
     }
 
@@ -99,5 +111,6 @@ public class StandardModeAdapter extends BaseAdapter{
         TextView nameTV;
         TextView signSTV;
         ImageView publishIV;
+        NetworkImageView userIV;
     }
 }

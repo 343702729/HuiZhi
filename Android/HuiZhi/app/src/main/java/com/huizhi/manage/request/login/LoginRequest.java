@@ -9,10 +9,12 @@ import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.http.HttpConnect;
 import com.huizhi.manage.http.URLData;
 import com.huizhi.manage.node.ResultNode;
+import com.huizhi.manage.node.SchoolNode;
 import com.huizhi.manage.util.JSONUtil;
 import com.huizhi.manage.base.ThreadPoolDo;
 
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -87,7 +89,8 @@ public class LoginRequest {
                 UserInfo.getInstance().getUser().setHeadImgUrl(JSONUtil.parseString(json, "HeadImgUrl"));
                 UserInfo.getInstance().getUser().setEmail(JSONUtil.parseString(json, "Email"));
                 UserInfo.getInstance().getUser().setStrCreateTime(JSONUtil.parseString(json, "strCreateTime"));
-                UserInfo.getInstance().getUser().setSchoolId(JSONUtil.parseString(json, "SchoolId"));
+                String schoolId = JSONUtil.parseString(json, "SchoolId");
+                UserInfo.getInstance().getUser().setSchoolId(schoolId);
                 UserInfo.getInstance().getUser().setDistrictId(JSONUtil.parseInt(json, "DistrictId"));
                 UserInfo.getInstance().getUser().setSchoolName(JSONUtil.parseString(json, "SchoolName"));
                 UserInfo.getInstance().getUser().setRoleType(JSONUtil.parseInt(json, "RoleType"));
@@ -99,6 +102,26 @@ public class LoginRequest {
                 String appKey = JSONUtil.parseString(json, "appKey");
                 Log.i("HuiZhi", "The rong key is:" + appKey);
                 UserInfo.getInstance().getUser().setAppKey(appKey);
+                JSONArray schoolAr = json.getJSONArray("Schools");
+                if(schoolAr!=null){
+                    List<SchoolNode> schoolNodes = new ArrayList<>();
+                    JSONObject itemJS = null;
+                    for (int i=0; i<schoolAr.length(); i++){
+                        itemJS = schoolAr.getJSONObject(i);
+                        SchoolNode schoolNode = new SchoolNode();
+                        schoolNode.setDistrictId(JSONUtil.parseString(itemJS, "DistrictId"));
+                        schoolNode.setSchoolId(JSONUtil.parseString(itemJS, "SchoolId"));
+                        schoolNode.setSchoolName(JSONUtil.parseString(itemJS, "SchoolName"));
+                        schoolNode.setRoleType(JSONUtil.parseInt(itemJS, "RoleType"));
+                        schoolNode.setRoleTypeName(JSONUtil.parseString(itemJS, "RoleTypeName"));
+                        schoolNode.setAdmin(JSONUtil.parseBoolean(itemJS, "IsAdmin"));
+                        schoolNodes.add(schoolNode);
+                        if(!TextUtils.isEmpty(schoolId)&&schoolId.equals(schoolNode.getSchoolId())){
+                            UserInfo.getInstance().setSwitchSchool(schoolNode);
+                        }
+                    }
+                    UserInfo.getInstance().getUser().setSchools(schoolNodes);
+                }
             }catch (Exception e){
                 e.printStackTrace();
             }

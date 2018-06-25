@@ -11,7 +11,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
+import com.android.volley.toolbox.Volley;
 import com.huizhi.manage.R;
+import com.huizhi.manage.base.BitmapCache;
+import com.huizhi.manage.http.AsyncFileUpload;
 import com.huizhi.manage.node.StudentNode;
 
 import java.util.ArrayList;
@@ -22,6 +28,7 @@ public class SignModeAdapter extends BaseAdapter {
     private List<StudentNode> nodes;
     private List<StudentNode> signNodes = new ArrayList<>();
     private LayoutInflater layoutInflater;
+    private ImageLoader mImageLoader;
 
     public SignModeAdapter(Context context, List<StudentNode> nodes){
         this.context = context;
@@ -30,6 +37,8 @@ public class SignModeAdapter extends BaseAdapter {
         else
             this.nodes = nodes;
         layoutInflater = LayoutInflater.from(context);
+        RequestQueue queue = Volley.newRequestQueue(context);
+        mImageLoader = new ImageLoader(queue, new BitmapCache());
     }
 
     public void updateViewsData(List<StudentNode> nodes){
@@ -85,6 +94,8 @@ public class SignModeAdapter extends BaseAdapter {
             viewItem.signIV = view.findViewById(R.id.sign_cb);
             viewItem.namtTV = view.findViewById(R.id.name_tv);
             viewItem.signSTV = view.findViewById(R.id.sign_status_tv);
+            viewItem.userIV = view.findViewById(R.id.user_iv);
+            viewItem.userIV.setTag(node.getFullHeadImgUrl());
             view.setTag(viewItem);
         }else{
             viewItem = (ViewItem)view.getTag();
@@ -105,6 +116,7 @@ public class SignModeAdapter extends BaseAdapter {
             viewItem.signIV.setBackgroundResource(R.mipmap.user_check_fc);
         }
         viewItem.signSTV.setText(node.getStrStuStatus());
+        viewItem.userIV.setImageUrl(AsyncFileUpload.getInstance().getFileUrl(node.getFullHeadImgUrl()), mImageLoader);
         return view;
     }
 
@@ -113,6 +125,7 @@ public class SignModeAdapter extends BaseAdapter {
         ImageView signIV;
         TextView namtTV;
         TextView signSTV;
+        NetworkImageView userIV;
     }
 
     private class ItemLineClick implements View.OnClickListener {

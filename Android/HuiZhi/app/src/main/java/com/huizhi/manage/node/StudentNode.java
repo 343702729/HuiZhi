@@ -14,6 +14,7 @@ public class StudentNode implements Serializable {
     private String title;
     private String worksPic;
     private String comment;
+    private String fullHeadImgUrl;
     private List<PictureNode> pictures;
 
     public String getStuNum() {
@@ -94,6 +95,14 @@ public class StudentNode implements Serializable {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getFullHeadImgUrl() {
+        return fullHeadImgUrl;
+    }
+
+    public void setFullHeadImgUrl(String fullHeadImgUrl) {
+        this.fullHeadImgUrl = fullHeadImgUrl;
     }
 
     public List<PictureNode> getPictures() {

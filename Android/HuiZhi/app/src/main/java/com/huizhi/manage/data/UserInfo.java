@@ -3,6 +3,7 @@ package com.huizhi.manage.data;
 import android.text.TextUtils;
 
 import com.huizhi.manage.base.BaseInfoUpdate;
+import com.huizhi.manage.node.SchoolNode;
 import com.huizhi.manage.node.UserNode;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class UserInfo {
     private boolean isLogin = false;
     private BaseInfoUpdate taskCreatInfo, communicateInfo;
     private BaseInfoUpdate appDownloadUpdate;
+    private SchoolNode switchSchool;
 
     private UserInfo(){
         userNode = new UserNode();
@@ -127,5 +129,13 @@ public class UserInfo {
 
     public void setAppDownloadUpdate(BaseInfoUpdate appDownloadUpdate) {
         this.appDownloadUpdate = appDownloadUpdate;
+    }
+
+    public SchoolNode getSwitchSchool() {
+        return switchSchool;
+    }
+
+    public void setSwitchSchool(SchoolNode switchSchool) {
+        this.switchSchool = switchSchool;
     }
 }

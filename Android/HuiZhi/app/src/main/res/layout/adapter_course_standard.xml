@@ -10,9 +10,10 @@
     android:paddingLeft="15dp"
     android:paddingRight="15dp">
 
-    <ImageView
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+    <com.huizhi.manage.wiget.CircleImageView
+        android:id="@+id/user_iv"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:background="@mipmap/user_icon"/>
 
     <TextView

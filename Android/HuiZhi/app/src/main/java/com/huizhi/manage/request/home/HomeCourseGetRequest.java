@@ -183,6 +183,7 @@ public class HomeCourseGetRequest {
                         studentNode.setStuStatus(JSONUtil.parseInt(itemJO, "StuStatus"));
                         studentNode.setStrStuStatus(JSONUtil.parseString(itemJO, "StrStuStatus"));
                         studentNode.setPublished(JSONUtil.parseBoolean(itemJO, "IsPublished"));
+                        studentNode.setFullHeadImgUrl(JSONUtil.parseString(itemJO, "FullHeadImgUrl"));
                         studentNodes.add(studentNode);
                     }
                     node.setStudentNodes(studentNodes);
@@ -248,6 +249,7 @@ public class HomeCourseGetRequest {
                 node.setLessonNum(JSONUtil.parseString(jsonOb, "LessonNum"));
                 node.setStuNum(JSONUtil.parseString(jsonOb, "StuNum"));
                 node.setStuName(JSONUtil.parseString(jsonOb, "StuName"));
+                node.setFullHeadImgUrl(JSONUtil.parseString(jsonOb, "FullHeadImgUrl"));
                 node.setStuStatus(JSONUtil.parseInt(jsonOb, "StuStatus"));
                 node.setStrStuStatus(JSONUtil.parseString(jsonOb, "StrStuStatus"));
                 node.setWorkID(JSONUtil.parseString(jsonOb, "WorkID"));

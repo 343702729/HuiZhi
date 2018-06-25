@@ -22,7 +22,16 @@
                 android:text="我的任务"
                 android:textSize="@dimen/title_text"
                 android:textColor="@android:color/white"/>
-
+            <Button
+                android:id="@+id/switch_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:drawableLeft="@mipmap/icon_switch"
+                android:background="@null"
+                android:text="校区"
+                android:textSize="14sp"
+                android:textColor="@color/white"/>
             <ImageButton
                 android:id="@+id/back_btn"
                 style="@style/back_btn"/>

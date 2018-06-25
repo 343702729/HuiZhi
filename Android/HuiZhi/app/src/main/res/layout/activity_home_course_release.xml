@@ -55,6 +55,7 @@
                     android:orientation="horizontal"
                     android:padding="15dp">
                     <ImageView
+                        android:id="@+id/user_iv"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:background="@mipmap/user_icon"/>

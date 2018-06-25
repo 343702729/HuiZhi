@@ -1,6 +1,8 @@
 package com.huizhi.manage.node;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by CL on 2018/1/6.
@@ -24,6 +26,7 @@ public class UserNode implements Serializable {
     private String chatToken;
     private int jobStatus;
     private int type;
+    private List<SchoolNode> schools = new ArrayList<>();
 
     public String getTeacherId() {
         return teacherId;
@@ -159,5 +162,13 @@ public class UserNode implements Serializable {
 
     public void setAppKey(String appKey) {
         this.appKey = appKey;
+    }
+
+    public List<SchoolNode> getSchools() {
+        return schools;
+    }
+
+    public void setSchools(List<SchoolNode> schools) {
+        this.schools = schools;
     }
 }

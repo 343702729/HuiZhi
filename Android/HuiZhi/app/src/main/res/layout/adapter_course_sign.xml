@@ -19,7 +19,8 @@
         android:layout_height="wrap_content"
         android:background="@mipmap/user_check_bg"/>
 
-    <ImageView
+    <com.huizhi.manage.wiget.CircleImageView
+        android:id="@+id/user_iv"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginLeft="5dp"
