@@ -13,6 +13,8 @@ public class URLData {
 
     public static final String URL_ABOUT = URL_HOST + "/app/aboutus/";
 
+    private static final String URL_HOME_WEBBA = "/ask/index-";
+
     private static final String URL_LOGIN = "/service/UserService.ashx";
     public static final String METHOD_LOGIN = "userLogin";
 
@@ -202,6 +204,15 @@ public class URLData {
         if(imgurl.startsWith("/"))
             return URL_HOST + imgurl;
         return URL_HOST + "/" + imgurl;
+    }
+
+    /**
+     * 问吧
+     * @param teacherid
+     * @return
+     */
+    public static String getUrlWenBa(String teacherid){
+        return URL_HOST + URL_HOME_WEBBA + teacherid;
     }
 
     /**

@@ -326,6 +326,28 @@
             </intent-filter>
         </activity>
 
+        <!-- wen ba 问吧 -->
+        <activity
+            android:name=".activity.home.HomeWenBaActivity"
+            android:windowSoftInputMode="stateHidden|stateUnchanged"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.ApplicationActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- yunyin fx 校区运营分享 -->
+        <activity
+            android:name=".activity.home.HomeYunYinFXActivity"
+            android:windowSoftInputMode="stateHidden|stateUnchanged"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.ApplicationActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <!-- work daily edit 工作日报 -->
         <activity
             android:name=".activity.home.HomeWorkDailyEditActivity"

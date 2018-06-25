@@ -24,6 +24,8 @@ import com.huizhi.manage.activity.home.HomeEmailInfoActivity;
 import com.huizhi.manage.activity.home.HomeFileMenuActivity;
 import com.huizhi.manage.activity.home.HomeMessageActivity;
 import com.huizhi.manage.activity.home.HomeNewsActivity;
+import com.huizhi.manage.activity.home.HomeWenBaActivity;
+import com.huizhi.manage.activity.home.HomeYunYinFXActivity;
 import com.huizhi.manage.activity.home.course.CourseListActivity;
 import com.huizhi.manage.activity.home.task.HomeTaskAgencyActivity;
 import com.huizhi.manage.activity.home.task.HomeTaskAllocationActivity;
@@ -34,7 +36,6 @@ import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.http.AsyncBitmapLoader;
 import com.huizhi.manage.http.AsyncFileUpload;
-import com.huizhi.manage.http.URLData;
 import com.huizhi.manage.login.LoginActivity;
 import com.huizhi.manage.node.BannerNode;
 import com.huizhi.manage.node.EmailInfoNode;
@@ -119,6 +120,12 @@ public class HomeFragment extends Fragment {
         //工作日志
         LinearLayout rzLL = (LinearLayout)messageLayout.findViewById(R.id.user_rz_ll);
         rzLL.setOnClickListener(itemOnClick);
+        //问吧
+        LinearLayout wbLL = (LinearLayout)messageLayout.findViewById(R.id.user_wb_ll);
+        wbLL.setOnClickListener(itemOnClick);
+        //问吧
+        LinearLayout fxLL = (LinearLayout)messageLayout.findViewById(R.id.user_fx_ll);
+        fxLL.setOnClickListener(itemOnClick);
         //课程列表
         LinearLayout kcLL = (LinearLayout)messageLayout.findViewById(R.id.user_kc_ll);
         kcLL.setOnClickListener(itemOnClick);
@@ -263,12 +270,22 @@ public class HomeFragment extends Fragment {
                     intent.setClass(activity, HomeTaskAllocationActivity.class);
                     startActivity(intent);
                     break;
-                case R.id.user_rz_ll:
+                case R.id.user_rz_ll://工作日志
                     intent = new Intent();
                     intent.setClass(activity, HomeWorkDailyActivity.class);
                     activity.startActivity(intent);
                     break;
-                case R.id.user_kc_ll:
+                case R.id.user_wb_ll://问吧
+                    intent = new Intent();
+                    intent.setClass(activity, HomeWenBaActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.user_fx_ll://校区运营分享
+                    intent = new Intent();
+                    intent.setClass(activity, HomeYunYinFXActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.user_kc_ll://家校互联
                     intent = new Intent();
                     intent.setClass(activity, CourseListActivity.class);
                     activity.startActivity(intent);

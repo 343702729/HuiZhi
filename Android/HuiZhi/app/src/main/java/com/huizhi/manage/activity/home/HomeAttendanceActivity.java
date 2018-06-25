@@ -1,7 +1,11 @@
 package com.huizhi.manage.activity.home;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.net.wifi.ScanResult;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -35,6 +39,8 @@ import com.tencent.tencentmap.mapsdk.map.MapActivity;
 import com.tencent.tencentmap.mapsdk.map.MapView;
 import com.tencent.tencentmap.mapsdk.map.TencentMap;
 
+import java.util.List;
+
 /**
  * Created by CL on 2017/12/28.
  * 考勤
@@ -56,6 +62,7 @@ public class HomeAttendanceActivity extends MapActivity {
         setContentView(R.layout.activity_home_attendance);
         initViews();
         getDates(handler);
+        getWifiName(this);
     }
 
     @Override
@@ -393,4 +400,28 @@ public class HomeAttendanceActivity extends MapActivity {
         }
     }
 
+
+    private static void getWifiName(Context context) {
+        String wserviceName = Context.WIFI_SERVICE;
+        WifiManager wm = (WifiManager) context.getSystemService(wserviceName);
+        List<ScanResult> wifiList = wm.getScanResults();
+        for (int i = 0; i < wifiList.size(); i++) {
+
+            ScanResult result = wifiList.get(i);
+            Log.d("dada", "bssid=" + result.BSSID + " ssid:" + result.SSID);
+        }
+
+        //下面的代码可以获取当当前设备连接到的网络的wifi信息
+
+        WifiManager mWifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        if (mWifi.isWifiEnabled()) {
+            WifiInfo wifiInfo = mWifi.getConnectionInfo();
+            String netName = wifiInfo.getSSID(); //获取被连接网络的名称
+            String netMac = wifiInfo.getBSSID(); //获取被连接网络的mac地址
+            String localMac = wifiInfo.getMacAddress();// 获得本机的MAC地址
+            Log.i("HuiZhi", "---netName:" + netName);   //---netName:HUAWEI MediaPad
+            Log.i("HuiZhi", "---netMac:" + netMac);     //---netMac:78:f5:fd:ae:b9:97
+            Log.i("HuiZhi", "---localMac:" + localMac); //---localMac:BC:76:70:9F:56:BD
+        }
+    }
 }

@@ -65,7 +65,7 @@ public class StandardMode extends LinearLayout {
             Bundle bundle = new Bundle();
             bundle.putSerializable("Node", node);
             intent.putExtras(intent);
-            context.startActivity(intent);
+//            context.startActivity(intent);
             context.startActivityForResult(intent, Constants.REQUEST_CODE);
         }
     };
