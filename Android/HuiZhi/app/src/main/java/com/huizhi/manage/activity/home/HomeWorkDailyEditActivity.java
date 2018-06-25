@@ -31,7 +31,10 @@ import com.huizhi.manage.util.AppUtil;
 public class HomeWorkDailyEditActivity extends Activity {
     private int year, month, day;
     private WorkDailyNode dailyNode;
+    private Button rbBtn, rzBtn;
     private EditText contentET;
+    private int type = 0;
+    private String rbStr, rzStr;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +51,11 @@ public class HomeWorkDailyEditActivity extends Activity {
         day = getIntent().getIntExtra("Day", 0);
         dailyNode = (WorkDailyNode)getIntent().getSerializableExtra("Item");
         Log.i("Task", "The holidayname:" + dailyNode.getWorkDate());
+
+        rbBtn = findViewById(R.id.ribao_btn);
+        rzBtn = findViewById(R.id.rizhi_btn);
+        rbBtn.setOnClickListener(itemBtmClick);
+        rzBtn.setOnClickListener(itemBtmClick);
 
         contentET = findViewById(R.id.content_et);
 
@@ -77,6 +85,39 @@ public class HomeWorkDailyEditActivity extends Activity {
         WorkDailyGetRequest getRequest = new WorkDailyGetRequest();
         getRequest.getWorkDailyDate(UserInfo.getInstance().getUser().getTeacherId(), UserInfo.getInstance().getUser().getSchoolId(), data, handler);
     }
+
+    private View.OnClickListener itemBtmClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            initBtnBg();
+            ((Button)view).setTextColor(getResources().getColor(R.color.white));
+            switch (view.getId()){
+                case R.id.ribao_btn:
+                    rzStr = contentET.getText().toString();
+                    contentET.setText(rbStr);
+                    type = 0;
+                    rbBtn.setBackgroundResource(R.drawable.frame_seg_blue_light_l_fc);
+                    contentET.setHint("请输入您的工作日报");
+
+                    break;
+                case R.id.rizhi_btn:
+                    rbStr = contentET.getText().toString();
+                    contentET.setText(rzStr);
+                    type = 1;
+                    rzBtn.setBackgroundResource(R.drawable.frame_seg_blue_light_r_fc);
+                    contentET.setHint("请输入您的个人日志");
+
+                    break;
+            }
+        }
+
+        private void initBtnBg(){
+            rbBtn.setBackgroundResource(R.drawable.frame_seg_blue_light_l_bg);
+            rzBtn.setBackgroundResource(R.drawable.frame_seg_blue_light_r_bg);
+            rbBtn.setTextColor(getResources().getColor(R.color.blue_light));
+            rzBtn.setTextColor(getResources().getColor(R.color.blue_light));
+        }
+    };
 
     private View.OnClickListener dailySubmitClick = new View.OnClickListener() {
         @Override
