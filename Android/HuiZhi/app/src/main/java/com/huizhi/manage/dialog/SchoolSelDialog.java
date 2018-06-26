@@ -3,6 +3,7 @@ package com.huizhi.manage.dialog;
 import android.app.ActionBar;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -24,8 +25,9 @@ public class SchoolSelDialog {
     private View contentView;
     private SchoolSelAdapter schoolSelAdapter;
     private String schoolId;
+    private int height = 115;
 
-    public SchoolSelDialog(Context context, String schoolId, BaseInfoUpdate infoUpdate){
+    public SchoolSelDialog(Context context, String schoolId, int height, BaseInfoUpdate infoUpdate){
         this.context = context;
         this.schoolId = schoolId;
         this.infoUpdate = infoUpdate;
@@ -44,7 +46,7 @@ public class SchoolSelDialog {
             int height = wm.getDefaultDisplay().getHeight();
             popupWindow = new PopupWindow(context);
             popupWindow.setWidth(ActionBar.LayoutParams.MATCH_PARENT);
-            popupWindow.setHeight(height - DipPxUtil.dip2px(context, 115));
+            popupWindow.setHeight(height - DipPxUtil.dip2px(context, height));
             popupWindow.setBackgroundDrawable(new BitmapDrawable());
             popupWindow.setFocusable(true);
             popupWindow.setOutsideTouchable(true);
@@ -55,7 +57,7 @@ public class SchoolSelDialog {
     }
 
     public void showView(View parentV){
-        popupWindow.showAtLocation(parentV, Gravity.TOP, 0, DipPxUtil.dip2px(context, 115));
+        popupWindow.showAtLocation(parentV, Gravity.TOP, 0, DipPxUtil.dip2px(context, height));
         popupWindow.update();
     }
 
@@ -63,12 +65,15 @@ public class SchoolSelDialog {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
             SchoolNode node = (SchoolNode)schoolSelAdapter.getItem(i);
+            Log.i("HuiZhi", "The school item select:" + node.getSchoolName());
             if(node.getSchoolId().equals(schoolId)) {
                 popupWindow.dismiss();
                 return;
             }
-            if(infoUpdate!=null)
+            if(infoUpdate!=null) {
                 infoUpdate.update(node);
+                popupWindow.dismiss();
+            }
         }
     };
 }

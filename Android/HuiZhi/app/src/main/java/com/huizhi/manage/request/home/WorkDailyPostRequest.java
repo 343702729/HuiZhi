@@ -30,13 +30,14 @@ public class WorkDailyPostRequest {
      * @param workdate
      * @param handler
      */
-    public void postWorkDaily(String teacherid, String schoolid, String workcontent, String workdate, Handler handler){
+    public void postWorkDaily(String teacherid, String schoolid, String workcontent, String personalNotes, String workdate, Handler handler){
         List<BasicNameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("Method", URLData.METHORD_USER_WORK_DAILY_SAVE));
         params.add(new BasicNameValuePair("TeacherId", teacherid));
         params.add(new BasicNameValuePair("SchoolId", schoolid));
         params.add(new BasicNameValuePair("WorkContent", workcontent));
         params.add(new BasicNameValuePair("WorkDate", workdate));
+        params.add(new BasicNameValuePair("PersonalNotes", personalNotes));
         ThreadPoolDo.getInstance().executeThread(new WorkDailyThread(params, handler));
     }
 

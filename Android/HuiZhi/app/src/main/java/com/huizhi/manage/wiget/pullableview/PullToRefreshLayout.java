@@ -110,7 +110,7 @@ public class PullToRefreshLayout extends RelativeLayout {
 	private boolean canPullDown = true;
 	private boolean canPullUp = true;
 	//控制是否可以上拉加载
-	private boolean isPullUp = true;
+	private boolean isPullUp = true, isPullDown = true;
 
 	/**
 	 * 执行自动回滚的handler
@@ -323,6 +323,17 @@ public class PullToRefreshLayout extends RelativeLayout {
 		canPullDown = true;
 		canPullUp = true;
 	}
+
+	public void isPullDown(boolean flage){
+		//isCanPullDown
+		isPullDown = flage;
+		if(refreshView!=null){
+			if(isPullDown)
+				refreshView.findViewById(R.id.head_view).setVisibility(VISIBLE);
+			else
+				refreshView.findViewById(R.id.head_view).setVisibility(GONE);
+		}
+	}
 	
 	public void isPullUp(boolean flage){
 		isPullUp = flage;
@@ -378,7 +389,7 @@ public class PullToRefreshLayout extends RelativeLayout {
 				break;
 			case MotionEvent.ACTION_MOVE:
 				if (mEvents == 0) {
-					if (((Pullable) pullableView).canPullDown() && canPullDown && state != LOADING) {
+					if (isPullDown &&((Pullable) pullableView).canPullDown() && canPullDown && state != LOADING) {
 						System.out.println("Come into pulldown");
 						// 可以下拉，正在加载时不能下拉
 						// 对实际滑动距离做缩小，造成用力拉的感觉
@@ -474,6 +485,11 @@ public class PullToRefreshLayout extends RelativeLayout {
 				.findViewById(R.id.loadstate_tv);
 		loadingView = loadmoreView.findViewById(R.id.loading_icon);
 		loadStateImageView = loadmoreView.findViewById(R.id.loadstate_iv);
+
+		if(isPullDown)
+			refreshView.findViewById(R.id.head_view).setVisibility(VISIBLE);
+		else
+			refreshView.findViewById(R.id.head_view).setVisibility(GONE);
 
 		if(isPullUp)
 			loadmoreView.findViewById(R.id.loadmore_view).setVisibility(VISIBLE);

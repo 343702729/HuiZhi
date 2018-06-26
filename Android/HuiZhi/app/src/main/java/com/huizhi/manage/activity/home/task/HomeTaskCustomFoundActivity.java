@@ -489,7 +489,7 @@ public class HomeTaskCustomFoundActivity extends Activity {
             loadingProgress = new LoadingProgress(HomeTaskCustomFoundActivity.this, null);
             loadingProgress.showView(view);
             HomeTaskPostRequest postRequest = new HomeTaskPostRequest();
-            postRequest.postCustomTask(createTechId, UserInfo.getInstance().getUser().getSchoolId(), getTasksJS(items), handler);
+            postRequest.postCustomTask(createTechId, UserInfo.getInstance().getUser().getSchoolId(), getTasksJS(items), getAccessoryListStr(picList), handler);
 //            postRequest.postCustomTask(uniqueId, "", createTechId, title, description, isTimeLimit, planEndTime, priority, personSelId, assignReason, handler);
         }
 
@@ -520,6 +520,28 @@ public class HomeTaskCustomFoundActivity extends Activity {
                 e.printStackTrace();
             }
 
+            return jsonAr.toString();
+        }
+
+        private String getAccessoryListStr(List<TaskAccessory> accessories){
+            if(accessories==null)
+                return "";
+            JSONArray jsonAr = new JSONArray();
+            JSONObject jsonOb = null;
+            try{
+                for (TaskAccessory node:accessories){
+                    jsonOb = new JSONObject();
+                    jsonOb.put("AccessoryType", node.getAccessoryType());
+                    jsonOb.put("FileType", node.getFileType());
+                    jsonOb.put("FileUrl", node.getFileUrl());
+                    jsonOb.put("FileSize", node.getFileSize());
+                    jsonOb.put("FileName", node.getFileName());
+                    jsonAr.put(jsonOb);
+                    jsonOb = null;
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             return jsonAr.toString();
         }
 
@@ -666,6 +688,8 @@ public class HomeTaskCustomFoundActivity extends Activity {
         taskAccessory.setFileLocalUrl(path);
         taskAccessory.setLocal(true);
         taskAccessory.setFileUrl(key);
+        taskAccessory.setAccessoryType(1);
+        taskAccessory.setFileType(1);
         taskAccessory.setFileName(filename);
         picList.add(taskAccessory);
         addPicture(taskAccessory, picList);

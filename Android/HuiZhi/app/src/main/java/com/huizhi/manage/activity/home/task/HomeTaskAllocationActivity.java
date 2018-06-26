@@ -65,6 +65,7 @@ public class HomeTaskAllocationActivity extends Activity {
     private String isLimtTime, createTime, userSel;
     private String schoolId;
     private SchoolNode schoolNode;
+    private TextView schoolTV;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,8 +93,11 @@ public class HomeTaskAllocationActivity extends Activity {
         ImageButton backBtn = (ImageButton)findViewById(R.id.back_btn);
         backBtn.setOnClickListener(new BackCliclListener(this));
 
-        schoolId = UserInfo.getInstance().getUser().getSchoolId();
+        schoolId = UserInfo.getInstance().getSwitchSchool().getSchoolId();
         schoolNode = UserInfo.getInstance().getSwitchSchool();
+
+        schoolTV = findViewById(R.id.school_tv);
+        schoolTV.setText(schoolNode.getSchoolName());
 
         Button switchBtn = findViewById(R.id.switch_btn);
         switchBtn.setOnClickListener(switchSchoolBtnClick);
@@ -122,7 +126,7 @@ public class HomeTaskAllocationActivity extends Activity {
     private View.OnClickListener switchSchoolBtnClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            SchoolSelDialog schoolSelDialog = new SchoolSelDialog(HomeTaskAllocationActivity.this, schoolId, infoUpdate);
+            SchoolSelDialog schoolSelDialog = new SchoolSelDialog(HomeTaskAllocationActivity.this, schoolId, 115, infoUpdate);
             schoolSelDialog.showView(view);
         }
 
@@ -131,7 +135,14 @@ public class HomeTaskAllocationActivity extends Activity {
             public void update(Object object) {
                 if(object==null)
                     return;
+
                 schoolNode = (SchoolNode)object;
+                schoolId = schoolNode.getSchoolId();
+                UserInfo.getInstance().setSwitchSchool(schoolNode);
+                schoolTV.setText(schoolNode.getSchoolName());
+                currentPage = 1;
+                pullToRefreshRL.isPullUp(false);
+                getDates(currentPage, pageSize, handler);
             }
         };
     };
@@ -194,7 +205,7 @@ public class HomeTaskAllocationActivity extends Activity {
     private void getDates(int page, int pageSize, Handler handler){
         Log.i("HuiZhi", "The total pages:" + totalePages);
         HomeTaskGetRequest getRequest = new HomeTaskGetRequest();
-        getRequest.getAdminTaskList(page, pageSize, UserInfo.getInstance().getUser().getTeacherId(), UserInfo.getInstance().getUser().getSchoolId(), taskStatus, UserInfo.getInstance().getUser().getTeacherName(),
+        getRequest.getAdminTaskList(page, pageSize, UserInfo.getInstance().getUser().getTeacherId(), schoolId, taskStatus, UserInfo.getInstance().getUser().getTeacherName(),
                 taskTitle, priority, isLimtTime, createTime, userSel, getSortString(),  handler);
     }
 
@@ -351,9 +362,14 @@ public class HomeTaskAllocationActivity extends Activity {
     }
 
     private void updateViews(List<TaskNode> nodes){
+//        if(currentPage==1&&(nodes==null||nodes.size()==0)) {
+//            pullToRefreshRL.isPullDown(false);
+//        }else {
+//            pullToRefreshRL.isPullDown(true);
+//        }
         if(nodes==null)
             return;
-        if(currentPage<totalePages)
+        if(currentPage<totalePages&&nodes.size()>0)
             pullToRefreshRL.isPullUp(true);
         taskNodes.clear();
         taskNodes.addAll(nodes);

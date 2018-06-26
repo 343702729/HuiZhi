@@ -122,8 +122,8 @@ public class HomeWorkDailyEditActivity extends Activity {
     private View.OnClickListener dailySubmitClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            String content = contentET.getText().toString();
-            if(TextUtils.isEmpty(content)){
+//            String content = contentET.getText().toString();
+            if(TextUtils.isEmpty(rbStr)){
                 Toast.makeText(HomeWorkDailyEditActivity.this, "日报内容不能为空", Toast.LENGTH_LONG).show();
                 return;
             }
@@ -138,7 +138,7 @@ public class HomeWorkDailyEditActivity extends Activity {
                 dataD = "" + day;
             String data = year + "-" + dataM + "-" + dataD;
             WorkDailyPostRequest dailyPostR = new WorkDailyPostRequest();
-            dailyPostR.postWorkDaily(UserInfo.getInstance().getUser().getTeacherId(), UserInfo.getInstance().getUser().getSchoolId(), content, data, handler);
+            dailyPostR.postWorkDaily(UserInfo.getInstance().getUser().getTeacherId(), UserInfo.getInstance().getUser().getSchoolId(), rbStr, rzStr, data, handler);
         }
     };
 
@@ -173,7 +173,9 @@ public class HomeWorkDailyEditActivity extends Activity {
     private void setDailyContent(WorkDailyNode node){
         if(node==null)
             return;
-        contentET.setText(node.getWorkContent());
+        rbStr = node.getWorkContent();
+        rzStr = node.getPersonalNotes();
+        contentET.setText(rbStr);
     }
 
 }

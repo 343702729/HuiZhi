@@ -100,6 +100,7 @@ public class WorkDailyGetRequest {
                 node.setTimeSheetId(JSONUtil.parseString(jsonOb, "TimeSheetId"));
                 node.setTeacherId(JSONUtil.parseString(jsonOb, "TeacherId"));
                 node.setWorkContent(JSONUtil.parseString(jsonOb, "WorkContent"));
+                node.setPersonalNotes(JSONUtil.parseString(jsonOb, "PersonalNotes"));
                 node.setStrWorkDate(JSONUtil.parseString(jsonOb, "strWorkDate"));
                 node.setStrCreateTime(JSONUtil.parseString(jsonOb, "strCreateTime"));
             }catch (Exception e){

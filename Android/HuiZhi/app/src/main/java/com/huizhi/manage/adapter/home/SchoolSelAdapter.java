@@ -59,6 +59,7 @@ public class SchoolSelAdapter extends BaseAdapter{
         }else{
             viewItem = (ViewItem)view.getTag();
         }
+        viewItem.nameTV.setText(node.getSchoolName());
         viewItem.selIV.setBackgroundResource(R.mipmap.user_check_bg);
         if(!TextUtils.isEmpty(schoolId)){
             if(schoolId.equals(node.getSchoolId()))

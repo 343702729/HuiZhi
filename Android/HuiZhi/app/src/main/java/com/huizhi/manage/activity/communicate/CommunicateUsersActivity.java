@@ -14,7 +14,9 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.huizhi.manage.R;
 import com.huizhi.manage.adapter.communicate.CommunicateUsersAdapter;
@@ -23,6 +25,8 @@ import com.huizhi.manage.base.BaseInfoUpdate;
 import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.dialog.ContentEntryDialog;
 import com.huizhi.manage.dialog.GroupChatSelDialog;
+import com.huizhi.manage.dialog.SchoolSelDialog;
+import com.huizhi.manage.node.SchoolNode;
 import com.huizhi.manage.node.UserNode;
 import com.huizhi.manage.util.AppUtil;
 import com.huizhi.manage.util.character.CharacterSearchUtil;
@@ -44,6 +48,11 @@ public class CommunicateUsersActivity extends Activity {
     private List<String> persons;
     private EditText searchET;
 
+    private List<UserNode> talkUsers;
+    private String schoolId;
+    private SchoolNode schoolNode;
+    private TextView schoolTV;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,26 +65,56 @@ public class CommunicateUsersActivity extends Activity {
         ImageButton backBtn = (ImageButton) findViewById(R.id.back_btn);
         backBtn.setOnClickListener(new BackCliclListener(this));
 
-        Button qlBtn = findViewById(R.id.ql_btn);
-        qlBtn.setOnClickListener(grupChatClick);
+        talkUsers = UserInfo.getInstance().getTalkUsers();
+
+        schoolTV = findViewById(R.id.school_tv);
+
+//        Button qlBtn = findViewById(R.id.ql_btn);
+//        qlBtn.setOnClickListener(grupChatClick);
+
+        LinearLayout switchLL = findViewById(R.id.switch_ll);
+        switchLL.setOnClickListener(switchSchoolBtnClick);
+        LinearLayout qunlLL = findViewById(R.id.qunl_ll);
+        qunlLL.setOnClickListener(grupChatClick);
 
         searchET = findViewById(R.id.search_et);
         searchET.addTextChangedListener(userTextWatcher);
 
         listView = findViewById(R.id.listview);
         listView.setOnItemClickListener(listItemClick);
-        usersAdapter = new CommunicateUsersAdapter(this, UserInfo.getInstance().getTalkUsers());
+        usersAdapter = new CommunicateUsersAdapter(this, talkUsers);
         listView.setAdapter(usersAdapter);
 
-        Log.i("HuiZhi", "The talk users size:" + UserInfo.getInstance().getTalkUsers().size());
+//        Log.i("HuiZhi", "The talk users size:" + UserInfo.getInstance().getTalkUsers().size());
     }
 
     private View.OnClickListener grupChatClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            GroupChatSelDialog selDialog = new GroupChatSelDialog(CommunicateUsersActivity.this, personSelInfo);
+            GroupChatSelDialog selDialog = new GroupChatSelDialog(CommunicateUsersActivity.this, talkUsers, personSelInfo);
             selDialog.showView(view);
         }
+    };
+
+    private View.OnClickListener switchSchoolBtnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            SchoolSelDialog schoolSelDialog = new SchoolSelDialog(CommunicateUsersActivity.this, schoolId, 130, infoUpdate);
+            schoolSelDialog.showView(view);
+        }
+
+        BaseInfoUpdate infoUpdate = new BaseInfoUpdate() {
+            @Override
+            public void update(Object object) {
+                if(object==null)
+                    return;
+
+                schoolNode = (SchoolNode)object;
+                schoolId = schoolNode.getSchoolId();
+                UserInfo.getInstance().setSwitchSchool(schoolNode);
+                schoolTV.setText(schoolNode.getSchoolName());
+            }
+        };
     };
 
     private BaseInfoUpdate personSelInfo = new BaseInfoUpdate() {
@@ -119,16 +158,18 @@ public class CommunicateUsersActivity extends Activity {
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            if(talkUsers==null||talkUsers.size()==0)
+                return;
             String str = searchET.getText().toString();
             Log.i("HuiZhi", "The user str:" + str);
             if(TextUtils.isEmpty(str)){
-                usersAdapter = new CommunicateUsersAdapter(CommunicateUsersActivity.this, UserInfo.getInstance().getTalkUsers());
+                usersAdapter = new CommunicateUsersAdapter(CommunicateUsersActivity.this, talkUsers);
                 listView.setAdapter(usersAdapter);
                 return;
             }
 
             List<UserNode> otherU = new ArrayList<>();
-            for(UserNode user:UserInfo.getInstance().getTalkUsers()){
+            for(UserNode user:talkUsers){
                 if(user.getType()!=1){
                     otherU.add(user);
                 }

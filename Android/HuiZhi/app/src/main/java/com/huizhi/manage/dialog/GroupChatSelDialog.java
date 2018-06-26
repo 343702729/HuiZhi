@@ -14,7 +14,9 @@ import com.huizhi.manage.R;
 import com.huizhi.manage.adapter.communicate.CommunicateGroupSelAdapter;
 import com.huizhi.manage.base.BaseInfoUpdate;
 import com.huizhi.manage.data.UserInfo;
+import com.huizhi.manage.node.UserNode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,10 +29,12 @@ public class GroupChatSelDialog {
     private PopupWindow popupWindow;
     private View contentView;
     private CommunicateGroupSelAdapter selAdapter;
+    private List<UserNode> talkUsers, userNodes;
 
-    public GroupChatSelDialog(Context context ,BaseInfoUpdate infoUpdate){
+    public GroupChatSelDialog(Context context, List<UserNode> talkUsers, BaseInfoUpdate infoUpdate){
         this.context = context;
         this.infoUpdate = infoUpdate;
+        this.talkUsers = talkUsers;
         initViews();
     }
 
@@ -52,8 +56,16 @@ public class GroupChatSelDialog {
     }
 
     private void initListView(){
+        if(talkUsers==null)
+            return;
+        userNodes = new ArrayList<>();
+        for (UserNode user:talkUsers){
+            if(user.getType()!=1){
+                userNodes.add(user);
+            }
+        }
         ListView listView = contentView.findViewById(R.id.listview);
-        selAdapter = new CommunicateGroupSelAdapter(context, UserInfo.getInstance().getTeamUsers());
+        selAdapter = new CommunicateGroupSelAdapter(context, userNodes);//UserInfo.getInstance().getTeamUsers()
         listView.setAdapter(selAdapter);
     }
 

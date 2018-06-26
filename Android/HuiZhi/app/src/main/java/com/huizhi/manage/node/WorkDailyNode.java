@@ -14,6 +14,7 @@ public class WorkDailyNode implements Serializable{
     private String timeSheetId;
     private String teacherId;
     private String workContent;
+    private String personalNotes;
     private String strWorkDate;
     private String strCreateTime;
 
@@ -71,6 +72,14 @@ public class WorkDailyNode implements Serializable{
 
     public void setWorkContent(String workContent) {
         this.workContent = workContent;
+    }
+
+    public String getPersonalNotes() {
+        return personalNotes;
+    }
+
+    public void setPersonalNotes(String personalNotes) {
+        this.personalNotes = personalNotes;
     }
 
     public String getStrWorkDate() {

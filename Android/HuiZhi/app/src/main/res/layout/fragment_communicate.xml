@@ -31,6 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginRight="10dp"
+                android:visibility="invisible"
                 android:background="@null"
                 android:text="发起群聊"
                 android:textColor="@color/white"
@@ -40,7 +41,78 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:paddingLeft="20dp"
+        android:gravity="center_vertical">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:scaleType="centerInside"
+            android:src="@mipmap/icon_location_school"/>
+        <TextView
+            android:id="@+id/school_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="星海广场校区"
+            android:textColor="@color/dark_gray"
+            android:textSize="13sp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingRight="20dp"
+            android:gravity="center|right">
+            <LinearLayout
+                android:id="@+id/switch_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:focusable="true"
+                android:clickable="true"
+                android:layout_marginRight="10dp"
+                android:background="@mipmap/switch_bg">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:background="@mipmap/icon_switch_bg"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="切换"
+                    android:textSize="13sp"
+                    android:textColor="#F3AA71"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/qunl_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:focusable="true"
+                android:clickable="true"
+                android:background="@mipmap/qunliao_bg">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:background="@mipmap/icon_ql_bg"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="群聊"
+                    android:textSize="13sp"
+                    android:textColor="#32B16C"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_marginTop="10dp"
         android:background="@android:color/white"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"

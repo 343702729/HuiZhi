@@ -229,12 +229,13 @@ public class HomeTaskPostRequest {
      * @param taskList
      * @param handler
      */
-    public void postCustomTask(String createTechid, String schoolid, String taskList, Handler handler){
+    public void postCustomTask(String createTechid, String schoolid, String taskList, String accessoryList, Handler handler){
         List<BasicNameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("Method", URLData.METHORD_HOME_TASK_CUSTOM_CREATE));
         params.add(new BasicNameValuePair("TaskList", taskList));
         params.add(new BasicNameValuePair("CreateTeacherId", createTechid));
         params.add(new BasicNameValuePair("SchoolId", schoolid));
+        params.add(new BasicNameValuePair("AccessoryList", accessoryList));
 //        params.add(new BasicNameValuePair("AtAll", atall));
         ThreadPoolDo.getInstance().executeThread(new TaskCustomCreateThread(params, handler));
     }
