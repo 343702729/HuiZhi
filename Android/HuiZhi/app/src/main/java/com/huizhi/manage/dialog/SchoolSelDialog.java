@@ -25,11 +25,12 @@ public class SchoolSelDialog {
     private View contentView;
     private SchoolSelAdapter schoolSelAdapter;
     private String schoolId;
-    private int height = 115;
+    private int marginHeight = 115;
 
     public SchoolSelDialog(Context context, String schoolId, int height, BaseInfoUpdate infoUpdate){
         this.context = context;
         this.schoolId = schoolId;
+        this.marginHeight = height;
         this.infoUpdate = infoUpdate;
         initViews();
     }
@@ -46,7 +47,7 @@ public class SchoolSelDialog {
             int height = wm.getDefaultDisplay().getHeight();
             popupWindow = new PopupWindow(context);
             popupWindow.setWidth(ActionBar.LayoutParams.MATCH_PARENT);
-            popupWindow.setHeight(height - DipPxUtil.dip2px(context, height));
+            popupWindow.setHeight(height - DipPxUtil.dip2px(context, marginHeight));
             popupWindow.setBackgroundDrawable(new BitmapDrawable());
             popupWindow.setFocusable(true);
             popupWindow.setOutsideTouchable(true);
@@ -57,7 +58,7 @@ public class SchoolSelDialog {
     }
 
     public void showView(View parentV){
-        popupWindow.showAtLocation(parentV, Gravity.TOP, 0, DipPxUtil.dip2px(context, height));
+        popupWindow.showAtLocation(parentV, Gravity.TOP, 0, DipPxUtil.dip2px(context, marginHeight));
         popupWindow.update();
     }
 

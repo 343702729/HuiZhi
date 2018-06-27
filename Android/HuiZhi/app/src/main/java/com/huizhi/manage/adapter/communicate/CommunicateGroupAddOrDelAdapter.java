@@ -55,6 +55,14 @@ public class CommunicateGroupAddOrDelAdapter extends BaseAdapter {
         mImageLoader = new ImageLoader(queue, new BitmapCache());
     }
 
+    public void updateViewsData(List<UserNode> nodes){
+        if(nodes==null)
+            this.nodes = new ArrayList<>();
+        else
+            this.nodes = nodes;
+        notifyDataSetChanged();
+    }
+
     public List<String> getPersonSelList(){
         return personSelList;
     }

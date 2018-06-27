@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.huizhi.manage.base.BaseInfoUpdate;
 import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.http.HttpConnect;
@@ -150,7 +151,10 @@ public class MainRequest {
                 for(int i=0; i<jsonAr.length(); i++){
                     JSONObject jsonOb = jsonAr.getJSONObject(i);
                     String groupName = JSONUtil.parseString(jsonOb, "GroupName");
-                    JSONArray jsonArItem = jsonOb.getJSONArray("UserList");
+//                    JSONArray jsonArItem = jsonOb.getJSONArray("UserList");
+                    JSONArray jsonArItem = JSONUtil.parseArray(jsonOb, "UserList");
+                    if(jsonArItem==null||jsonArItem.length()==0)
+                        continue;
                     UserNode titleU = new UserNode();
                     titleU.setTeacherName(groupName);
                     titleU.setType(1);
@@ -169,6 +173,146 @@ public class MainRequest {
             }catch (Exception e){
 
             }
+        }
+    }
+
+    /**
+     * 取本校区人员和客服人员
+     * @param userid
+     * @param schoolid
+     * @param handler
+     */
+    public void getSchoolTalkUsers(String userid, String schoolid, Handler handler){
+        List<BasicNameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("Method", URLData.METHORD_TALK_USERS));
+        params.add(new BasicNameValuePair("UserId", userid));
+        params.add(new BasicNameValuePair("SchoolId", schoolid));
+        ThreadPoolDo.getInstance().executeThread(new SchoolTalkUsersThread(params, handler));
+    }
+
+    private class SchoolTalkUsersThread extends Thread{
+        private List<BasicNameValuePair> params;
+        private Handler handler;
+
+        public SchoolTalkUsersThread(List<BasicNameValuePair> params, Handler handler){
+            this.params = params;
+            this.handler = handler;
+        }
+
+        @Override
+        public void run() {
+            super.run();
+            try {
+                String result = HttpConnect.getHttpConnect(URLData.getUrlTalkUsers(), params);
+                Log.i("HuiZhi", "The result:" + result);
+                if(TextUtils.isEmpty(result))
+                    return;
+                ResultNode resultNode = JSONUtil.parseResult(result);
+                Log.i("HuiZhi", "The result:" + resultNode.getResult() + "  message:" + resultNode.getMessage() + "  returnObj:" + resultNode.getReturnObj());
+                if(resultNode == null)
+                    return;
+//                parseReturn(resultNode.getReturnObj());
+                if(resultNode.getResult() == Constants.RESULT_SUCCESS) {
+                    List<UserNode> nodes = parseReturn(resultNode.getReturnObj());
+                    handler.sendMessage(handler.obtainMessage(Constants.MSG_SUCCESS, nodes));
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        private List<UserNode> parseReturn(String jsonStr){
+            if(TextUtils.isEmpty(jsonStr))
+                return null;
+            try {
+                JSONArray jsonAr = new JSONArray(jsonStr);
+                List<UserNode> users = new ArrayList<>();
+                for(int i=0; i<jsonAr.length(); i++){
+                    JSONObject jsonOb = jsonAr.getJSONObject(i);
+                    String groupName = JSONUtil.parseString(jsonOb, "GroupName");
+                    JSONArray jsonArItem = JSONUtil.parseArray(jsonOb, "UserList");
+                    if(jsonArItem==null||jsonArItem.length()==0)
+                        continue;
+                    UserNode titleU = new UserNode();
+                    titleU.setTeacherName(groupName);
+                    titleU.setType(1);
+                    users.add(titleU);
+                    for(int j=0; j<jsonArItem.length(); j++){
+                        JSONObject jsonObItem = jsonArItem.getJSONObject(j);
+                        UserNode user = new UserNode();
+                        user.setTeacherId(JSONUtil.parseString(jsonObItem, "TeacherId"));
+                        user.setTeacherName(JSONUtil.parseString(jsonObItem, "TeacherName"));
+                        user.setHeadImgUrl(JSONUtil.parseString(jsonObItem, "FullHeadImgUrlThumb"));
+                        user.setRoleTypeName(JSONUtil.parseString(jsonObItem, "RoleTypeName"));
+                        users.add(user);
+                    }
+                }
+//                UserInfo.getInstance().setTalkUsers(users);
+                return users;
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+    /**
+     * 取聊天的人员（单人）
+     * @param userid
+     */
+    public void getTalkItemUser(String userid, BaseInfoUpdate infoUpdate){
+        List<BasicNameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("Method", URLData.METHORD_TALK_ITEM_USER));
+        params.add(new BasicNameValuePair("UserId", userid));
+        ThreadPoolDo.getInstance().executeThread(new TalkItemUserThread(params, infoUpdate));
+    }
+
+    private class TalkItemUserThread extends Thread{
+        private List<BasicNameValuePair> params;
+        private BaseInfoUpdate infoUpdate;
+
+        public TalkItemUserThread(List<BasicNameValuePair> params, BaseInfoUpdate infoUpdate){
+            this.params = params;
+            this.infoUpdate = infoUpdate;
+        }
+
+        @Override
+        public void run() {
+            super.run();
+            try {
+                String result = HttpConnect.getHttpConnect(URLData.getUrlTalkItemUser(), params);
+                Log.i("HuiZhi", "The result:" + result);
+                if(TextUtils.isEmpty(result))
+                    return;
+                ResultNode resultNode = JSONUtil.parseResult(result);
+                Log.i("HuiZhi", "The result:" + resultNode.getResult() + "  message:" + resultNode.getMessage() + "  returnObj:" + resultNode.getReturnObj());
+                if(resultNode == null)
+                    return;
+                if(resultNode.getResult() == Constants.RESULT_SUCCESS) {
+                    UserNode node = parseReturn(resultNode.getReturnObj());
+                    if(infoUpdate!=null)
+                        infoUpdate.update(node);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        private UserNode parseReturn(String jsonStr){
+            if(TextUtils.isEmpty(jsonStr))
+                return null;
+            try {
+                JSONObject jsonOb = new JSONObject(jsonStr);
+                UserNode user = new UserNode();
+                user.setTeacherId(JSONUtil.parseString(jsonOb, "TeacherId"));
+                user.setTeacherName(JSONUtil.parseString(jsonOb, "TeacherName"));
+                user.setHeadImgUrl(JSONUtil.parseString(jsonOb, "FullHeadImgUrlThumb"));
+                user.setRoleTypeName(JSONUtil.parseString(jsonOb, "RoleTypeName"));
+                return user;
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return null;
         }
     }
 

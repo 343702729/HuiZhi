@@ -3,6 +3,8 @@ package com.huizhi.manage.activity.communicate;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -22,12 +24,14 @@ import com.huizhi.manage.R;
 import com.huizhi.manage.adapter.communicate.CommunicateUsersAdapter;
 import com.huizhi.manage.base.BackCliclListener;
 import com.huizhi.manage.base.BaseInfoUpdate;
+import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.dialog.ContentEntryDialog;
 import com.huizhi.manage.dialog.GroupChatSelDialog;
 import com.huizhi.manage.dialog.SchoolSelDialog;
 import com.huizhi.manage.node.SchoolNode;
 import com.huizhi.manage.node.UserNode;
+import com.huizhi.manage.request.main.MainRequest;
 import com.huizhi.manage.util.AppUtil;
 import com.huizhi.manage.util.character.CharacterSearchUtil;
 
@@ -65,9 +69,13 @@ public class CommunicateUsersActivity extends Activity {
         ImageButton backBtn = (ImageButton) findViewById(R.id.back_btn);
         backBtn.setOnClickListener(new BackCliclListener(this));
 
+        schoolId = UserInfo.getInstance().getSwitchSchool().getSchoolId();
+        schoolNode = UserInfo.getInstance().getSwitchSchool();
+
         talkUsers = UserInfo.getInstance().getTalkUsers();
 
         schoolTV = findViewById(R.id.school_tv);
+        schoolTV.setText(schoolNode.getSchoolName());
 
 //        Button qlBtn = findViewById(R.id.ql_btn);
 //        qlBtn.setOnClickListener(grupChatClick);
@@ -111,8 +119,10 @@ public class CommunicateUsersActivity extends Activity {
 
                 schoolNode = (SchoolNode)object;
                 schoolId = schoolNode.getSchoolId();
-                UserInfo.getInstance().setSwitchSchool(schoolNode);
+//                UserInfo.getInstance().setSwitchSchool(schoolNode);
                 schoolTV.setText(schoolNode.getSchoolName());
+                MainRequest mainRequest = new MainRequest();
+                mainRequest.getSchoolTalkUsers(UserInfo.getInstance().getUser().getTeacherId(), schoolId, handler);
             }
         };
     };
@@ -195,9 +205,24 @@ public class CommunicateUsersActivity extends Activity {
 //            Intent intent = new Intent();
 //            intent.setClass(activity, CommunicateActivity.class);
 //            activity.startActivity(intent);
+
             UserNode userNode = (UserNode)usersAdapter.getItem(i);
+            Log.i("HuiZhi", "The teacher name:" + userNode.getTeacherName());
             RongIM.getInstance().startPrivateChat(CommunicateUsersActivity.this, userNode.getTeacherId(), userNode.getTeacherName());
         }
     };
 
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case Constants.MSG_SUCCESS:
+                    talkUsers = (List<UserNode>)msg.obj;
+                    Log.i("HuiZhi", "The talk users size:" + talkUsers.size());
+                    usersAdapter.updateUsers(talkUsers);
+                    break;
+            }
+        }
+    };
 }

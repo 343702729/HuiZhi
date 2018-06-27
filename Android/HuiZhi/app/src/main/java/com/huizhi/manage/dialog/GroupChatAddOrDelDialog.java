@@ -17,6 +17,7 @@ import com.huizhi.manage.adapter.communicate.CommunicateGroupSelAdapter;
 import com.huizhi.manage.base.BaseInfoUpdate;
 import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.node.UserNode;
+import com.huizhi.manage.request.main.MainRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +75,9 @@ public class GroupChatAddOrDelDialog {
             return;
         List<UserNode> nodes = new ArrayList<>();
         for(String id:ids){
-            nodes.add(UserInfo.getInstance().getUserByTeacherId(id));
+            UserNode userNode = UserInfo.getInstance().getUserByTeacherId(id);
+            if(userNode!=null)
+                nodes.add(userNode);
         }
         ListView listView = contentView.findViewById(R.id.listview);
         if(isAdd) {
@@ -83,6 +86,8 @@ public class GroupChatAddOrDelDialog {
         }else {
             titleTV.setText("删除联系人");
             for(UserNode node:nodes){
+                if(node==null)
+                    continue;
                 if(node.getTeacherId().equals(UserInfo.getInstance().getUser().getTeacherId()))
                     nodes.remove(node);
                 break;

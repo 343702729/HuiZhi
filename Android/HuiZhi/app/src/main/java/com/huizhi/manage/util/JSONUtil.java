@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.huizhi.manage.node.ResultNode;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -53,6 +54,14 @@ public class JSONUtil {
             return jsonOb.getBoolean(name);
         }catch (Exception e){
             return false;
+        }
+    }
+
+    public static JSONArray parseArray(JSONObject jsonOb, String name){
+        try {
+            return jsonOb.getJSONArray(name);
+        }catch (Exception e){
+            return null;
         }
     }
 }

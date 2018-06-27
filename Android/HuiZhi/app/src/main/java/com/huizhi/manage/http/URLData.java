@@ -42,6 +42,9 @@ public class URLData {
     private static final String URL_TALK_USERS = "/service/UserService.ashx";
     public static final String METHORD_TALK_USERS = "getTalkUserList";
 
+    private static final String URL_TALK_ITEM_USER = "/service/UserService.ashx";
+    public static final String METHORD_TALK_ITEM_USER = "getTalkUserInfo";
+
     private static final String URL_VERSION = "/service/ClientUpgradeService.ashx";
     public static final String METHORD_VERSION = "GetNewVersion";
 
@@ -295,6 +298,14 @@ public class URLData {
      */
     public static String getUrlTalkUsers(){
         return URL_HOST + URL_TALK_USERS;
+    }
+
+    /**
+     * 取聊天的人员（单人）
+     * @return
+     */
+    public static String getUrlTalkItemUser(){
+        return URL_HOST +URL_TALK_ITEM_USER;
     }
 
     /**

@@ -15,6 +15,7 @@ import com.huizhi.manage.base.BaseInfoUpdate;
 import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.http.AsyncFileUpload;
 import com.huizhi.manage.node.UserNode;
+import com.huizhi.manage.request.main.MainRequest;
 import com.huizhi.manage.util.AppUtil;
 
 import java.util.List;
@@ -88,9 +89,14 @@ public class CommunicateListActivity extends FragmentActivity {
         public void onSuccess(List<Conversation> conversations) {
             if(conversations==null)
                 return;
+            MainRequest mainRequest = new MainRequest();
             for (int i=0; i<conversations.size(); i++){
                 String targetid = conversations.get(i).getTargetId();
+
+                mainRequest.getTalkItemUser(targetid, new UserInfoUpdate(targetid));
+
 //                setRongUserInfo(conversations.get(i).getTargetId());
+                /**
                 UserNode user = com.huizhi.manage.data.UserInfo.getInstance().getTalkUserByTeacherId(targetid);
 
                 Uri uri = null;
@@ -108,6 +114,7 @@ public class CommunicateListActivity extends FragmentActivity {
                 }
 
                 RongIM.getInstance().refreshUserInfoCache(userInfo);
+                 */
             }
 //            Conversation conversation = new Conversation();
 //            conversation.setTargetId("0d07fdd9-03bb-458a-a675-736b34c41077");
@@ -179,6 +186,43 @@ public class CommunicateListActivity extends FragmentActivity {
             }
 
             RongIM.getInstance().refreshUserInfoCache(userInfo);
+        }
+    }
+
+    private class UserInfoUpdate implements BaseInfoUpdate{
+        private String targetid;
+
+        public UserInfoUpdate(String targetid){
+            this.targetid = targetid;
+        }
+
+        @Override
+        public void update(Object object) {
+            if(object==null)
+                return;
+            final UserNode user = (UserNode)object;
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    Uri uri = null;
+                    UserInfo userInfo;
+                    if(user!=null){
+                        if(!TextUtils.isEmpty(user.getHeadImgUrl())){
+                            String headImg = AsyncFileUpload.getInstance().getFileUrl(user.getHeadImgUrl());
+                            Log.i("HuiZhi", "The head img:" + headImg);
+                            uri = Uri.parse(headImg);
+                        }
+                        userInfo = new UserInfo(targetid, user.getTeacherName(), uri);
+
+                    }else {
+                        userInfo = new UserInfo(targetid, "群聊", uri);
+                    }
+
+                    RongIM.getInstance().refreshUserInfoCache(userInfo);
+                }
+            });
+
         }
     }
 

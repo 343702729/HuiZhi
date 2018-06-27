@@ -3,6 +3,8 @@ package com.huizhi.manage.wiget.view;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,12 +14,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.huizhi.manage.R;
+import com.huizhi.manage.activity.communicate.CommunicateListActivity;
 import com.huizhi.manage.base.BaseInfoUpdate;
 import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.dialog.GroupChatAddOrDelDialog;
 import com.huizhi.manage.http.AsyncBitmapLoader;
 import com.huizhi.manage.http.AsyncFileUpload;
 import com.huizhi.manage.node.UserNode;
+import com.huizhi.manage.request.main.MainRequest;
 import com.huizhi.manage.util.PictureUtil;
 
 import java.util.List;
@@ -115,6 +119,10 @@ public class CommunicateGrouUsersView extends LinearLayout {
     private void setUserItem(String userid, ImageView iv, TextView tv){
         if(TextUtils.isEmpty(userid))
             return;
+        MainRequest mainRequest = new MainRequest();
+        mainRequest.getTalkItemUser(userid, new UserInfoUpdate(userid, iv, tv));
+
+        /**
         UserNode userNode = UserInfo.getInstance().getUserByTeacherId(userid);
         tv.setText(userNode.getTeacherName());
         try {
@@ -130,6 +138,7 @@ public class CommunicateGrouUsersView extends LinearLayout {
         }catch (Exception e){
             e.printStackTrace();
         }
+         */
     }
 
     private void setAddDeletePerView(int index){
@@ -253,4 +262,53 @@ public class CommunicateGrouUsersView extends LinearLayout {
             }
         };
     };
+
+    private class UserInfoUpdate implements BaseInfoUpdate {
+        private String targetid;
+        private ImageView imageView;
+        private TextView textView;
+        private UserNode userNode;
+
+        public UserInfoUpdate(String targetid, ImageView imageView, TextView textView) {
+            this.targetid = targetid;
+            this.imageView = imageView;
+            this.textView = textView;
+        }
+
+        @Override
+        public void update(Object object) {
+            if(object==null)
+                return;
+            userNode = (UserNode)object;
+            handler.sendEmptyMessage(1);
+        }
+
+        private Handler handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                if(msg.what==1){
+                    if(userNode==null)
+                        return;
+//                    UserNode userNode = UserInfo.getInstance().getUserByTeacherId(targetid);
+                    textView.setText(userNode.getTeacherName());
+                    try {
+                        Bitmap bitmap = asyncBitmapLoader.loadBitmapFromServer(imageView, AsyncFileUpload.getInstance().getFileUrl(userNode.getHeadImgUrl()), new AsyncBitmapLoader.ImageCallBack() {
+                            @Override
+                            public void imageLoad(ImageView imageView, Bitmap bitmap) {
+                                imageView.setImageBitmap(PictureUtil.toRoundBitmap(bitmap));
+                            }
+                        });
+                        if(bitmap!=null){
+                            imageView.setImageBitmap(PictureUtil.toRoundBitmap(bitmap));
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+    }
+
+
 }
