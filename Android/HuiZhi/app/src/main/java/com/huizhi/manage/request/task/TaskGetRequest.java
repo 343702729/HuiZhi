@@ -223,11 +223,18 @@ public class TaskGetRequest {
             if(!TextUtils.isEmpty(assignJs)){
                 node.setTaskAssignLst(parseTaskAssign(assignJs));
             }
+
+            String accessoryMJs = JSONUtil.parseString(jsonOb, "TaskMainAccessoryLst");
+            if(!TextUtils.isEmpty(accessoryMJs)){
+                node.setTaskMainAccessoryLst(parseTaskAccessory(accessoryMJs));
+            }
+
             String accessoryJs = JSONUtil.parseString(jsonOb, "TaskAccessoryLst");
 //                Log.i("Task", "The accesscory:" + accessoryJs);
             if(!TextUtils.isEmpty(accessoryJs)){
                 node.setTaskAccessoryLst(parseTaskAccessory(accessoryJs));
             }
+
             String cCTeachersJs = JSONUtil.parseString(jsonOb, "CCTeacherList");
             if(!TextUtils.isEmpty(cCTeachersJs)){
                 //parseCCTeachers

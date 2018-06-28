@@ -41,6 +41,7 @@ public class TaskNode implements Serializable {
     private int takeTimeForApproveTask = 0;
     private List<TaskAssignNode> taskAssignLst;
     private List<TaskAccessory> taskAccessoryLst = new ArrayList<>();
+    private List<TaskAccessory> taskMainAccessoryLst = new ArrayList<>();
     private List<TaskNode> subTaskNodes = new ArrayList<>();
     private List<UserNode> cCTeacherLst = new ArrayList<>();
 
@@ -258,6 +259,14 @@ public class TaskNode implements Serializable {
 
     public void setTaskAccessoryLst(List<TaskAccessory> taskAccessoryLst) {
         this.taskAccessoryLst = taskAccessoryLst;
+    }
+
+    public List<TaskAccessory> getTaskMainAccessoryLst() {
+        return taskMainAccessoryLst;
+    }
+
+    public void setTaskMainAccessoryLst(List<TaskAccessory> taskMainAccessoryLst) {
+        this.taskMainAccessoryLst = taskMainAccessoryLst;
     }
 
     public int getTakeTimeFromCreateTask() {

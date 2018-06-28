@@ -55,14 +55,16 @@ public class HomeAttendanceActivity extends MapActivity {
     private LocationListener locationListener;
     private TextView isInRegionTV;
     private String lateReason, earlyReason;
+    private static String netMac;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_attendance);
+        getWifiName(this);
         initViews();
         getDates(handler);
-        getWifiName(this);
+
     }
 
     @Override
@@ -141,7 +143,7 @@ public class HomeAttendanceActivity extends MapActivity {
                 return;
             double[] location = (double[])object;
             HomeUserPostRequest postRequest = new HomeUserPostRequest();
-            postRequest.postUserAttendanceIsInRegion(UserInfo.getInstance().getUser().getSchoolId(), location[0], location[1], handler);
+            postRequest.postUserAttendanceIsInRegion(UserInfo.getInstance().getUser().getSchoolId(), location[0], location[1], netMac, handler);
         }
     };
 
@@ -187,7 +189,7 @@ public class HomeAttendanceActivity extends MapActivity {
             double[] location = (double[])object;
             Log.i("HuiZhi", "The sb latitude:" + location[0] + "  longitude:" + location[1]);
             HomeUserPostRequest postRequest = new HomeUserPostRequest();
-            postRequest.postUserAttendanceIsInRegion(UserInfo.getInstance().getUser().getSchoolId(), location[0], location[1], new AttendanceHandler(1));
+            postRequest.postUserAttendanceIsInRegion(UserInfo.getInstance().getUser().getSchoolId(), location[0], location[1], netMac, new AttendanceHandler(1));
         }
     };
 
@@ -199,7 +201,7 @@ public class HomeAttendanceActivity extends MapActivity {
             double[] location = (double[])object;
             Log.i("HuiZhi", "The xb latitude:" + location[0] + "  longitude:" + location[1]);
             HomeUserPostRequest postRequest = new HomeUserPostRequest();
-            postRequest.postUserAttendanceIsInRegion(UserInfo.getInstance().getUser().getSchoolId(), location[0], location[1], new AttendanceHandler(2));
+            postRequest.postUserAttendanceIsInRegion(UserInfo.getInstance().getUser().getSchoolId(), location[0], location[1], netMac, new AttendanceHandler(2));
         }
     };
 
@@ -417,7 +419,7 @@ public class HomeAttendanceActivity extends MapActivity {
         if (mWifi.isWifiEnabled()) {
             WifiInfo wifiInfo = mWifi.getConnectionInfo();
             String netName = wifiInfo.getSSID(); //获取被连接网络的名称
-            String netMac = wifiInfo.getBSSID(); //获取被连接网络的mac地址
+            netMac = wifiInfo.getBSSID(); //获取被连接网络的mac地址
             String localMac = wifiInfo.getMacAddress();// 获得本机的MAC地址
             Log.i("HuiZhi", "---netName:" + netName);   //---netName:HUAWEI MediaPad
             Log.i("HuiZhi", "---netMac:" + netMac);     //---netMac:78:f5:fd:ae:b9:97

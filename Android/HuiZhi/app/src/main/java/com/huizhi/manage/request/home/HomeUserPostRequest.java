@@ -52,12 +52,13 @@ public class HomeUserPostRequest {
      * @param lng
      * @param handler
      */
-    public void postUserAttendanceIsInRegion(String schoolid, double lat, double lng, Handler handler){
+    public void postUserAttendanceIsInRegion(String schoolid, double lat, double lng, String macAddress, Handler handler){
         List<BasicNameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("Method", URLData.METHORD_HOME_ATTENDANCE_IS_IN_REGION));
         params.add(new BasicNameValuePair("SchoolId", schoolid));
         params.add(new BasicNameValuePair("Longitude", String.valueOf(lng)));
         params.add(new BasicNameValuePair("Latitude", String.valueOf(lat)));
+        params.add(new BasicNameValuePair("MacAddress", macAddress));
         ThreadPoolDo.getInstance().executeThread(new AttendanceIsInRegion(params, handler));
     }
 

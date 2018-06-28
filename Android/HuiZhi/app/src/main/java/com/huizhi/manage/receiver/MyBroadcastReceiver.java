@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.huizhi.manage.activity.home.HomeMessageInfoActivity;
 import com.huizhi.manage.activity.home.HomeNewsInfoActivity;
+import com.huizhi.manage.activity.home.task.HomeTaskAgencyActivity;
 import com.huizhi.manage.activity.home.task.HomeTaskVerifyActivity;
 import com.huizhi.manage.activity.task.TaskDetailActivity;
 import com.huizhi.manage.data.Constants;
@@ -123,6 +124,11 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
                 intent.putExtras(bundle);
                 intent.putExtra("Id", dates[1]);
                 Intent[] intents = {intent};
+                context.startActivity(intent);
+            }else if("51".equals(dates[0])){
+                Intent intent = new Intent(context, HomeTaskAgencyActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtras(bundle);
                 context.startActivity(intent);
             }
         }else{

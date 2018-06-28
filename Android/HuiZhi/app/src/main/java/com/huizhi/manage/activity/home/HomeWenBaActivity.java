@@ -17,6 +17,9 @@ import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.http.URLData;
 import com.huizhi.manage.util.AppUtil;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by CL on 2018/06/23
  * 问吧
@@ -73,6 +76,9 @@ public class HomeWenBaActivity extends Activity {
         //加载页面
         System.out.println("WebInfo load web url:" + url);
         Log.i("HuiZhi", "WebInfo load web url:" + url);
-        webView.loadUrl(url);
+        //UserInfo.getInstance().getUser().getTeacherId()
+        Map<String, String > map = new HashMap<String, String>() ;
+        map.put( "LogonUserId" , UserInfo.getInstance().getUser().getTeacherId()) ;
+        webView.loadUrl(url, map);
     }
 }

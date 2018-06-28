@@ -89,6 +89,21 @@
                         android:layout_marginTop="10dp"
                         android:textColor="@color/light_black"
                         android:textSize="16sp" />
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none">
+
+                        <LinearLayout
+                            android:id="@+id/pics_show_ll"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"

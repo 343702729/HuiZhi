@@ -51,6 +51,7 @@ public class TaskDetailActivity extends Activity{
     private ScrollView scrollView;
     private List<TaskAccessory> picList = new ArrayList<>(), fileList = new ArrayList<>();
     private boolean isJoin = false;
+    private LinearLayout picsShowLL;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,6 +75,8 @@ public class TaskDetailActivity extends Activity{
         AppUtil.setNavigationBar(this);
         ImageButton backBtn = (ImageButton)findViewById(R.id.back_btn);
         backBtn.setOnClickListener(new BackCliclListener(this));
+
+        picsShowLL = findViewById(R.id.pics_show_ll);
 
         picturesLL = findViewById(R.id.pictures_ll);
         filesLL = findViewById(R.id.files_ll);
@@ -122,12 +125,25 @@ public class TaskDetailActivity extends Activity{
         UserNode user = UserInfo.getInstance().getUserByTeacherId(node.getCreateTeacherId());
         if(user!=null)
             createPerTV.setText(user.getTeacherName());
+        setTaskPics(node);
         setTaskPriority(node.getPriority());
         setTaskStatus(node.getTaskStatus());
         setAssignList(node.getTaskAssignLst());
         setAccessories(node);
         setStatusTime(node);
         addAccessories();
+    }
+
+    private void setTaskPics(TaskNode node){
+        if(node==null||node.getTaskMainAccessoryLst()==null)
+            return;
+        picsShowLL.removeAllViews();
+        for(TaskAccessory item:node.getTaskMainAccessoryLst()){
+            PictureItemView picItemV = new PictureItemView(this);
+            picItemV.setDatas(item, node.getTaskMainAccessoryLst());
+            picsShowLL.addView(picItemV);
+        }
+
     }
 
     private void setAccessories(TaskNode node){

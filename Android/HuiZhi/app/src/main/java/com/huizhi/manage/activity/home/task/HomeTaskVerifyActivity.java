@@ -66,6 +66,7 @@ public class HomeTaskVerifyActivity extends Activity {
     private String personSelId;
     private ScrollView scrollView;
     private ImageButton backBtn;
+    private LinearLayout picsShowLL;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -90,6 +91,8 @@ public class HomeTaskVerifyActivity extends Activity {
         AppUtil.setNavigationBar(this);
         backBtn = (ImageButton)findViewById(R.id.back_btn);
         backBtn.setOnClickListener(new BackCliclListener(this));
+
+        picsShowLL = findViewById(R.id.pics_show_ll);
 
         picturesLL = findViewById(R.id.pictures_ll);
         filesLL = findViewById(R.id.files_ll);
@@ -116,6 +119,8 @@ public class HomeTaskVerifyActivity extends Activity {
         Button operateBtn = findViewById(R.id.operate_btn);
         operateBtn.setOnClickListener(operateBtnClick);
 
+        setTaskPics(node);
+
         if(3==taskNode.getTaskStatus()||5==taskNode.getTaskStatus()){
             operateBtn.setVisibility(View.GONE);
         }else {
@@ -137,6 +142,18 @@ public class HomeTaskVerifyActivity extends Activity {
         setAssignList(node.getTaskAssignLst());
         setAccessories(node);
         addAccessories();
+    }
+
+    private void setTaskPics(TaskNode node){
+        if(node==null||node.getTaskMainAccessoryLst()==null)
+            return;
+        picsShowLL.removeAllViews();
+        for(TaskAccessory item:node.getTaskMainAccessoryLst()){
+            PictureItemView picItemV = new PictureItemView(this);
+            picItemV.setDatas(item, node.getTaskMainAccessoryLst());
+            picsShowLL.addView(picItemV);
+        }
+
     }
 
     private void setAccessories(TaskNode node){

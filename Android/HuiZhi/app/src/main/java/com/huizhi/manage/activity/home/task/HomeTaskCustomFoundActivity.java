@@ -483,13 +483,14 @@ public class HomeTaskCustomFoundActivity extends Activity {
                 taskN.setProcessingTeacherId(personSelId);
             }
             taskN.setCcTeacherId(personCSelId);
+            taskN.setTaskMainAccessoryLst(picList);
             List<TaskNode> items = new ArrayList<>();
             items.add(taskN);
             items.addAll(subTasks);
             loadingProgress = new LoadingProgress(HomeTaskCustomFoundActivity.this, null);
             loadingProgress.showView(view);
             HomeTaskPostRequest postRequest = new HomeTaskPostRequest();
-            postRequest.postCustomTask(createTechId, UserInfo.getInstance().getUser().getSchoolId(), getTasksJS(items), getAccessoryListStr(picList), handler);
+            postRequest.postCustomTask(createTechId, UserInfo.getInstance().getUser().getSchoolId(), getTasksJS(items), handler);
 //            postRequest.postCustomTask(uniqueId, "", createTechId, title, description, isTimeLimit, planEndTime, priority, personSelId, assignReason, handler);
         }
 
@@ -513,6 +514,7 @@ public class HomeTaskCustomFoundActivity extends Activity {
                     jsonOb.put("CCTeacherId", node.getCcTeacherId());
                     jsonOb.put("AssignReason", "");
                     jsonOb.put("AtAll", node.getAtAll());
+                    jsonOb.put("AccessoryList", getAccessoryListStr(node.getTaskMainAccessoryLst()));
                     jsonAr.put(jsonOb);
                     jsonOb = null;
                 }
@@ -523,14 +525,15 @@ public class HomeTaskCustomFoundActivity extends Activity {
             return jsonAr.toString();
         }
 
-        private String getAccessoryListStr(List<TaskAccessory> accessories){
+        private JSONArray getAccessoryListStr(List<TaskAccessory> accessories){
             if(accessories==null)
-                return "";
+                return null;
             JSONArray jsonAr = new JSONArray();
             JSONObject jsonOb = null;
             try{
                 for (TaskAccessory node:accessories){
                     jsonOb = new JSONObject();
+                    jsonOb.put("AccessoryId", "");
                     jsonOb.put("AccessoryType", node.getAccessoryType());
                     jsonOb.put("FileType", node.getFileType());
                     jsonOb.put("FileUrl", node.getFileUrl());
@@ -542,7 +545,7 @@ public class HomeTaskCustomFoundActivity extends Activity {
             }catch (Exception e){
                 e.printStackTrace();
             }
-            return jsonAr.toString();
+            return jsonAr;
         }
 
     };
