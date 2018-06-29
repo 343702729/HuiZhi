@@ -39,11 +39,14 @@ public class TaskNode implements Serializable {
     private int takeTimeFromCreateTask = 0;
     private int takeTimeForFinishTask = 0;
     private int takeTimeForApproveTask = 0;
+    private int canChooseApprover;
+    private boolean isMoreProcessors;
     private List<TaskAssignNode> taskAssignLst;
     private List<TaskAccessory> taskAccessoryLst = new ArrayList<>();
     private List<TaskAccessory> taskMainAccessoryLst = new ArrayList<>();
     private List<TaskNode> subTaskNodes = new ArrayList<>();
     private List<UserNode> cCTeacherLst = new ArrayList<>();
+    private List<UserNode> taskProcessorLst = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -293,6 +296,22 @@ public class TaskNode implements Serializable {
         this.takeTimeForApproveTask = takeTimeForApproveTask;
     }
 
+    public int getCanChooseApprover() {
+        return canChooseApprover;
+    }
+
+    public void setCanChooseApprover(int canChooseApprover) {
+        this.canChooseApprover = canChooseApprover;
+    }
+
+    public boolean isMoreProcessors() {
+        return isMoreProcessors;
+    }
+
+    public void setMoreProcessors(boolean moreProcessors) {
+        isMoreProcessors = moreProcessors;
+    }
+
     public List<TaskNode> getSubTaskNodes() {
         return subTaskNodes;
     }
@@ -311,6 +330,14 @@ public class TaskNode implements Serializable {
 
     public void setcCTeacherLst(List<UserNode> cCTeacherLst) {
         this.cCTeacherLst = cCTeacherLst;
+    }
+
+    public List<UserNode> getTaskProcessorLst() {
+        return taskProcessorLst;
+    }
+
+    public void setTaskProcessorLst(List<UserNode> taskProcessorLst) {
+        this.taskProcessorLst = taskProcessorLst;
     }
 
     public String getTaskType(){

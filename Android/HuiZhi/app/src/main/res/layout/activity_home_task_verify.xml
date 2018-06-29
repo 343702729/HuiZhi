@@ -213,6 +213,33 @@
                     </LinearLayout>
                 </LinearLayout>
 
+                <!-- 执行人 -->
+                <LinearLayout
+                    android:id="@+id/line_pros_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="15dp"
+                    android:visibility="gone"
+                    android:background="@drawable/frame_task_bg"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none">
+
+                        <LinearLayout
+                            android:id="@+id/processors_ll"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+                </LinearLayout>
+
                 <!-- 图片 -->
                 <LinearLayout
                     android:layout_width="match_parent"

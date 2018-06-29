@@ -15,6 +15,8 @@ public class URLData {
 
     private static final String URL_HOME_WEBBA = "/ask/index-";
 
+    private static final String URL_HOME_YUNYIN = "/knowledgelist";
+
     private static final String URL_LOGIN = "/service/UserService.ashx";
     public static final String METHOD_LOGIN = "userLogin";
 
@@ -216,6 +218,10 @@ public class URLData {
      */
     public static String getUrlWenBa(String teacherid){
         return URL_HOST + URL_HOME_WEBBA + teacherid;
+    }
+
+    public static String getUrlHomeYunyin(){
+        return URL_HOST + URL_HOME_YUNYIN;
     }
 
     /**

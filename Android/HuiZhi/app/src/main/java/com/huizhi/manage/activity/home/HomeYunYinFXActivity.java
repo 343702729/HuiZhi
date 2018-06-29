@@ -13,7 +13,12 @@ import android.widget.ImageButton;
 
 import com.huizhi.manage.R;
 import com.huizhi.manage.base.BackCliclListener;
+import com.huizhi.manage.data.UserInfo;
+import com.huizhi.manage.http.URLData;
 import com.huizhi.manage.util.AppUtil;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by CL on 2018/06/23
@@ -22,7 +27,7 @@ import com.huizhi.manage.util.AppUtil;
 
 public class HomeYunYinFXActivity extends Activity {
     private WebView webView;
-    private String emailUrl = "";
+    private String url = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,7 +39,7 @@ public class HomeYunYinFXActivity extends Activity {
 
     private void initDates(){
         try{
-            emailUrl = getIntent().getStringExtra("ItemUrl");
+            url = URLData.getUrlHomeYunyin();
         }catch (Exception e){
 
         }
@@ -69,8 +74,9 @@ public class HomeYunYinFXActivity extends Activity {
             }
         });
         //加载页面
-        System.out.println("WebInfo load web url:" + emailUrl);
-        Log.i("HuiZhi", "WebInfo load web url:" + emailUrl);
-        webView.loadUrl(emailUrl);
+        Log.i("HuiZhi", "WebInfo load web url:" + url);
+        Map<String, String > map = new HashMap<String, String>() ;
+        map.put( "LogonUserId" , UserInfo.getInstance().getUser().getTeacherId()) ;
+        webView.loadUrl(url, map);
     }
 }

@@ -139,6 +139,7 @@ public class HomeTaskVerifyActivity extends Activity {
         if(!node.isForAllTeacher()&&node.getcCTeacherLst()!=null&&node.getcCTeacherLst().size()>0){
             setCcpersons(node.getcCTeacherLst());
         }
+        setProcessors(node);
         setAssignList(node.getTaskAssignLst());
         setAccessories(node);
         addAccessories();
@@ -154,6 +155,17 @@ public class HomeTaskVerifyActivity extends Activity {
             picsShowLL.addView(picItemV);
         }
 
+    }
+
+    private void setProcessors(TaskNode node){
+        if(node==null||node.getTaskProcessorLst()==null||!node.isMoreProcessors())
+            return;
+        LinearLayout lineProsLL = findViewById(R.id.line_pros_ll);
+        LinearLayout processorsLL = findViewById(R.id.processors_ll);
+        for (UserNode user:node.getTaskProcessorLst()){
+
+        }
+        lineProsLL.setVisibility(View.VISIBLE);
     }
 
     private void setAccessories(TaskNode node){

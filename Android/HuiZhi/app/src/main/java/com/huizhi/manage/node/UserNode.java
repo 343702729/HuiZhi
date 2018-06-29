@@ -26,6 +26,9 @@ public class UserNode implements Serializable {
     private String chatToken;
     private int jobStatus;
     private int type;
+    private int isDone;
+    private String strIsDone;
+    private String fullHeadImgUrlThumb;
     private List<SchoolNode> schools = new ArrayList<>();
 
     public String getTeacherId() {
@@ -162,6 +165,30 @@ public class UserNode implements Serializable {
 
     public void setAppKey(String appKey) {
         this.appKey = appKey;
+    }
+
+    public int getIsDone() {
+        return isDone;
+    }
+
+    public void setIsDone(int isDone) {
+        this.isDone = isDone;
+    }
+
+    public String getStrIsDone() {
+        return strIsDone;
+    }
+
+    public void setStrIsDone(String strIsDone) {
+        this.strIsDone = strIsDone;
+    }
+
+    public String getFullHeadImgUrlThumb() {
+        return fullHeadImgUrlThumb;
+    }
+
+    public void setFullHeadImgUrlThumb(String fullHeadImgUrlThumb) {
+        this.fullHeadImgUrlThumb = fullHeadImgUrlThumb;
     }
 
     public List<SchoolNode> getSchools() {

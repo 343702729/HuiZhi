@@ -218,6 +218,9 @@ public class TaskGetRequest {
             node.setTaskCreateType(JSONUtil.parseInt(jsonOb, "TaskCreateType"));
             node.setStrTaskCreateType(JSONUtil.parseString(jsonOb, "strTaskCreateType"));
             node.setForAllTeacher(JSONUtil.parseBoolean(jsonOb, "ForAllTeacher"));
+            node.setCanChooseApprover(JSONUtil.parseInt(jsonOb, "CanChooseApprover"));
+            node.setMoreProcessors(JSONUtil.parseBoolean(jsonOb, "IsMoreProcessors"));
+
             String assignJs = JSONUtil.parseString(jsonOb, "TaskAssignLst");
 //                Log.i("Task", "The assign:" + assignJs);
             if(!TextUtils.isEmpty(assignJs)){
@@ -239,6 +242,11 @@ public class TaskGetRequest {
             if(!TextUtils.isEmpty(cCTeachersJs)){
                 //parseCCTeachers
                 node.setcCTeacherLst(parseCCTeachers(cCTeachersJs));
+            }
+
+            String processorJs = JSONUtil.parseString(jsonOb, "TaskProcessorLst");
+            if(!TextUtils.isEmpty(processorJs)){
+                node.setTaskProcessorLst(parseProcessors(processorJs));
             }
         }
 
@@ -306,6 +314,31 @@ public class TaskGetRequest {
                     userNode = new UserNode();
                     userNode.setTeacherId(JSONUtil.parseString(itemJs, "TeacherId"));
                     userNode.setTeacherName(JSONUtil.parseString(itemJs, "TeacherName"));
+                    users.add(userNode);
+                    userNode = null;
+                }
+                return  users;
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        private List<UserNode> parseProcessors(String processorJs){
+            if(TextUtils.isEmpty(processorJs))
+                return null;
+            try {
+                JSONArray jsonAr = new JSONArray(processorJs);
+                UserNode userNode = null;
+                List<UserNode> users = new ArrayList<>();
+                for(int i=0; i<jsonAr.length(); i++){
+                    JSONObject itemJs = jsonAr.getJSONObject(i);
+                    userNode = new UserNode();
+                    userNode.setTeacherId(JSONUtil.parseString(itemJs, "TeacherId"));
+                    userNode.setTeacherName(JSONUtil.parseString(itemJs, "TeacherName"));
+                    userNode.setFullHeadImgUrlThumb(JSONUtil.parseString(itemJs, "FullHeadImgUrlThumb"));
+                    userNode.setIsDone(JSONUtil.parseInt(itemJs, "IsDone"));
+                    userNode.setStrIsDone(JSONUtil.parseString(itemJs, "strIsDone"));
                     users.add(userNode);
                     userNode = null;
                 }
