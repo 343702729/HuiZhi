@@ -38,6 +38,7 @@ import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.dialog.ContentEntryDialog;
 import com.huizhi.manage.dialog.LoadingProgress;
 import com.huizhi.manage.dialog.PersonMultSelDialog;
+import com.huizhi.manage.dialog.PersonMultiSelDialog;
 import com.huizhi.manage.dialog.PersonSelDialog;
 import com.huizhi.manage.dialog.PictureSelDialog;
 import com.huizhi.manage.http.AsyncBitmapLoader;
@@ -225,7 +226,7 @@ public class HomeTaskCustomFoundActivity extends Activity {
     private View.OnClickListener personSelClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            PersonSelDialog perSelDialog = new PersonSelDialog(HomeTaskCustomFoundActivity.this, personSelId, false, true, personsInfoUpdate);
+            PersonMultiSelDialog perSelDialog = new PersonMultiSelDialog(HomeTaskCustomFoundActivity.this, personSelId, false, true, personsInfoUpdate);
             perSelDialog.showView(view);
         }
 
@@ -241,8 +242,14 @@ public class HomeTaskCustomFoundActivity extends Activity {
                         personTV.setText("所有人");
                         personCCLL.setVisibility(View.GONE);
                     }else {
-                        UserNode user = UserInfo.getInstance().getUserByTeacherId(personSelId);
-                        personTV.setText(user.getTeacherName());
+                        if(TextUtils.isEmpty(personSelId))
+                            return;
+                        String[] persId = personSelId.split(",");
+                        UserNode user = UserInfo.getInstance().getUserByTeacherId(persId[0]);
+                        if(persId.length>1)
+                            personTV.setText(user.getTeacherName() + " ...");
+                        else
+                            personTV.setText(user.getTeacherName());
 
                         try {
                             AsyncBitmapLoader asyncBitmapLoader = new AsyncBitmapLoader();
