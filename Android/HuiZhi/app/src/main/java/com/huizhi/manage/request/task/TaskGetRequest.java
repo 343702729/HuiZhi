@@ -337,6 +337,7 @@ public class TaskGetRequest {
                     userNode.setTeacherId(JSONUtil.parseString(itemJs, "TeacherId"));
                     userNode.setTeacherName(JSONUtil.parseString(itemJs, "TeacherName"));
                     userNode.setFullHeadImgUrlThumb(JSONUtil.parseString(itemJs, "FullHeadImgUrlThumb"));
+                    userNode.setHeadImgUrl(JSONUtil.parseString(itemJs, "FullHeadImgUrlThumb"));
                     userNode.setIsDone(JSONUtil.parseInt(itemJs, "IsDone"));
                     userNode.setStrIsDone(JSONUtil.parseString(itemJs, "strIsDone"));
                     users.add(userNode);

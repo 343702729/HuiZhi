@@ -35,6 +35,7 @@ import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.dialog.ContentEntryDialog;
 import com.huizhi.manage.dialog.PersonMultSelDialog;
+import com.huizhi.manage.dialog.PersonMultiSelDialog;
 import com.huizhi.manage.dialog.PersonSelDialog;
 import com.huizhi.manage.dialog.PictureSelDialog;
 import com.huizhi.manage.http.AsyncBitmapLoader;
@@ -328,18 +329,32 @@ public class HomeTaskVerifyEditActivity extends Activity {
             return;
         }
         personSelId = personId;
-        if(TextUtils.isEmpty(personId)){
-            personTV.setVisibility(View.GONE);
-            personIV.setVisibility(View.GONE);
-            return;
+//        if(TextUtils.isEmpty(personId)){
+//            personTV.setVisibility(View.GONE);
+//            personIV.setVisibility(View.GONE);
+//            return;
+//        }
+
+        UserNode user = null;
+        if(taskNode.isMoreProcessors()){
+            String prosId = "";
+            for (UserNode node:taskNode.getTaskProcessorLst()){
+                prosId = prosId + node.getTeacherId() + ",";
+            }
+            personSelId = prosId;
+            user = taskNode.getTaskProcessorLst().get(0);
+            personTV.setText(user.getTeacherName() + " ...");
+        }else {
+            user = UserInfo.getInstance().getUserByTeacherId(personId);
+            personTV.setText(user.getTeacherName());
         }
-        UserNode user = UserInfo.getInstance().getUserByTeacherId(personId);
-        if(user==null){
-            personTV.setVisibility(View.GONE);
-            personIV.setVisibility(View.GONE);
-            return;
-        }
-        personTV.setText(user.getTeacherName());
+
+//        if(user==null){
+//            personTV.setVisibility(View.GONE);
+//            personIV.setVisibility(View.GONE);
+//            return;
+//        }
+
         try {
             AsyncBitmapLoader asyncBitmapLoader = new AsyncBitmapLoader();
 //            asyncBitmapLoader.showPicByVolleyRequest(HomeTaskVerifyEditActivity.this, URLData.getUrlFile(UserInfo.getInstance().getUser().getHeadImgUrl()), personIV);
@@ -365,14 +380,21 @@ public class HomeTaskVerifyEditActivity extends Activity {
     private View.OnClickListener personSelClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            PersonSelDialog perSelDialog = null;
+
 //            if(taskNode.getTaskCreateType()==1){
 //                perSelDialog = new PersonSelDialog(HomeTaskVerifyEditActivity.this, personSelId, false, true, personsInfoUpdate);
 //            }else {
 //                perSelDialog = new PersonSelDialog(HomeTaskVerifyEditActivity.this, personSelId, personsInfoUpdate);
 //            }
-            perSelDialog = new PersonSelDialog(HomeTaskVerifyEditActivity.this, personSelId, false, true, personsInfoUpdate);
-            perSelDialog.showView(view);
+            if(taskNode.isMoreProcessors()){
+                PersonMultiSelDialog perSelDialog = new PersonMultiSelDialog(HomeTaskVerifyEditActivity.this, personSelId, false, true, personsInfoUpdate);
+                perSelDialog.showView(view);
+            }else {
+                PersonSelDialog perSelDialog = null;
+                perSelDialog = new PersonSelDialog(HomeTaskVerifyEditActivity.this, personSelId, false, true, personsInfoUpdate);
+                perSelDialog.showView(view);
+            }
+
         }
 
         private BaseInfoUpdate personsInfoUpdate = new BaseInfoUpdate() {
@@ -417,8 +439,16 @@ public class HomeTaskVerifyEditActivity extends Activity {
                         personTV.setText("所有人");
                         personCCLL.setVisibility(View.GONE);
                     }else {
-                        UserNode user = UserInfo.getInstance().getUserByTeacherId(personSelId);
-                        personTV.setText(user.getTeacherName());
+                        if(TextUtils.isEmpty(personSelId))
+                            return;
+                        String[] persId = personSelId.split(",");
+                        UserNode user = UserInfo.getInstance().getUserByTeacherId(persId[0]);
+                        if(persId.length>1)
+                            personTV.setText(user.getTeacherName() + " ...");
+                        else
+                            personTV.setText(user.getTeacherName());
+//                        UserNode user = UserInfo.getInstance().getUserByTeacherId(personSelId);
+//                        personTV.setText(user.getTeacherName());
 
                         try {
                             AsyncBitmapLoader asyncBitmapLoader = new AsyncBitmapLoader();

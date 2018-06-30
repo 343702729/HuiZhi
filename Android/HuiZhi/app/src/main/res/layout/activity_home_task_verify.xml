@@ -224,7 +224,10 @@
                     android:visibility="gone"
                     android:background="@drawable/frame_task_bg"
                     android:orientation="vertical"
-                    android:padding="15dp">
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
                     <HorizontalScrollView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -321,7 +324,7 @@
         <Button
             android:id="@+id/operate_btn"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="49dp"
             android:layout_gravity="bottom"
             android:background="@android:color/white"
             android:orientation="horizontal"

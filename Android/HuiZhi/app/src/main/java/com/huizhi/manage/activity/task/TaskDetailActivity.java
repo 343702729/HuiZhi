@@ -127,7 +127,7 @@ public class TaskDetailActivity extends Activity{
             createPerTV.setText(user.getTeacherName());
         setTaskPics(node);
         setTaskPriority(node.getPriority());
-        setTaskStatus(node.getTaskStatus());
+        setTaskStatus(node.getTaskStatus(), node.isMoreProcessors());
         setAssignList(node.getTaskAssignLst());
         setAccessories(node);
         setStatusTime(node);
@@ -215,7 +215,7 @@ public class TaskDetailActivity extends Activity{
         }
     }
 
-    private void setTaskStatus(int status){
+    private void setTaskStatus(int status, boolean isMoreProcessors){
         setTaskOperate(status);
         TextView pendingTV = findViewById(R.id.task_pending_tv);
         TextView auditTV = findViewById(R.id.task_audit_tv);
@@ -256,6 +256,13 @@ public class TaskDetailActivity extends Activity{
         if(isJoin){
             params.setMargins(0, 0, 0, 0);
             bottmLL.setVisibility(View.GONE);
+        }
+        if(isMoreProcessors&&status==1){
+            LinearLayout undoLL = findViewById(R.id.task_undo_ll);
+            undoLL.setVisibility(View.GONE);
+            params.setMargins(0, 0, 0, DipPxUtil.dip2px(this, 50));
+            pendingTV.setVisibility(View.VISIBLE);
+            bottmLL.setVisibility(View.VISIBLE);
         }
         scrollView.setLayoutParams(params);
     }

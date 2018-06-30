@@ -42,6 +42,7 @@ import com.huizhi.manage.util.DipPxUtil;
 import com.huizhi.manage.wiget.util.Utility;
 import com.huizhi.manage.wiget.view.FileItemView;
 import com.huizhi.manage.wiget.view.PictureItemView;
+import com.huizhi.manage.wiget.view.UserProcessorItemView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -162,8 +163,10 @@ public class HomeTaskVerifyActivity extends Activity {
             return;
         LinearLayout lineProsLL = findViewById(R.id.line_pros_ll);
         LinearLayout processorsLL = findViewById(R.id.processors_ll);
+        processorsLL.removeAllViews();
         for (UserNode user:node.getTaskProcessorLst()){
-
+            UserProcessorItemView itemView = new UserProcessorItemView(HomeTaskVerifyActivity.this, user);
+            processorsLL.addView(itemView);
         }
         lineProsLL.setVisibility(View.VISIBLE);
     }
