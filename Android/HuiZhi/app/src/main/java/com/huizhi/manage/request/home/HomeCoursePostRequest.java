@@ -29,9 +29,10 @@ public class HomeCoursePostRequest {
      * @param isPublish
      * @param handler
      */
-    public void postPublish(String teacherName, String lessonNum, String stuNums, String worksPic, String title, String comment, int isPublish, String worksId, Handler handler){
+    public void postPublish(int IsStuWork, String teacherName, String lessonNum, String stuNums, String worksPic, String title, String comment, int isPublish, String worksId, Handler handler){
         List<BasicNameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("Method", URLData.METHORD_HOME_COURSE_STU_PUBLISH));
+        params.add(new BasicNameValuePair("IsStuWork", String.valueOf(IsStuWork)));
         params.add(new BasicNameValuePair("TeacherName", teacherName));
         params.add(new BasicNameValuePair("LessonNum", lessonNum));
         params.add(new BasicNameValuePair("StuNum", stuNums));

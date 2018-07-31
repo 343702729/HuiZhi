@@ -6,6 +6,7 @@ public class CourseNode {
     private String lessonNum;
     private String lessonName;
     private String lessonTime;
+    private String lessonStatus;
     private int allStuCount;
     private int signedCount;
     private int leaveStuCount;
@@ -110,5 +111,13 @@ public class CourseNode {
 
     public void setStudentNodes(List<StudentNode> studentNodes) {
         this.studentNodes = studentNodes;
+    }
+
+    public String getLessonStatus() {
+        return lessonStatus;
+    }
+
+    public void setLessonStatus(String lessonStatus) {
+        this.lessonStatus = lessonStatus;
     }
 }

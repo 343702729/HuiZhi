@@ -66,6 +66,7 @@ public class CourseReleaseActivity extends Activity {
     private CoursePictureAdapter pictureAdapter;
     private StudentNode studentNode;
     private List<PictureNode> picNodes = new ArrayList<>();
+    private boolean isClass = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,14 +78,23 @@ public class CourseReleaseActivity extends Activity {
     }
 
     private void initDatas(){
-        lessonNum = getIntent().getStringExtra("LessonNum");
-        stuNum = getIntent().getStringExtra("StuNum");
+        isClass = getIntent().getBooleanExtra("IsClass", false);
+        if(!isClass) {
+            lessonNum = getIntent().getStringExtra("LessonNum");
+            stuNum = getIntent().getStringExtra("StuNum");
+        }else {
+            lessonNum = getIntent().getStringExtra("LessonNum");
+        }
     }
 
     private void initViews() {
         AppUtil.setNavigationBar(this);
         ImageButton backBtn = findViewById(R.id.back_btn);
         backBtn.setOnClickListener(new BackCliclListener(this));
+
+        LinearLayout topLL = findViewById(R.id.top_ll);
+        if(isClass)
+            topLL.setVisibility(View.GONE);
 
         signSTV = findViewById(R.id.sign_status_tv);
         signBtn = findViewById(R.id.sign_btn);
@@ -107,15 +117,18 @@ public class CourseReleaseActivity extends Activity {
 
     private void getDatas(){
         HomeCourseGetRequest getRequest = new HomeCourseGetRequest();
-        getRequest.getCourseStuInfo(lessonNum, stuNum, handler);
+//        if(!isClass)
+            getRequest.getCourseStuInfo(lessonNum, stuNum, handler);
     }
 
     private View.OnClickListener submitLLClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if(studentNode.getStuStatus()!=1){
-                Toast.makeText(CourseReleaseActivity.this, "请先给学员签到，再上传作品", Toast.LENGTH_SHORT).show();
-                return;
+            if(!isClass){
+                if(studentNode.getStuStatus()!=1){
+                    Toast.makeText(CourseReleaseActivity.this, "请先给学员签到，再上传作品", Toast.LENGTH_SHORT).show();
+                    return;
+                }
             }
             if(picNodes.size()>=4){
                 Toast.makeText(CourseReleaseActivity.this, "最多上传4张", Toast.LENGTH_SHORT).show();
@@ -123,6 +136,7 @@ public class CourseReleaseActivity extends Activity {
             }
             PictureSelDialog picSelDialog = new PictureSelDialog(CourseReleaseActivity.this, pictureSelInfo);
             picSelDialog.showView(view);
+
         }
     };
 
@@ -195,8 +209,17 @@ public class CourseReleaseActivity extends Activity {
 
             String comment = commentET.getText().toString();
 
+            int isStuWork = 0;
+
             HomeCoursePostRequest postRequest = new HomeCoursePostRequest();
-            postRequest.postPublish(UserInfo.getInstance().getUser().getTeacherName(), lessonNum, stuNum, getPicsJson(), "", comment, status, "", handler);
+            if(isClass){
+                isStuWork = 0;
+                postRequest.postPublish(isStuWork, UserInfo.getInstance().getUser().getTeacherName(), lessonNum, stuNum, getPicsJson(), "", comment, status, "", handler);
+            }else {
+                isStuWork = 1;
+                postRequest.postPublish(isStuWork, UserInfo.getInstance().getUser().getTeacherName(), lessonNum, stuNum, getPicsJson(), "", comment, status, "", handler);
+            }
+
         }
 
         private String getPicsJson(){

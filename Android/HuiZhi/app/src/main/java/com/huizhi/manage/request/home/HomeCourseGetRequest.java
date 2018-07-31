@@ -30,10 +30,11 @@ public class HomeCourseGetRequest {
      * @param teachernum
      * @param handler
      */
-    public void getCourseList(String teachernum, Handler handler){
+    public void getCourseList(String teachernum, String lessonDate, Handler handler){
         List<BasicNameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("Method", URLData.METHORD_HOME_COURSE_LIST));
         params.add(new BasicNameValuePair("TeacherNum", teachernum));
+        params.add(new BasicNameValuePair("LessonDate", lessonDate));
         ThreadPoolDo.getInstance().executeThread(new CourseListThread(params, handler));
     }
 
@@ -89,6 +90,7 @@ public class HomeCourseGetRequest {
                         node = new CourseNode();
                         node.setLessonNum(JSONUtil.parseString(itemJS, "LessonNum"));
                         node.setLessonName(JSONUtil.parseString(itemJS, "LessonName"));
+                        node.setLessonStatus(JSONUtil.parseString(itemJS, "LessonStatus"));
                         node.setLessonTime(JSONUtil.parseString(itemJS, "LessonTime"));
                         node.setAllStuCount(JSONUtil.parseInt(itemJS, "AllStuCount"));
                         node.setSignedCount(JSONUtil.parseInt(itemJS, "SignedCount"));

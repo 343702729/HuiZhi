@@ -21,6 +21,10 @@ import com.huizhi.manage.data.Constants;
 import com.jaeger.library.StatusBarUtil;
 
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -183,5 +187,15 @@ public class AppUtil {
                 setScreenHeight(context);
             }
         }
+    }
+
+    public static String getDate(int index){
+        Date date=new Date();//取时间
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        calendar.add(calendar.DATE,index);//把日期往后增加一天.整数往后推,负数往前移动
+        date=calendar.getTime(); //这个时间就是日期往后推一天的结果
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+        return formatter.format(date);
     }
 }

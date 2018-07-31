@@ -60,6 +60,7 @@ public class CourseAdapter extends BaseAdapter {
             viewItem = new ViewItem();
             view = layoutInflater.inflate(R.layout.adapter_course, null);
             viewItem.nameTV = view.findViewById(R.id.name_tv);
+            viewItem.statusSKTV = view.findViewById(R.id.sk_status_tv);
             viewItem.timeTV = view.findViewById(R.id.time_tv);
             viewItem.allStuTV = view.findViewById(R.id.all_stu_count_tv);
             viewItem.signStuTV = view.findViewById(R.id.sign_count_tv);
@@ -72,6 +73,12 @@ public class CourseAdapter extends BaseAdapter {
             viewItem = (ViewItem)view.getTag();
         }
         viewItem.nameTV.setText(node.getLessonName());
+        if("已上课".equals(node.getLessonStatus())){
+            viewItem.statusSKTV.setTextColor(context.getResources().getColor(R.color.app_green));
+        }else {
+            viewItem.statusSKTV.setTextColor(context.getResources().getColor(R.color.red));
+        }
+        viewItem.statusSKTV.setText(node.getLessonStatus());
         viewItem.timeTV.setText(node.getLessonTime());
         viewItem.allStuTV.setText(String.valueOf(node.getAllStuCount()));
         viewItem.signStuTV.setText(String.valueOf(node.getSignedCount()));
@@ -84,6 +91,7 @@ public class CourseAdapter extends BaseAdapter {
 
     private class ViewItem{
         TextView nameTV;
+        TextView statusSKTV;
         TextView timeTV;
         TextView allStuTV;
         TextView signStuTV;

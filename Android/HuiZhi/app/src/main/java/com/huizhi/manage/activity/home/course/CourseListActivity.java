@@ -1,14 +1,19 @@
 package com.huizhi.manage.activity.home.course;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,6 +34,7 @@ import com.huizhi.manage.request.home.HomeCourseGetRequest;
 import com.huizhi.manage.util.AppUtil;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -40,6 +46,8 @@ public class CourseListActivity extends Activity {
     private CourseAdapter courseAdapter;
     private LinearLayout loadingLL;
     private ImageView loadingIV;
+    private Button day1Btn, day2Btn, day3Btn, day4Btn;
+    private String lessonDate;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,6 +68,19 @@ public class CourseListActivity extends Activity {
         progressBar1 = findViewById(R.id.progress_bar1);
         progressBar2 = findViewById(R.id.progress_bar2);
 
+        day1Btn = findViewById(R.id.day1_btn);
+        day2Btn = findViewById(R.id.day2_btn);
+        day3Btn = findViewById(R.id.day3_btn);
+        day4Btn = findViewById(R.id.day4_btn);
+
+        day1Btn.setOnClickListener(dayBtnClick);
+        day2Btn.setOnClickListener(dayBtnClick);
+        day3Btn.setOnClickListener(dayBtnClick);
+        day4Btn.setOnClickListener(dayBtnClick);
+
+        LinearLayout calendarLL = findViewById(R.id.calendar_ll);
+        calendarLL.setOnClickListener(calendarLLClick);
+
         listView = findViewById(R.id.listview);
         courseAdapter = new CourseAdapter(this, null);
         listView.setAdapter(courseAdapter);
@@ -71,8 +92,98 @@ public class CourseListActivity extends Activity {
         AnimationDrawable animationDrawable = (AnimationDrawable) loadingIV.getBackground();
         animationDrawable.start();
         HomeCourseGetRequest getRequest = new HomeCourseGetRequest();
-        getRequest.getCourseList(UserInfo.getInstance().getUser().getTeacherNum(), handler);
+        getRequest.getCourseList(UserInfo.getInstance().getUser().getTeacherNum(), lessonDate, handler);
     }
+
+    private View.OnClickListener dayBtnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            initBtns();
+            //LessonDate
+
+            if(view.getId()==R.id.day1_btn){
+                lessonDate = "";
+                day1Btn.setBackgroundResource(R.drawable.frame_course_gray_l_fc);
+                day1Btn.setTextColor(getResources().getColor(R.color.white));
+            }else if(view.getId()==R.id.day2_btn){
+                lessonDate = AppUtil.getDate(0);
+                day2Btn.setBackgroundColor(getResources().getColor(R.color.blue_light));
+                day2Btn.setTextColor(getResources().getColor(R.color.white));
+            }else if(view.getId()==R.id.day3_btn){
+                lessonDate = AppUtil.getDate(-1);
+                day3Btn.setBackgroundColor(getResources().getColor(R.color.blue_light));
+                day3Btn.setTextColor(getResources().getColor(R.color.white));
+            }else if(view.getId()==R.id.day4_btn){
+                lessonDate = AppUtil.getDate(1);
+                day4Btn.setBackgroundResource(R.drawable.frame_course_gray_r_fc);
+                day4Btn.setTextColor(getResources().getColor(R.color.white));
+            }
+            Log.i("HuiZhi", "The lessonDate is:" + lessonDate);
+            getDatas();
+        }
+
+    };
+
+    private void initBtns(){
+        day1Btn.setBackgroundResource(R.drawable.frame_course_gray_l_bg);
+        day1Btn.setTextColor(getResources().getColor(R.color.gray));
+        day2Btn.setBackgroundColor(getResources().getColor(R.color.white));
+        day2Btn.setTextColor(getResources().getColor(R.color.gray));
+        day3Btn.setBackgroundColor(getResources().getColor(R.color.white));
+        day3Btn.setTextColor(getResources().getColor(R.color.gray));
+        day4Btn.setBackgroundResource(R.drawable.frame_course_gray_r_bg);
+        day4Btn.setTextColor(getResources().getColor(R.color.gray));
+    }
+
+    private View.OnClickListener calendarLLClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Calendar calendar = Calendar.getInstance();
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            final DatePickerDialog picker = new DatePickerDialog(CourseListActivity.this, null, year, month, day);
+            picker.setCancelable(true);
+            picker.setCanceledOnTouchOutside(true);
+            picker.setButton(DialogInterface.BUTTON_POSITIVE, "确认",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            initBtns();
+                            //确定的逻辑代码
+                            DatePicker dp = picker.getDatePicker();
+                            int year = dp.getYear();
+                            int monthOfYear = dp.getMonth() + 1;
+                            int dayOfMonth = dp.getDayOfMonth();
+                            if(monthOfYear<10)
+                                lessonDate = year + "0" + monthOfYear + "" + dayOfMonth;
+                            else
+                                lessonDate = year + "" + monthOfYear + "" + dayOfMonth;
+                            Log.i("HuiZhi", "The calendar lessonDate is:" + lessonDate);
+                            TextView calendarDTV = findViewById(R.id.calendar_day_tv);
+                            calendarDTV.setText(lessonDate);
+                            getDatas();
+                        }
+                    });
+
+            picker.setButton(DialogInterface.BUTTON_NEGATIVE, "取消",
+                    new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //取消什么也不用做
+                        }
+                    });
+            picker.show();
+        }
+    };
+
+    private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+
+        }
+    } ;
 
     private AdapterView.OnItemClickListener courseItemClick = new AdapterView.OnItemClickListener() {
         @Override

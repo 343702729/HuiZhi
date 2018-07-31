@@ -62,6 +62,7 @@ public class StandardMode extends LinearLayout {
             intent.setClass(context, CourseReleaseActivity.class);
             intent.putExtra("LessonNum", lessonNum);
             intent.putExtra("StuNum", node.getStuNum());
+            intent.putExtra("IsClass", false);
             Bundle bundle = new Bundle();
             bundle.putSerializable("Node", node);
             intent.putExtras(intent);

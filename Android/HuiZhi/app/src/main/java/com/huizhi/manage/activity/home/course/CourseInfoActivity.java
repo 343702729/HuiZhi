@@ -28,6 +28,7 @@ import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.dialog.CourseFilterDialog;
 import com.huizhi.manage.node.CourseNode;
+import com.huizhi.manage.node.StudentNode;
 import com.huizhi.manage.request.home.HomeCourseGetRequest;
 import com.huizhi.manage.request.home.HomeCoursePostRequest;
 import com.huizhi.manage.util.AppUtil;
@@ -87,6 +88,8 @@ public class CourseInfoActivity extends Activity {
         teacherSignBtn.setOnClickListener(signBtnClick);
         assistantSignBtn.setOnClickListener(signBtnClick);
 
+        LinearLayout bjzpLL = findViewById(R.id.bjzp_ll);
+        bjzpLL.setOnClickListener(bjzpLLClick);
 
         lineV = findViewById(R.id.line_v);
 
@@ -178,6 +181,17 @@ public class CourseInfoActivity extends Activity {
         }
     };
 
+    private View.OnClickListener bjzpLLClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent();
+            intent.setClass(CourseInfoActivity.this, CourseReleaseActivity.class);
+            intent.putExtra("LessonNum", lessonNum);
+            intent.putExtra("IsClass", true);
+            startActivityForResult(intent, Constants.REQUEST_CODE);
+        }
+    };
+
     private View.OnClickListener btnClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -265,6 +279,7 @@ public class CourseInfoActivity extends Activity {
         if(node==null)
             return;
         TextView titleTV = findViewById(R.id.title_tv);
+        TextView timeTV = findViewById(R.id.time_tv);
         TextView allstuTV = findViewById(R.id.allstu_tv);
         TextView signedTV = findViewById(R.id.signed_tv);
         TextView leavestuTV = findViewById(R.id.leavestu_tv);
@@ -273,6 +288,7 @@ public class CourseInfoActivity extends Activity {
         TextView completionrTV = findViewById(R.id.completionrate_tv);
 
         titleTV.setText(node.getLessonName());
+        timeTV.setText("上课时间: " + node.getLessonTime());
         allstuTV.setText(String.valueOf(node.getAllStuCount()));
         signedTV.setText(String.valueOf(node.getSignedCount()));
         leavestuTV.setText(String.valueOf(node.getLeaveStuCount()));
