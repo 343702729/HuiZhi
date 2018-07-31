@@ -17,6 +17,7 @@ public class UserInfo {
     private static UserInfo mUserInfo;
     private UserNode userNode;
     private List<UserNode> teamUsers = new ArrayList<>();
+    private List<UserNode> taskUsers = new ArrayList<>();
     private List<UserNode> talkUsers = new ArrayList<>();
     private String registrationId;
     private final int phoneType = 2;
@@ -51,6 +52,14 @@ public class UserInfo {
         this.teamUsers = teamUsers;
     }
 
+    public List<UserNode> getTaskUsers() {
+        return taskUsers;
+    }
+
+    public void setTaskUsers(List<UserNode> taskUsers) {
+        this.taskUsers = taskUsers;
+    }
+
     public List<UserNode> getTalkUsers() {
         return talkUsers;
     }
@@ -63,6 +72,16 @@ public class UserInfo {
         if(TextUtils.isEmpty(teacherid))
             return null;
         for(UserNode node:teamUsers){
+            if(teacherid.equals(node.getTeacherId()))
+                return node;
+        }
+        return null;
+    }
+
+    public UserNode getTaskUserByTeacherId(String teacherid){
+        if(TextUtils.isEmpty(teacherid))
+            return null;
+        for(UserNode node:taskUsers){
             if(teacherid.equals(node.getTeacherId()))
                 return node;
         }

@@ -32,7 +32,9 @@ import com.huizhi.manage.fragment.TaskFragment;
 import com.huizhi.manage.node.SchoolNode;
 import com.huizhi.manage.node.TaskNode;
 import com.huizhi.manage.node.TaskPageNode;
+import com.huizhi.manage.node.UserNode;
 import com.huizhi.manage.request.home.HomeTaskGetRequest;
+import com.huizhi.manage.request.main.MainRequest;
 import com.huizhi.manage.util.AppUtil;
 import com.huizhi.manage.wiget.pullableview.PullToRefreshLayout;
 import com.huizhi.manage.wiget.pullableview.PullableListView;
@@ -143,6 +145,8 @@ public class HomeTaskAllocationActivity extends Activity {
                 currentPage = 1;
                 pullToRefreshRL.isPullUp(false);
                 getDates(currentPage, pageSize, handler);
+                MainRequest mainRequest = new MainRequest();
+                mainRequest.getSchoolTalkUsers(UserInfo.getInstance().getUser().getSchoolId(), schoolId, userHandler);
             }
         };
     };
@@ -349,6 +353,18 @@ public class HomeTaskAllocationActivity extends Activity {
                     break;
                 case Constants.MSG_FAILURE:
 
+                    break;
+            }
+        }
+    };
+
+    private Handler userHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case Constants.MSG_SUCCESS:
+                    UserInfo.getInstance().setTaskUsers((List<UserNode>)msg.obj);
                     break;
             }
         }

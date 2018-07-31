@@ -108,6 +108,7 @@ public class MainRequest {
                     userNode = null;
                 }
                 UserInfo.getInstance().setTeamUsers(users);
+                UserInfo.getInstance().setTaskUsers(users);
             }catch (Exception e){
                 e.printStackTrace();
             }

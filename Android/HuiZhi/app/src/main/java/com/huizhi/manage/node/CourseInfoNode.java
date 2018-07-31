@@ -8,6 +8,8 @@ public class CourseInfoNode implements Serializable {
     private int doneLessonNum = 0;
     private int commentedNum = 0;
     private int toBeCommentNum = 0;
+    private String lessonFinishPercent;
+    private String commentFinishPercent;
     private List<CourseNode> lessons;
 
     public int getTotLessonNum() {
@@ -40,6 +42,22 @@ public class CourseInfoNode implements Serializable {
 
     public void setToBeCommentNum(int toBeCommentNum) {
         this.toBeCommentNum = toBeCommentNum;
+    }
+
+    public String getLessonFinishPercent() {
+        return lessonFinishPercent;
+    }
+
+    public void setLessonFinishPercent(String lessonFinishPercent) {
+        this.lessonFinishPercent = lessonFinishPercent;
+    }
+
+    public String getCommentFinishPercent() {
+        return commentFinishPercent;
+    }
+
+    public void setCommentFinishPercent(String commentFinishPercent) {
+        this.commentFinishPercent = commentFinishPercent;
     }
 
     public List<CourseNode> getLessons() {

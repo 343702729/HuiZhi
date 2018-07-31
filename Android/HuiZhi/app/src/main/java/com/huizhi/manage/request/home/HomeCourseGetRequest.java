@@ -27,13 +27,13 @@ public class HomeCourseGetRequest {
 
     /**
      * 取课程列表
-     * @param teachername
+     * @param teachernum
      * @param handler
      */
-    public void getCourseList(String teachername, Handler handler){
+    public void getCourseList(String teachernum, Handler handler){
         List<BasicNameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("Method", URLData.METHORD_HOME_COURSE_LIST));
-        params.add(new BasicNameValuePair("TeacherName", teachername));
+        params.add(new BasicNameValuePair("TeacherNum", teachernum));
         ThreadPoolDo.getInstance().executeThread(new CourseListThread(params, handler));
     }
 
@@ -77,6 +77,8 @@ public class HomeCourseGetRequest {
                 infoNode.setDoneLessonNum(JSONUtil.parseInt(jsonOb, "DoneLessonNum"));
                 infoNode.setCommentedNum(JSONUtil.parseInt(jsonOb, "CommentedNum"));
                 infoNode.setToBeCommentNum(JSONUtil.parseInt(jsonOb, "ToBeCommentNum"));
+                infoNode.setLessonFinishPercent(JSONUtil.parseString(jsonOb, "LessonFinishPercent"));
+                infoNode.setCommentFinishPercent(JSONUtil.parseString(jsonOb, "CommentFinishPercent"));
                 JSONArray jsonAr = jsonOb.getJSONArray("Lessons");
                 if(jsonAr!=null){
                     JSONObject itemJS;

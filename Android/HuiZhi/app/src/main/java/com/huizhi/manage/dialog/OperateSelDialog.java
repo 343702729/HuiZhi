@@ -58,6 +58,12 @@ public class OperateSelDialog {
             zpBtn.setVisibility(View.GONE);
             contentView.findViewById(R.id.view_zp).setVisibility(View.GONE);
         }
+        if(taskNode.getTaskStatus()!=1&&taskNode.getCanChooseApprover()==0){
+            okBtn.setVisibility(View.VISIBLE);
+            contentView.findViewById(R.id.view_ok).setVisibility(View.VISIBLE);
+            noBtn.setVisibility(View.GONE);
+            contentView.findViewById(R.id.view_no).setVisibility(View.GONE);
+        }
         Button cancelBtn = contentView.findViewById(R.id.cancel_btn);
         cancelBtn.setOnClickListener(itemClickListener);
         if(popupWindow==null){

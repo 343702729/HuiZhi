@@ -1,6 +1,7 @@
 package com.huizhi.manage.adapter.home;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,8 @@ public class StandardModeAdapter extends BaseAdapter{
             this.nodes = nodes;
         this.isSign = isSign;
         layoutInflater = LayoutInflater.from(context);
+        RequestQueue queue = Volley.newRequestQueue(context);
+        mImageLoader = new ImageLoader(queue, new BitmapCache());
     }
 
     public void updateViewsData(List<StudentNode> nodes){
@@ -103,7 +106,8 @@ public class StandardModeAdapter extends BaseAdapter{
         }else {
             viewItem.publishIV.setImageResource(R.mipmap.icon_publish_undo);
         }
-        viewItem.userIV.setImageUrl(AsyncFileUpload.getInstance().getFileUrl(node.getFullHeadImgUrl()), mImageLoader);
+        if(!TextUtils.isEmpty(node.getFullHeadImgUrl()))
+            viewItem.userIV.setImageUrl(AsyncFileUpload.getInstance().getFileUrl(node.getFullHeadImgUrl()), mImageLoader);
         return view;
     }
 

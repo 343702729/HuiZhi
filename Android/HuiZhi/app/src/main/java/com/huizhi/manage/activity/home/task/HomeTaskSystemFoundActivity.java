@@ -110,7 +110,7 @@ public class HomeTaskSystemFoundActivity extends Activity {
             public void update(Object object) {
                 if(object!=null){
                     personSelId = (String)object;
-                    UserNode user = UserInfo.getInstance().getUserByTeacherId(personSelId);
+                    UserNode user = UserInfo.getInstance().getTaskUserByTeacherId(personSelId);
                     personTV.setText(user.getTeacherName());
                     personIV.setImageBitmap(null);
                     personIV.setBackgroundResource(R.mipmap.user_icon);
@@ -217,7 +217,7 @@ public class HomeTaskSystemFoundActivity extends Activity {
             loadingProgress = new LoadingProgress(HomeTaskSystemFoundActivity.this, null);
             loadingProgress.showView(view);
             HomeTaskPostRequest postRequest = new HomeTaskPostRequest();
-            postRequest.postSystemTask(sysTaskId, createTechId, UserInfo.getInstance().getUser().getSchoolId(), isTimeLimit, planEndTime, priorty, personSelId, assignReason, handler);
+            postRequest.postSystemTask(sysTaskId, createTechId, UserInfo.getInstance().getSwitchSchool().getSchoolId(), isTimeLimit, planEndTime, priorty, personSelId, assignReason, handler);
         }
     };
 

@@ -245,7 +245,7 @@ public class HomeTaskCustomFoundActivity extends Activity {
                         if(TextUtils.isEmpty(personSelId))
                             return;
                         String[] persId = personSelId.split(",");
-                        UserNode user = UserInfo.getInstance().getUserByTeacherId(persId[0]);
+                        UserNode user = UserInfo.getInstance().getTaskUserByTeacherId(persId[0]);
                         if(persId.length>1)
                             personTV.setText(user.getTeacherName() + " ...");
                         else
@@ -304,7 +304,7 @@ public class HomeTaskCustomFoundActivity extends Activity {
                     personCIV.setImageBitmap(null);
                     personCIV.setBackgroundResource(R.mipmap.user_icon);
                     String[] perids = personCSelId.split(",");
-                    UserNode user = UserInfo.getInstance().getUserByTeacherId(perids[0]);
+                    UserNode user = UserInfo.getInstance().getTaskUserByTeacherId(perids[0]);
                     if(perids.length>1){
                         personCTV.setText(user.getTeacherName() + "等" + perids.length + "人");
                     }else {
@@ -497,7 +497,7 @@ public class HomeTaskCustomFoundActivity extends Activity {
             loadingProgress = new LoadingProgress(HomeTaskCustomFoundActivity.this, null);
             loadingProgress.showView(view);
             HomeTaskPostRequest postRequest = new HomeTaskPostRequest();
-            postRequest.postCustomTask(createTechId, UserInfo.getInstance().getUser().getSchoolId(), getTasksJS(items), handler);
+            postRequest.postCustomTask(createTechId, UserInfo.getInstance().getSwitchSchool().getSchoolId(), getTasksJS(items), handler);
 //            postRequest.postCustomTask(uniqueId, "", createTechId, title, description, isTimeLimit, planEndTime, priority, personSelId, assignReason, handler);
         }
 

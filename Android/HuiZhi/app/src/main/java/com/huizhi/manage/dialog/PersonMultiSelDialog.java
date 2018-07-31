@@ -91,7 +91,8 @@ public class PersonMultiSelDialog {
             }
             allLL.setVisibility(View.VISIBLE);
         }
-        List<UserNode> users = UserInfo.getInstance().getTeamUsers();
+//        List<UserNode> users = UserInfo.getInstance().getTeamUsers();
+        List<UserNode> users = UserInfo.getInstance().getTaskUsers();
         addUserView(users);
 
 
@@ -117,9 +118,11 @@ public class PersonMultiSelDialog {
         LinearLayout adminsLL = contentView.findViewById(R.id.admins_ll);
         LinearLayout usersLL = contentView.findViewById(R.id.users_ll);
         for(UserNode node:nodes){
+            if(node.getType()==1)
+                continue;
             UserItemView itemView = new UserItemView(context);
             boolean isSel = false;
-            if(!TextUtils.isEmpty(perSelId)&&perSelId.contains(node.getTeacherId()))
+            if(!TextUtils.isEmpty(perSelId)&&!TextUtils.isEmpty(node.getTeacherId())&&perSelId.contains(node.getTeacherId()))
                 isSel = true;
             itemView.setDate(node, isSel, new UserItemClick(node, itemView));
             if(node.isAdmin()){

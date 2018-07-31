@@ -18,7 +18,11 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
+
+import com.huizhi.manage.data.Constants;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
@@ -192,4 +196,69 @@ public class PictureUtil {
         canvas.drawBitmap(bitmap, rect, rect, paint);
         return output;
     }
+
+    public static String getTemporaryPic(String picpath){
+        if(TextUtils.isEmpty(picpath))
+            return null;
+        String filename = picpath.substring(picpath.lastIndexOf("/") + 1, picpath.length());
+        Log.i("YaYin", "The pic path:" + picpath + "  filename:" + filename);
+        return saveMyBitmap(filename, getImage(picpath));
+    }
+
+    public static Bitmap getImage(String srcPath) {
+        BitmapFactory.Options newOpts = new BitmapFactory.Options();
+        //开始读入图片，此时把options.inJustDecodeBounds 设回true了
+        newOpts.inJustDecodeBounds = true;
+        Bitmap bitmap = BitmapFactory.decodeFile(srcPath,newOpts);//此时返回bm为空
+
+        newOpts.inJustDecodeBounds = false;
+        int w = newOpts.outWidth;
+        int h = newOpts.outHeight;
+        //现在主流手机比较多是800*480分辨率，所以高和宽我们设置为
+        float hh = 1920f;//这里设置高度为800f
+        float ww = 1080f;//这里设置宽度为480f
+        //缩放比。由于是固定比例缩放，只用高或者宽其中一个数据进行计算即可
+        int be = 1;//be=1表示不缩放
+        if (w > h && w > ww) {//如果宽度大的话根据宽度固定大小缩放
+            be = (int) (newOpts.outWidth / ww);
+        } else if (w < h && h > hh) {//如果高度高的话根据宽度固定大小缩放
+            be = (int) (newOpts.outHeight / hh);
+        }
+        if (be <= 0)
+            be = 1;
+        newOpts.inSampleSize = be;//设置缩放比例
+        //重新读入图片，注意此时已经把options.inJustDecodeBounds 设回false了
+        bitmap = BitmapFactory.decodeFile(srcPath, newOpts);
+        return bitmap;
+    }
+
+    /**
+     * 将压缩的bitmap保存到SDCard卡临时文件夹，用于上传
+     *
+     * @param filename
+     * @param bit
+     * @return
+     */
+    private static String saveMyBitmap(String filename, Bitmap bit) {
+        String filePath = Constants.PATH_PIC + filename;
+        File dir = new File(Constants.PATH_PIC);
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+
+        File f = new File(filePath);
+        try {
+            f.createNewFile();
+            FileOutputStream fOut = null;
+            fOut = new FileOutputStream(f);
+            bit.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
+            fOut.flush();
+            fOut.close();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+
+        return filePath;
+    }
+
 }

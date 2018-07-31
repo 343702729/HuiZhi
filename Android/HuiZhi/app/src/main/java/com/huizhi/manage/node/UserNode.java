@@ -17,6 +17,7 @@ public class UserNode implements Serializable {
     private String strCreateTime;
     private String schoolId;
     private int districtId;
+    private String teacherNum;
     private String schoolName;
     private int roleType;           //11：店长  2：老师
     private String roleTypeName;
@@ -25,7 +26,7 @@ public class UserNode implements Serializable {
     private String appKey;
     private String chatToken;
     private int jobStatus;
-    private int type;
+    private int type = 0;
     private int isDone;
     private String strIsDone;
     private String fullHeadImgUrlThumb;
@@ -93,6 +94,14 @@ public class UserNode implements Serializable {
 
     public void setDistrictId(int districtId) {
         this.districtId = districtId;
+    }
+
+    public String getTeacherNum() {
+        return teacherNum;
+    }
+
+    public void setTeacherNum(String teacherNum) {
+        this.teacherNum = teacherNum;
     }
 
     public String getSchoolName() {

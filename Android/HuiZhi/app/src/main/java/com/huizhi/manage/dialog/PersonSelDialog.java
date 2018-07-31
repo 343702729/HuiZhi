@@ -32,6 +32,7 @@ public class PersonSelDialog {
     private String perSelId;
     private boolean isShowAdmin = false;
     private boolean isShowAll = false;
+    private boolean isTaskUsers = true;
 
     public PersonSelDialog(Context context, String personSelId, BaseInfoUpdate infoUpdate){
         this.context = context;
@@ -47,6 +48,7 @@ public class PersonSelDialog {
         Log.i("Task", "The person:" + personSelId);
         this.isShowAdmin = isShowAdmin;
         this.infoUpdate = infoUpdate;
+        isTaskUsers = false;
         initViews();
     }
 
@@ -81,7 +83,12 @@ public class PersonSelDialog {
             }
             allLL.setVisibility(View.VISIBLE);
         }
-        List<UserNode> users = UserInfo.getInstance().getTeamUsers();
+//        List<UserNode> users = UserInfo.getInstance().getTeamUsers();
+        List<UserNode> users;
+        if(!isTaskUsers)
+            users = UserInfo.getInstance().getTeamUsers();
+        else
+            users = UserInfo.getInstance().getTaskUsers();
         addUserView(users);
 
 
@@ -107,6 +114,8 @@ public class PersonSelDialog {
         LinearLayout adminsLL = contentView.findViewById(R.id.admins_ll);
         LinearLayout usersLL = contentView.findViewById(R.id.users_ll);
         for(UserNode node:nodes){
+            if(node.getType()==1)
+                continue;
             UserItemView itemView = new UserItemView(context);
             boolean isSel = false;
             if(!TextUtils.isEmpty(perSelId)&&perSelId.equals(node.getTeacherId()))

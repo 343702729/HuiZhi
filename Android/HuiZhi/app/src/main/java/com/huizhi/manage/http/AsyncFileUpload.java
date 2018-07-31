@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.huizhi.manage.base.BaseInfoUpdate;
+import com.huizhi.manage.util.PictureUtil;
 import com.qiniu.android.common.Zone;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.Configuration;
@@ -17,6 +18,7 @@ import com.qiniu.android.storage.UploadOptions;
 
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.Date;
 
 /**
@@ -108,7 +110,10 @@ public class AsyncFileUpload {
         String key = createFileName(filePath);  //在七牛上显示的名字
         String name = filePath.substring(filePath.lastIndexOf("/") + 1);
 //        String token = "";                                    //上传token
-        uploadManager.put(data, key, token,
+        String temporaryPath = PictureUtil.getTemporaryPic(filePath);
+        final File temporaryFile = new File(temporaryPath);
+
+        uploadManager.put(temporaryPath, key, token,
                 new UpCompletionHandler() {
                     @Override
                     public void complete(String key, ResponseInfo info, JSONObject res) {
@@ -116,6 +121,7 @@ public class AsyncFileUpload {
                         Log.i("HuiZhi", "The key: " + key + ",\r\n " + info + ",\r\n " + res);
                         Toast.makeText(context, "上传成功", Toast.LENGTH_SHORT).show();
                         if(infoUpdate!=null){
+                            temporaryFile.delete();
                             infoUpdate.update(key);
                         }
                     }

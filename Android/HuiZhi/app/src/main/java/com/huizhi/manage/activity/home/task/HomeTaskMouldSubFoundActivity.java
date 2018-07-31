@@ -166,7 +166,7 @@ public class HomeTaskMouldSubFoundActivity extends Activity {
             personIV.setVisibility(View.GONE);
             return;
         }
-        UserNode user = UserInfo.getInstance().getUserByTeacherId(personId);
+        UserNode user = UserInfo.getInstance().getTaskUserByTeacherId(personId);
         if(user==null)
             return;
         personTV.setText(user.getTeacherName());

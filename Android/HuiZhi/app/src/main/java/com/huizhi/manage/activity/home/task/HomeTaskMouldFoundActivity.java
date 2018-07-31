@@ -233,7 +233,7 @@ public class HomeTaskMouldFoundActivity extends Activity{
             if(isEdit){
                 postRequest.postMouldTaskEdit(UserInfo.getInstance().getUser().getTeacherId(), mouldNode.getCategoryId(), name, getTasksJS(subTasks), handler);
             }else {
-                postRequest.postMouldTaskCreate(UserInfo.getInstance().getUser().getTeacherId(), UserInfo.getInstance().getUser().getSchoolId(), name, getTasksJS(subTasks), handler);
+                postRequest.postMouldTaskCreate(UserInfo.getInstance().getUser().getTeacherId(), UserInfo.getInstance().getSwitchSchool().getSchoolId(), name, getTasksJS(subTasks), handler);
             }
         }
 
