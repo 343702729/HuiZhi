@@ -133,6 +133,7 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }else if("60".equals(dates[0])){
+//                Log.i("HuiZhi", "The lessonNum is:" + dates[1]);
                 Intent intent = new Intent();
                 intent.setClass(context, CourseInfoActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
