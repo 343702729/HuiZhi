@@ -15,6 +15,7 @@ public class CourseNode {
     private String completionRate;
     private boolean isSignInTeacher;
     private boolean isSignInTutor;
+    private int isUploadedWork;
     private List<StudentNode> studentNodes;
 
     public String getLessonNum() {
@@ -111,6 +112,14 @@ public class CourseNode {
 
     public void setStudentNodes(List<StudentNode> studentNodes) {
         this.studentNodes = studentNodes;
+    }
+
+    public int getIsUploadedWork() {
+        return isUploadedWork;
+    }
+
+    public void setIsUploadedWork(int isUploadedWork) {
+        this.isUploadedWork = isUploadedWork;
     }
 
     public String getLessonStatus() {

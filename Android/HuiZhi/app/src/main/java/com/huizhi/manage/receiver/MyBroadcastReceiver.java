@@ -11,6 +11,8 @@ import android.util.Log;
 
 import com.huizhi.manage.activity.home.HomeMessageInfoActivity;
 import com.huizhi.manage.activity.home.HomeNewsInfoActivity;
+import com.huizhi.manage.activity.home.course.CourseInfoActivity;
+import com.huizhi.manage.activity.home.course.CourseListActivity;
 import com.huizhi.manage.activity.home.task.HomeTaskAgencyActivity;
 import com.huizhi.manage.activity.home.task.HomeTaskVerifyActivity;
 import com.huizhi.manage.activity.task.TaskDetailActivity;
@@ -130,10 +132,16 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtras(bundle);
                 context.startActivity(intent);
+            }else if("60".equals(dates[0])){
+                Intent intent = new Intent();
+                intent.setClass(context, CourseInfoActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("LessonNum", dates[1]);
+                context.startActivity(intent);
             }
         }else{
             Log.i(TAG, "Come into app is not running");
-            if("31".equals(dates[0])||"32".equals(dates[0])||"33".equals(dates[0])||"41".equals(dates[0])||"42".equals(dates[0])||"2".equals(dates[0])||"1".equals(dates[0])){
+            if("60".equals(dates[0])||"31".equals(dates[0])||"32".equals(dates[0])||"33".equals(dates[0])||"41".equals(dates[0])||"42".equals(dates[0])||"2".equals(dates[0])||"1".equals(dates[0])){
                 Intent intent = context.getPackageManager().getLaunchIntentForPackage(Constants.PACKAG_ENAME);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 intent.putExtra("IsMessage", true);

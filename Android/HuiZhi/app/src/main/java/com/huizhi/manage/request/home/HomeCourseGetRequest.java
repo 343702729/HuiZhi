@@ -173,6 +173,7 @@ public class HomeCourseGetRequest {
                 node.setCompletionRate(JSONUtil.parseString(lessonJS, "CompletionRate"));
                 node.setSignInTeacher(JSONUtil.parseBoolean(lessonJS, "IsSignInTeacher"));
                 node.setSignInTutor(JSONUtil.parseBoolean(lessonJS, "IsSignInTutor"));
+                node.setIsUploadedWork(JSONUtil.parseInt(lessonJS, "IsUploadedWork"));
 
                 JSONArray studentsJS = jsonOb.getJSONArray("Students");
                 if(studentsJS!=null){

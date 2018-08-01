@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.huizhi.manage.R;
 import com.huizhi.manage.activity.home.HomeMessageInfoActivity;
 import com.huizhi.manage.activity.home.HomeNewsInfoActivity;
+import com.huizhi.manage.activity.home.course.CourseInfoActivity;
 import com.huizhi.manage.activity.home.task.HomeTaskAgencyActivity;
 import com.huizhi.manage.activity.home.task.HomeTaskVerifyActivity;
 import com.huizhi.manage.activity.task.TaskDetailActivity;
@@ -225,6 +226,14 @@ public class LoginActivity extends Activity {
                 finish();
             }else if(51==type){
                 Intent intent = new Intent(this, HomeTaskAgencyActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                Intent[] intents = {mainIntent, intent};
+                startActivities(intents);
+                finish();
+            }else if(60==type){
+                Intent intent = new Intent();
+                intent.setClass(this, CourseInfoActivity.class);
+                intent.putExtra("LessonNum", date);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
                 Intent[] intents = {mainIntent, intent};
                 startActivities(intents);

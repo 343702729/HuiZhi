@@ -16,6 +16,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -280,6 +281,8 @@ public class CourseInfoActivity extends Activity {
             return;
         TextView titleTV = findViewById(R.id.title_tv);
         TextView timeTV = findViewById(R.id.time_tv);
+        TextView uploadSTV = findViewById(R.id.upload_status_tv);
+        ImageView uploadSIV = findViewById(R.id.publish_iv);
         TextView allstuTV = findViewById(R.id.allstu_tv);
         TextView signedTV = findViewById(R.id.signed_tv);
         TextView leavestuTV = findViewById(R.id.leavestu_tv);
@@ -289,6 +292,11 @@ public class CourseInfoActivity extends Activity {
 
         titleTV.setText(node.getLessonName());
         timeTV.setText("上课时间: " + node.getLessonTime());
+        if(node.getIsUploadedWork()==1){
+            uploadSTV.setText("已上传");
+            uploadSTV.setTextColor(getResources().getColor(R.color.app_green));
+            uploadSIV.setImageResource(R.mipmap.icon_publish_do);
+        }
         allstuTV.setText(String.valueOf(node.getAllStuCount()));
         signedTV.setText(String.valueOf(node.getSignedCount()));
         leavestuTV.setText(String.valueOf(node.getLeaveStuCount()));
