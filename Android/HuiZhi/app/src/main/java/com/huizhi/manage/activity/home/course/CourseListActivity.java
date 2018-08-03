@@ -78,6 +78,11 @@ public class CourseListActivity extends Activity {
         day3Btn.setOnClickListener(dayBtnClick);
         day4Btn.setOnClickListener(dayBtnClick);
 
+        Calendar calendar = Calendar.getInstance();
+        String str = calendar.get(Calendar.YEAR) + "-" + (calendar.get(Calendar.MONTH) + 1) + "-" + calendar.get(Calendar.DATE);
+        TextView calendarDTV = findViewById(R.id.calendar_day_tv);
+        calendarDTV.setText(str);
+
         LinearLayout calendarLL = findViewById(R.id.calendar_ll);
         calendarLL.setOnClickListener(calendarLLClick);
 
@@ -155,13 +160,22 @@ public class CourseListActivity extends Activity {
                             int year = dp.getYear();
                             int monthOfYear = dp.getMonth() + 1;
                             int dayOfMonth = dp.getDayOfMonth();
+
+                            String strMonth, strDay;
                             if(monthOfYear<10)
-                                lessonDate = year + "0" + monthOfYear + "" + dayOfMonth;
+                                strMonth = "0" + monthOfYear;
                             else
-                                lessonDate = year + "" + monthOfYear + "" + dayOfMonth;
+                                strMonth = "" + monthOfYear;
+                            if(dayOfMonth<10)
+                                strDay = "0" + dayOfMonth;
+                            else
+                                strDay = "" + dayOfMonth;
+                            String str;
+                            str = year + "-" + strMonth + "-" + strDay;
+                            lessonDate = year + strMonth + strDay;
                             Log.i("HuiZhi", "The calendar lessonDate is:" + lessonDate);
                             TextView calendarDTV = findViewById(R.id.calendar_day_tv);
-                            calendarDTV.setText(lessonDate);
+                            calendarDTV.setText(str);
                             getDatas();
                         }
                     });

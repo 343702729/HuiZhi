@@ -65,7 +65,7 @@ public class HomeTaskFixedActivity extends Activity {
             createTime = "3";
         }else if(type==2){
             titleTV.setText("已完成任务");
-            status = 3;
+            status = 2;
             createTime = "3";
         }else if(type==3){
             titleTV.setText("待完成任务");
