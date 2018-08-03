@@ -107,7 +107,7 @@ public class HomeUserPostRequest {
         public void run() {
             super.run();
             try {
-                String result = HttpConnect.postHttpConnect(URLData.getUrlHomeAttendanceIsInRegion(), params);
+                String result = HttpConnect.getHttpConnect(URLData.getUrlHomeAttendanceIsInRegion(), params);
                 Log.i("HuiZhi", "The result:" + result);
                 if(TextUtils.isEmpty(result))
                     return;
