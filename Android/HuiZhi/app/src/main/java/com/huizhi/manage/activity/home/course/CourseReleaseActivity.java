@@ -203,11 +203,30 @@ public class CourseReleaseActivity extends Activity {
         public void onClick(View view) {
             Log.i("HuiZhi", "The pic size is:" + picNodes.size());
             boolean isPublish = publishCB.isChecked();
+            String comment = commentET.getText().toString();
             int status = 0;
+
+            if(isPublish){
+                if(picNodes.size()==0){
+                    Toast.makeText(CourseReleaseActivity.this, "请上传图片", Toast.LENGTH_LONG).show();
+                    return;
+                }
+            }else {
+                if(picNodes.size()==0&&TextUtils.isEmpty(comment)){
+                    Toast.makeText(CourseReleaseActivity.this, "图片和评语不能为空", Toast.LENGTH_LONG).show();
+                    return;
+                }
+            }
+
             if(isPublish)
                 status = 1;
 
-            String comment = commentET.getText().toString();
+
+
+//            if(TextUtils.isEmpty(comment)){
+//                Toast.makeText(CourseReleaseActivity.this, "评语不能为空", Toast.LENGTH_LONG).show();
+//                return;
+//            }
 
             int isStuWork = 0;
 
