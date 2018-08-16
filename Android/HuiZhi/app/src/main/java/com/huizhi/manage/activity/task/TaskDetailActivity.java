@@ -122,9 +122,10 @@ public class TaskDetailActivity extends Activity{
         }
         isJoin = node.getIsJoin();
 
-        UserNode user = UserInfo.getInstance().getUserByTeacherId(node.getCreateTeacherId());
-        if(user!=null)
-            createPerTV.setText(user.getTeacherName());
+//        UserNode user = UserInfo.getInstance().getUserByTeacherId(node.getCreateTeacherId());
+//        if(user!=null)
+//            createPerTV.setText(user.getTeacherName());
+        createPerTV.setText(node.getCreateTeacherName());
         setTaskPics(node);
         setTaskPriority(node.getPriority());
         setTaskStatus(node.getTaskStatus(), node.isMoreProcessors());

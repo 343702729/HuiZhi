@@ -24,6 +24,7 @@ public class TaskNode implements Serializable {
     private int priority;                   //3,高2,中 1,低
     private int taskStatus;                 //1, 新创建 2，待审核 3, 已完成 4, 已拒绝 5, 已关闭
     private String createTeacherId;
+    private String createTeacherName;
     private String assignTeacherId;
     private String processingTeacherId;
     private String processingTeacherName;
@@ -150,6 +151,14 @@ public class TaskNode implements Serializable {
 
     public void setCreateTeacherId(String createTeacherId) {
         this.createTeacherId = createTeacherId;
+    }
+
+    public String getCreateTeacherName() {
+        return createTeacherName;
+    }
+
+    public void setCreateTeacherName(String createTeacherName) {
+        this.createTeacherName = createTeacherName;
     }
 
     public String getAssignTeacherId() {

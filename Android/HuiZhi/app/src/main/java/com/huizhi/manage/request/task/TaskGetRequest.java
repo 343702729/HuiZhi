@@ -118,6 +118,7 @@ public class TaskGetRequest {
                     node.setPriority(JSONUtil.parseInt(jsonOb, "Priority"));
                     node.setTaskStatus(JSONUtil.parseInt(jsonOb, "TaskStatus"));
                     node.setCreateTeacherId(JSONUtil.parseString(jsonOb, "CreateTeacherId"));
+                    node.setCreateTeacherName(JSONUtil.parseString(jsonOb, "CreateTeacherName"));
                     node.setAssignTeacherId(JSONUtil.parseString(jsonOb, "AssignTeacherId"));
                     node.setProcessingTeacherId(JSONUtil.parseString(jsonOb, "ProcessingTeacherId"));
                     node.setLastExecuteTeacherId(JSONUtil.parseString(jsonOb, "LastExecuteTeacherId"));
@@ -205,6 +206,7 @@ public class TaskGetRequest {
             node.setPriority(JSONUtil.parseInt(jsonOb, "Priority"));
             node.setTaskStatus(JSONUtil.parseInt(jsonOb, "TaskStatus"));
             node.setCreateTeacherId(JSONUtil.parseString(jsonOb, "CreateTeacherId"));
+            node.setCreateTeacherName(JSONUtil.parseString(jsonOb, "CreateTeacherName"));
             node.setAssignTeacherId(JSONUtil.parseString(jsonOb, "AssignTeacherId"));
             node.setProcessingTeacherId(JSONUtil.parseString(jsonOb, "ProcessingTeacherId"));
             node.setProcessingTeacherName(JSONUtil.parseString(jsonOb, "ProcessingTeacherName"));

@@ -123,6 +123,12 @@ public class HomeWorkDailyEditActivity extends Activity {
         @Override
         public void onClick(View view) {
 //            String content = contentET.getText().toString();
+            if(type==0){
+                rbStr = contentET.getText().toString();
+            }else if(type==1){
+                rzStr = contentET.getText().toString();
+            }
+
             if(TextUtils.isEmpty(rbStr)){
                 Toast.makeText(HomeWorkDailyEditActivity.this, "日报内容不能为空", Toast.LENGTH_LONG).show();
                 return;

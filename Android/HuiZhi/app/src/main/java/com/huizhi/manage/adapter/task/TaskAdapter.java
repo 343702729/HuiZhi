@@ -81,10 +81,11 @@ public class TaskAdapter extends BaseAdapter {
         viewHolder.titleTV.setText(node.getTaskTitle());
         viewHolder.descriptionTV.setText(node.getTaskDescription());
         viewHolder.timeTV.setText(node.getStrCreateTime());
-        UserNode userNode = UserInfo.getInstance().getUserByTeacherId(node.getCreateTeacherId());
-        if(userNode!=null){
-            viewHolder.peopleTV.setText(userNode.getTeacherName());
-        }
+//        UserNode userNode = UserInfo.getInstance().getUserByTeacherId(node.getCreateTeacherId());
+//        if(userNode!=null){
+//            viewHolder.peopleTV.setText(userNode.getTeacherName());
+//        }
+        viewHolder.peopleTV.setText(node.getCreateTeacherName());
         viewHolder.limitimeIV.setVisibility(View.GONE);
         viewHolder.joinIV.setVisibility(View.GONE);
         if(node.isTimeLimit()){
