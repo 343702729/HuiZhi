@@ -96,9 +96,11 @@ public class CoursePictureAdapter extends BaseAdapter {
         if(node.isServer()){
             Log.i("HuiZhi", "Come into load server imag:" + i + "  url:" + node.getUrl());
             viewItem.pictureIV.setImageUrl(AsyncFileUpload.getInstance().getFileUrl(node.getThumbImageUrl190()), mImageLoader);
+            viewItem.pictureIV.setVisibility(View.VISIBLE);
         }else {
             Log.i("HuiZhi", "Come into load local imag:" + i + "  url:" + node.getPath());
             viewItem.localPicIV.setImageBitmap(PictureUtil.getimage(node.getPath()));
+            viewItem.localPicIV.setVisibility(View.VISIBLE);
         }
         viewItem.pictureIV.setOnClickListener(new ItemShowListener(node, i));
         viewItem.deleteIV.setOnClickListener(new DeleteItemListener(node));

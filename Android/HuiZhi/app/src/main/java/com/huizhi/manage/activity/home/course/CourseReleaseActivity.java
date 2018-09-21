@@ -388,6 +388,7 @@ public class CourseReleaseActivity extends Activity {
                 System.out.println("The uri is:" + originalUri);
                 if(android.os.Build.VERSION.SDK_INT>=android.os.Build.VERSION_CODES.KITKAT){
                     String picPath = FileUtil.getPath(CourseReleaseActivity.this, originalUri);
+//                    Toast.makeText(this, "选择本地图片：" + picPath, Toast.LENGTH_LONG).show();
                     Log.i("Task", "The picture path is:" + picPath);
 //                    System.out.println("The pic path:" + picPath);
                     AsyncFileUpload.getInstance().upload(this, picPath, new PicInfoUpdate(picPath));
@@ -416,16 +417,20 @@ public class CourseReleaseActivity extends Activity {
         public void update(Object object) {
             if(object==null)
                 return;
+//            Toast.makeText(CourseReleaseActivity.this, "加载图片：" + picpath, Toast.LENGTH_LONG).show();
             addNewPicture(picpath, (String)object);
         }
     };
 
     private void addNewPicture(String picPath, String picUrl){
+//        Toast.makeText(CourseReleaseActivity.this, "加载网络图片：" + picUrl, Toast.LENGTH_LONG).show();
         if(TextUtils.isEmpty(picPath)||TextUtils.isEmpty(picUrl))
             return;
         PictureNode node = new PictureNode();
         node.setPath(picPath);
         node.setUrl(picUrl);
+        node.setThumbImageUrl190(picUrl);
+        node.setServer(true);
         picNodes.add(node);
         pictureAdapter.updateViewsData(picNodes);
 //        pictureAdapter = new CoursePictureAdapter(this, picNodes);

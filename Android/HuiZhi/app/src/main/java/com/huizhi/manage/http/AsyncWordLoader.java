@@ -128,7 +128,7 @@ public class AsyncWordLoader {
                 is = HttpConnect.getStreamFromURL(url);
                 File f = new File(folderUrl);
                 if(!f.exists()){
-                    f.mkdir();
+                    f.mkdirs();
                 }
                 //创建文件
                 File file = new File(folderUrl+fileName);

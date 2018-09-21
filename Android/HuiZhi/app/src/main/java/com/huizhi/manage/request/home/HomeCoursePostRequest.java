@@ -57,7 +57,8 @@ public class HomeCoursePostRequest {
         public void run() {
             super.run();
             try {
-                String result = HttpConnect.getHttpConnect(URLData.getUrlHomeCourseStuPublish(), params);
+//                String result = HttpConnect.getHttpConnect(URLData.getUrlHomeCourseStuPublish(), params);
+                String result = HttpConnect.postHttpConnect(URLData.getUrlHomeCourseStuPublish(), params);
                 Log.i("HuiZhi", "The result:" + result);
                 if(TextUtils.isEmpty(result))
                     return;

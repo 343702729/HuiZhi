@@ -243,7 +243,7 @@ public class PictureUtil {
         String filePath = Constants.PATH_PIC + filename;
         File dir = new File(Constants.PATH_PIC);
         if (!dir.exists()) {
-            dir.mkdir();
+            dir.mkdirs();
         }
 
         File f = new File(filePath);
