@@ -30,6 +30,7 @@ public class UserNode implements Serializable {
     private int isDone;
     private String strIsDone;
     private String fullHeadImgUrlThumb;
+    private String schoolType;
     private List<SchoolNode> schools = new ArrayList<>();
 
     public String getTeacherId() {
@@ -198,6 +199,14 @@ public class UserNode implements Serializable {
 
     public void setFullHeadImgUrlThumb(String fullHeadImgUrlThumb) {
         this.fullHeadImgUrlThumb = fullHeadImgUrlThumb;
+    }
+
+    public String getSchoolType() {
+        return schoolType;
+    }
+
+    public void setSchoolType(String schoolType) {
+        this.schoolType = schoolType;
     }
 
     public List<SchoolNode> getSchools() {

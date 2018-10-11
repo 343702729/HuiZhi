@@ -100,6 +100,7 @@ public class LoginRequest {
                 UserInfo.getInstance().getUser().setChatToken(JSONUtil.parseString(json, "token"));
                 UserInfo.getInstance().getUser().setJobStatus(JSONUtil.parseInt(json, "JobStatus"));
                 UserInfo.getInstance().getUser().setTeacherNum(JSONUtil.parseString(json, "TeacherNum"));
+                UserInfo.getInstance().getUser().setSchoolType(JSONUtil.parseString(json, "SchoolType"));
                 String appKey = JSONUtil.parseString(json, "appKey");
                 Log.i("HuiZhi", "The rong key is:" + appKey);
                 UserInfo.getInstance().getUser().setAppKey(appKey);

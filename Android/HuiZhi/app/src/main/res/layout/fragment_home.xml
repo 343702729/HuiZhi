@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="none">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,61 +21,69 @@
                 android:layout_height="wrap_content"
                 android:background="@mipmap/user_title_bg"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/title_height"
                     android:layout_marginTop="@dimen/navigation_padding"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@mipmap/icon_logo_title" />
                     <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="绘智门店管理系统"-->
-                        <!--android:textColor="@android:color/black"-->
-                        <!--android:textStyle="bold"-->
-                        <!--android:textSize="@dimen/title_text"/>-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="绘智门店管理系统"-->
+                    <!--android:textColor="@android:color/black"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:textSize="@dimen/title_text"/>-->
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:paddingLeft="30dp"
+                    android:orientation="horizontal"
                     android:paddingBottom="20dp"
-                    android:paddingRight="30dp"
-                    android:orientation="horizontal">
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp">
+
                     <ImageView
                         android:id="@+id/user_iv"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:src="@mipmap/user_icon"/>
+                        android:src="@mipmap/user_icon" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="right">
+                        android:gravity="right"
+                        android:orientation="vertical">
+
                         <TextView
                             android:id="@+id/school_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="18sp"
-                            android:textColor="@color/light_black"/>
+                            android:textColor="@color/light_black"
+                            android:textSize="18sp" />
+
                         <TextView
                             android:id="@+id/name_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@android:color/black"
                             android:textSize="28sp"
-                            android:textStyle="bold"
-                            android:textColor="@android:color/black"/>
+                            android:textStyle="bold" />
+
                         <TextView
                             android:id="@+id/role_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/light_red"
-                            android:textSize="16sp"/>
+                            android:textSize="16sp" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -82,96 +91,108 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/app_bg"/>
+                android:background="@color/app_bg" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:gravity="center_vertical"
                 android:background="@color/white"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
+
                 <LinearLayout
                     android:id="@+id/week_all_ll"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:focusable="true"
-                    android:clickable="true"
                     android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center"
                     android:orientation="vertical">
+
                     <TextView
                         android:id="@+id/week_all_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
-                        android:textStyle="bold"
                         android:textColor="@color/light_black"
-                        android:textSize="22sp"/>
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="本周任务"
-                        android:textSize="14sp"
-                        android:textColor="@color/gray"/>
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
                 </LinearLayout>
+
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:background="@color/app_bg"/>
+                    android:layout_marginTop="10dp"
+                    android:background="@color/app_bg" />
+
                 <LinearLayout
                     android:id="@+id/week_done_ll"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:focusable="true"
-                    android:clickable="true"
-                    android:gravity="center"
                     android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
                     android:orientation="vertical">
+
                     <TextView
                         android:id="@+id/week_done_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
-                        android:textStyle="bold"
                         android:textColor="@color/light_black"
-                        android:textSize="22sp"/>
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="已完成"
-                        android:textSize="14sp"
-                        android:textColor="@color/gray"/>
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
                 </LinearLayout>
+
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:background="@color/app_bg"/>
+                    android:layout_marginTop="10dp"
+                    android:background="@color/app_bg" />
+
                 <LinearLayout
                     android:id="@+id/week_todo_ll"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:focusable="true"
-                    android:clickable="true"
-                    android:gravity="center"
                     android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
                     android:orientation="vertical">
+
                     <TextView
                         android:id="@+id/week_todo_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
-                        android:textStyle="bold"
                         android:textColor="@color/light_red"
-                        android:textSize="22sp"/>
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="待完成"
-                        android:textSize="14sp"
-                        android:textColor="@color/gray"/>
+                        android:textColor="@color/gray"
+                        android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -180,6 +201,7 @@
                 android:layout_height="101dp"
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -190,66 +212,75 @@
                         android:id="@+id/user_db_ll"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:paddingLeft="30dp"
-                        android:gravity="center_vertical"
+                        android:layout_weight="1"
                         android:background="@drawable/select_button_wg"
-                        android:layout_weight="1">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="30dp">
+
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:src="@mipmap/icon_rw"
-                            android:scaleType="centerInside" />
+                            android:scaleType="centerInside"
+                            android:src="@mipmap/icon_rw" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:text="待办任务"
-                            android:textSize="16sp"
-                            android:textColor="@color/light_black"/>
+                            android:textColor="@color/light_black"
+                            android:textSize="16sp" />
+
                         <TextView
                             android:id="@+id/db_count_tv"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:layout_marginLeft="10dp"
-                            android:gravity="center"
                             android:layout_marginRight="15dp"
+                            android:background="@drawable/frame_circle_dark_red"
+                            android:gravity="center"
                             android:text="0"
                             android:textColor="@color/white"
-                            android:textSize="14sp"
-                            android:background="@drawable/frame_circle_dark_red"/>
+                            android:textSize="14sp" />
                     </LinearLayout>
+
                     <View
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
-                        android:background="@color/app_bg"/>
+                        android:background="@color/app_bg" />
+
                     <LinearLayout
                         android:id="@+id/user_kq_ll"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:paddingLeft="30dp"
-                        android:gravity="center_vertical"
+                        android:layout_weight="1"
                         android:background="@drawable/select_button_wg"
-                        android:layout_weight="1">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="30dp">
+
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:src="@mipmap/icon_kq"
-                            android:scaleType="fitXY" />
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/icon_kq" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:text="考勤"
-                            android:textSize="16sp"
-                            android:textColor="@color/light_black"/>
+                            android:textColor="@color/light_black"
+                            android:textSize="16sp" />
                     </LinearLayout>
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/app_bg"/>
+                    android:background="@color/app_bg" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -260,50 +291,55 @@
                         android:id="@+id/user_zl_ll"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:paddingLeft="30dp"
-                        android:gravity="center_vertical"
+                        android:layout_weight="1"
                         android:background="@drawable/select_button_wg"
-                        android:layout_weight="1">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="30dp">
+
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
                             android:scaleType="centerInside"
-                            android:src="@mipmap/icon_zl"/>
+                            android:src="@mipmap/icon_zl" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:text="资料中心"
-                            android:textSize="16sp"
-                            android:textColor="@color/light_black"/>
+                            android:textColor="@color/light_black"
+                            android:textSize="16sp" />
                     </LinearLayout>
+
                     <View
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
-                        android:background="@color/app_bg"/>
+                        android:background="@color/app_bg" />
                     <!-- 消息通知 -->
                     <LinearLayout
                         android:id="@+id/user_tz_ll"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:paddingLeft="30dp"
-                        android:gravity="center_vertical"
+                        android:layout_weight="1"
                         android:background="@drawable/select_button_wg"
-                        android:layout_weight="1">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="30dp">
+
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
                             android:scaleType="centerInside"
-                            android:src="@mipmap/icon_tz"/>
+                            android:src="@mipmap/icon_tz" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:text="消息通知"
-                            android:textSize="16sp"
-                            android:textColor="@color/light_black"/>
+                            android:textColor="@color/light_black"
+                            android:textSize="16sp" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -313,12 +349,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="110dp"
                 android:layout_marginTop="10dp"
-                android:visibility="gone"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:visibility="gone">
+
                 <com.huizhi.manage.wiget.banner.MyViewFlow
                     android:id="@+id/viewflow"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent" />
+
                 <LinearLayout
                     android:id="@+id/points_ll"
                     android:layout_width="match_parent"
@@ -341,133 +379,153 @@
                     android:id="@+id/user_fp_ll"
                     style="@style/ItemBarLL"
                     android:visibility="gone">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
                         android:scaleType="centerInside"
-                        android:src="@mipmap/icon_gl"/>
+                        android:src="@mipmap/icon_gl" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:text="任务管理"
-                        android:textSize="16sp"
-                        android:textColor="@color/light_black"/>
+                        android:textColor="@color/light_black"
+                        android:textSize="16sp" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="right|center_vertical">
+                        android:gravity="right|center_vertical"
+                        android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@mipmap/right_icon"/>
+                            android:background="@mipmap/right_icon" />
                     </LinearLayout>
                 </LinearLayout>
+
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginLeft="30dp"
-                    android:background="@color/app_bg"/>
+                    android:background="@color/app_bg" />
                 <!-- 未读邮件 -->
                 <LinearLayout
                     android:id="@+id/user_yj_ll"
                     style="@style/ItemBarLL">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
                         android:scaleType="centerInside"
-                        android:src="@mipmap/icon_yj"/>
+                        android:src="@mipmap/icon_yj" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:text="未读邮件"
-                        android:textSize="16sp"
-                        android:textColor="@color/light_black"/>
+                        android:textColor="@color/light_black"
+                        android:textSize="16sp" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="right|center_vertical">
+                        android:gravity="right|center_vertical"
+                        android:orientation="horizontal">
+
                         <TextView
                             android:id="@+id/email_count_tv"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
-                            android:gravity="center"
                             android:layout_marginRight="15dp"
+                            android:background="@drawable/frame_circle_dark_red"
+                            android:gravity="center"
                             android:text="0"
                             android:textColor="@color/white"
-                            android:textSize="14sp"
-                            android:background="@drawable/frame_circle_dark_red"/>
+                            android:textSize="14sp" />
+
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@mipmap/right_icon"/>
+                            android:background="@mipmap/right_icon" />
                     </LinearLayout>
                 </LinearLayout>
+
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginLeft="30dp"
-                    android:background="@color/app_bg"/>
+                    android:background="@color/app_bg" />
                 <!-- 绘智新闻 -->
                 <LinearLayout
                     android:id="@+id/user_xw_ll"
                     style="@style/ItemBarLL">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
                         android:scaleType="centerInside"
-                        android:src="@mipmap/icon_xw"/>
+                        android:src="@mipmap/icon_xw" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:text="绘智新闻"
-                        android:textSize="16sp"
-                        android:textColor="@color/light_black"/>
+                        android:textColor="@color/light_black"
+                        android:textSize="16sp" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="right|center_vertical">
+                        android:gravity="right|center_vertical"
+                        android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@mipmap/right_icon"/>
+                            android:background="@mipmap/right_icon" />
                     </LinearLayout>
                 </LinearLayout>
+
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginLeft="30dp"
-                    android:background="@color/app_bg"/>
+                    android:background="@color/app_bg" />
                 <!-- 工作日志 -->
                 <LinearLayout
                     android:id="@+id/user_rz_ll"
                     style="@style/ItemBarLL">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
                         android:scaleType="centerInside"
-                        android:src="@mipmap/icon_rz"/>
+                        android:src="@mipmap/icon_rz" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:text="工作日志"
-                        android:textSize="16sp"
-                        android:textColor="@color/light_black"/>
+                        android:textColor="@color/light_black"
+                        android:textSize="16sp" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="right|center_vertical">
+                        android:gravity="right|center_vertical"
+                        android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@mipmap/right_icon"/>
+                            android:background="@mipmap/right_icon" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -475,32 +533,36 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginLeft="30dp"
-                    android:background="@color/app_bg"/>
+                    android:background="@color/app_bg" />
                 <!-- 问吧 -->
                 <LinearLayout
                     android:id="@+id/user_wb_ll"
                     style="@style/ItemBarLL">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
                         android:scaleType="centerInside"
-                        android:src="@mipmap/icon_wb"/>
+                        android:src="@mipmap/icon_wb" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:text="问吧"
-                        android:textSize="16sp"
-                        android:textColor="@color/light_black"/>
+                        android:textColor="@color/light_black"
+                        android:textSize="16sp" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="right|center_vertical">
+                        android:gravity="right|center_vertical"
+                        android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@mipmap/right_icon"/>
+                            android:background="@mipmap/right_icon" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -508,32 +570,36 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginLeft="30dp"
-                    android:background="@color/app_bg"/>
+                    android:background="@color/app_bg" />
                 <!-- 校区运营分享 -->
                 <LinearLayout
                     android:id="@+id/user_fx_ll"
                     style="@style/ItemBarLL">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
                         android:scaleType="centerInside"
-                        android:src="@mipmap/icon_fx"/>
+                        android:src="@mipmap/icon_fx" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:text="校区运营分享"
-                        android:textSize="16sp"
-                        android:textColor="@color/light_black"/>
+                        android:textColor="@color/light_black"
+                        android:textSize="16sp" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="right|center_vertical">
+                        android:gravity="right|center_vertical"
+                        android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@mipmap/right_icon"/>
+                            android:background="@mipmap/right_icon" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -541,40 +607,82 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginLeft="30dp"
-                    android:background="@color/app_bg"/>
+                    android:background="@color/app_bg" />
                 <!-- 课程列表 -->
                 <LinearLayout
                     android:id="@+id/user_kc_ll"
                     style="@style/ItemBarLL">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
                         android:scaleType="centerInside"
-                        android:src="@mipmap/icon_jx"/>
+                        android:src="@mipmap/icon_jx" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:text="家校互联"
-                        android:textSize="16sp"
-                        android:textColor="@color/light_black"/>
+                        android:textColor="@color/light_black"
+                        android:textSize="16sp" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="right|center_vertical">
+                        android:gravity="right|center_vertical"
+                        android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@mipmap/right_icon"/>
+                            android:background="@mipmap/right_icon" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="30dp"
+                    android:background="@color/app_bg" />
+                <!-- OA -->
+                <LinearLayout
+                    android:id="@+id/user_oa_ll"
+                    style="@style/ItemBarLL">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:scaleType="centerInside"
+                        android:src="@mipmap/icon_oa" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="OA办公"
+                        android:textColor="@color/light_black"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right|center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@mipmap/right_icon" />
                     </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/app_bg"/>
+                android:background="@color/app_bg" />
 
         </LinearLayout>
     </com.huizhi.manage.wiget.MyScrollView>
