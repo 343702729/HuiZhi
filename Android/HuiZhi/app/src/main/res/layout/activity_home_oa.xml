@@ -27,7 +27,7 @@
         </FrameLayout>
     </LinearLayout>
 
-    <WebView
+    <com.huizhi.manage.wiget.ProgressWebView
         android:id="@+id/webview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

@@ -22,12 +22,13 @@ import static io.rong.imkit.utils.SystemUtils.getCurProcessName;
 public class MainApplication extends Application {
     public int localVersion;
     public String versionName;
+    public static MainApplication instance;
 
     @Override
     public void onCreate() {
         super.onCreate();
 //        RongIM.init(this);
-
+        instance = this;
         try {
             PackageInfo mPKinfo = getPackageManager().getPackageInfo(getPackageName(), 0);
             localVersion = mPKinfo.versionCode;
@@ -46,6 +47,12 @@ public class MainApplication extends Application {
         Log.i("HuiZhi", "Come into load rong key:" + key);
         if(!TextUtils.isEmpty(key))
             RongIM.init(this, key);
+    }
+
+    public static MainApplication getInstance() {
+
+        return instance;
+
     }
 
 }
