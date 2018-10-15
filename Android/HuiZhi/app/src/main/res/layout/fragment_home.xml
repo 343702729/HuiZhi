@@ -286,31 +286,63 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="horizontal">
-                    <!-- 资料中心 -->
-                    <LinearLayout
-                        android:id="@+id/user_zl_ll"
+                    <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/select_button_wg"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingLeft="30dp">
+                        android:layout_weight="1">
+                        <!-- 资料中心 -->
+                        <LinearLayout
+                            android:id="@+id/user_zl_ll"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="20dp"
-                            android:scaleType="centerInside"
-                            android:src="@mipmap/icon_zl" />
+                            android:background="@drawable/select_button_wg"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingLeft="30dp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:text="资料中心"
-                            android:textColor="@color/light_black"
-                            android:textSize="16sp" />
-                    </LinearLayout>
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="20dp"
+                                android:scaleType="centerInside"
+                                android:src="@mipmap/icon_zl" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:text="资料中心"
+                                android:textColor="@color/light_black"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+
+                        <!-- OA -->
+                        <LinearLayout
+                            android:id="@+id/user_oa_ll"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/select_button_wg"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingLeft="30dp">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="20dp"
+                                android:scaleType="centerInside"
+                                android:src="@mipmap/icon_oa" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:text="OA办公"
+                                android:textColor="@color/light_black"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+                    </FrameLayout>
+
 
                     <View
                         android:layout_width="1dp"
@@ -374,6 +406,45 @@
                 android:layout_marginTop="10dp"
                 android:background="@android:color/white"
                 android:orientation="vertical">
+
+                <!-- 家校互联 -->
+                <LinearLayout
+                    android:id="@+id/user_kc_ll"
+                    style="@style/ItemBarLL">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:scaleType="centerInside"
+                        android:src="@mipmap/icon_jx" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="家校互联"
+                        android:textColor="@color/light_black"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right|center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@mipmap/right_icon" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="30dp"
+                    android:background="@color/app_bg" />
+
                 <!-- 任务分配 -->
                 <LinearLayout
                     android:id="@+id/user_fp_ll"
@@ -587,80 +658,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:text="校区运营分享"
-                        android:textColor="@color/light_black"
-                        android:textSize="16sp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="right|center_vertical"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@mipmap/right_icon" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="30dp"
-                    android:background="@color/app_bg" />
-                <!-- 课程列表 -->
-                <LinearLayout
-                    android:id="@+id/user_kc_ll"
-                    style="@style/ItemBarLL">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:scaleType="centerInside"
-                        android:src="@mipmap/icon_jx" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="家校互联"
-                        android:textColor="@color/light_black"
-                        android:textSize="16sp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="right|center_vertical"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@mipmap/right_icon" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="30dp"
-                    android:background="@color/app_bg" />
-                <!-- OA -->
-                <LinearLayout
-                    android:id="@+id/user_oa_ll"
-                    style="@style/ItemBarLL">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:scaleType="centerInside"
-                        android:src="@mipmap/icon_oa" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="OA办公"
                         android:textColor="@color/light_black"
                         android:textSize="16sp" />
 
