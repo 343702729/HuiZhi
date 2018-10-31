@@ -156,11 +156,17 @@ public class CourseReleaseActivity extends Activity {
                 }
 
             }else if(index==2){
-                //相册选择
-                Intent intent=new Intent(Intent.ACTION_GET_CONTENT);//ACTION_OPEN_DOCUMENT
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-                intent.setType("image/*");
-                startActivityForResult(intent, Constants.SELECT_PICTURE);
+                if (Build.VERSION.SDK_INT < 23) {
+                    //相册选择
+                    Intent intent=new Intent(Intent.ACTION_GET_CONTENT);//ACTION_OPEN_DOCUMENT
+                    intent.addCategory(Intent.CATEGORY_OPENABLE);
+                    intent.setType("image/*");
+                    startActivityForResult(intent, Constants.SELECT_PICTURE);
+
+                } else {
+                    permissionForS();
+                }
+
             }
 
         }
@@ -195,6 +201,23 @@ public class CourseReleaseActivity extends Activity {
                     Constants.TAKE_PICTURE);
         } else {
             takePictures();
+        }
+    }
+
+    private void permissionForS() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
+                    Constants.SELECT_PICTURE);
+        } else {
+            //相册选择
+            Intent intent=new Intent(Intent.ACTION_GET_CONTENT);//ACTION_OPEN_DOCUMENT
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.setType("image/*");
+            startActivityForResult(intent, Constants.SELECT_PICTURE);
         }
     }
 
