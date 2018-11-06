@@ -126,6 +126,30 @@ public class HomeUserGetRequest {
         ThreadPoolDo.getInstance().executeThread(new NewListThread(params, handler));
     }
 
+    /**
+     * 未运营分享未读数量
+     * @param teacherId
+     * @param handler
+     */
+    public void getFXNoReadCount(String teacherId, Handler handler){
+        List<BasicNameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("Method", URLData.METHORD_SHARE_COUNT));
+        params.add(new BasicNameValuePair("TeacherId", teacherId));
+        ThreadPoolDo.getInstance().executeThread(new FXNoReadCountThread(params, handler));
+    }
+
+    /**
+     * 资料未读数量
+     * @param teacherId
+     * @param handler
+     */
+    public void getFileNoReadCound(String teacherId, Handler handler){
+        List<BasicNameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("Method", URLData.METHORD_FILE_COUNT));
+        params.add(new BasicNameValuePair("TeacherId", teacherId));
+        ThreadPoolDo.getInstance().executeThread(new FileNoReadCountThread(params, handler));
+    }
+
     private class TaskSummaryThread extends Thread{
         private List<BasicNameValuePair> params;
         private Handler handler;
@@ -499,6 +523,79 @@ public class HomeUserGetRequest {
             return newPageNode;
         }
 
+    }
+
+    private class FXNoReadCountThread extends Thread{
+        private List<BasicNameValuePair> params;
+        private Handler handler;
+
+        public FXNoReadCountThread(List<BasicNameValuePair> params, Handler handler){
+            this.params = params;
+            this.handler = handler;
+        }
+
+        @Override
+        public void run() {
+            super.run();
+            try {
+                String result = HttpConnect.getHttpConnect(URLData.getUrlShareCount(), params);
+                Log.i("HuiZhi", "The result:" + result);
+                if(TextUtils.isEmpty(result))
+                    return;
+                ResultNode resultNode = JSONUtil.parseResult(result);
+                Log.i("HuiZhi", "The result:" + resultNode.getResult() + "  message:" + resultNode.getMessage() + "  returnObj:" + resultNode.getReturnObj());
+                if(resultNode == null)
+                    return;
+                if(resultNode.getResult() == Constants.RESULT_SUCCESS) {
+                    handler.sendMessage(handler.obtainMessage(Constants.MSG_SUCCESS_FOUR, getNoReadCount(resultNode.getReturnObj())));
+                }else
+                    handler.sendMessage(handler.obtainMessage(Constants.MSG_FAILURE, resultNode.getMessage()));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    private String getNoReadCount(String result){
+        try {
+            JSONObject jsonIt = new JSONObject(result);
+            return jsonIt.getString("NoReadCount");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "0";
+    }
+
+    private class FileNoReadCountThread extends Thread{
+        private List<BasicNameValuePair> params;
+        private Handler handler;
+
+        public FileNoReadCountThread(List<BasicNameValuePair> params, Handler handler){
+            this.params = params;
+            this.handler = handler;
+        }
+
+        @Override
+        public void run() {
+            super.run();
+            try {
+                String result = HttpConnect.getHttpConnect(URLData.getUrlFileCount(), params);
+                Log.i("HuiZhi", "The result:" + result);
+                if(TextUtils.isEmpty(result))
+                    return;
+                ResultNode resultNode = JSONUtil.parseResult(result);
+                Log.i("HuiZhi", "The result:" + resultNode.getResult() + "  message:" + resultNode.getMessage() + "  returnObj:" + resultNode.getReturnObj());
+                if(resultNode == null)
+                    return;
+                if(resultNode.getResult() == Constants.RESULT_SUCCESS) {
+                    handler.sendMessage(handler.obtainMessage(Constants.MSG_SUCCESS_ONE, getNoReadCount(resultNode.getReturnObj())));
+                }else
+                    handler.sendMessage(handler.obtainMessage(Constants.MSG_FAILURE, resultNode.getMessage()));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 
 }

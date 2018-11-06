@@ -27,6 +27,7 @@ import com.huizhi.manage.fragment.UserFragment;
 import com.huizhi.manage.login.LoginActivity;
 import com.huizhi.manage.node.VersionNode;
 import com.huizhi.manage.request.common.FileGetRequest;
+import com.huizhi.manage.request.home.HomeUserGetRequest;
 import com.huizhi.manage.request.main.MainRequest;
 import com.huizhi.manage.util.AppUtil;
 import com.huizhi.manage.util.NavigationBarUtil;
@@ -66,6 +67,12 @@ public class MainActivity extends FragmentActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        getFileData();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         removeUnreadCountObserver();
@@ -98,6 +105,11 @@ public class MainActivity extends FragmentActivity {
     public void getDatas(){
         MainRequest mainRequest = new MainRequest();
         mainRequest.getVersion(((MainApplication)getApplication()).localVersion, handler);
+    }
+
+    public void getFileData(){
+        HomeUserGetRequest getRequest = new HomeUserGetRequest();
+        getRequest.getFileNoReadCound(UserInfo.getInstance().getUser().getTeacherId(), handler);
     }
 
     private void setTabSelection(int index){
@@ -310,6 +322,13 @@ public class MainActivity extends FragmentActivity {
             }else if(msg.what== Constants.MSG_SUCCESS){
                 VersionNode versionNode = (VersionNode)msg.obj;
                 checkVersion(versionNode);
+            }else if(msg.what == Constants.MSG_SUCCESS_ONE){
+                ImageView fileIV = findViewById(R.id.material_count_iv);
+                String count = (String)msg.obj;
+                if("0".equals(count))
+                    fileIV.setVisibility(View.INVISIBLE);
+                else
+                    fileIV.setVisibility(View.VISIBLE);
             }
         }
     };

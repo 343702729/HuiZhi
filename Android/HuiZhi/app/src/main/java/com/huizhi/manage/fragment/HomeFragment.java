@@ -124,7 +124,7 @@ public class HomeFragment extends Fragment {
         //问吧
         LinearLayout wbLL = (LinearLayout)messageLayout.findViewById(R.id.user_wb_ll);
         wbLL.setOnClickListener(itemOnClick);
-        //问吧
+        //校区运营分享
         LinearLayout fxLL = (LinearLayout)messageLayout.findViewById(R.id.user_fx_ll);
         fxLL.setOnClickListener(itemOnClick);
         //课程列表
@@ -145,6 +145,13 @@ public class HomeFragment extends Fragment {
             LinearLayout fpLL = (LinearLayout)messageLayout.findViewById(R.id.user_fp_ll);
             fpLL.setOnClickListener(itemOnClick);
             fpLL.setVisibility(View.VISIBLE);
+            ImageView fpIV = messageLayout.findViewById(R.id.user_fp_iv);
+            fpIV.setVisibility(View.VISIBLE);
+        }
+
+        if(UserInfo.getInstance().getUser().isEnableKnowledge()){
+            //校区运营分享
+            fxLL.setVisibility(View.VISIBLE);
         }
 
         setUserInfoViews();
@@ -174,6 +181,7 @@ public class HomeFragment extends Fragment {
         HomeUserGetRequest getRequest = new HomeUserGetRequest();
         getRequest.getUserTaskSummary(UserInfo.getInstance().getUser().getTeacherId(), UserInfo.getInstance().getUser().getSchoolId(), handler);
         getRequest.getEmailInfo(UserInfo.getInstance().getUser().getEmail(), handler);
+        getRequest.getFXNoReadCount(UserInfo.getInstance().getUser().getTeacherId(), handler);
     }
 
     /**
@@ -343,6 +351,14 @@ public class HomeFragment extends Fragment {
                         return;
                     emailInfoNode = (EmailInfoNode)msg.obj;
                     setEmailInfo(emailInfoNode);
+                    break;
+                case Constants.MSG_SUCCESS_FOUR:
+                    if(msg.obj==null)
+                        return;
+                    String count = (String)msg.obj;
+                    Log.i("HuiZhi", "The fx count is:" + count);
+                    TextView fxCountTV = messageLayout.findViewById(R.id.fx_count_tv);
+                    fxCountTV.setText(count);
                     break;
             }
         }

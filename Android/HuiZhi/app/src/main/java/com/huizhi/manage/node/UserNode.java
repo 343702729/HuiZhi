@@ -31,6 +31,7 @@ public class UserNode implements Serializable {
     private String strIsDone;
     private String fullHeadImgUrlThumb;
     private String schoolType;
+    private boolean IsEnableKnowledge;
     private List<SchoolNode> schools = new ArrayList<>();
 
     public String getTeacherId() {
@@ -215,5 +216,13 @@ public class UserNode implements Serializable {
 
     public void setSchools(List<SchoolNode> schools) {
         this.schools = schools;
+    }
+
+    public boolean isEnableKnowledge() {
+        return IsEnableKnowledge;
+    }
+
+    public void setEnableKnowledge(boolean enableKnowledge) {
+        IsEnableKnowledge = enableKnowledge;
     }
 }

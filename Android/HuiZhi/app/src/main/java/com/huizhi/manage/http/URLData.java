@@ -53,6 +53,12 @@ public class URLData {
     private static final String URL_NEWS_BANNER = "/service/HZNewsService.ashx";
     public static final String METHORD_NEWS_BANNER = "getNewsBannerList";
 
+    private static final String URL_SHARE_COUNT = "/Service/KnowledgeService.ashx";
+    public static final String METHORD_SHARE_COUNT = "getNoReadCount";
+
+    private static final String URL_FILE_COUNT = "/Service/FilesService.ashx";
+    public static final String METHORD_FILE_COUNT = "getNoReadCount";
+
     private static final String URL_NEWS_LIST = "/service/HZNewsService.ashx";
     public static final String METHORD_NEWS_LIST = "getNewsList";
 
@@ -328,6 +334,22 @@ public class URLData {
      */
     public static String getUrlNewsBanner(){
         return URL_HOST + URL_NEWS_BANNER;
+    }
+
+    /**
+     * 未运营分享未读数量
+     * @return
+     */
+    public static String getUrlShareCount(){
+        return URL_HOST + URL_SHARE_COUNT;
+    }
+
+    /**
+     * 资料未读数量
+     * @return
+     */
+    public static String getUrlFileCount(){
+        return URL_HOST + URL_FILE_COUNT;
     }
 
     /**

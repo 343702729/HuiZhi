@@ -445,7 +445,7 @@
                     android:layout_marginLeft="30dp"
                     android:background="@color/app_bg" />
 
-                <!-- 任务分配 -->
+                <!-- 任务管理 -->
                 <LinearLayout
                     android:id="@+id/user_fp_ll"
                     style="@style/ItemBarLL"
@@ -479,7 +479,9 @@
                 </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/user_fp_iv"
                     android:layout_width="match_parent"
+                    android:visibility="gone"
                     android:layout_height="1dp"
                     android:layout_marginLeft="30dp"
                     android:background="@color/app_bg" />
@@ -645,7 +647,8 @@
                 <!-- 校区运营分享 -->
                 <LinearLayout
                     android:id="@+id/user_fx_ll"
-                    style="@style/ItemBarLL">
+                    style="@style/ItemBarLL"
+                    android:visibility="gone">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -666,6 +669,17 @@
                         android:layout_height="wrap_content"
                         android:gravity="right|center_vertical"
                         android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/fx_count_tv"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_marginRight="15dp"
+                            android:background="@drawable/frame_circle_dark_red"
+                            android:gravity="center"
+                            android:text="0"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
 
                         <ImageView
                             android:layout_width="wrap_content"
