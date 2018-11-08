@@ -56,6 +56,9 @@ public class URLData {
     private static final String URL_SHARE_COUNT = "/Service/KnowledgeService.ashx";
     public static final String METHORD_SHARE_COUNT = "getNoReadCount";
 
+    private static final String URL_NOTICE_COUNT = "/Service/NoticeService.ashx";
+    public static final String METHORD_NOTICE_COUNT = "getNoReadCount";
+
     private static final String URL_FILE_COUNT = "/Service/FilesService.ashx";
     public static final String METHORD_FILE_COUNT = "getNoReadCount";
 
@@ -342,6 +345,14 @@ public class URLData {
      */
     public static String getUrlShareCount(){
         return URL_HOST + URL_SHARE_COUNT;
+    }
+
+    /**
+     * 通知未读消息
+     * @return
+     */
+    public static String getUrlNoticeCount(){
+        return URL_HOST + URL_NOTICE_COUNT;
     }
 
     /**

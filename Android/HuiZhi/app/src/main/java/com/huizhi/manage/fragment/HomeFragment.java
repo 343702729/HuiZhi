@@ -182,6 +182,7 @@ public class HomeFragment extends Fragment {
         getRequest.getUserTaskSummary(UserInfo.getInstance().getUser().getTeacherId(), UserInfo.getInstance().getUser().getSchoolId(), handler);
         getRequest.getEmailInfo(UserInfo.getInstance().getUser().getEmail(), handler);
         getRequest.getFXNoReadCount(UserInfo.getInstance().getUser().getTeacherId(), handler);
+        getRequest.getTZNoReadCount(UserInfo.getInstance().getUser().getTeacherId(), handler);
     }
 
     /**
@@ -359,6 +360,17 @@ public class HomeFragment extends Fragment {
                     Log.i("HuiZhi", "The fx count is:" + count);
                     TextView fxCountTV = messageLayout.findViewById(R.id.fx_count_tv);
                     fxCountTV.setText(count);
+                    break;
+                case Constants.MSG_SUCCESS_FIVE:
+                    if(msg.obj==null)
+                        return;
+                    String ggcount = (String)msg.obj;
+                    Log.i("HuiZhi", "The gg count is:" + ggcount);
+                    ImageView ggCountIV = messageLayout.findViewById(R.id.gg_count_iv);
+                    if("1".equals(ggcount))
+                        ggCountIV.setVisibility(View.INVISIBLE);
+                    else
+                        ggCountIV.setVisibility(View.VISIBLE);
                     break;
             }
         }

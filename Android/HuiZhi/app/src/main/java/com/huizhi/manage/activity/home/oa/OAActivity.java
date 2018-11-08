@@ -47,6 +47,7 @@ public class OAActivity extends Activity{
 
     private void initDates(){
         url = "http://121.43.164.49:8080/tmis/mobile/index?uid=" + UserInfo.getInstance().getUser().getTeacherNum() + "&code=adsfjkj89siu3i4n-i23iiudsfiasu-iuioeuicuiuc-rbquwiocub";
+
     }
 
 

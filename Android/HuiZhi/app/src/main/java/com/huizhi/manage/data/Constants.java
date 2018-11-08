@@ -16,6 +16,7 @@ public class Constants {
     public static final int MSG_SUCCESS_TWO = 202;
     public static final int MSG_SUCCESS_THREE = 203;
     public static final int MSG_SUCCESS_FOUR = 204;
+    public static final int MSG_SUCCESS_FIVE = 205;
     public static final int MSG_FAILURE = 300;
     public static final int MSG_RECEIVE = 1000;
 

@@ -13,6 +13,7 @@ import com.huizhi.manage.activity.home.HomeMessageInfoActivity;
 import com.huizhi.manage.activity.home.HomeNewsInfoActivity;
 import com.huizhi.manage.activity.home.course.CourseInfoActivity;
 import com.huizhi.manage.activity.home.course.CourseListActivity;
+import com.huizhi.manage.activity.home.oa.OAActivity;
 import com.huizhi.manage.activity.home.task.HomeTaskAgencyActivity;
 import com.huizhi.manage.activity.home.task.HomeTaskVerifyActivity;
 import com.huizhi.manage.activity.task.TaskDetailActivity;
@@ -138,6 +139,12 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
                 intent.setClass(context, CourseInfoActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("LessonNum", dates[1]);
+                context.startActivity(intent);
+            }else if("70".equals(dates[0])){
+                Intent intent = new Intent();
+                intent.setClass(context, OAActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("URL", dates[1]);
                 context.startActivity(intent);
             }
         }else{

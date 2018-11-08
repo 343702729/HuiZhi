@@ -139,6 +139,18 @@ public class HomeUserGetRequest {
     }
 
     /**
+     * 公告未读数量
+     * @param teacherId
+     * @param handler
+     */
+    public void getTZNoReadCount(String teacherId, Handler handler){
+        List<BasicNameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("Method", URLData.METHORD_NOTICE_COUNT));
+        params.add(new BasicNameValuePair("TeacherId", teacherId));
+        ThreadPoolDo.getInstance().executeThread(new NoticeNoReadCountThread(params, handler));
+    }
+
+    /**
      * 资料未读数量
      * @param teacherId
      * @param handler
@@ -590,6 +602,37 @@ public class HomeUserGetRequest {
                     return;
                 if(resultNode.getResult() == Constants.RESULT_SUCCESS) {
                     handler.sendMessage(handler.obtainMessage(Constants.MSG_SUCCESS_ONE, getNoReadCount(resultNode.getReturnObj())));
+                }else
+                    handler.sendMessage(handler.obtainMessage(Constants.MSG_FAILURE, resultNode.getMessage()));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private class NoticeNoReadCountThread extends Thread{
+        private List<BasicNameValuePair> params;
+        private Handler handler;
+
+        public NoticeNoReadCountThread(List<BasicNameValuePair> params, Handler handler){
+            this.params = params;
+            this.handler = handler;
+        }
+
+        @Override
+        public void run() {
+            super.run();
+            try {
+                String result = HttpConnect.getHttpConnect(URLData.getUrlNoticeCount(), params);
+                Log.i("HuiZhi", "The result:" + result);
+                if(TextUtils.isEmpty(result))
+                    return;
+                ResultNode resultNode = JSONUtil.parseResult(result);
+                Log.i("HuiZhi", "The result:" + resultNode.getResult() + "  message:" + resultNode.getMessage() + "  returnObj:" + resultNode.getReturnObj());
+                if(resultNode == null)
+                    return;
+                if(resultNode.getResult() == Constants.RESULT_SUCCESS) {
+                    handler.sendMessage(handler.obtainMessage(Constants.MSG_SUCCESS_FIVE, getNoReadCount(resultNode.getReturnObj())));
                 }else
                     handler.sendMessage(handler.obtainMessage(Constants.MSG_FAILURE, resultNode.getMessage()));
             }catch (Exception e){
