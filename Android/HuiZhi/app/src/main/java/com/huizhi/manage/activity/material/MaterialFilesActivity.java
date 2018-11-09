@@ -76,7 +76,7 @@ public class MaterialFilesActivity extends Activity{
         if(isFavorite)
             getRequest.getFavoriteFiles(UserInfo.getInstance().getUser().getTeacherId(),handler);
         else
-            getRequest.getFileList(fileMenuNode.getFolderId(), handler);
+            getRequest.getFileList(fileMenuNode.getFolderId(), UserInfo.getInstance().getUser().getTeacherId(), handler);
     }
 
     private AdapterView.OnItemClickListener fileItemClick = new AdapterView.OnItemClickListener() {

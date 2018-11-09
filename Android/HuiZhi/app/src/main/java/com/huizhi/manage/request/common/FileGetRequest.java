@@ -83,10 +83,11 @@ public class FileGetRequest {
      * @param folderid
      * @param handler
      */
-    public void getFileList(String folderid, Handler handler){
+    public void getFileList(String folderid, String teacherid, Handler handler){
         List<BasicNameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("Method", URLData.METHORD_FILE_LIST));
         params.add(new BasicNameValuePair("FolderId", folderid));
+        params.add(new BasicNameValuePair("TeacherId", teacherid));
         ThreadPoolDo.getInstance().executeThread(new FileListThread(params, handler));
     }
 

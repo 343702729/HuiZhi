@@ -367,7 +367,7 @@ public class HomeFragment extends Fragment {
                     String ggcount = (String)msg.obj;
                     Log.i("HuiZhi", "The gg count is:" + ggcount);
                     ImageView ggCountIV = messageLayout.findViewById(R.id.gg_count_iv);
-                    if("1".equals(ggcount))
+                    if("0".equals(ggcount))
                         ggCountIV.setVisibility(View.INVISIBLE);
                     else
                         ggCountIV.setVisibility(View.VISIBLE);
