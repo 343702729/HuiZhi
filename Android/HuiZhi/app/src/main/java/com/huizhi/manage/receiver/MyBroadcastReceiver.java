@@ -144,7 +144,6 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
                 Intent intent = new Intent();
                 intent.setClass(context, OAActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("URL", dates[1]);
                 context.startActivity(intent);
             }
         }else{
