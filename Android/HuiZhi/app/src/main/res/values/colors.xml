@@ -51,4 +51,7 @@
     <color name="gray_text">#9FA6B5</color>
     <color name="blue_light">#3EB4FE</color>
     <color name="gray_dark_text">#666666</color>
+
+    <color name="kprogresshud_default_color">#b1000000</color>
+    <color name="kprogresshud_grey_color">#449E9E9E</color>
 </resources>

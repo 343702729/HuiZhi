@@ -37,6 +37,7 @@ import com.huizhi.manage.base.BaseInfoUpdate;
 import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.dialog.PictureSelDialog;
+import com.huizhi.manage.dialog.ProgressDialog;
 import com.huizhi.manage.http.AsyncBitmapLoader;
 import com.huizhi.manage.http.AsyncFileUpload;
 import com.huizhi.manage.node.PictureNode;
@@ -67,11 +68,13 @@ public class CourseReleaseActivity extends Activity {
     private StudentNode studentNode;
     private List<PictureNode> picNodes = new ArrayList<>();
     private boolean isClass = false;
+    private ProgressDialog progressLoadingDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_course_release);
+        progressLoadingDialog = new ProgressDialog(this, "上传中...");
         initDatas();
         initViews();
         getDatas();
@@ -389,6 +392,7 @@ public class CourseReleaseActivity extends Activity {
             Log.i("HuiZhi", "The take picPath:" + picPath);
             if (picPath != null ) {//&& (picPath.endsWith(".png") || picPath.endsWith(".PNG") || picPath.endsWith(".jpg") || picPath.endsWith(".JPG"))
                 photoUri = Uri.fromFile(new File(picPath));
+                progressLoadingDialog.showView();
                 if (Build.VERSION.SDK_INT > 23) {
 //                    photoUri = FileProvider.getUriForFile(this, "com.innopro.bamboo.fileprovider", new File(picPath));
                     AsyncFileUpload.getInstance().upload(this, picPath, new PicInfoUpdate(picPath));
@@ -414,6 +418,7 @@ public class CourseReleaseActivity extends Activity {
 //                    Toast.makeText(this, "选择本地图片：" + picPath, Toast.LENGTH_LONG).show();
                     Log.i("Task", "The picture path is:" + picPath);
 //                    System.out.println("The pic path:" + picPath);
+                    progressLoadingDialog.showView();
                     AsyncFileUpload.getInstance().upload(this, picPath, new PicInfoUpdate(picPath));
 
                 }else{
@@ -425,6 +430,9 @@ public class CourseReleaseActivity extends Activity {
             } catch (Exception e) {
                 // TODO: handle exception
                 e.printStackTrace();
+                if(progressLoadingDialog!=null)
+                    progressLoadingDialog.closeView();
+                Toast.makeText(CourseReleaseActivity.this, "图片出错，上传失败", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -438,8 +446,11 @@ public class CourseReleaseActivity extends Activity {
 
         @Override
         public void update(Object object) {
-            if(object==null)
+            if(progressLoadingDialog!=null)
+                progressLoadingDialog.closeView();
+            if(object==null) {
                 return;
+            }
 //            Toast.makeText(CourseReleaseActivity.this, "加载图片：" + picpath, Toast.LENGTH_LONG).show();
             addNewPicture(picpath, (String)object);
         }

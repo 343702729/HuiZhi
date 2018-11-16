@@ -256,6 +256,7 @@ public class PictureUtil {
             fOut.close();
         } catch (IOException e1) {
             e1.printStackTrace();
+            return null;
         }
 
         return filePath;

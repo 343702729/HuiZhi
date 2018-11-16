@@ -111,6 +111,10 @@ public class AsyncFileUpload {
         String name = filePath.substring(filePath.lastIndexOf("/") + 1);
 //        String token = "";                                    //上传token
         String temporaryPath = PictureUtil.getTemporaryPic(filePath);
+        if(TextUtils.isEmpty(temporaryPath)){
+            infoUpdate.update(null);
+            return;
+        }
         final File temporaryFile = new File(temporaryPath);
 
         uploadManager.put(temporaryPath, key, token,
@@ -119,7 +123,13 @@ public class AsyncFileUpload {
                     public void complete(String key, ResponseInfo info, JSONObject res) {
                         //  res 包含hash、key等信息，具体字段取决于上传策略的设置。
                         Log.i("HuiZhi", "The key: " + key + ",\r\n " + info + ",\r\n " + res);
-                        Toast.makeText(context, "上传成功", Toast.LENGTH_SHORT).show();
+                        if(info.isOK()) {
+                            Toast.makeText(context, "图片上传成功", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(context, "图片上传失败", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
                         if(infoUpdate!=null){
                             temporaryFile.delete();
                             infoUpdate.update(key);
