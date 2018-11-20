@@ -40,6 +40,8 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 用于开启 debug 版本的应用在6.0 系统上 层叠窗口权限 -->
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
 
     <application
         android:name=".main.MainApplication"
@@ -608,14 +610,26 @@
             </intent-filter>
         </activity>
 
+        <!--<provider-->
+            <!--android:name="android.support.v4.content.FileProvider"-->
+            <!--android:authorities="chao.example.instantchat.FileProvider"-->
+            <!--android:exported="false"-->
+            <!--android:grantUriPermissions="true">-->
+            <!--<meta-data-->
+                <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
+                <!--android:resource="@xml/rc_file_path" />-->
+        <!--</provider>-->
+
+
+        <!-- packagename.fileprovider -->
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="chao.example.instantchat.FileProvider"
-            android:exported="false"
-            android:grantUriPermissions="true">
+            android:authorities="com.huizhi.manage.FileProvider"
+            android:grantUriPermissions="true"
+            android:exported="false">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/rc_file_path" />
+                android:resource="@xml/filepaths" />
         </provider>
 
         <!-- apk 下载service -->
@@ -755,6 +769,7 @@
 
         <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>
         <meta-data android:name="JPUSH_APPKEY" android:value="614da6617607ed73456c0fbe" /> <!--  </>值来自开发者平台取得的AppKey-->
+
 
     </application>
 

@@ -253,7 +253,7 @@ public class ApplicationUpdateService extends Service{
 		if(Build.VERSION.SDK_INT>=24) { //Android 7.0及以上
 			// 参数2 清单文件中provider节点里面的authorities ; 参数3  共享的文件,即apk包的file类
 			//com.yayin.merchantmanage.fileprovider
-			String fp = getPackageName() + ".fileprovider";
+			String fp = getPackageName() + ".FileProvider";
 			Log.i("YaYin", "The packagename is:" + fp);
 			Uri apkUri = FileProvider.getUriForFile(this, fp, appFile);
 			//对目标应用临时授权该Uri所代表的文件

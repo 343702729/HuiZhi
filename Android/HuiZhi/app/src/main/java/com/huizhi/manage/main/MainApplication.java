@@ -55,4 +55,11 @@ public class MainApplication extends Application {
 
     }
 
+    public String getVersionName() {
+        return versionName;
+    }
+
+    public void setVersionName(String versionName) {
+        this.versionName = versionName;
+    }
 }

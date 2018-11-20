@@ -10,14 +10,16 @@ android {
         }
     }
     compileSdkVersion 26
+    buildToolsVersion '26.0.0'
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.huizhi.manage"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        flavorDimensions "26"
 
     }
     buildTypes {
@@ -47,7 +49,7 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
-    buildToolsVersion '26.0.2'
+
 }
 
 dependencies {
@@ -63,8 +65,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.2.4'
     implementation 'com.android.support:support-v4:27.0.0'
     //    compile 'com.qiniu:qiniu-android-sdk:7.3.+'
-    compile 'fm.jiecao:jiecaovideoplayer:5.5.2'
-    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    implementation 'fm.jiecao:jiecaovideoplayer:5.5.2'
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     implementation files('libs/jpush-android-3.1.1.jar')
     implementation files('libs/jcore-android-1.1.9.jar')
     //    compile 'com.mcxiaoke.volley:library:1.0.+'
@@ -73,7 +75,7 @@ dependencies {
     implementation files('libs/okhttp-3.2.0.jar')
     implementation files('libs/okio-1.6.0.jar')
     implementation files('libs/happy-dns-0.2.3.2.jar')
-    compile 'com.jaeger.statusbarutil:library:1.4.0'
+    implementation 'com.jaeger.statusbarutil:library:1.4.0'
     //    compile project(':IMKit')
     implementation files('libs/org.apache.http.legacy.jar')
 }

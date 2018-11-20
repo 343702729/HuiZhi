@@ -3,6 +3,7 @@ package com.huizhi.manage.fragment;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -24,6 +25,7 @@ import com.huizhi.manage.dialog.JudgeDialog;
 import com.huizhi.manage.http.AsyncBitmapLoader;
 import com.huizhi.manage.http.AsyncFileUpload;
 import com.huizhi.manage.login.LoginActivity;
+import com.huizhi.manage.main.MainApplication;
 import com.huizhi.manage.util.PictureUtil;
 import com.huizhi.manage.util.SharedPrefsUtil;
 
@@ -76,6 +78,12 @@ public class UserFragment extends Fragment {
         Button logoutBtn = messageLayout.findViewById(R.id.logout_btn);
         logoutBtn.setOnClickListener(logoutBtnClick);
 
+        TextView versionTV = messageLayout.findViewById(R.id.version_tv);
+        try {
+            versionTV.setText("V" + MainApplication.getInstance().getVersionName());
+        }catch (Exception e){
+
+        }
     }
 
     private View.OnClickListener itemClick = new View.OnClickListener() {
