@@ -55,15 +55,15 @@ public class MainActivity extends FragmentActivity {
 
         getDatas();
 
-        communicateIMConnect();
+//        communicateIMConnect();
         initDates();
         initViews();
         fragmentManager = getFragmentManager();
         setTabSelection(index);
         getUsersInfo();
         getUploadToken();
-        addRongListener();
-        addUnreadCountObserver();
+//        addRongListener();
+//        addUnreadCountObserver();
     }
 
     @Override
@@ -150,15 +150,9 @@ public class MainActivity extends FragmentActivity {
                     materialFragment.onResume();
                 }
                 break;
+                /**
             case 3:
                 NavigationBarUtil.MIUISetStatusBarLightMode(getWindow(), false);
-//                if(communicateFragment ==null){
-//                    communicateFragment = new CommunicateFragment();
-//                    transaction.add(R.id.content, communicateFragment);
-//                }else{
-//                    transaction.show(communicateFragment);
-//                    communicateFragment.onResume();
-//                }
 
                 if(communicateListFragment==null){
                     communicateListFragment = new CommunicateListFragment();
@@ -168,7 +162,8 @@ public class MainActivity extends FragmentActivity {
                     communicateListFragment.onResume();
                 }
                 break;
-            case 4:
+                 */
+            case 3:
                 NavigationBarUtil.MIUISetStatusBarLightMode(getWindow(), true);
                 if(userFragment==null){
                     userFragment = new UserFragment();
@@ -236,7 +231,7 @@ public class MainActivity extends FragmentActivity {
                     setTabSelection(3);
                     break;
                 case R.id.user_btn:
-                    setTabSelection(4);
+                    setTabSelection(3);
                     break;
             }
 

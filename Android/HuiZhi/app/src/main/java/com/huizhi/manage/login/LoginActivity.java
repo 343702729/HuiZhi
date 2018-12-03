@@ -133,7 +133,7 @@ public class LoginActivity extends Activity {
                 case Constants.MSG_SUCCESS:
 //                    UserInfo.getInstance().setChatToken("123321123");
                     if(0==UserInfo.getInstance().getUser().getJobStatus()) {
-                        ((MainApplication)getApplication()).setRongInit(UserInfo.getInstance().getUser().getAppKey());
+//                        ((MainApplication)getApplication()).setRongInit(UserInfo.getInstance().getUser().getAppKey());
                         initJPush();
                         UserInfo.getInstance().setLogin(true);
                         JPushInterface.setAlias(getApplicationContext(), UserInfo.getInstance().getUser().getAlias(), mAliasCallback);
