@@ -106,8 +106,13 @@ public class StandardModeAdapter extends BaseAdapter{
         }else {
             viewItem.publishIV.setImageResource(R.mipmap.icon_publish_undo);
         }
-        if(!TextUtils.isEmpty(node.getFullHeadImgUrl()))
-            viewItem.userIV.setImageUrl(AsyncFileUpload.getInstance().getFileUrl(node.getFullHeadImgUrl()), mImageLoader);
+        try {
+            if(!TextUtils.isEmpty(node.getFullHeadImgUrl()))
+                viewItem.userIV.setImageUrl(AsyncFileUpload.getInstance().getFileUrl(node.getFullHeadImgUrl()), mImageLoader);//node.getFullHeadImgUrl()
+        }catch (Exception e){
+
+        }
+
         return view;
     }
 

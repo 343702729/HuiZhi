@@ -297,11 +297,11 @@ public class CourseInfoActivity extends Activity {
             uploadSTV.setTextColor(getResources().getColor(R.color.app_green));
             uploadSIV.setImageResource(R.mipmap.icon_publish_do);
         }
-        allstuTV.setText(String.valueOf(node.getAllStuCount()));
-        signedTV.setText(String.valueOf(node.getSignedCount()));
-        leavestuTV.setText(String.valueOf(node.getLeaveStuCount()));
-        publishwTV.setText(String.valueOf(node.getPublishWorkCount()));
-        commentedTV.setText(String.valueOf(node.getCommentedCount()));
+        allstuTV.setText(node.getAllStuCount() + "");
+        signedTV.setText(node.getSignedCount() + "");
+        leavestuTV.setText(node.getLeaveStuCount() + "");
+        publishwTV.setText(node.getPublishWorkCount() + "");
+        commentedTV.setText(node.getCommentedCount() + "");//node.getCommentedCount()
         completionrTV.setText(node.getCompletionRate());
 
         if(node.isSignInTeacher()){

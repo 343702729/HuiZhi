@@ -143,6 +143,8 @@ public class HomeNewsActivity extends Activity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            if(pullRefreshListener!=null)
+                pullRefreshListener.closeRefreshLoad();
             switch (msg.what){
                 case Constants.MSG_SUCCESS:
                     if(msg.obj==null)

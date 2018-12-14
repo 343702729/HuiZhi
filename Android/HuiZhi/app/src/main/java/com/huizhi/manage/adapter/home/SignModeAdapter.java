@@ -116,7 +116,13 @@ public class SignModeAdapter extends BaseAdapter {
             viewItem.signIV.setBackgroundResource(R.mipmap.user_check_fc);
         }
         viewItem.signSTV.setText(node.getStrStuStatus());
-        viewItem.userIV.setImageUrl(AsyncFileUpload.getInstance().getFileUrl(node.getFullHeadImgUrl()), mImageLoader);
+        try {
+            viewItem.userIV.setImageUrl(AsyncFileUpload.getInstance().getFileUrl(node.getFullHeadImgUrl()), mImageLoader);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
         return view;
     }
 
