@@ -27,6 +27,7 @@ import com.huizhi.manage.activity.home.HomeNewsActivity;
 import com.huizhi.manage.activity.home.HomeWenBaActivity;
 import com.huizhi.manage.activity.home.HomeYunYinFXActivity;
 import com.huizhi.manage.activity.home.course.CourseListActivity;
+import com.huizhi.manage.activity.home.course.CoursewareActivity;
 import com.huizhi.manage.activity.home.oa.OAActivity;
 import com.huizhi.manage.activity.home.task.HomeTaskAgencyActivity;
 import com.huizhi.manage.activity.home.task.HomeTaskAllocationActivity;
@@ -133,6 +134,9 @@ public class HomeFragment extends Fragment {
         //OA
         LinearLayout oaLL = (LinearLayout)messageLayout.findViewById(R.id.user_oa_ll);
         oaLL.setOnClickListener(itemOnClick);
+        //课件库
+        LinearLayout kjLL = (LinearLayout)messageLayout.findViewById(R.id.user_kj_ll);
+        kjLL.setOnClickListener(itemOnClick);
 
         if("ZYX".equals(UserInfo.getInstance().getUser().getSchoolType())){
             oaLL.setVisibility(View.VISIBLE);
@@ -312,6 +316,11 @@ public class HomeFragment extends Fragment {
                 case R.id.user_oa_ll://oa
                     intent = new Intent();
                     intent.setClass(activity, OAActivity.class);
+                    activity.startActivity(intent);
+                    break;
+                case R.id.user_kj_ll://课件库
+                    intent = new Intent();
+                    intent.setClass(activity, CoursewareActivity.class);
                     activity.startActivity(intent);
                     break;
             }

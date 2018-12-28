@@ -1,30 +1,15 @@
-package com.huizhi.manage.activity.home.oa;
+package com.huizhi.manage.activity.home.course;
 
-import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.ClipData;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.KeyEvent;
-import android.webkit.ValueCallback;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.huizhi.manage.R;
-import com.huizhi.manage.activity.home.web.BaseWebChromeClient;
 import com.huizhi.manage.base.BackCliclListener;
 import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.util.AppUtil;
@@ -33,20 +18,23 @@ import com.huizhi.manage.wiget.ProgressWebView;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OAActivity extends Activity{
+/**
+ * 课件库
+ */
+public class CoursewareActivity extends Activity{
     private ProgressWebView webView;
     private String url = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_oa);
+        setContentView(R.layout.activity_home_course_ware);
         initDates();
         initViews();
     }
 
     private void initDates(){
-        url = "http://121.43.164.49:8080/tmis/mobile/index?uid=" + UserInfo.getInstance().getUser().getTeacherNum() + "&code=adsfjkj89siu3i4n-i23iiudsfiasu-iuioeuicuiuc-rbquwiocub";
+        url = "http://app.huizhiart.com/courseware/category/" + UserInfo.getInstance().getUser().getTeacherNum();
 
     }
 
@@ -61,7 +49,7 @@ public class OAActivity extends Activity{
     }
 
     private void initWebView(){
-        webView = (ProgressWebView) findViewById(R.id.webview);
+        webView =  findViewById(R.id.webview);
         Map<String, String > map = new HashMap<String, String>() ;
         map.put( "LogonUserId" , UserInfo.getInstance().getUser().getTeacherId()) ;
         webView.loadUrl(url, map);
