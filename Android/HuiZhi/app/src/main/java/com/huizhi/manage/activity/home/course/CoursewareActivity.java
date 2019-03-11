@@ -34,7 +34,7 @@ public class CoursewareActivity extends Activity{
     }
 
     private void initDates(){
-        url = "http://app.huizhiart.com/courseware/category/" + UserInfo.getInstance().getUser().getTeacherNum();
+        url = "http://app.huizhiart.com/courseware/category/" + UserInfo.getInstance().getUser().getTeacherId();
 
     }
 

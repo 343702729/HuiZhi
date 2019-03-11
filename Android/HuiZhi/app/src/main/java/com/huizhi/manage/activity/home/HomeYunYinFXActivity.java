@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.webkit.DownloadListener;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -73,10 +75,33 @@ public class HomeYunYinFXActivity extends Activity {
                 super.onPageFinished(view, url);
             }
         });
+        webView.setDownloadListener(new DownloadListener() {
+            @Override
+            public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimeType, long contentLength) {
+                // H5中包含下载链接的话让外部浏览器去处理
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
+            }
+        });
+
         //加载页面
         Log.i("HuiZhi", "WebInfo load web url:" + url);
         Map<String, String > map = new HashMap<String, String>() ;
         map.put( "LogonUserId" , UserInfo.getInstance().getUser().getTeacherId()) ;
         webView.loadUrl(url, map);
     }
+
+
+    @Override
+    public boolean
+    onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {
+            webView.goBack();//返回上个页面
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);//退出H5界面
+    }
+
 }

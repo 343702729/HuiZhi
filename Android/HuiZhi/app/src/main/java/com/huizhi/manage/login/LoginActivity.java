@@ -1,12 +1,15 @@
 package com.huizhi.manage.login;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Display;
@@ -256,4 +259,6 @@ public class LoginActivity extends Activity {
             }
         }
     }
+
+
 }
