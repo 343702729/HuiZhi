@@ -2,11 +2,15 @@ package com.huizhi.manage.activity.home.course;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.KeyEvent;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.huizhi.manage.R;
@@ -18,10 +22,14 @@ import com.huizhi.manage.wiget.ProgressWebView;
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+import static android.view.View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
+
 /**
  * 课件库
  */
 public class CoursewareActivity extends Activity{
+    private LinearLayout titleLL;
     private ProgressWebView webView;
     private String url = "";
 
@@ -29,6 +37,7 @@ public class CoursewareActivity extends Activity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_course_ware);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         initDates();
         initViews();
     }
@@ -44,6 +53,8 @@ public class CoursewareActivity extends Activity{
         AppUtil.setNavigationBar(this);
         ImageButton backBtn = (ImageButton)findViewById(R.id.back_btn);
         backBtn.setOnClickListener(new BackCliclListener(this));
+
+        titleLL = findViewById(R.id.title_ll);
 
         initWebView();
     }
@@ -82,6 +93,32 @@ public class CoursewareActivity extends Activity{
                     }
                 }
             }
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
+//            Toast.makeText(getApplicationContext(), "横屏", Toast.LENGTH_SHORT).show();
+            titleLL.setVisibility(View.GONE);
+            AppUtil.setNavigationBarAlpha(this, 0);
+        }else{
+//            Toast.makeText(getApplicationContext(), "竖屏", Toast.LENGTH_SHORT).show();
+            titleLL.setVisibility(View.VISIBLE);
+            AppUtil.setNavigationBarAlpha(this, 112);
+        }
+    }
+
+    private void setNavigationBar(Activity activity,int visible){
+        View decorView = activity.getWindow().getDecorView();
+        //显示NavigationBar
+        if (View.GONE == visible){
+            int option = SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+            decorView.setSystemUiVisibility(option);
+        }else if (View.VISIBLE == visible){
+            int option = SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
+            decorView.setSystemUiVisibility(option);
         }
     }
 

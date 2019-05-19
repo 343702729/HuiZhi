@@ -41,7 +41,7 @@
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name=".main.MainApplication"
@@ -387,7 +387,7 @@
         <activity
             android:name=".activity.home.course.CoursewareActivity"
             android:windowSoftInputMode="stateHidden|stateUnchanged"
-            android:screenOrientation="landscape" >
+            android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.ApplicationActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
