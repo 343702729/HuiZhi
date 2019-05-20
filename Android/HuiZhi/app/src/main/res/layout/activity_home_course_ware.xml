@@ -12,7 +12,6 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/title_height"
-            android:layout_marginTop="@dimen/navigation_padding"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"

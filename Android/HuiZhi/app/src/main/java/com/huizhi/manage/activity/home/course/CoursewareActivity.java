@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -36,8 +37,10 @@ public class CoursewareActivity extends Activity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_home_course_ware);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         initDates();
         initViews();
     }
@@ -50,7 +53,7 @@ public class CoursewareActivity extends Activity{
 
 
     private void initViews(){
-        AppUtil.setNavigationBar(this);
+//        AppUtil.setNavigationBar(this);
         ImageButton backBtn = (ImageButton)findViewById(R.id.back_btn);
         backBtn.setOnClickListener(new BackCliclListener(this));
 
@@ -102,11 +105,13 @@ public class CoursewareActivity extends Activity{
         if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
 //            Toast.makeText(getApplicationContext(), "横屏", Toast.LENGTH_SHORT).show();
             titleLL.setVisibility(View.GONE);
-            AppUtil.setNavigationBarAlpha(this, 0);
+            setSystemUIVisible(false);
+//            AppUtil.setNavigationBarAlpha(this, 0);
         }else{
 //            Toast.makeText(getApplicationContext(), "竖屏", Toast.LENGTH_SHORT).show();
             titleLL.setVisibility(View.VISIBLE);
-            AppUtil.setNavigationBarAlpha(this, 112);
+            setSystemUIVisible(true);
+//            AppUtil.setNavigationBarAlpha(this, 112);
         }
     }
 
@@ -129,6 +134,22 @@ public class CoursewareActivity extends Activity{
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == ProgressWebView.TYPE_REQUEST_PERMISSION) {
             webView.toCamera();// 到相机
+        }
+    }
+
+    private void setSystemUIVisible(boolean show) {
+        if (show) {
+            int uiFlags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            uiFlags |= 0x00001000;
+            getWindow().getDecorView().setSystemUiVisibility(uiFlags);
+        } else {
+            int uiFlags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_FULLSCREEN;
+            uiFlags |= 0x00001000;
+            getWindow().getDecorView().setSystemUiVisibility(uiFlags);
         }
     }
 }
