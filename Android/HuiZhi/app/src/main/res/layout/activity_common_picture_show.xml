@@ -40,12 +40,23 @@
                     android:text=")"
                     android:textSize="@dimen/title_text"
                     android:textColor="@android:color/white"/>
-            </LinearLayout>
 
+            </LinearLayout>
 
             <ImageButton
                 android:id="@+id/back_btn"
                 style="@style/back_btn"/>
+
+            <TextView
+                android:id="@+id/download_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:visibility="gone"
+                android:layout_marginRight="20dp"
+                android:text="下载"
+                android:textSize="@dimen/title_text"
+                android:textColor="@android:color/white"/>
         </FrameLayout>
     </FrameLayout>
 

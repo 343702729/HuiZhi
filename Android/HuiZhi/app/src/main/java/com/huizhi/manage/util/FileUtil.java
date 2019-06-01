@@ -16,8 +16,14 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.huizhi.manage.base.BaseInfoUpdate;
+import com.huizhi.manage.http.HttpConnect;
+
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * Created by CL on 2018/1/13.
@@ -258,6 +264,64 @@ public class FileUtil {
         }
 
         return null;
+    }
+
+    public static class LoadPictureThread extends Thread{
+        private String url;
+        private String fileName;
+        private BaseInfoUpdate infoUpdate;
+        private String folderUrl;
+
+        public LoadPictureThread(String url, String fileName, String folderUrl, BaseInfoUpdate infoUpdate){
+            this.url = url;
+            this.fileName = fileName;
+            this.infoUpdate = infoUpdate;
+            this.folderUrl = folderUrl;
+        }
+
+        @Override
+        public void run() {
+            super.run();
+            OutputStream os = null;
+            InputStream is = null;
+            try {
+                is = HttpConnect.getStreamFromURL(url);
+                File f = new File(folderUrl);
+                if(!f.exists()){
+                    f.mkdirs();
+                }
+                //创建文件
+                File file = new File(folderUrl+fileName);
+                //判断是否存在文件
+                if(!file.exists()){
+                    //创建新文件
+                    file.createNewFile();
+                }else{
+                    file.delete();
+                    file.createNewFile();
+                }
+                os = new FileOutputStream(file);
+                byte buffer[] = new byte[1024];
+                int len =0 ;
+                while( (len = is.read(buffer))!= -1){
+                    os.write(buffer,0,len);
+                }
+                os.flush();
+                if(infoUpdate!=null)
+                    infoUpdate.update(folderUrl+fileName);
+            }catch (Exception e){
+                e.printStackTrace();
+            }finally {
+                try{
+                    os.close();
+                    is.close();
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+
+        }
     }
 
     /**

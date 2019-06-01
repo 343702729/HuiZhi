@@ -138,6 +138,7 @@ public class MaterialFilePictureInfoActivity extends Activity {
             Intent intent = new Intent();
             intent.setClass(MaterialFilePictureInfoActivity.this, PictureUsualShowActivity.class);
             intent.putExtra("Index", index);
+            intent.putExtra("Type", 1);
             intent.putExtra("Pictures", (Serializable) picsUrl);
             startActivity(intent);
         }
