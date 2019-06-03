@@ -30,10 +30,10 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@mipmap/icon_logo_title" />
-                    <!--<TextView-->
+                        android:layout_width="120dp"
+                        android:layout_height="50dp"
+                        android:background="@mipmap/login_title" />login_title
+                    <!--<TextView icon_logo_title-->
                     <!--android:layout_width="wrap_content"-->
                     <!--android:layout_height="wrap_content"-->
                     <!--android:text="绘智门店管理系统"-->

@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         keystore {
-            storeFile file('D:\\Git\\Android\\HuiZhi\\app\\keystore.keystore')
+            storeFile file('D:\\workspace_hz\\Android\\HuiZhi\\app\\keystore.keystore')
             storePassword '123456'
             keyAlias 'keystore'
             keyPassword '123456'
@@ -16,8 +16,8 @@ android {
         applicationId "com.huizhi.manage"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 5
-        versionName "5.0"
+        versionCode 6
+        versionName "6.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         flavorDimensions "26"
 
