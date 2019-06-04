@@ -55,7 +55,8 @@ public class CoursewareActivity extends Activity{
     private void initViews(){
 //        AppUtil.setNavigationBar(this);
         ImageButton backBtn = (ImageButton)findViewById(R.id.back_btn);
-        backBtn.setOnClickListener(new BackCliclListener(this));
+        backBtn.setOnClickListener(backBtnClick);
+//        backBtn.setOnClickListener(new BackCliclListener(this));
 
         titleLL = findViewById(R.id.title_ll);
 
@@ -68,6 +69,17 @@ public class CoursewareActivity extends Activity{
         map.put( "LogonUserId" , UserInfo.getInstance().getUser().getTeacherId()) ;
         webView.loadUrl(url, map);
     }
+
+    private View.OnClickListener backBtnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (webView.canGoBack()) {
+                webView.goBack();// 返回上一页面
+            } else {
+                finish();
+            }
+        }
+    };
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.DownloadListener;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -50,7 +51,8 @@ public class HomeYunYinFXActivity extends Activity {
     private void initViews(){
         AppUtil.setNavigationBar(this);
         ImageButton backBtn = (ImageButton)findViewById(R.id.back_btn);
-        backBtn.setOnClickListener(new BackCliclListener(this));
+//        backBtn.setOnClickListener(new BackCliclListener(this));
+        backBtn.setOnClickListener(backBtnClick);
 
         webView = (WebView)findViewById(R.id.webview);
         WebSettings webSettings = webView.getSettings();
@@ -103,5 +105,16 @@ public class HomeYunYinFXActivity extends Activity {
         }
         return super.onKeyDown(keyCode, event);//退出H5界面
     }
+
+    private View.OnClickListener backBtnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (webView.canGoBack()) {
+                webView.goBack();// 返回上一页面
+            } else {
+                finish();
+            }
+        }
+    };
 
 }
