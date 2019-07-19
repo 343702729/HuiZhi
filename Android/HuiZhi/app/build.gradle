@@ -16,8 +16,8 @@ android {
         applicationId "com.huizhi.manage"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 6
-        versionName "6.0"
+        versionCode 7
+        versionName "7.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         flavorDimensions "26"
 
@@ -78,4 +78,7 @@ dependencies {
     implementation 'com.jaeger.statusbarutil:library:1.4.0'
     //    compile project(':IMKit')
     implementation files('libs/org.apache.http.legacy.jar')
+
+    compile 'com.github.bumptech.glide:glide:3.5.2'
+//    compile 'com.android.support:support-v4:22.0.0'
 }

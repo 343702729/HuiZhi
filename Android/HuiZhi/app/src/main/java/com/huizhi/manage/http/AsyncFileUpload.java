@@ -111,6 +111,7 @@ public class AsyncFileUpload {
         String name = filePath.substring(filePath.lastIndexOf("/") + 1);
 //        String token = "";                                    //上传token
         String temporaryPath = PictureUtil.getTemporaryPic(filePath);
+//        String temporaryPath = filePath;
         if(TextUtils.isEmpty(temporaryPath)){
             infoUpdate.update(null);
             return;

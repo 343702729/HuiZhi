@@ -8,6 +8,9 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.wifi.ScanResult;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.ActivityCompat;
@@ -38,6 +41,8 @@ import com.huizhi.manage.util.AppUtil;
 import com.huizhi.manage.util.NavigationBarUtil;
 import com.huizhi.manage.util.RongUtil;
 import com.huizhi.manage.version.VersionUtil;
+
+import java.util.List;
 
 import io.rong.imkit.RongIM;
 import io.rong.imkit.manager.IUnReadMessageObserver;
@@ -424,4 +429,5 @@ public class MainActivity extends FragmentActivity {
                     123);
         }
     }
+
 }

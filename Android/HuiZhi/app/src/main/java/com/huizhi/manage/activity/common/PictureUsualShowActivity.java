@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.huizhi.manage.R;
 import com.huizhi.manage.adapter.common.PageViewAdapter;
 import com.huizhi.manage.base.BackCliclListener;
@@ -85,10 +86,12 @@ public class PictureUsualShowActivity extends Activity {
         LayoutInflater inflater = getLayoutInflater();
         AsyncBitmapLoader asyncBitmapLoader = new AsyncBitmapLoader();
         for(String item:picList){
+            Log.i("HuiZhi", "The pic url is:" + item);
             view = inflater.inflate(R.layout.adapter_picture_show, null);
             iv = view.findViewById(R.id.pic_iv);
             try {
-                asyncBitmapLoader.showFitPicByVolleyRequest(this, AsyncFileUpload.getInstance().getFileUrl(item), iv);
+                Glide.with(this).load(AsyncFileUpload.getInstance().getFileUrl(item)).into(iv);
+//                asyncBitmapLoader.showFitPicByVolleyRequest(this, AsyncFileUpload.getInstance().getFileUrl(item), iv);
 //                    Bitmap bitmap = asyncBitmapLoader.loadBitmapFromServer(iv, picUrl, new AsyncBitmapLoader.ImageCallBack() {
 //                        @Override
 //                        public void imageLoad(ImageView imageView, Bitmap bitmap) {

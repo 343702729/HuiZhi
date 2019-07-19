@@ -57,6 +57,8 @@
                 android:text="下载"
                 android:textSize="@dimen/title_text"
                 android:textColor="@android:color/white"/>
+
+
         </FrameLayout>
     </FrameLayout>
 
