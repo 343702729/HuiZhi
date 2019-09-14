@@ -2,6 +2,7 @@ package com.huizhi.manage.fragment.home;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,16 +11,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
 import com.huizhi.manage.R;
+import com.huizhi.manage.activity.home.HomeAttendanceActivity;
+import com.huizhi.manage.activity.home.HomeMessageActivity;
+import com.huizhi.manage.activity.home.HomeWorkDailyActivity;
+import com.huizhi.manage.activity.home.course.CourseListActivity;
 import com.huizhi.manage.adapter.home.ImagePagerAdapter;
 import com.huizhi.manage.data.Constants;
+import com.huizhi.manage.data.UserInfo;
+import com.huizhi.manage.http.AsyncFileUpload;
 import com.huizhi.manage.node.BannerNode;
 import com.huizhi.manage.request.home.HomeUserGetRequest;
+import com.huizhi.manage.util.TLog;
+import com.huizhi.manage.wiget.GlideCircleTransform;
 import com.huizhi.manage.wiget.banner.MyViewFlow;
 import com.huizhi.manage.wiget.banner.PointView;
 import com.huizhi.manage.wiget.banner.ViewFlow;
+import com.huizhi.manage.wiget.view.ItemCategoryView;
+import com.huizhi.manage.wiget.view.ItemNewsView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +43,8 @@ public class ItemHomeFragment extends Fragment {
     private MyViewFlow viewFlow;
     private LinearLayout pointsLL;
     private PointView pointView;
+    private LinearLayout itemNewsLL;
+    private LinearLayout itemCategoryLL;
 
     private int imgSize = 0;
 
@@ -47,6 +62,30 @@ public class ItemHomeFragment extends Fragment {
         viewFlow = messageLayout.findViewById(R.id.viewflow);
         viewFlow.setOnViewSwitchListener(imageSwitchListener);
         pointsLL = messageLayout.findViewById(R.id.points_ll);
+
+        LinearLayout jxhlLL = messageLayout.findViewById(R.id.user_kc_ll);
+        jxhlLL.setOnClickListener(itemOnClick);
+        LinearLayout kqLL = messageLayout.findViewById(R.id.user_kq_ll);
+        kqLL.setOnClickListener(itemOnClick);
+        LinearLayout rzLL = messageLayout.findViewById(R.id.user_rz_ll);
+        rzLL.setOnClickListener(itemOnClick);
+        LinearLayout ggLL = messageLayout.findViewById(R.id.user_gg_ll);
+        ggLL.setOnClickListener(itemOnClick);
+
+        itemNewsLL = messageLayout.findViewById(R.id.item_news_ll);
+        itemCategoryLL = messageLayout.findViewById(R.id.item_category_ll);
+
+        String headImg = AsyncFileUpload.getInstance().getFileUrl(UserInfo.getInstance().getUser().getHeadImgUrl());
+        TLog.log("The headimg is:" + headImg);
+        ImageView headIV = messageLayout.findViewById(R.id.user_iv);
+        Glide.with(activity).load(headImg)
+                //圆形
+                .transform(new GlideCircleTransform(activity))
+                .into(headIV);
+
+        addNewsLL();
+
+        addCategoryLL();
     }
 
     /**
@@ -96,6 +135,46 @@ public class ItemHomeFragment extends Fragment {
                 pointView.setPointSelect(count);
         }
     };
+
+    private View.OnClickListener itemOnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = null;
+            switch (view.getId()){
+                case R.id.user_kc_ll://家校互联
+                    intent = new Intent();
+                    intent.setClass(activity, CourseListActivity.class);
+                    activity.startActivity(intent);
+                    break;
+                case R.id.user_kq_ll://考勤
+                    intent = new Intent();
+                    intent.setClass(activity, HomeAttendanceActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.user_rz_ll://工作日志
+                    intent = new Intent();
+                    intent.setClass(activity, HomeWorkDailyActivity.class);
+                    activity.startActivity(intent);
+                    break;
+                case R.id.user_gg_ll://消息通知
+                    intent = new Intent();
+                    intent.setClass(activity, HomeMessageActivity.class);
+                    startActivity(intent);
+                    break;
+            }
+        }
+    };
+
+    private void addNewsLL(){
+        itemNewsLL.addView(new ItemNewsView(activity, false));
+        itemNewsLL.addView(new ItemNewsView(activity, true));
+    }
+
+    private void addCategoryLL(){
+        itemCategoryLL.addView(new ItemCategoryView(activity, "教师"));
+        itemCategoryLL.addView(new ItemCategoryView(activity, "运营"));
+        itemCategoryLL.addView(new ItemCategoryView(activity, "学院"));
+    }
 
     private Handler handler = new Handler(){
         @Override

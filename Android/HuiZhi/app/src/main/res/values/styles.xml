@@ -41,4 +41,22 @@
         <item name="android:windowEnterAnimation">@anim/bottom_enter</item>
         <item name="android:windowExitAnimation">@anim/bottom_exit</item>
     </style>
+
+    <style name="item_line_ll">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">42dp</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="info_title_tv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">6dp</item>
+        <item name="android:textColor">@color/gray_dark_text</item>
+        <item name="android:textSize">14sp</item>
+    </style>
 </resources>
