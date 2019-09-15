@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
+import com.google.zxing.activity.CaptureActivity;
+import com.google.zxing.util.Constant;
 import com.huizhi.manage.R;
 import com.huizhi.manage.activity.home.HomeAttendanceActivity;
 import com.huizhi.manage.activity.home.HomeMessageActivity;
@@ -37,6 +39,8 @@ import com.huizhi.manage.wiget.view.ItemNewsView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
+
 public class ItemHomeFragment extends Fragment {
     private View messageLayout;
     private Activity activity;
@@ -45,6 +49,7 @@ public class ItemHomeFragment extends Fragment {
     private PointView pointView;
     private LinearLayout itemNewsLL;
     private LinearLayout itemCategoryLL;
+    private ImageView scanIV;
 
     private int imgSize = 0;
 
@@ -62,6 +67,9 @@ public class ItemHomeFragment extends Fragment {
         viewFlow = messageLayout.findViewById(R.id.viewflow);
         viewFlow.setOnViewSwitchListener(imageSwitchListener);
         pointsLL = messageLayout.findViewById(R.id.points_ll);
+
+        scanIV = messageLayout.findViewById(R.id.scan_iv);
+        scanIV.setOnClickListener(scanIVClick);
 
         LinearLayout jxhlLL = messageLayout.findViewById(R.id.user_kc_ll);
         jxhlLL.setOnClickListener(itemOnClick);
@@ -136,6 +144,14 @@ public class ItemHomeFragment extends Fragment {
         }
     };
 
+    private View.OnClickListener scanIVClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(activity, CaptureActivity.class);
+            startActivityForResult(intent, Constant.REQ_QR_CODE);
+        }
+    };
+
     private View.OnClickListener itemOnClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -190,4 +206,14 @@ public class ItemHomeFragment extends Fragment {
             }
         }
     };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Constant.REQ_QR_CODE && resultCode == RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            String scanResult = bundle.getString(Constant.INTENT_EXTRA_KEY_QR_SCAN);
+            TLog.log("The scan result:" + scanResult);
+        }
+    }
 }

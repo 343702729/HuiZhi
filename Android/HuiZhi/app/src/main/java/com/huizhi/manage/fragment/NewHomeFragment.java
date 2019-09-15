@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -25,6 +26,7 @@ public class NewHomeFragment extends Fragment {
     private Fragment itemHome,itemTeacher, itemOperate, itemTopic;
     private int currentIndex = 0;
     private FrameLayout item1FL, item2FL, item3FL, item4FL;
+    private Fragment currentFG;
 
     @Nullable
     @Override
@@ -86,6 +88,7 @@ public class NewHomeFragment extends Fragment {
                     transaction.show(itemHome);
                     itemHome.onResume();
                 }
+                currentFG = itemHome;
                 break;
             case 2:
                 if(itemTeacher==null){
@@ -95,6 +98,7 @@ public class NewHomeFragment extends Fragment {
                     transaction.show(itemTeacher);
                     itemTeacher.onResume();
                 }
+                currentFG = itemTeacher;
                 break;
             case 3:
                 if(itemOperate==null){
@@ -104,6 +108,7 @@ public class NewHomeFragment extends Fragment {
                     transaction.show(itemOperate);
                     itemOperate.onResume();
                 }
+                currentFG = itemOperate;
                 break;
             case 4:
                 if(itemTopic==null){
@@ -113,6 +118,7 @@ public class NewHomeFragment extends Fragment {
                     transaction.show(itemTopic);
                     itemTopic.onResume();
                 }
+                currentFG = itemTopic;
                 break;
         }
         transaction.commit();
@@ -167,4 +173,8 @@ public class NewHomeFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }

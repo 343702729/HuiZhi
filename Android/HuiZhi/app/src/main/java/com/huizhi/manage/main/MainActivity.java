@@ -59,6 +59,7 @@ public class MainActivity extends FragmentActivity {
     private boolean isExit = false;
     private int index = 0;
     private boolean isChat = false;
+    private Fragment currentFG;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +144,7 @@ public class MainActivity extends FragmentActivity {
                     transaction.show(homeFragment);
                     homeFragment.onResume();
                 }
+                currentFG = homeFragment;
                 break;
             case 1:
                 NavigationBarUtil.MIUISetStatusBarLightMode(getWindow(), false);
@@ -153,6 +155,7 @@ public class MainActivity extends FragmentActivity {
                     transaction.show(messageFragment);
                     messageFragment.onResume();
                 }
+                currentFG = messageFragment;
                 break;
             /**
             case 2:
@@ -188,6 +191,7 @@ public class MainActivity extends FragmentActivity {
                     transaction.show(userFragment);
                     userFragment.onResume();
                 }
+                currentFG = userFragment;
                 break;
         }
         transaction.commit();
@@ -218,7 +222,7 @@ public class MainActivity extends FragmentActivity {
 
         int[] ivs = {R.id.home_home_iv, R.id.home_task_iv, R.id.home_user_iv};
         int[] tvs = {R.id.home_home_tv, R.id.home_task_tv, R.id.home_user_tv};
-        int[] bgs = {R.mipmap.home_bg, R.mipmap.task_bg, R.mipmap.user_bg};
+        int[] bgs = {R.mipmap.home_bg, R.mipmap.icon_message_bg, R.mipmap.user_bg};
         int[] fcs = {R.mipmap.home_bg_fc, R.mipmap.task_bg_fc, R.mipmap.user_bg_fc};
         ImageView imageView;
         TextView textView;
@@ -293,6 +297,8 @@ public class MainActivity extends FragmentActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.i("Main", "Come into activity result");
+        if(currentFG!=null)
+            currentFG.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

@@ -621,6 +621,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.google.zxing.activity.CaptureActivity" />
+
         <!--<provider-->
             <!--android:name="android.support.v4.content.FileProvider"-->
             <!--android:authorities="chao.example.instantchat.FileProvider"-->

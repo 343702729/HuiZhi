@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="15dp"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/item_iv"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:text="在一座城市跨越2500年---苏州写生基地游学"
+                android:textSize="14sp"
+                android:textColor="@color/gray_dark_text"/>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="2019-07-03 12:00"
+                    android:textSize="12sp"
+                    android:textColor="@color/gray"/>
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="right"
+                    android:gravity="center"
+                    android:background="@drawable/frame_green_sc"
+                    android:text="选修课"
+                    android:textSize="10sp"
+                    android:textColor="@color/light_green"/>
+            </FrameLayout>
+        </FrameLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
