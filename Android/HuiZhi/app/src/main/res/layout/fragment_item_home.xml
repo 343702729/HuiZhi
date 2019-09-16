@@ -26,7 +26,8 @@
                 android:orientation="vertical">
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="40dp">
+                    android:layout_height="40dp"
+                    android:layout_marginRight="10dp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -37,18 +38,19 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"/>
                         <TextView
+                            android:id="@+id/school_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="绘智安溪铭都花苑校区"
+                            android:text=""
                             android:textSize="13sp"
                             android:textStyle="bold"
                             android:textColor="@color/black_light"/>
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="120dp"
+                        android:layout_width="125dp"
                         android:layout_height="match_parent"
-                        android:gravity="center_vertical"
+                        android:gravity="center_vertical|right"
                         android:layout_gravity="right"
                         android:orientation="horizontal">
                         <ImageView
@@ -57,11 +59,12 @@
                             android:layout_height="30dp"
                             android:src="@mipmap/user_icon"/>
                         <TextView
+                            android:id="@+id/name_tv"
                             android:layout_width="65dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="3dp"
                             android:singleLine="true"
-                            android:text="Sophia"
+                            android:text=""
                             android:textSize="12sp"
                             android:textColor="@color/gray_dark_text"/>
                         <ImageView

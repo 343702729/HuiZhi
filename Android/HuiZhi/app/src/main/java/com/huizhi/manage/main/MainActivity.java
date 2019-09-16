@@ -5,12 +5,8 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.wifi.ScanResult;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.ActivityCompat;
@@ -27,15 +23,9 @@ import android.widget.Toast;
 import com.huizhi.manage.R;
 import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.data.UserInfo;
-import com.huizhi.manage.fragment.CommunicateListFragment;
-import com.huizhi.manage.fragment.HomeFragment;
-import com.huizhi.manage.fragment.MaterialFragment;
 import com.huizhi.manage.fragment.NewHomeFragment;
 import com.huizhi.manage.fragment.NewMessageFragment;
 import com.huizhi.manage.fragment.NewUserFragment;
-import com.huizhi.manage.fragment.TaskFragment;
-import com.huizhi.manage.fragment.UserFragment;
-import com.huizhi.manage.login.LoginActivity;
 import com.huizhi.manage.node.VersionNode;
 import com.huizhi.manage.request.common.FileGetRequest;
 import com.huizhi.manage.request.home.HomeUserGetRequest;
@@ -44,8 +34,6 @@ import com.huizhi.manage.util.AppUtil;
 import com.huizhi.manage.util.NavigationBarUtil;
 import com.huizhi.manage.util.RongUtil;
 import com.huizhi.manage.version.VersionUtil;
-
-import java.util.List;
 
 import io.rong.imkit.RongIM;
 import io.rong.imkit.manager.IUnReadMessageObserver;
@@ -222,8 +210,8 @@ public class MainActivity extends FragmentActivity {
 
         int[] ivs = {R.id.home_home_iv, R.id.home_task_iv, R.id.home_user_iv};
         int[] tvs = {R.id.home_home_tv, R.id.home_task_tv, R.id.home_user_tv};
-        int[] bgs = {R.mipmap.home_bg, R.mipmap.icon_message_bg, R.mipmap.user_bg};
-        int[] fcs = {R.mipmap.home_bg_fc, R.mipmap.task_bg_fc, R.mipmap.user_bg_fc};
+        int[] bgs = {R.mipmap.home_bg, R.mipmap.icon_message_bg, R.mipmap.icon_user_bg};
+        int[] fcs = {R.mipmap.home_bg_fc, R.mipmap.icon_message_fc, R.mipmap.icon_user_fc};
         ImageView imageView;
         TextView textView;
         for(int i=0; i<3; i++){

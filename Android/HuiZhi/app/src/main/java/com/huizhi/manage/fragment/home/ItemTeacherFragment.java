@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.huizhi.manage.R;
@@ -61,10 +62,14 @@ public class ItemTeacherFragment extends Fragment {
         studyLL = messageLayout.findViewById(R.id.study_ll);
         courseLL = messageLayout.findViewById(R.id.course_ll);
 
+        TextView nameTV = messageLayout.findViewById(R.id.name_tv);
+        nameTV.setText(UserInfo.getInstance().getUser().getTeacherName());
+
         String headImg = AsyncFileUpload.getInstance().getFileUrl(UserInfo.getInstance().getUser().getHeadImgUrl());
         TLog.log("The headimg is:" + headImg);
         ImageView headIV = messageLayout.findViewById(R.id.user_iv);
         Glide.with(activity).load(headImg)
+                .error(R.mipmap.user_icon)
                 //圆形
                 .transform(new GlideCircleTransform(activity))
                 .into(headIV);

@@ -62,7 +62,7 @@
                     android:id="@+id/home_task_iv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@mipmap/task_bg" />
+                    android:background="@mipmap/icon_message_bg" />
             </LinearLayout>
 
             <TextView
@@ -167,7 +167,7 @@
                     android:id="@+id/home_user_iv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@mipmap/user_bg" />
+                    android:background="@mipmap/icon_user_bg" />
             </LinearLayout>
 
             <TextView

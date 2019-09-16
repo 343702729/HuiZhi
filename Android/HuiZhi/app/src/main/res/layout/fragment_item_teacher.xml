@@ -47,11 +47,12 @@
                     android:layout_height="35dp"
                     android:background="@mipmap/user_icon"/>
                 <TextView
+                    android:id="@+id/name_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:singleLine="true"
-                    android:text="Sophia"
+                    android:text=""
                     android:textSize="13sp"
                     android:textStyle="bold"
                     android:textColor="@color/black_light"/>

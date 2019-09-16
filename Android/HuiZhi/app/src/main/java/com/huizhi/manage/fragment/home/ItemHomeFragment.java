@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.zxing.activity.CaptureActivity;
@@ -83,10 +84,16 @@ public class ItemHomeFragment extends Fragment {
         itemNewsLL = messageLayout.findViewById(R.id.item_news_ll);
         itemCategoryLL = messageLayout.findViewById(R.id.item_category_ll);
 
+        TextView nameTV = messageLayout.findViewById(R.id.name_tv);
+        nameTV.setText(UserInfo.getInstance().getUser().getTeacherName());
+        TextView schoolTV = messageLayout.findViewById(R.id.school_tv);
+        schoolTV.setText(UserInfo.getInstance().getUser().getSchoolName());
+
         String headImg = AsyncFileUpload.getInstance().getFileUrl(UserInfo.getInstance().getUser().getHeadImgUrl());
         TLog.log("The headimg is:" + headImg);
         ImageView headIV = messageLayout.findViewById(R.id.user_iv);
         Glide.with(activity).load(headImg)
+                .error(R.mipmap.user_icon)
                 //圆形
                 .transform(new GlideCircleTransform(activity))
                 .into(headIV);

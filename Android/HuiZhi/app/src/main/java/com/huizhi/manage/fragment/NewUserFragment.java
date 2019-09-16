@@ -70,9 +70,11 @@ public class NewUserFragment extends Fragment {
         LinearLayout gyLL = messageLayout.findViewById(R.id.user_gy_ll);
         gyLL.setOnClickListener(itemOnClick);
 
+        TextView nameTV = messageLayout.findViewById(R.id.name_tv);
+        nameTV.setText(UserInfo.getInstance().getUser().getTeacherName());
         TextView roleTV = messageLayout.findViewById(R.id.role_tv);
         roleTV.setText(UserInfo.getInstance().getUser().getRoleTypeName());
-        TextView schoolTV = (TextView)messageLayout.findViewById(R.id.school_tv);
+        TextView schoolTV = messageLayout.findViewById(R.id.school_tv);
         schoolTV.setText(UserInfo.getInstance().getUser().getSchoolName());
 
         TextView logoutBtn = messageLayout.findViewById(R.id.logout_btn);
