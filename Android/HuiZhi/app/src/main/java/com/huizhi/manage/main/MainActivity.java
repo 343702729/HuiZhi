@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.huizhi.manage.R;
 import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.data.UserInfo;
+import com.huizhi.manage.fragment.MaterialFragment;
 import com.huizhi.manage.fragment.NewHomeFragment;
 import com.huizhi.manage.fragment.NewMessageFragment;
 import com.huizhi.manage.fragment.NewUserFragment;
@@ -137,7 +138,8 @@ public class MainActivity extends FragmentActivity {
             case 1:
                 NavigationBarUtil.MIUISetStatusBarLightMode(getWindow(), false);
                 if(messageFragment==null){
-                    messageFragment = new NewMessageFragment();
+//                    messageFragment = new NewMessageFragment();
+                    messageFragment = new MaterialFragment();
                     transaction.add(R.id.content, messageFragment);
                 }else{
                     transaction.show(messageFragment);

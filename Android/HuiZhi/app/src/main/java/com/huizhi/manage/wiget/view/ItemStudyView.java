@@ -11,9 +11,11 @@ import com.huizhi.manage.R;
 public class ItemStudyView extends LinearLayout {
     private Context context;
 
+
     public ItemStudyView(Context context){
         super(context);
         this.context = context;
+
         initViews();
     }
 

@@ -15,6 +15,7 @@
     <color name="text_light_black">#9FA6B5</color>
     <color name="light_gray">#CBC7C8</color>
     <color name="dark_gray">#666666</color>
+    <color name="dark_gray_light">#596F7D</color>
     <color name="light_black">#535354</color>
     <color name="red">#FF1F00</color>
     <color name="light_red">#E22C6D</color>
