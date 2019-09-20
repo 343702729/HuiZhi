@@ -138,8 +138,8 @@ public class MainActivity extends FragmentActivity {
             case 1:
                 NavigationBarUtil.MIUISetStatusBarLightMode(getWindow(), false);
                 if(messageFragment==null){
-//                    messageFragment = new NewMessageFragment();
-                    messageFragment = new MaterialFragment();
+                    messageFragment = new NewMessageFragment();
+//                    messageFragment = new MaterialFragment();
                     transaction.add(R.id.content, messageFragment);
                 }else{
                     transaction.show(messageFragment);
