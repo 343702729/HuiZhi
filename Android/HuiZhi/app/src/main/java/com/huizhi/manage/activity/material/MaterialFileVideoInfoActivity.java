@@ -267,7 +267,8 @@ public class MaterialFileVideoInfoActivity extends AppCompatActivity {
             favoriteIB.setOnClickListener(favoriteBtnClick);
             descriptionTV.setText(fileNode.getDescription());
             setFavoriteBg(fileNode.isFavorite());
-            List<FileNode> list = fileNode.getFileList();
+//            List<FileNode> list = fileNode.getFileList();
+            List<FileNode> list = fileNode.getFileInfos();
             if(list!=null&&list.size()>0){
                 FileNode node = list.get(0);
                 if(!TextUtils.isEmpty(node.getFilePath())) {

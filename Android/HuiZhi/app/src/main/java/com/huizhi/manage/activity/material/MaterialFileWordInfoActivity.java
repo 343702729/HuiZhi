@@ -90,7 +90,8 @@ public class MaterialFileWordInfoActivity extends Activity {
             this.view = view;
             if(fileNode==null)
                 return;
-            List<FileNode> nodes = fileNode.getFileList();
+//            List<FileNode> nodes = fileNode.getFileList();
+            List<FileNode> nodes = fileNode.getFileInfos();
             if(nodes==null||nodes.size()==0)
                 return;
             node = nodes.get(0);
@@ -183,13 +184,19 @@ public class MaterialFileWordInfoActivity extends Activity {
         TextView titleTV = findViewById(R.id.info_title_tv);
         TextView timeTV = findViewById(R.id.info_time_tv);
         ImageButton favoriteIB = findViewById(R.id.favorite_ib);
+        TextView contentTV = findViewById(R.id.file_content_tv);
 
         if(node!=null){
             titleTV.setText(node.getFileName());
             timeTV.setText(node.getStrCreateTime());
             setFavoriteBg(node.isFavorite());
             favoriteIB.setOnClickListener(favoriteBtnClick);
+
+            contentTV.setText(node.getDescription());
         }
+
+
+
 
         LinearLayout ylBtn = findViewById(R.id.yl_ll);
         ylBtn.setOnClickListener(itemBtnClick);
