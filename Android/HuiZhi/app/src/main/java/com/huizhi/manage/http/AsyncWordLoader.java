@@ -33,8 +33,11 @@ public class AsyncWordLoader {
     public String loadWord(Activity activity, String wordurl, BaseInfoUpdate infoUpdate){
         verifyStoragePermissions(activity);
         Log.i("HuiZhi", "The word url:" + wordurl);
-//        String wordName = wordurl.substring(wordurl.lastIndexOf("/") + 1);
-        String wordName = wordurl.substring(wordurl.lastIndexOf("/") + 1, wordurl.indexOf("?"));
+        String wordName;
+        if(!wordurl.contains("?"))
+            wordName = wordurl.substring(wordurl.lastIndexOf("/") + 1);
+        else
+            wordName = wordurl.substring(wordurl.lastIndexOf("/") + 1, wordurl.indexOf("?"));
         File cacheDir = new File(Constants.PATH_WORD);
         File[] cacheFiles = cacheDir.listFiles();
         int i = 0;
@@ -55,7 +58,12 @@ public class AsyncWordLoader {
     public void downloadWord(String wordurl, BaseInfoUpdate infoUpdate){
         Log.i("HuiZhi", "Come into download word");
 //        String wordName = wordurl.substring(wordurl.lastIndexOf("/") + 1);
-        String wordName = wordurl.substring(wordurl.lastIndexOf("/") + 1, wordurl.indexOf("?"));
+//        String wordName = wordurl.substring(wordurl.lastIndexOf("/") + 1, wordurl.indexOf("?"));
+        String wordName;
+        if(!wordurl.contains("?"))
+            wordName = wordurl.substring(wordurl.lastIndexOf("/") + 1);
+        else
+            wordName = wordurl.substring(wordurl.lastIndexOf("/") + 1, wordurl.indexOf("?"));
         Log.i("HuiZhi", "Come into download word wordName:" + wordName);
         File cacheDir = new File(Constants.PATH_WORD);
         File[] cacheFiles = cacheDir.listFiles();
