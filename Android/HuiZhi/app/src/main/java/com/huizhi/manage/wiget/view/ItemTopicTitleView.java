@@ -11,21 +11,26 @@ import com.bumptech.glide.Glide;
 import com.huizhi.manage.R;
 import com.huizhi.manage.base.BaseInfoUpdate;
 
-public class ItemTopicTitle extends LinearLayout {
+public class ItemTopicTitleView extends LinearLayout {
     private Context context;
     private boolean flag;
     private BaseInfoUpdate infoUpdate;
     private int index;
     private LinearLayout bgLL;
     private TextView titleTV;
+    private View bodyView;
 
-    public ItemTopicTitle(Context context, boolean flag, int index, BaseInfoUpdate infoUpdate){
+    public ItemTopicTitleView(Context context, boolean flag, int index, BaseInfoUpdate infoUpdate){
         super(context);
         this.context = context;
         this.flag = flag;
         this.index = index;
         this.infoUpdate = infoUpdate;
         initViews();
+    }
+
+    public View getBodyView() {
+        return bodyView;
     }
 
     public void initViews() {
@@ -35,6 +40,16 @@ public class ItemTopicTitle extends LinearLayout {
         bgLL.setOnClickListener(itemClick);
         titleTV = findViewById(R.id.item_title_tv);
         setStatus(flag);
+        createBodyViews();
+    }
+
+    private void createBodyViews(){
+        if(index==2)
+            bodyView = new ItemTopicBody2View(context);
+        else if(index==3)
+            bodyView = new ItemTopicBody3View(context);
+        else
+            bodyView = new ItemTopicBody1View(context);
     }
 
     public void setStatus(boolean flag){

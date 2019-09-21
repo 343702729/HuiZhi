@@ -10,8 +10,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.huizhi.manage.R;
+import com.huizhi.manage.adapter.home.ViewPagerAdapter;
 import com.huizhi.manage.base.BaseInfoUpdate;
-import com.huizhi.manage.wiget.view.ItemTopicTitle;
+import com.huizhi.manage.wiget.ViewPager;
+import com.huizhi.manage.wiget.view.ItemTopicTitleView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +22,9 @@ public class ItemTopicFragment extends Fragment {
     private View messageLayout;
     private Activity activity;
     private LinearLayout titlesLL;
-    private LinearLayout itemBodyLL;
-    private List<ItemTopicTitle> titleViews = new ArrayList<>();
+    private ViewPager viewPager;
+    private List<ItemTopicTitleView> titleViews = new ArrayList<>();
+    private List<View> itemViews = new ArrayList<>();
     private int currentSel = 0;
 
     @Nullable
@@ -35,36 +38,38 @@ public class ItemTopicFragment extends Fragment {
 
     private void initViews(){
         titlesLL = messageLayout.findViewById(R.id.item_title_ll);
-        itemBodyLL = messageLayout.findViewById(R.id.item_body_ll);
+        viewPager = messageLayout.findViewById(R.id.viewpager);
         addTitles();
-        setBodyViews(0);
+        viewPager.setCurrentItem(0, false);
     }
 
     private void addTitles(){
         titleViews.clear();
         currentSel = 0;
-        ItemTopicTitle view1 = new ItemTopicTitle(activity, true, 0, new ItemTitlInfoUpdate());
+        ItemTopicTitleView view1 = new ItemTopicTitleView(activity, true, 0, new ItemTitlInfoUpdate());
         titleViews.add(view1);
-        ItemTopicTitle view2 = new ItemTopicTitle(activity, false, 1, new ItemTitlInfoUpdate());
+        ItemTopicTitleView view2 = new ItemTopicTitleView(activity, false, 1, new ItemTitlInfoUpdate());
         titleViews.add(view2);
-        ItemTopicTitle view3 = new ItemTopicTitle(activity, false, 2, new ItemTitlInfoUpdate());
+        ItemTopicTitleView view3 = new ItemTopicTitleView(activity, false, 2, new ItemTitlInfoUpdate());
         titleViews.add(view3);
-        ItemTopicTitle view4 = new ItemTopicTitle(activity, false, 3, new ItemTitlInfoUpdate());
+        ItemTopicTitleView view4 = new ItemTopicTitleView(activity, false, 3, new ItemTitlInfoUpdate());
         titleViews.add(view4);
+
         titlesLL.addView(view1);
         titlesLL.addView(view2);
         titlesLL.addView(view3);
         titlesLL.addView(view4);
-    }
 
-    private void setBodyViews(int type){
-//        itemBodyLL
+        itemViews.add(view1.getBodyView());
+        itemViews.add(view2.getBodyView());
+        itemViews.add(view3.getBodyView());
+        itemViews.add(view4.getBodyView());
+
+        ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(itemViews);
+        viewPager.setAdapter(pagerAdapter);
     }
 
     private class ItemTitlInfoUpdate implements BaseInfoUpdate{
-
-        public ItemTitlInfoUpdate(){
-        }
 
         @Override
         public void update(Object object) {
@@ -75,9 +80,11 @@ public class ItemTopicFragment extends Fragment {
                 return;
             currentSel = index;
             for (int i=0; i<titleViews.size(); i++){
-                ItemTopicTitle itemV = titleViews.get(i);
+                ItemTopicTitleView itemV = titleViews.get(i);
                 if(index==i){
                     itemV.setStatus(true);
+                    viewPager.setCurrentItem(index, false);
+//                    setBodyViews(index);
                 }else {
                     itemV.setStatus(false);
                 }
