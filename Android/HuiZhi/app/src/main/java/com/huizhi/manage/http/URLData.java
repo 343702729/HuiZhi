@@ -9,7 +9,8 @@ import com.huizhi.manage.data.UserInfo;
  */
 
 public class URLData {
-    private static final String URL_HOST = "http://app.huizhiart.com";    //http://app.huizhiart.com    http://hzapp.dewinfo.com
+//    private static final String URL_HOST = "http://app.huizhiart.com";    //http://app.huizhiart.com    http://hzapp.dewinfo.com
+    private static final String URL_HOST = "http://hzapp.dewinfo.com";    //http://app.huizhiart.com    http://hzapp.dewinfo.com
 
     public static final String URL_ABOUT = URL_HOST + "/app/aboutus/";
 
@@ -196,6 +197,12 @@ public class URLData {
 
     private static final String URL_HOME_COURSE_STU_PUBLISH = "/service/TeacherService.ashx";
     public static final String METHORD_HOME_COURSE_STU_PUBLISH = "publishStuWorks";
+
+    private static final String URL_HOME_COURSE_PROJECT = "/ServiceII/ProjectLibService.ashx";
+    public static final String METHORD_HOME_COURSE_WARE_TYPE = "GetCoursewareType";
+
+    public static final String METHORD_HOME_COURSE_WARE_CATEGORY = "GetProjectLibCategory";
+
 
     /**
      * 用户登录
@@ -721,6 +728,14 @@ public class URLData {
      */
     public static String getUrlHomeCourseStuPublish(){
         return URL_HOST + URL_HOME_COURSE_STU_PUBLISH;
+    }
+
+    /**
+     * 取课件类型
+     * @return
+     */
+    public static String getUrlHomeCourseProject(){
+        return URL_HOST + URL_HOME_COURSE_PROJECT;
     }
 
 }

@@ -81,6 +81,9 @@ public class ItemHomeFragment extends Fragment {
         LinearLayout ggLL = messageLayout.findViewById(R.id.user_gg_ll);
         ggLL.setOnClickListener(itemOnClick);
 
+        FrameLayout jxhlIV = messageLayout.findViewById(R.id.jxhl_fl);
+        jxhlIV.setOnClickListener(itemOnClick);
+
         itemNewsLL = messageLayout.findViewById(R.id.item_news_ll);
         itemCategoryLL = messageLayout.findViewById(R.id.item_category_ll);
 
@@ -164,6 +167,7 @@ public class ItemHomeFragment extends Fragment {
         public void onClick(View view) {
             Intent intent = null;
             switch (view.getId()){
+                case R.id.jxhl_fl:
                 case R.id.user_kc_ll://家校互联
                     intent = new Intent();
                     intent.setClass(activity, CourseListActivity.class);

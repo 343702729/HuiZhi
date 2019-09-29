@@ -21,6 +21,7 @@ import com.huizhi.manage.R;
 import com.huizhi.manage.activity.home.HomeEmailInfoActivity;
 import com.huizhi.manage.activity.home.task.HomeTaskAgencyActivity;
 import com.huizhi.manage.activity.home.task.HomeTaskAllocationActivity;
+import com.huizhi.manage.activity.task.TaskCenterActivity;
 import com.huizhi.manage.activity.user.UserHeadPortraitEdit;
 import com.huizhi.manage.activity.user.UserHuiZhiAboutActivity;
 import com.huizhi.manage.activity.user.UserPasswordEditActivity;
@@ -58,6 +59,8 @@ public class NewUserFragment extends Fragment {
     private void initViews(){
         LinearLayout dbLL = messageLayout.findViewById(R.id.user_db_ll);
         dbLL.setOnClickListener(itemOnClick);
+        LinearLayout reLL = messageLayout.findViewById(R.id.user_rw_ll);
+        reLL.setOnClickListener(itemOnClick);
         LinearLayout fpLL = messageLayout.findViewById(R.id.user_fp_ll);
         fpLL.setOnClickListener(itemOnClick);
         LinearLayout yjLL = messageLayout.findViewById(R.id.user_yj_ll);
@@ -79,6 +82,12 @@ public class NewUserFragment extends Fragment {
 
         TextView logoutBtn = messageLayout.findViewById(R.id.logout_btn);
         logoutBtn.setOnClickListener(logoutBtnClick);
+
+        if(UserInfo.getInstance().getUser().isAdmin()){
+            dbLL.setVisibility(View.VISIBLE);
+            View dbV = messageLayout.findViewById(R.id.user_db_v);
+            dbV.setVisibility(View.VISIBLE);
+        }
 
         String headImg = AsyncFileUpload.getInstance().getFileUrl(UserInfo.getInstance().getUser().getHeadImgUrl());
         TLog.log("The headimg is:" + headImg);
@@ -102,6 +111,11 @@ public class NewUserFragment extends Fragment {
                 case R.id.user_db_ll://代办任务
                     intent = new Intent();
                     intent.setClass(activity, HomeTaskAgencyActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.user_rw_ll://任务中心
+                    intent = new Intent();
+                    intent.setClass(activity, TaskCenterActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.user_fp_ll://任务分配

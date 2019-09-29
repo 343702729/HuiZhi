@@ -6,25 +6,27 @@
     android:orientation="vertical">
 
     <!-- title -->
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/frame_gradation"
-        android:orientation="vertical">
-        <LinearLayout
+        android:background="@drawable/frame_gradation">
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/title_height"
-            android:layout_marginTop="@dimen/navigation_padding"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_marginTop="@dimen/navigation_padding">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="我的任务"
                 android:textSize="@dimen/title_text"
                 android:textColor="@android:color/white"/>
-        </LinearLayout>
-    </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/back_btn"
+                style="@style/back_btn"/>
+        </FrameLayout>
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
