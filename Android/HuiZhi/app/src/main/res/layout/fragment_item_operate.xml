@@ -122,13 +122,11 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/tasks_ll"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:orientation="vertical">
-                    <include layout="@layout/item_operate_task"/>
-                    <include layout="@layout/item_operate_task"/>
-                    <include layout="@layout/item_operate_task"/>
                 </LinearLayout>
 
             </LinearLayout>

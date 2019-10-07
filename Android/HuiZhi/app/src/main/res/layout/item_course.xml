@@ -24,9 +24,10 @@
                     android:layout_height="100dp"
                     android:scaleType="fitXY"/>
                 <TextView
+                    android:id="@+id/title1_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="轻松学国画入门画 零基础入门兴趣爱好绘画"
+                    android:text=""
                     android:textSize="12sp"
                     android:textColor="@color/black_light"/>
             </LinearLayout>
@@ -42,9 +43,10 @@
                     android:layout_height="100dp"
                     android:scaleType="fitXY"/>
                 <TextView
+                    android:id="@+id/title2_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="轻松学国画入门画 零基础入门兴趣爱好绘画"
+                    android:text=""
                     android:textSize="12sp"
                     android:textColor="@color/black_light"/>
             </LinearLayout>

@@ -6,8 +6,8 @@ package com.huizhi.manage.node;
 
 public class BannerNode {
     private String bannerId;
-    private String newsId;
-    private String imgUrl;
+    private String NewsId;
+    private String ImgUrl;
     private int sequenceNumber;
     private String createTime;
     private String strCreateTime;
@@ -23,19 +23,19 @@ public class BannerNode {
     }
 
     public String getNewsId() {
-        return newsId;
+        return NewsId;
     }
 
     public void setNewsId(String newsId) {
-        this.newsId = newsId;
+        this.NewsId = newsId;
     }
 
     public String getImgUrl() {
-        return imgUrl;
+        return ImgUrl;
     }
 
     public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+        this.ImgUrl = imgUrl;
     }
 
     public int getSequenceNumber() {

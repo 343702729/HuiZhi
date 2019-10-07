@@ -8,11 +8,11 @@ import android.widget.TextView;
 import com.huizhi.manage.R;
 import com.huizhi.manage.node.HomeOperateNode;
 
-public class ItemQuestionView extends LinearLayout {
+public class ItemOperateTaskView extends LinearLayout {
     private Context context;
-    private HomeOperateNode.ObjAsk node;
+    private HomeOperateNode.ObjTask node;
 
-    public ItemQuestionView(Context context, HomeOperateNode.ObjAsk node){
+    public ItemOperateTaskView(Context context, HomeOperateNode.ObjTask node){
         super(context);
         this.context = context;
         this.node = node;
@@ -21,8 +21,8 @@ public class ItemQuestionView extends LinearLayout {
 
     public void initViews() {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.item_question, this);
-        TextView questionTV = findViewById(R.id.question_tv);
-        questionTV.setText(node.getQuestion());
+        inflater.inflate(R.layout.item_operate_task, this);
+        TextView taskNTV = findViewById(R.id.task_name_tv);
+        taskNTV.setText(node.getTaskName());
     }
 }

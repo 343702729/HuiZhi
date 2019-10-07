@@ -16,10 +16,13 @@ import com.huizhi.manage.R;
 import com.huizhi.manage.adapter.home.ImagePagerAdapter;
 import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.node.BannerNode;
+import com.huizhi.manage.node.HomeOperateNode;
 import com.huizhi.manage.request.home.HomeUserGetRequest;
+import com.huizhi.manage.request.operate.OperateRequest;
 import com.huizhi.manage.wiget.banner.MyViewFlow;
 import com.huizhi.manage.wiget.banner.PointView;
 import com.huizhi.manage.wiget.banner.ViewFlow;
+import com.huizhi.manage.wiget.view.ItemOperateTaskView;
 import com.huizhi.manage.wiget.view.ItemOperateView;
 import com.huizhi.manage.wiget.view.ItemProgrammeView;
 import com.huizhi.manage.wiget.view.ItemQuestionView;
@@ -33,6 +36,7 @@ public class ItemOperateFragment extends Fragment {
     private MyViewFlow viewFlow;
     private LinearLayout pointsLL;
     private PointView pointView;
+    private LinearLayout taskLL;
     private LinearLayout yyLL;
     private LinearLayout faLL;
     private LinearLayout wbLL;
@@ -45,7 +49,7 @@ public class ItemOperateFragment extends Fragment {
         messageLayout = inflater.inflate(R.layout.fragment_item_operate, container, false);
         activity = getActivity();
         initViews();
-        getBannerDates();
+        getDatas();
         return messageLayout;
     }
 
@@ -54,21 +58,31 @@ public class ItemOperateFragment extends Fragment {
         viewFlow.setOnViewSwitchListener(imageSwitchListener);
         pointsLL = messageLayout.findViewById(R.id.points_ll);
 
+        taskLL = messageLayout.findViewById(R.id.tasks_ll);
         yyLL = messageLayout.findViewById(R.id.item_yy_ll);
         faLL = messageLayout.findViewById(R.id.item_fa_ll);
         wbLL = messageLayout.findViewById(R.id.item_wb_ll);
 
-        addOperateDatas();
+
         addProgrammeDatas();
-        addQuesstionData();
+
     }
 
-    /**
-     * 滚动图片
-     */
-    private void getBannerDates(){
-        HomeUserGetRequest getRequest = new HomeUserGetRequest();
-        getRequest.getUserNewsBanner(handler);
+    private void getDatas(){
+        OperateRequest request = new OperateRequest();
+        request.getHomeOperate(handler);
+    }
+
+    private void setViewsData(HomeOperateNode node){
+        if(node==null)
+            return;
+        setNewsBanner(node.getObjBanner());
+
+        addOperateDatas(node.getObjNews());
+
+        addOperateTasks(node.getObjTask());
+
+        addQuesstionData(node.getObjAsk());
     }
 
     private void setNewsBanner(List<BannerNode> bannerNodes){
@@ -111,8 +125,32 @@ public class ItemOperateFragment extends Fragment {
         }
     };
 
-    private void addOperateDatas(){
-        yyLL.addView(new ItemOperateView(activity));
+    private void addOperateTasks(List<HomeOperateNode.ObjTask> items){
+        taskLL.removeAllViews();
+        if(items==null)
+            return;
+        for (HomeOperateNode.ObjTask item:items){
+            taskLL.addView(new ItemOperateTaskView(activity, item));
+        }
+    }
+
+    private void addOperateDatas(List<HomeOperateNode.ObjNew> items){
+        if(items==null)
+            return;
+        for (int i=0; i<items.size();){
+            if(i>=items.size())
+                return;
+            HomeOperateNode.ObjNew item1 = null, item2 = null;
+            item1 = items.get(i);
+            i++;
+            if(i<items.size()) {
+                item2 = items.get(i);
+                i++;
+            }
+
+            yyLL.addView(new ItemOperateView(activity, item1, item2));
+        }
+
     }
 
     private void addProgrammeDatas(){
@@ -120,10 +158,14 @@ public class ItemOperateFragment extends Fragment {
         faLL.addView(new ItemProgrammeView(activity));
     }
 
-    private void addQuesstionData(){
-        wbLL.addView(new ItemQuestionView(activity));
-        wbLL.addView(new ItemQuestionView(activity));
-        wbLL.addView(new ItemQuestionView(activity));
+    private void addQuesstionData(List<HomeOperateNode.ObjAsk> items){
+        if(items==null)
+            return;
+        wbLL.removeAllViews();
+        for (HomeOperateNode.ObjAsk item:items){
+            wbLL.addView(new ItemQuestionView(activity, item));
+        }
+
     }
 
     private Handler handler = new Handler(){
@@ -136,6 +178,10 @@ public class ItemOperateFragment extends Fragment {
                         return;
                     List<BannerNode> bannerNodes = (List<BannerNode>) msg.obj;
                     setNewsBanner(bannerNodes);
+                    break;
+                case Constants.MSG_SUCCESS:
+                    HomeOperateNode node = (HomeOperateNode)msg.obj;
+                    setViewsData(node);
                     break;
             }
         }

@@ -4,14 +4,27 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical">
-    <GridView
-        android:id="@+id/gridview"
+    <FrameLayout
+        android:id="@+id/body_fl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:scrollbars="none"
-        android:verticalSpacing="15dp"
-        android:numColumns="2"/>
+        android:layout_height="match_parent">
+        <GridView
+            android:id="@+id/gridview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:scrollbars="none"
+            android:verticalSpacing="15dp"
+            android:numColumns="2"/>
+        <LinearLayout
+            android:id="@+id/level3_ll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            android:orientation="vertical">
+        </LinearLayout>
+    </FrameLayout>
+
 
 </LinearLayout>

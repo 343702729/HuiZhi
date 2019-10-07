@@ -34,6 +34,7 @@ import com.huizhi.manage.wiget.GlideCircleTransform;
 import com.huizhi.manage.wiget.banner.MyViewFlow;
 import com.huizhi.manage.wiget.banner.PointView;
 import com.huizhi.manage.wiget.banner.ViewFlow;
+import com.huizhi.manage.wiget.pullableview.PullToRefreshLayout;
 import com.huizhi.manage.wiget.view.ItemCategoryView;
 import com.huizhi.manage.wiget.view.ItemNewsView;
 
@@ -52,6 +53,8 @@ public class ItemHomeFragment extends Fragment {
     private LinearLayout itemCategoryLL;
     private ImageView scanIV;
 
+    private PullRefreshListener pullRefreshListener;
+
     private int imgSize = 0;
 
     @Nullable
@@ -65,6 +68,11 @@ public class ItemHomeFragment extends Fragment {
     }
 
     private void initViews(){
+        pullRefreshListener = new PullRefreshListener();
+        PullToRefreshLayout pullRL = (PullToRefreshLayout)messageLayout.findViewById(R.id.refreshview);
+        pullRL.isPullUp(false);
+        pullRL.setOnRefreshListener(pullRefreshListener);
+
         viewFlow = messageLayout.findViewById(R.id.viewflow);
         viewFlow.setOnViewSwitchListener(imageSwitchListener);
         pointsLL = messageLayout.findViewById(R.id.points_ll);
@@ -154,6 +162,27 @@ public class ItemHomeFragment extends Fragment {
         }
     };
 
+    private class PullRefreshListener implements PullToRefreshLayout.OnRefreshListener {
+        private PullToRefreshLayout refreshLayout, loadLayout;
+        @Override
+        public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
+            refreshLayout = pullToRefreshLayout;
+            handler.sendEmptyMessageDelayed(2, 3000);
+        }
+
+        @Override
+        public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
+            loadLayout = pullToRefreshLayout;
+        }
+
+        public void closeRefreshLoad(){
+            if(refreshLayout!=null)
+                refreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+            if(loadLayout!=null)
+                loadLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+        }
+    };
+
     private View.OnClickListener scanIVClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -207,6 +236,8 @@ public class ItemHomeFragment extends Fragment {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            if(pullRefreshListener!=null)
+                pullRefreshListener.closeRefreshLoad();
             switch (msg.what) {
                 case Constants.MSG_SUCCESS_ONE:
                     if (msg.obj == null)

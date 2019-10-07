@@ -62,7 +62,7 @@ public class TopicRequest {
                     Gson gson = new Gson();
                     CourseWareTypeNode node = gson.fromJson(data, CourseWareTypeNode.class);
                     if(handler!=null)
-                        handler.sendMessage(handler.obtainMessage(Constants.MSG_SUCCESS, node));
+                        handler.sendMessage(handler.obtainMessage(Constants.MSG_SUCCESS_ONE, node));
                 }
 
             }catch (Exception e){
@@ -71,6 +71,11 @@ public class TopicRequest {
         }
     }
 
+    /**
+     *
+     * @param categoryId
+     * @param handler
+     */
     public void getCourseCategory(String categoryId, Handler handler){
         List<BasicNameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("Method", URLData.METHORD_HOME_COURSE_WARE_CATEGORY));

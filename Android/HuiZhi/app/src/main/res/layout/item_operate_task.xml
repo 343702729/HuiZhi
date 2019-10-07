@@ -23,13 +23,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
+                android:id="@+id/task_name_tv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:singleLine="true"
                 android:gravity="center_vertical"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="10dp"
-                android:text="校区中秋节营销活动"
+                android:text=""
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="@color/black_light"/>

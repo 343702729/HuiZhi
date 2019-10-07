@@ -203,6 +203,9 @@ public class URLData {
 
     public static final String METHORD_HOME_COURSE_WARE_CATEGORY = "GetProjectLibCategory";
 
+    private static final String URL_BUSINESS_TASK_SERVICE = "/ServiceII/BusinessTaskService.ashx";
+    public static final String METHORD_HOME_OPERATE = "GetHomeInfo";
+
 
     /**
      * 用户登录
@@ -736,6 +739,14 @@ public class URLData {
      */
     public static String getUrlHomeCourseProject(){
         return URL_HOST + URL_HOME_COURSE_PROJECT;
+    }
+
+    /**
+     * 运营主界面信息
+     * @return
+     */
+    public static String getUrlBusinessTaskService(){
+        return URL_HOST + URL_BUSINESS_TASK_SERVICE;
     }
 
 }

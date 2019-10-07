@@ -5,15 +5,16 @@
     android:orientation="vertical">
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:paddingRight="10dp">
         <TextView
+            android:id="@+id/question_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="15dp"
             android:maxLines="2"
-            android:text="家长分享作品获得积分，分享、转发、点赞每次都 是多少积分？"
+            android:text=""
             android:textSize="14sp"
             android:textColor="@color/gray_dark_text"/>
         <ImageView
