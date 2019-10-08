@@ -6,6 +6,7 @@ public class HomeOperateNode {
     private List<ObjTask> ObjTask;
     private List<BannerNode> ObjBanner;
     private List<ObjNew> ObjNews;
+    private List<ObjKnowledge> ObjKnowledge;
     private List<ObjAsk> ObjAsk;
 
     public List<HomeOperateNode.ObjTask> getObjTask() {
@@ -30,6 +31,14 @@ public class HomeOperateNode {
 
     public void setObjNews(List<ObjNew> objNews) {
         ObjNews = objNews;
+    }
+
+    public List<HomeOperateNode.ObjKnowledge> getObjKnowledge() {
+        return ObjKnowledge;
+    }
+
+    public void setObjKnowledge(List<HomeOperateNode.ObjKnowledge> objKnowledge) {
+        ObjKnowledge = objKnowledge;
     }
 
     public List<HomeOperateNode.ObjAsk> getObjAsk() {
@@ -358,4 +367,183 @@ public class HomeOperateNode {
         }
     }
 
+    public class ObjKnowledge{
+        private String month;
+        private List<KnowledgeItem> items;
+
+        public String getMonth() {
+            return month;
+        }
+
+        public void setMonth(String month) {
+            this.month = month;
+        }
+
+        public List<KnowledgeItem> getItems() {
+            return items;
+        }
+
+        public void setItems(List<KnowledgeItem> items) {
+            this.items = items;
+        }
+    }
+
+    public class KnowledgeItem{
+        private String KnowledgeId;
+        private String Title;
+        private int VisitCount;
+        private String SharerName;
+        private String FullAudioFileUrl;
+        private String FullTopImgUrl;
+        private String FullSharerHeadImgUrl;
+        private String strCreateTime;
+        private List<Accessory> Accessorys;
+        private boolean IsPreview;
+        private int FitMonth;
+        private int FitFestival;
+        private String StrFitFestival;
+
+        public String getKnowledgeId() {
+            return KnowledgeId;
+        }
+
+        public void setKnowledgeId(String knowledgeId) {
+            KnowledgeId = knowledgeId;
+        }
+
+        public String getTitle() {
+            return Title;
+        }
+
+        public void setTitle(String title) {
+            Title = title;
+        }
+
+        public int getVisitCount() {
+            return VisitCount;
+        }
+
+        public void setVisitCount(int visitCount) {
+            VisitCount = visitCount;
+        }
+
+        public String getSharerName() {
+            return SharerName;
+        }
+
+        public void setSharerName(String sharerName) {
+            SharerName = sharerName;
+        }
+
+        public String getFullAudioFileUrl() {
+            return FullAudioFileUrl;
+        }
+
+        public void setFullAudioFileUrl(String fullAudioFileUrl) {
+            FullAudioFileUrl = fullAudioFileUrl;
+        }
+
+        public String getFullTopImgUrl() {
+            return FullTopImgUrl;
+        }
+
+        public void setFullTopImgUrl(String fullTopImgUrl) {
+            FullTopImgUrl = fullTopImgUrl;
+        }
+
+        public String getFullSharerHeadImgUrl() {
+            return FullSharerHeadImgUrl;
+        }
+
+        public void setFullSharerHeadImgUrl(String fullSharerHeadImgUrl) {
+            FullSharerHeadImgUrl = fullSharerHeadImgUrl;
+        }
+
+        public String getStrCreateTime() {
+            return strCreateTime;
+        }
+
+        public void setStrCreateTime(String strCreateTime) {
+            this.strCreateTime = strCreateTime;
+        }
+
+        public List<Accessory> getAccessorys() {
+            return Accessorys;
+        }
+
+        public void setAccessorys(List<Accessory> accessorys) {
+            Accessorys = accessorys;
+        }
+
+        public boolean isPreview() {
+            return IsPreview;
+        }
+
+        public void setPreview(boolean preview) {
+            IsPreview = preview;
+        }
+
+        public int getFitMonth() {
+            return FitMonth;
+        }
+
+        public void setFitMonth(int fitMonth) {
+            FitMonth = fitMonth;
+        }
+
+        public int getFitFestival() {
+            return FitFestival;
+        }
+
+        public void setFitFestival(int fitFestival) {
+            FitFestival = fitFestival;
+        }
+
+        public String getStrFitFestival() {
+            return StrFitFestival;
+        }
+
+        public void setStrFitFestival(String strFitFestival) {
+            StrFitFestival = strFitFestival;
+        }
+    }
+
+    public class Accessory{
+        private String FileUrl;
+        private String Title;
+        private String FullFileUrl;
+        private String NewTitle;
+
+        public String getFileUrl() {
+            return FileUrl;
+        }
+
+        public void setFileUrl(String fileUrl) {
+            FileUrl = fileUrl;
+        }
+
+        public String getTitle() {
+            return Title;
+        }
+
+        public void setTitle(String title) {
+            Title = title;
+        }
+
+        public String getFullFileUrl() {
+            return FullFileUrl;
+        }
+
+        public void setFullFileUrl(String fullFileUrl) {
+            FullFileUrl = fullFileUrl;
+        }
+
+        public String getNewTitle() {
+            return NewTitle;
+        }
+
+        public void setNewTitle(String newTitle) {
+            NewTitle = newTitle;
+        }
+    }
 }

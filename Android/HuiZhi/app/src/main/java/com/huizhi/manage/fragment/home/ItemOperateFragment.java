@@ -63,9 +63,6 @@ public class ItemOperateFragment extends Fragment {
         faLL = messageLayout.findViewById(R.id.item_fa_ll);
         wbLL = messageLayout.findViewById(R.id.item_wb_ll);
 
-
-        addProgrammeDatas();
-
     }
 
     private void getDatas(){
@@ -83,6 +80,8 @@ public class ItemOperateFragment extends Fragment {
         addOperateTasks(node.getObjTask());
 
         addQuesstionData(node.getObjAsk());
+
+        addProgrammeDatas(node.getObjKnowledge());
     }
 
     private void setNewsBanner(List<BannerNode> bannerNodes){
@@ -153,9 +152,12 @@ public class ItemOperateFragment extends Fragment {
 
     }
 
-    private void addProgrammeDatas(){
-        faLL.addView(new ItemProgrammeView(activity));
-        faLL.addView(new ItemProgrammeView(activity));
+    private void addProgrammeDatas(List<HomeOperateNode.ObjKnowledge> nodes){
+        if(nodes==null)
+            return;
+        for (HomeOperateNode.ObjKnowledge node:nodes){
+            faLL.addView(new ItemProgrammeView(activity, node));
+        }
     }
 
     private void addQuesstionData(List<HomeOperateNode.ObjAsk> items){
