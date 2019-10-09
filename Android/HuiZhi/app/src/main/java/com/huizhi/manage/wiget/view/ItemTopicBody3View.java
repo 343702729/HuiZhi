@@ -1,6 +1,7 @@
 package com.huizhi.manage.wiget.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
@@ -12,9 +13,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.huizhi.manage.R;
+import com.huizhi.manage.activity.base.HtmlWebActivity;
 import com.huizhi.manage.adapter.topic.TopicItemLVAdapter;
 import com.huizhi.manage.base.BaseInfoUpdate;
 import com.huizhi.manage.data.Constants;
+import com.huizhi.manage.data.UserInfo;
+import com.huizhi.manage.http.URLHtmlData;
 import com.huizhi.manage.node.CourseWareTypeNode;
 import com.huizhi.manage.request.topic.TopicRequest;
 import com.huizhi.manage.util.TLog;
@@ -29,6 +33,7 @@ public class ItemTopicBody3View extends LinearLayout {
     private List<CourseWareTypeNode.ObjTypeItem> items = new ArrayList<>();
     private TopicItemLVAdapter adapter;
     private BaseInfoUpdate infoUpdate;
+    private CourseWareTypeNode courseNode;
 
     public ItemTopicBody3View(Context context, String category, BaseInfoUpdate infoUpdate){
         super(context);
@@ -59,10 +64,13 @@ public class ItemTopicBody3View extends LinearLayout {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                CourseWareTypeNode.ObjTypeItem item = (CourseWareTypeNode.ObjTypeItem)adapter.getItem(i-1);
+                CourseWareTypeNode.ObjTypeItem item = (CourseWareTypeNode.ObjTypeItem)adapter.getItem(i-1);
                 TLog.log("Come into listview item click" + i );
+                Intent intent = new Intent(context, HtmlWebActivity.class);
+                intent.putExtra("Title", courseNode.getObjCategory().getCategoryName());
+                intent.putExtra("Url", URLHtmlData.getCourseUrl(UserInfo.getInstance().getUser().getTeacherId(), category, item.getCode() + ""));
 
-
+                context.startActivity(intent);
             }
         });
     }
@@ -78,9 +86,9 @@ public class ItemTopicBody3View extends LinearLayout {
             super.handleMessage(msg);
             switch (msg.what){
                 case Constants.MSG_SUCCESS_ONE:
-                    CourseWareTypeNode node = (CourseWareTypeNode)msg.obj;
+                    courseNode = (CourseWareTypeNode)msg.obj;
 //                    TLog.log("The node item size:" + node.getObjTypeList().size());
-                    setViewsData(node);
+                    setViewsData(courseNode);
                     break;
             }
         }

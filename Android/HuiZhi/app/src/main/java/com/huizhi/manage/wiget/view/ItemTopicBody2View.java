@@ -1,6 +1,7 @@
 package com.huizhi.manage.wiget.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
@@ -14,12 +15,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.huizhi.manage.R;
+import com.huizhi.manage.activity.base.HtmlWebActivity;
 import com.huizhi.manage.adapter.home.ViewPagerAdapter;
 import com.huizhi.manage.adapter.topic.TopicItemGVAdapter;
 import com.huizhi.manage.adapter.topic.TopicItemLVAdapter;
 import com.huizhi.manage.base.BaseInfoUpdate;
 import com.huizhi.manage.data.Constants;
+import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.fragment.home.ItemTopicFragment;
+import com.huizhi.manage.http.URLHtmlData;
 import com.huizhi.manage.node.CourseWareCategoryNode;
 import com.huizhi.manage.node.CourseWareTypeNode;
 import com.huizhi.manage.request.topic.TopicRequest;
@@ -65,6 +69,11 @@ public class ItemTopicBody2View extends LinearLayout {
                 }
                 if(node.getTypeCount()==0){
                     //直接架载网页
+                    Intent intent = new Intent(context, HtmlWebActivity.class);
+                    intent.putExtra("Title", node.getCategoryName());
+                    intent.putExtra("Url", URLHtmlData.getCourseUrl(UserInfo.getInstance().getUser().getTeacherId(), node.getCategoryId(), "1"));
+
+                    context.startActivity(intent);
                     TLog.log("Come into load web html");
                     return;
                 }
