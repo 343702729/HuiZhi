@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -21,7 +22,10 @@ import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.http.AsyncFileUpload;
 import com.huizhi.manage.node.BannerNode;
+import com.huizhi.manage.node.HomeOperateNode;
+import com.huizhi.manage.node.TeacherTrainingNode;
 import com.huizhi.manage.request.home.HomeUserGetRequest;
+import com.huizhi.manage.request.teacher.TeacherRequest;
 import com.huizhi.manage.util.TLog;
 import com.huizhi.manage.wiget.GlideCircleTransform;
 import com.huizhi.manage.wiget.banner.MyViewFlow;
@@ -50,7 +54,7 @@ public class ItemTeacherFragment extends Fragment {
         messageLayout = inflater.inflate(R.layout.fragment_item_teacher, container, false);
         activity = getActivity();
         initViews();
-        getBannerDates();
+		getDatas();
         return messageLayout;
     }
 
@@ -74,28 +78,21 @@ public class ItemTeacherFragment extends Fragment {
                 .transform(new GlideCircleTransform(activity))
                 .into(headIV);
 
-        addStudyDatas();
-        addCourseDatas();
     }
 
-    /**
-     * 滚动图片
-     */
-    private void getBannerDates(){
-        HomeUserGetRequest getRequest = new HomeUserGetRequest();
-        getRequest.getUserNewsBanner(handler);
-    }
+    private void getDatas(){
+		TeacherRequest request = new TeacherRequest();
+		request.getTeacherData(UserInfo.getInstance().getUser().getTeacherId(), handler);
+		request.getProgressData(UserInfo.getInstance().getUser().getTeacherId(), handler);
+	}
 
-    private ViewFlow.ViewSwitchListener imageSwitchListener = new ViewFlow.ViewSwitchListener() {
-        @Override
-        public void onSwitched(View view, int position) {
-            if(imgSize == 0)
-                return;
-            int count = position%imgSize;
-            if(pointView!=null)
-                pointView.setPointSelect(count);
-        }
-    };
+	private void setViewsData(TeacherTrainingNode node){
+    	if(node==null)
+    		return;
+		setNewsBanner(node.getObjBanner());
+		addStudyDatas(node.getObjTraining());
+		addCourseDatas(node.getObjTeachingTraining());
+	}
 
     private void setNewsBanner(List<BannerNode> bannerNodes){
         if(bannerNodes==null||bannerNodes.size()==0)
@@ -126,14 +123,64 @@ public class ItemTeacherFragment extends Fragment {
         pointView.addViews(pointsLL, bannerNodes.size());
     }
 
-    private void addStudyDatas(){
-        studyLL.addView(new ItemStudyView(activity));
-        studyLL.addView(new ItemStudyView(activity));
+	private ViewFlow.ViewSwitchListener imageSwitchListener = new ViewFlow.ViewSwitchListener() {
+		@Override
+		public void onSwitched(View view, int position) {
+			if(imgSize == 0)
+				return;
+			int count = position%imgSize;
+			if(pointView!=null)
+				pointView.setPointSelect(count);
+		}
+	};
+
+    private void setProgressData(TeacherTrainingNode.ObjProgress node){
+    	if(node==null)
+    		return;
+		ProgressBar kcPB = messageLayout.findViewById(R.id.kc_pb);
+		TextView kcTV = messageLayout.findViewById(R.id.kc_tv);
+		kcPB.setMax(node.getTotLessonNum());
+		kcPB.setProgress(node.getDoneLessonNum());
+		kcTV.setText(node.getLessonFinishPercent());
+
+		ProgressBar bkPB = messageLayout.findViewById(R.id.bk_pg);
+		TextView bkTV = messageLayout.findViewById(R.id.bk_tv);
+		bkPB.setMax(node.getTotLessonNum());
+		bkPB.setProgress(node.getDoneLessonPrepareNum());
+		bkTV.setText(node.getLessonPreparedPercent());
+
+		ProgressBar pyPB = messageLayout.findViewById(R.id.py_pg);
+		TextView pyTV = messageLayout.findViewById(R.id.py_tv);
+		pyPB.setMax(node.getCommentedNum());
+		pyPB.setProgress(node.getToBeCommentNum());
+		pyTV.setText(node.getCommentFinishPercent());
+	}
+
+    private void addStudyDatas(List<TeacherTrainingNode.ObjTrainingItem> nodes){
+    	if(nodes==null)
+    		return;
+    	for (TeacherTrainingNode.ObjTrainingItem node:nodes){
+			studyLL.addView(new ItemStudyView(activity, node));
+		}
+
     }
 
-    private void addCourseDatas(){
-        courseLL.addView(new ItemCourseView(activity));
-        courseLL.addView(new ItemCourseView(activity));
+    private void addCourseDatas(List<TeacherTrainingNode.ObjTeachingTrainingItem> nodes){
+    	if(nodes==null)
+    		return;
+		for (int i=0; i<nodes.size();){
+			if(i>=nodes.size())
+				return;
+			TeacherTrainingNode.ObjTeachingTrainingItem item1 = null, item2 = null;
+			item1 = nodes.get(i);
+			i++;
+			if(i<nodes.size()) {
+				item2 = nodes.get(i);
+				i++;
+			}
+
+			courseLL.addView(new ItemCourseView(activity, item1, item2));
+		}
     }
 
     private Handler handler = new Handler(){
@@ -147,6 +194,14 @@ public class ItemTeacherFragment extends Fragment {
                     List<BannerNode> bannerNodes = (List<BannerNode>) msg.obj;
                     setNewsBanner(bannerNodes);
                     break;
+                case Constants.MSG_SUCCESS:
+					TeacherTrainingNode node = (TeacherTrainingNode)msg.obj;
+					setViewsData(node);
+                	break;
+				case Constants.MSG_SUCCESS_FIVE:
+					TeacherTrainingNode.ObjProgress progressNode = (TeacherTrainingNode.ObjProgress)msg.obj;
+					setProgressData(progressNode);
+					break;
             }
         }
     };

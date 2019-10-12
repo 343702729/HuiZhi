@@ -8,13 +8,18 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.huizhi.manage.R;
+import com.huizhi.manage.node.TeacherTrainingNode;
 
 public class ItemCourseView extends LinearLayout {
     private Context context;
+    private TeacherTrainingNode.ObjTeachingTrainingItem item1;
+    private TeacherTrainingNode.ObjTeachingTrainingItem item2;
 
-    public ItemCourseView(Context context){
+    public ItemCourseView(Context context, TeacherTrainingNode.ObjTeachingTrainingItem item1, TeacherTrainingNode.ObjTeachingTrainingItem item2){
         super(context);
         this.context = context;
+        this.item1 = item1;
+        this.item2 = item2;
         initViews();
     }
 
@@ -25,7 +30,18 @@ public class ItemCourseView extends LinearLayout {
         ImageView item1IV = findViewById(R.id.item1_iv);
         ImageView item2IV = findViewById(R.id.item2_iv);
 
-        Glide.with(context).load(R.mipmap.icon_pic_bg).into(item1IV);
-        Glide.with(context).load(R.mipmap.icon_pic_bg).into(item2IV);
+		TextView title1TV = findViewById(R.id.title1_tv);
+		TextView title2TV = findViewById(R.id.title2_tv);
+
+        if(item1!=null){
+			Glide.with(context).load(item1.getCoverImg()).into(item1IV);
+			title1TV.setText(item1.getTitle());
+		}
+
+		if(item2!=null){
+			Glide.with(context).load(item2.getCoverImg()).into(item2IV);
+			title2TV.setText(item2.getTitle());
+		}
+
     }
 }

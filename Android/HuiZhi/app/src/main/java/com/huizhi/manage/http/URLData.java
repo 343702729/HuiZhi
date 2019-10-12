@@ -206,6 +206,11 @@ public class URLData {
     private static final String URL_BUSINESS_TASK_SERVICE = "/ServiceII/BusinessTaskService.ashx";
     public static final String METHORD_HOME_OPERATE = "GetHomeInfo";
 
+    private static final String URL_TEACHER_TRAINING_SERVICE = "/ServiceII/TeachingTrainingService.ashx";
+    public static final String METHORD_TEACHER_TRAINING = "GetHomeInfo";
+
+    public static final String METHORD_TEACHER_PROGRESS = "GetProgress";
+
 
     /**
      * 用户登录
@@ -748,5 +753,13 @@ public class URLData {
     public static String getUrlBusinessTaskService(){
         return URL_HOST + URL_BUSINESS_TASK_SERVICE;
     }
+
+	/**
+	 * 教学主界面信息
+	 * @return
+	 */
+	public static String getUrlTeacherTrainingService(){
+    	return URL_HOST + URL_TEACHER_TRAINING_SERVICE;
+	}
 
 }

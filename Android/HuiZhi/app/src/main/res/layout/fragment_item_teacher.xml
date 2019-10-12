@@ -220,20 +220,22 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp">
                             <ProgressBar
+                                android:id="@+id/kc_pb"
                                 android:layout_width="match_parent"
                                 android:layout_height="8dp"
                                 android:layout_marginRight="50dp"
                                 android:layout_gravity="center_vertical"
                                 style="?android:attr/progressBarStyleHorizontal"
                                 android:max="100"
-                                android:progress="60"
+                                android:progress="0"
                                 android:progressDrawable="@drawable/progress_bar_blue"/>
                             <TextView
+                                android:id="@+id/kc_tv"
                                 android:layout_width="40dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right|center_vertical"
                                 android:gravity="right"
-                                android:text="5/10"
+                                android:text=""
                                 android:textColor="@color/gray_dark_text"
                                 android:textSize="14sp"/>
                         </FrameLayout>
@@ -255,6 +257,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp">
                             <ProgressBar
+                                android:id="@+id/bk_pg"
                                 android:layout_width="match_parent"
                                 android:layout_height="8dp"
                                 android:layout_marginRight="50dp"
@@ -264,6 +267,7 @@
                                 android:progress="60"
                                 android:progressDrawable="@drawable/progress_bar_green"/>
                             <TextView
+                                android:id="@+id/bk_tv"
                                 android:layout_width="40dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right|center_vertical"
@@ -289,6 +293,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp">
                             <ProgressBar
+                                android:id="@+id/py_pg"
                                 android:layout_width="match_parent"
                                 android:layout_height="8dp"
                                 android:layout_marginRight="50dp"
@@ -298,6 +303,7 @@
                                 android:progress="60"
                                 android:progressDrawable="@drawable/progress_bar_orange"/>
                             <TextView
+                                android:id="@+id/py_tv"
                                 android:layout_width="40dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right|center_vertical"
