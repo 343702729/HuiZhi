@@ -211,6 +211,9 @@ public class URLData {
 
     public static final String METHORD_TEACHER_PROGRESS = "GetProgress";
 
+    private static final String URL_MESSAGE_SERVICE = "/ServiceII/MessageService.ashx";
+    public static final String METHORD_MESSAGE_LIST = "GetMessageList";
+
 
     /**
      * 用户登录
@@ -761,5 +764,13 @@ public class URLData {
 	public static String getUrlTeacherTrainingService(){
     	return URL_HOST + URL_TEACHER_TRAINING_SERVICE;
 	}
+
+    /**
+     * 取用户的消息
+     * @return
+     */
+	public static String getUrlMessageService(){
+        return URL_HOST + URL_MESSAGE_SERVICE;
+    }
 
 }

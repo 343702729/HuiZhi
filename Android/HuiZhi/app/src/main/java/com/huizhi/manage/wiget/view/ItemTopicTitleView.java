@@ -51,6 +51,9 @@ public class ItemTopicTitleView extends LinearLayout {
         bgLL.setOnClickListener(itemClick);
         titleTV = findViewById(R.id.item_title_tv);
         typeTV = findViewById(R.id.item_type_tv);
+        if(categoryNode!=null){
+            titleTV.setText(categoryNode.getCategoryName());
+        }
         setStatus(flag);
         createBodyViews();
     }

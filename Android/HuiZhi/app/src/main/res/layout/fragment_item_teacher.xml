@@ -390,6 +390,7 @@
                         android:textSize="14sp"
                         android:textColor="@color/black_light"/>
                     <LinearLayout
+                        android:id="@+id/more_kc_ll"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right|center_vertical"

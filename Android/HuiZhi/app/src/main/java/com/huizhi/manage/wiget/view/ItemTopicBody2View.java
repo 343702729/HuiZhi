@@ -72,7 +72,6 @@ public class ItemTopicBody2View extends LinearLayout {
                     Intent intent = new Intent(context, HtmlWebActivity.class);
                     intent.putExtra("Title", node.getCategoryName());
                     intent.putExtra("Url", URLHtmlData.getCourseUrl(UserInfo.getInstance().getUser().getTeacherId(), node.getCategoryId(), "1"));
-
                     context.startActivity(intent);
                     TLog.log("Come into load web html");
                     return;

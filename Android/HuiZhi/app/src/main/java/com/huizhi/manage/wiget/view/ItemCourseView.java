@@ -1,13 +1,18 @@
 package com.huizhi.manage.wiget.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.huizhi.manage.R;
+import com.huizhi.manage.activity.base.HtmlWebActivity;
+import com.huizhi.manage.data.UserInfo;
+import com.huizhi.manage.http.URLHtmlData;
 import com.huizhi.manage.node.TeacherTrainingNode;
 
 public class ItemCourseView extends LinearLayout {
@@ -36,12 +41,33 @@ public class ItemCourseView extends LinearLayout {
         if(item1!=null){
 			Glide.with(context).load(item1.getCoverImg()).into(item1IV);
 			title1TV.setText(item1.getTitle());
+            item1IV.setOnClickListener(itemClick);
 		}
 
 		if(item2!=null){
 			Glide.with(context).load(item2.getCoverImg()).into(item2IV);
 			title2TV.setText(item2.getTitle());
+			item2IV.setOnClickListener(itemClick);
 		}
 
     }
+
+    private OnClickListener itemClick = new OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(context, HtmlWebActivity.class);
+            switch (view.getId()){
+                case R.id.item1_iv:
+                    intent.putExtra("Title", item1.getTitle());
+                    intent.putExtra("Url", URLHtmlData.getTrainingDetailUrl(UserInfo.getInstance().getUser().getTeacherId(), item1.getTrainingId()));
+                    context.startActivity(intent);
+                    break;
+                case R.id.item2_iv:
+                    intent.putExtra("Title", item2.getTitle());
+                    intent.putExtra("Url", URLHtmlData.getTrainingDetailUrl(UserInfo.getInstance().getUser().getTeacherId(), item2.getTrainingId()));
+                    context.startActivity(intent);
+                    break;
+            }
+        }
+    };
 }

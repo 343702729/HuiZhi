@@ -2,6 +2,7 @@ package com.huizhi.manage.fragment.home;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,8 +14,11 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.huizhi.manage.R;
+import com.huizhi.manage.activity.base.HtmlWebActivity;
 import com.huizhi.manage.adapter.home.ImagePagerAdapter;
 import com.huizhi.manage.data.Constants;
+import com.huizhi.manage.data.UserInfo;
+import com.huizhi.manage.http.URLHtmlData;
 import com.huizhi.manage.node.BannerNode;
 import com.huizhi.manage.node.HomeOperateNode;
 import com.huizhi.manage.request.home.HomeUserGetRequest;
@@ -63,7 +67,54 @@ public class ItemOperateFragment extends Fragment {
         faLL = messageLayout.findViewById(R.id.item_fa_ll);
         wbLL = messageLayout.findViewById(R.id.item_wb_ll);
 
+        LinearLayout rwLL = messageLayout.findViewById(R.id.rw_ll);
+        LinearLayout dtLL = messageLayout.findViewById(R.id.dt_ll);
+        LinearLayout faLL = messageLayout.findViewById(R.id.fa_ll);
+        LinearLayout wdLL = messageLayout.findViewById(R.id.wd_ll);
+        rwLL.setOnClickListener(itemLLClick);
+        dtLL.setOnClickListener(itemLLClick);
+        faLL.setOnClickListener(itemLLClick);
+        wdLL.setOnClickListener(itemLLClick);
+
+        LinearLayout moredtLL = messageLayout.findViewById(R.id.more_dt_ll);
+        moredtLL.setOnClickListener(itemLLClick);
+        LinearLayout morefaLL = messageLayout.findViewById(R.id.more_fa_ll);
+        morefaLL.setOnClickListener(itemLLClick);
+        LinearLayout morewdLL = messageLayout.findViewById(R.id.more_wd_ll);
+        morewdLL.setOnClickListener(itemLLClick);
     }
+
+    private View.OnClickListener itemLLClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(activity, HtmlWebActivity.class);
+            switch (view.getId()){
+                case R.id.rw_ll:        //运行任务
+                    intent.putExtra("Title", "运行任务");
+                    intent.putExtra("Url", URLHtmlData.getOperateListUrl(UserInfo.getInstance().getUser().getTeacherId()));
+                    activity.startActivity(intent);
+                    break;
+                case R.id.dt_ll:        //运营动态
+                case R.id.more_dt_ll:   //运营动态 more
+                    intent.putExtra("Title", "运营动态");
+                    intent.putExtra("Url", URLHtmlData.getOperateNewsUrl(UserInfo.getInstance().getUser().getTeacherId()));
+                    activity.startActivity(intent);
+                    break;
+                case R.id.fa_ll:        //运营方案
+                case R.id.more_fa_ll:   //运营方案 more
+                    intent.putExtra("Title", "运营方案");
+                    intent.putExtra("Url", URLHtmlData.getOperatePlanUrl(UserInfo.getInstance().getUser().getTeacherId()));
+                    activity.startActivity(intent);
+                    break;
+                case R.id.wd_ll:        //问答
+                case R.id.more_wd_ll:   //问答 more
+                    intent.putExtra("Title", "问答");
+                    intent.putExtra("Url", URLHtmlData.getOperateAskUrl(UserInfo.getInstance().getUser().getTeacherId()));
+                    activity.startActivity(intent);
+                    break;
+            }
+        }
+    };
 
     private void getDatas(){
         OperateRequest request = new OperateRequest();
@@ -75,13 +126,14 @@ public class ItemOperateFragment extends Fragment {
             return;
         setNewsBanner(node.getObjBanner());
 
+        addOperateTasks(node.getObjTask());
+
         addOperateDatas(node.getObjNews());
 
-        addOperateTasks(node.getObjTask());
+        addProgrammeDatas(node.getObjKnowledge());
 
         addQuesstionData(node.getObjAsk());
 
-        addProgrammeDatas(node.getObjKnowledge());
     }
 
     private void setNewsBanner(List<BannerNode> bannerNodes){

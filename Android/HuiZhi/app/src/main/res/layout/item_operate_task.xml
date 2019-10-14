@@ -14,12 +14,14 @@
         android:paddingRight="20dp"
         android:background="@drawable/frame_circle_graylight">
         <TextView
+            android:id="@+id/task_title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="新任务"
             android:textSize="14sp"
             android:textColor="#F3A432"/>
         <FrameLayout
+            android:id="@+id/task_fl"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView

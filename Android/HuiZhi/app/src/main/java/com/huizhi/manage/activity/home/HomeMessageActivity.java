@@ -29,7 +29,7 @@ import java.util.List;
 
 /**
  * Created by CL on 2018/1/25.
- * 消息通知
+ * 公告通知
  */
 
 public class HomeMessageActivity extends Activity {

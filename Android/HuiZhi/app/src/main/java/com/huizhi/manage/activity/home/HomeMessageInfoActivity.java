@@ -26,7 +26,7 @@ import com.huizhi.manage.util.AppUtil;
 
 /**
  * Created by CL on 2018/1/26.
- * 消息中心
+ * 公告中心
  */
 
 public class HomeMessageInfoActivity extends Activity {

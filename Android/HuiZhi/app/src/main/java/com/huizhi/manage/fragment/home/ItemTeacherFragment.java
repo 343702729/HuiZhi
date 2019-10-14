@@ -2,6 +2,7 @@ package com.huizhi.manage.fragment.home;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,10 +18,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.huizhi.manage.R;
+import com.huizhi.manage.activity.base.HtmlWebActivity;
 import com.huizhi.manage.adapter.home.ImagePagerAdapter;
 import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.http.AsyncFileUpload;
+import com.huizhi.manage.http.URLHtmlData;
 import com.huizhi.manage.node.BannerNode;
 import com.huizhi.manage.node.HomeOperateNode;
 import com.huizhi.manage.node.TeacherTrainingNode;
@@ -78,7 +81,24 @@ public class ItemTeacherFragment extends Fragment {
                 .transform(new GlideCircleTransform(activity))
                 .into(headIV);
 
+        LinearLayout morekcLL = messageLayout.findViewById(R.id.more_kc_ll);
+        morekcLL.setOnClickListener(itemClick);
+
     }
+
+    private View.OnClickListener itemClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(activity, HtmlWebActivity.class);
+            switch (view.getId()){
+                case R.id.more_kc_ll:
+                    intent.putExtra("Title", "课程教学");
+                    intent.putExtra("Url", URLHtmlData.getTrainingListUrl(UserInfo.getInstance().getUser().getTeacherId()));
+                    activity.startActivity(intent);
+                    break;
+            }
+        }
+    };
 
     private void getDatas(){
 		TeacherRequest request = new TeacherRequest();

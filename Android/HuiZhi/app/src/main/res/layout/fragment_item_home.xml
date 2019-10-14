@@ -123,7 +123,7 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="@mipmap/icon_item_jxhl"/>
+                                android:background="@mipmap/icon_home_jx"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -142,7 +142,7 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="@mipmap/icon_item_kq"/>
+                                android:background="@mipmap/icon_home_kq"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -161,7 +161,7 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="@mipmap/icon_item_rz"/>
+                                android:background="@mipmap/icon_home_rz"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -180,7 +180,7 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="@mipmap/icon_item_gg"/>
+                                android:background="@mipmap/icon_home_gg"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -246,23 +246,16 @@
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-                        <FrameLayout
+                        <ImageView
                             android:id="@+id/jxhl_fl"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="right"
                             android:layout_marginRight="10dp"
-                            android:background="@drawable/frame_white_circle_bg">
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
-                                android:layout_marginTop="5dp"
-                                android:layout_marginBottom="5dp"
-                                android:layout_gravity="center"
-                                android:background="@mipmap/icon_arrow_right"/>
-                        </FrameLayout>
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@mipmap/icon_home_right"/>
                     </FrameLayout>
                 </LinearLayout>
 

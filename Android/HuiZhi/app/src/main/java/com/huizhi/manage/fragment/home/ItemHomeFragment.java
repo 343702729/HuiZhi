@@ -89,7 +89,7 @@ public class ItemHomeFragment extends Fragment {
         LinearLayout ggLL = messageLayout.findViewById(R.id.user_gg_ll);
         ggLL.setOnClickListener(itemOnClick);
 
-        FrameLayout jxhlIV = messageLayout.findViewById(R.id.jxhl_fl);
+        ImageView jxhlIV = messageLayout.findViewById(R.id.jxhl_fl);
         jxhlIV.setOnClickListener(itemOnClick);
 
         itemNewsLL = messageLayout.findViewById(R.id.item_news_ll);

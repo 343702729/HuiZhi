@@ -84,7 +84,8 @@
                     android:visibility="gone">
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/icon_user_db"/>
                     <TextView
                         style="@style/info_title_tv"
                         android:text="待办任务"/>
@@ -138,7 +139,8 @@
                     style="@style/item_line_ll">
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/icon_user_fp"/>
                     <TextView
                         style="@style/info_title_tv"
                         android:text="任务管理"/>
@@ -164,7 +166,8 @@
                     style="@style/item_line_ll">
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/icon_user_yj"/>
                     <TextView
                         style="@style/info_title_tv"
                         android:text="企业邮箱"/>
@@ -193,7 +196,8 @@
                     style="@style/item_line_ll">
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/icon_user_tx"/>
                     <TextView
                         style="@style/info_title_tv"
                         android:text="修改头像"/>
@@ -219,7 +223,8 @@
                     style="@style/item_line_ll">
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/icon_user_xx"/>
                     <TextView
                         style="@style/info_title_tv"
                         android:text="修改密码"/>
@@ -248,7 +253,8 @@
                     style="@style/item_line_ll">
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/icon_user_gy"/>
                     <TextView
                         style="@style/info_title_tv"
                         android:text="关于绘智"/>
@@ -273,7 +279,8 @@
                     style="@style/item_line_ll">
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/icon_user_xy"/>
                     <TextView
                         style="@style/info_title_tv"
                         android:text="隐私协议"/>
