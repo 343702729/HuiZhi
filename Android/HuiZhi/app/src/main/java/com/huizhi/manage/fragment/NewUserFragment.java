@@ -162,7 +162,7 @@ public class NewUserFragment extends Fragment {
                 SharedPrefsUtil.putValue(activity, "Account", "");
                 SharedPrefsUtil.putValue(activity, "Password", "");
                 UserInfo.getInstance().setLogin(false);
-                RongIM.getInstance().logout();
+//                RongIM.getInstance().logout();
                 JPushInterface.stopPush(activity);
 //            Intent intent = new Intent(Intent.ACTION_MAIN);
 //            intent.addCategory(Intent.CATEGORY_HOME);
