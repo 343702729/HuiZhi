@@ -101,7 +101,7 @@ public class TeacherRequest {
 					Gson gson = new Gson();//TeacherTrainingNode
 					TeacherTrainingNode.ObjProgress node = gson.fromJson(data, TeacherTrainingNode.ObjProgress.class);
 					if(handler!=null)
-						handler.sendMessage(handler.obtainMessage(Constants.MSG_SUCCESS_FIVE, node));
+						handler.sendMessage(handler.obtainMessage(Constants.MSG_SUCCESS_FOUR, node));
 				}
 			}catch (Exception e){
 				e.printStackTrace();

@@ -90,6 +90,25 @@ public class URLHtmlData {
     }
 
     /**
+     *  学习列表页
+     * @param teacherid
+     * @return
+     */
+    public static String getStudyListUrl(String teacherid){
+        return URL_HOST + "/study/index/" + teacherid;
+    }
+
+    /**
+     *  学习展示页
+     * @param teacherid
+     * @param detailsid
+     * @return
+     */
+    public static String getStudyDetailUrl(String teacherid, String detailsid){
+        return URL_HOST + "/study/details/" + teacherid + "/" + detailsid;
+    }
+
+    /**
      * 课程列表
      * @param teacherid
      * @return

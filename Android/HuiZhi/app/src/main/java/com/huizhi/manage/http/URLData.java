@@ -214,6 +214,9 @@ public class URLData {
     private static final String URL_MESSAGE_SERVICE = "/ServiceII/MessageService.ashx";
     public static final String METHORD_MESSAGE_LIST = "GetMessageList";
 
+    private static final String URL_HOME_SERVICE = "/ServiceII/HomeService.ashx";
+    public static final String METHORD_HOME_INFO = "GetHomeInfo";
+
 
     /**
      * 用户登录
@@ -771,6 +774,14 @@ public class URLData {
      */
 	public static String getUrlMessageService(){
         return URL_HOST + URL_MESSAGE_SERVICE;
+    }
+
+    /**
+     * 主界面信息
+     * @return
+     */
+    public static String getUrlHomeService(){
+	    return URL_HOST + URL_HOME_SERVICE;
     }
 
 }

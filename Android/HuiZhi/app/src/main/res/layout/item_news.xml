@@ -11,74 +11,36 @@
         android:layout_marginBottom="5dp"
         android:visibility="gone"
         android:background="@color/app_bg"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        android:singleLine="true"
-        android:text="绘智与您相约2019中国国际教育品牌连锁加盟博然会"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        android:textColor="@color/black_light"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:orientation="horizontal">
         <ImageView
-            android:id="@+id/item1_iv"
+            android:id="@+id/item_iv"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"/>
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:layout_weight="1"/>
-        <View
-            android:layout_width="10dp"
-            android:layout_height="match_parent"/>
-        <ImageView
-            android:id="@+id/item2_iv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:layout_weight="1"/>
-        <View
-            android:layout_width="10dp"
-            android:layout_height="match_parent"/>
-        <ImageView
-            android:id="@+id/item3_iv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:layout_weight="1"/>
-    </LinearLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2019-07-03 12:00"
-            android:textSize="11sp"
-            android:textColor="@color/gray"/>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="right"
-            android:gravity="center_vertical">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/icon_eye"/>
+            android:layout_marginLeft="10dp">
             <TextView
+                android:id="@+id/content_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:maxLines="3"
+                android:textSize="15sp"
+                android:textColor="@color/black_light"/>
+            <TextView
+                android:id="@+id/time_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="6789"
+                android:layout_gravity="bottom"
+                android:text="2019-07-03 12:00"
                 android:textSize="11sp"
                 android:textColor="@color/gray"/>
-        </LinearLayout>
-    </FrameLayout>
+        </FrameLayout>
+    </LinearLayout>
 
 </LinearLayout>

@@ -18,12 +18,22 @@ import com.huizhi.manage.node.HomeOperateNode;
 public class ItemOperateView extends LinearLayout {
     private Context context;
     private HomeOperateNode.ObjNew item1, item2;
+    private boolean flag;
 
     public ItemOperateView(Context context, HomeOperateNode.ObjNew item1, HomeOperateNode.ObjNew item2){
         super(context);
         this.context = context;
         this.item1 = item1;
         this.item2 = item2;
+        initViews();
+    }
+
+    public ItemOperateView(Context context, HomeOperateNode.ObjNew item1, HomeOperateNode.ObjNew item2, boolean flag){
+        super(context);
+        this.context = context;
+        this.item1 = item1;
+        this.item2 = item2;
+        this.flag = flag;
         initViews();
     }
 
@@ -36,6 +46,8 @@ public class ItemOperateView extends LinearLayout {
 
         TextView title1TV = findViewById(R.id.title1_tv);
         TextView title2TV = findViewById(R.id.title2_tv);
+
+        View bottomV = findViewById(R.id.bottom_v);
         if(item1!=null){
             Glide.with(context).load(item1.getThumbImgUrl()).into(item1IV);
             title1TV.setText(item1.getNewsTitle());
@@ -48,6 +60,8 @@ public class ItemOperateView extends LinearLayout {
             item2IV.setOnClickListener(itemClick);
         }
 
+        if(flag)
+            bottomV.setVisibility(View.GONE);
     }
 
     private OnClickListener itemClick = new OnClickListener() {

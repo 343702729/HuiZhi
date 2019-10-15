@@ -178,6 +178,7 @@
                             android:gravity="center"
                             android:orientation="vertical">
                             <ImageView
+                                android:id="@+id/gg_count_iv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@mipmap/icon_home_gg"/>
@@ -221,10 +222,11 @@
                         android:textColor="@color/gray_dark_text"/>
 
                     <TextView
+                        android:id="@+id/course_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
-                        android:text="8/10"
+                        android:text=""
                         android:textSize="12sp"
                         android:textColor="@color/gray_dark_text"/>
 
@@ -237,6 +239,7 @@
                         android:textColor="@color/gray_dark_text"/>
 
                     <TextView
+                        android:id="@+id/comment_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
@@ -264,14 +267,18 @@
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:layout_marginTop="10dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
                     android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/icon_home_tag_left"/>
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="25dp"
-                        android:layout_marginTop="15dp">
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:layout_marginBottom="5dp">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -306,18 +313,160 @@
                         android:id="@+id/item_news_ll"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
                         android:orientation="vertical">
 
                     </LinearLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:background="@mipmap/icon_home_tag_right"/>
+                    </FrameLayout>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/item_category_ll"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/white"
                     android:layout_marginTop="10dp"
                     android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/icon_home_tag_left"/>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:orientation="vertical">
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/title_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="教师"
+                                android:textStyle="bold"
+                                android:textSize="14sp"
+                                android:textColor="@color/black_light"/>
+                            <LinearLayout
+                                android:id="@+id/more_teacher_ll"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right|center_vertical"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="2dp"
+                                    android:text="more"
+                                    android:textSize="12sp"
+                                    android:textColor="@color/gray"/>
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:background="@mipmap/icon_s_arrow_right"/>
+                            </LinearLayout>
+
+                        </FrameLayout>
+                        <LinearLayout
+                            android:id="@+id/item_teacher_ll"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:background="@mipmap/icon_home_tag_right"/>
+                    </FrameLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/icon_home_tag_left"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:orientation="vertical">
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="运营"
+                                android:textStyle="bold"
+                                android:textSize="14sp"
+                                android:textColor="@color/black_light"/>
+                            <LinearLayout
+                                android:id="@+id/more_yy_ll"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right|center_vertical"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="2dp"
+                                    android:text="more"
+                                    android:textSize="12sp"
+                                    android:textColor="@color/gray"/>
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:background="@mipmap/icon_s_arrow_right"/>
+                            </LinearLayout>
+
+                        </FrameLayout>
+                        <LinearLayout
+                            android:id="@+id/item_operate_ll"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:background="@mipmap/icon_home_tag_right"/>
+                    </FrameLayout>
                 </LinearLayout>
 
             </LinearLayout>

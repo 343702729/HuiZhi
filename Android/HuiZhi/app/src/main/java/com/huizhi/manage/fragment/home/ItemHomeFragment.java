@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.bumptech.glide.Glide;
 import com.google.zxing.activity.CaptureActivity;
 import com.google.zxing.util.Constant;
 import com.huizhi.manage.R;
+import com.huizhi.manage.activity.base.HtmlWebActivity;
 import com.huizhi.manage.activity.home.HomeAttendanceActivity;
 import com.huizhi.manage.activity.home.HomeMessageActivity;
 import com.huizhi.manage.activity.home.HomeWorkDailyActivity;
@@ -27,8 +29,14 @@ import com.huizhi.manage.adapter.home.ImagePagerAdapter;
 import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.http.AsyncFileUpload;
+import com.huizhi.manage.http.URLHtmlData;
 import com.huizhi.manage.node.BannerNode;
+import com.huizhi.manage.node.HomeInfoNode;
+import com.huizhi.manage.node.HomeOperateNode;
+import com.huizhi.manage.node.TeacherTrainingNode;
+import com.huizhi.manage.request.home.HomeNewRequest;
 import com.huizhi.manage.request.home.HomeUserGetRequest;
+import com.huizhi.manage.request.teacher.TeacherRequest;
 import com.huizhi.manage.util.TLog;
 import com.huizhi.manage.wiget.GlideCircleTransform;
 import com.huizhi.manage.wiget.banner.MyViewFlow;
@@ -36,7 +44,9 @@ import com.huizhi.manage.wiget.banner.PointView;
 import com.huizhi.manage.wiget.banner.ViewFlow;
 import com.huizhi.manage.wiget.pullableview.PullToRefreshLayout;
 import com.huizhi.manage.wiget.view.ItemCategoryView;
+import com.huizhi.manage.wiget.view.ItemCourseView;
 import com.huizhi.manage.wiget.view.ItemNewsView;
+import com.huizhi.manage.wiget.view.ItemOperateView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +60,7 @@ public class ItemHomeFragment extends Fragment {
     private LinearLayout pointsLL;
     private PointView pointView;
     private LinearLayout itemNewsLL;
+    private LinearLayout itemTeacherLL;
     private LinearLayout itemCategoryLL;
     private ImageView scanIV;
 
@@ -63,7 +74,6 @@ public class ItemHomeFragment extends Fragment {
         messageLayout = inflater.inflate(R.layout.fragment_item_home, container, false);
         activity = getActivity();
         initViews();
-        getBannerDates();
         return messageLayout;
     }
 
@@ -92,8 +102,15 @@ public class ItemHomeFragment extends Fragment {
         ImageView jxhlIV = messageLayout.findViewById(R.id.jxhl_fl);
         jxhlIV.setOnClickListener(itemOnClick);
 
+        LinearLayout morejsLL = messageLayout.findViewById(R.id.more_teacher_ll);
+        morejsLL.setOnClickListener(itemOnClick);
+
+        LinearLayout moreyyLL = messageLayout.findViewById(R.id.more_yy_ll);
+        moreyyLL.setOnClickListener(itemOnClick);
+
         itemNewsLL = messageLayout.findViewById(R.id.item_news_ll);
-        itemCategoryLL = messageLayout.findViewById(R.id.item_category_ll);
+        itemTeacherLL = messageLayout.findViewById(R.id.item_teacher_ll);
+        itemCategoryLL = messageLayout.findViewById(R.id.item_operate_ll);
 
         TextView nameTV = messageLayout.findViewById(R.id.name_tv);
         nameTV.setText(UserInfo.getInstance().getUser().getTeacherName());
@@ -109,17 +126,43 @@ public class ItemHomeFragment extends Fragment {
                 .transform(new GlideCircleTransform(activity))
                 .into(headIV);
 
-        addNewsLL();
-
-        addCategoryLL();
+        getDatas();
     }
 
-    /**
-     * 滚动图片
-     */
-    private void getBannerDates(){
-        HomeUserGetRequest getRequest = new HomeUserGetRequest();
-        getRequest.getUserNewsBanner(handler);
+    @Override
+    public void onResume() {
+        super.onResume();
+        getTZDatas();
+    }
+
+    private void getDatas(){
+        TeacherRequest request = new TeacherRequest();
+        request.getProgressData(UserInfo.getInstance().getUser().getTeacherId(), handler);
+        HomeNewRequest newRequest = new HomeNewRequest();
+        newRequest.getHomeInfo(handler);
+    }
+
+    private void getTZDatas(){
+        HomeUserGetRequest request = new HomeUserGetRequest();
+        request.getTZNoReadCount(UserInfo.getInstance().getUser().getTeacherId(), handler);
+    }
+
+    private void setViewsData(HomeInfoNode node){
+        if(node==null)
+            return;
+        setNewsBanner(node.getObjBanner());
+        addNewsLL(node.getObjNews());
+        addTeacherLL(node.getObjTeachingTraining());
+        addOperateLL(node.getObjBusinessNews());
+    }
+
+    private void setProgressData(TeacherTrainingNode.ObjProgress progressNode){
+        if(progressNode==null)
+            return;
+        TextView courseTV = messageLayout.findViewById(R.id.course_tv);
+        courseTV.setText(progressNode.getDoneLessonNum() + "/" + progressNode.getTotLessonNum());
+        TextView commentTV = messageLayout.findViewById(R.id.comment_tv);
+        commentTV.setText(progressNode.getToBeCommentNum() + "/" + progressNode.getCommentedNum());
     }
 
     private void setNewsBanner(List<BannerNode> bannerNodes){
@@ -217,19 +260,74 @@ public class ItemHomeFragment extends Fragment {
                     intent.setClass(activity, HomeMessageActivity.class);
                     startActivity(intent);
                     break;
+                case R.id.more_teacher_ll://教师more
+                    intent = new Intent(activity, HtmlWebActivity.class);
+                    intent.putExtra("Title", "教师");
+                    intent.putExtra("Url", URLHtmlData.getTrainingListUrl(UserInfo.getInstance().getUser().getTeacherId()));
+                    activity.startActivity(intent);
+                    break;
+                case R.id.more_yy_ll:
+                    intent = new Intent(activity, HtmlWebActivity.class);
+                    intent.putExtra("Title", "运营方案");
+                    intent.putExtra("Url", URLHtmlData.getOperatePlanUrl(UserInfo.getInstance().getUser().getTeacherId()));
+                    activity.startActivity(intent);
+                    break;
             }
         }
     };
 
-    private void addNewsLL(){
-        itemNewsLL.addView(new ItemNewsView(activity, false));
-        itemNewsLL.addView(new ItemNewsView(activity, true));
+    private void addNewsLL(List<HomeInfoNode.ObjNew> items){
+        if(items==null)
+            return;
+        for (int i=0; i<items.size();i++){
+            if(i==0)
+                itemNewsLL.addView(new ItemNewsView(activity, items.get(i), false));
+            else
+                itemNewsLL.addView(new ItemNewsView(activity, items.get(i), true));
+        }
+
     }
 
-    private void addCategoryLL(){
-        itemCategoryLL.addView(new ItemCategoryView(activity, "教师"));
-        itemCategoryLL.addView(new ItemCategoryView(activity, "运营"));
-        itemCategoryLL.addView(new ItemCategoryView(activity, "学院"));
+    private void addTeacherLL(List<TeacherTrainingNode.ObjTeachingTrainingItem> items){
+        if(items==null)
+            return;
+        for (int i=0; i<items.size();){
+            if(i>=items.size())
+                return;
+            TeacherTrainingNode.ObjTeachingTrainingItem item1 = null, item2 = null;
+            item1 = items.get(i);
+            i++;
+            if(i<items.size()) {
+                item2 = items.get(i);
+                i++;
+            }
+
+            if(i+1<items.size())
+                itemTeacherLL.addView(new ItemCourseView(activity, item1, item2));
+            else
+                itemTeacherLL.addView(new ItemCourseView(activity, item1, item2, true));
+        }
+    }
+
+    private void addOperateLL(List<HomeOperateNode.ObjNew> items){
+        if(items==null)
+            return;
+        for (int i=0; i<items.size();){
+            if(i>=items.size())
+                return;
+            HomeOperateNode.ObjNew item1 = null, item2 = null;
+            item1 = items.get(i);
+            i++;
+            if(i<items.size()) {
+                item2 = items.get(i);
+                i++;
+            }
+
+            if(i+1<items.size())
+                itemCategoryLL.addView(new ItemOperateView(activity, item1, item2));
+            else
+                itemCategoryLL.addView(new ItemOperateView(activity, item1, item2, true));
+        }
     }
 
     private Handler handler = new Handler(){
@@ -239,11 +337,30 @@ public class ItemHomeFragment extends Fragment {
             if(pullRefreshListener!=null)
                 pullRefreshListener.closeRefreshLoad();
             switch (msg.what) {
+                case Constants.MSG_SUCCESS:
+                    HomeInfoNode node = (HomeInfoNode)msg.obj;
+                    setViewsData(node);
+                    break;
                 case Constants.MSG_SUCCESS_ONE:
                     if (msg.obj == null)
                         return;
                     List<BannerNode> bannerNodes = (List<BannerNode>) msg.obj;
                     setNewsBanner(bannerNodes);
+                    break;
+                case Constants.MSG_SUCCESS_FOUR:
+                    TeacherTrainingNode.ObjProgress progressNode = (TeacherTrainingNode.ObjProgress)msg.obj;
+                    setProgressData(progressNode);
+                    break;
+                case Constants.MSG_SUCCESS_FIVE:
+                    if(msg.obj==null)
+                        return;
+                    String ggcount = (String)msg.obj;
+                    Log.i("HuiZhi", "The gg count is:" + ggcount);
+                    ImageView ggCountIV = messageLayout.findViewById(R.id.gg_count_iv);
+                    if("0".equals(ggcount))
+                        Glide.with(activity).load(R.mipmap.icon_home_gg).into(ggCountIV);
+                    else
+                        Glide.with(activity).load(R.mipmap.icon_home_gg_fc).into(ggCountIV);
                     break;
             }
         }

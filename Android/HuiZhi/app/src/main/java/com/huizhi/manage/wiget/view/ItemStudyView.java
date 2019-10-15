@@ -1,13 +1,18 @@
 package com.huizhi.manage.wiget.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.huizhi.manage.R;
+import com.huizhi.manage.activity.base.HtmlWebActivity;
+import com.huizhi.manage.data.UserInfo;
+import com.huizhi.manage.http.URLHtmlData;
 import com.huizhi.manage.node.TeacherTrainingNode;
 
 public class ItemStudyView extends LinearLayout {
@@ -38,5 +43,15 @@ public class ItemStudyView extends LinearLayout {
 		}
         ImageView itemIV = findViewById(R.id.item_iv);
         Glide.with(context).load(node.getCoverImg()).into(itemIV);
+        LinearLayout itemLL = findViewById(R.id.item_ll);
+        itemLL.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, HtmlWebActivity.class);
+                intent.putExtra("Title", node.getTitle());
+                intent.putExtra("Url", URLHtmlData.getStudyDetailUrl(UserInfo.getInstance().getUser().getTeacherId(), node.getTrainingId()));
+                context.startActivity(intent);
+            }
+        });
     }
 }

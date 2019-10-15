@@ -6,8 +6,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="10dp">
+        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,4 +52,8 @@
         </LinearLayout>
 
     </LinearLayout>
+    <View
+        android:id="@+id/bottom_v"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
 </LinearLayout>

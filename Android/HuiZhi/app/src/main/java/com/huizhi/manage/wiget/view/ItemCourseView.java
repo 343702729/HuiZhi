@@ -19,12 +19,22 @@ public class ItemCourseView extends LinearLayout {
     private Context context;
     private TeacherTrainingNode.ObjTeachingTrainingItem item1;
     private TeacherTrainingNode.ObjTeachingTrainingItem item2;
+    private boolean flag = false;
 
     public ItemCourseView(Context context, TeacherTrainingNode.ObjTeachingTrainingItem item1, TeacherTrainingNode.ObjTeachingTrainingItem item2){
         super(context);
         this.context = context;
         this.item1 = item1;
         this.item2 = item2;
+        initViews();
+    }
+
+    public ItemCourseView(Context context, TeacherTrainingNode.ObjTeachingTrainingItem item1, TeacherTrainingNode.ObjTeachingTrainingItem item2, boolean flag){
+        super(context);
+        this.context = context;
+        this.item1 = item1;
+        this.item2 = item2;
+        this.flag = flag;
         initViews();
     }
 
@@ -38,6 +48,8 @@ public class ItemCourseView extends LinearLayout {
 		TextView title1TV = findViewById(R.id.title1_tv);
 		TextView title2TV = findViewById(R.id.title2_tv);
 
+		View bottomV = findViewById(R.id.bottom_v);
+
         if(item1!=null){
 			Glide.with(context).load(item1.getCoverImg()).into(item1IV);
 			title1TV.setText(item1.getTitle());
@@ -50,6 +62,8 @@ public class ItemCourseView extends LinearLayout {
 			item2IV.setOnClickListener(itemClick);
 		}
 
+		if(flag)
+            bottomV.setVisibility(View.GONE);
     }
 
     private OnClickListener itemClick = new OnClickListener() {

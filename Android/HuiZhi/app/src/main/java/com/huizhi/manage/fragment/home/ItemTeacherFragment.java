@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.huizhi.manage.R;
 import com.huizhi.manage.activity.base.HtmlWebActivity;
+import com.huizhi.manage.activity.home.course.CourseListActivity;
 import com.huizhi.manage.adapter.home.ImagePagerAdapter;
 import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.data.UserInfo;
@@ -81,6 +82,18 @@ public class ItemTeacherFragment extends Fragment {
                 .transform(new GlideCircleTransform(activity))
                 .into(headIV);
 
+        LinearLayout itembjLL = messageLayout.findViewById(R.id.item_bj_ll);
+        itembjLL.setOnClickListener(itemClick);
+
+        LinearLayout itemjyLL = messageLayout.findViewById(R.id.item_jy_ll);
+        itemjyLL.setOnClickListener(itemClick);
+
+        LinearLayout itemxxLL = messageLayout.findViewById(R.id.item_xx_ll);
+        itemxxLL.setOnClickListener(itemClick);
+
+        LinearLayout morexxLL = messageLayout.findViewById(R.id.more_xx_ll);
+        morexxLL.setOnClickListener(itemClick);
+
         LinearLayout morekcLL = messageLayout.findViewById(R.id.more_kc_ll);
         morekcLL.setOnClickListener(itemClick);
 
@@ -89,9 +102,23 @@ public class ItemTeacherFragment extends Fragment {
     private View.OnClickListener itemClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(activity, HtmlWebActivity.class);
+            Intent intent;
             switch (view.getId()){
+                case R.id.item_bj_ll:
+                    intent = new Intent();
+                    intent.setClass(activity, CourseListActivity.class);
+                    activity.startActivity(intent);
+                    break;
+                case R.id.item_xx_ll:
+                case R.id.more_xx_ll:
+                    intent = new Intent(activity, HtmlWebActivity.class);
+                    intent.putExtra("Title", "学习");
+                    intent.putExtra("Url", URLHtmlData.getStudyListUrl(UserInfo.getInstance().getUser().getTeacherId()));
+                    activity.startActivity(intent);
+                    break;
+                case R.id.item_jy_ll:
                 case R.id.more_kc_ll:
+                    intent = new Intent(activity, HtmlWebActivity.class);
                     intent.putExtra("Title", "课程教学");
                     intent.putExtra("Url", URLHtmlData.getTrainingListUrl(UserInfo.getInstance().getUser().getTeacherId()));
                     activity.startActivity(intent);
@@ -218,7 +245,7 @@ public class ItemTeacherFragment extends Fragment {
 					TeacherTrainingNode node = (TeacherTrainingNode)msg.obj;
 					setViewsData(node);
                 	break;
-				case Constants.MSG_SUCCESS_FIVE:
+				case Constants.MSG_SUCCESS_FOUR:
 					TeacherTrainingNode.ObjProgress progressNode = (TeacherTrainingNode.ObjProgress)msg.obj;
 					setProgressData(progressNode);
 					break;
