@@ -119,7 +119,7 @@ public class ItemTeacherFragment extends Fragment {
                 case R.id.item_jy_ll:
                 case R.id.more_kc_ll:
                     intent = new Intent(activity, HtmlWebActivity.class);
-                    intent.putExtra("Title", "课程教学");
+                    intent.putExtra("Title", "教研");
                     intent.putExtra("Url", URLHtmlData.getTrainingListUrl(UserInfo.getInstance().getUser().getTeacherId()));
                     activity.startActivity(intent);
                     break;
@@ -161,7 +161,7 @@ public class ItemTeacherFragment extends Fragment {
             imgsList.add(node.getImgUrl());
             urlList.add(node.getNewsId());
         }
-        viewFlow.setAdapter(new ImagePagerAdapter(activity, imgsList, urlList, titleList).setInfiniteLoop(true));
+        viewFlow.setAdapter(new ImagePagerAdapter(activity, imgsList, urlList, titleList, bannerNodes).setInfiniteLoop(true));
         viewFlow.setmSideBuffer(bannerNodes.size());
         viewFlow.setTimeSpan(4000);
         viewFlow.setSelection(bannerNodes.size() * 1000);

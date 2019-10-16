@@ -72,13 +72,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="3222"
+                        android:text="0"
                         android:textSize="13sp"
                         android:textColor="#94D050"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
+                        android:visibility="gone"
                         android:text="排名:"
                         android:textSize="13sp"
                         android:textColor="@color/gray"/>
@@ -86,6 +87,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
+                        android:visibility="gone"
                         android:text="168"
                         android:textSize="13sp"
                         android:textColor="#94D050"/>

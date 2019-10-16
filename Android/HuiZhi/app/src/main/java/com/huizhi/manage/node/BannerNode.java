@@ -13,6 +13,7 @@ public class BannerNode {
     private String strCreateTime;
     private boolean activeFlg;
     private String newsTitle;
+    private int Type;
 
     public String getBannerId() {
         return bannerId;
@@ -76,5 +77,13 @@ public class BannerNode {
 
     public void setNewsTitle(String newsTitle) {
         this.newsTitle = newsTitle;
+    }
+
+    public int getType() {
+        return Type;
+    }
+
+    public void setType(int type) {
+        Type = type;
     }
 }

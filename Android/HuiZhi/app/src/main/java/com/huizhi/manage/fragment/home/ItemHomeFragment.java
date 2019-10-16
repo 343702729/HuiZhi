@@ -23,6 +23,7 @@ import com.huizhi.manage.R;
 import com.huizhi.manage.activity.base.HtmlWebActivity;
 import com.huizhi.manage.activity.home.HomeAttendanceActivity;
 import com.huizhi.manage.activity.home.HomeMessageActivity;
+import com.huizhi.manage.activity.home.HomeNewsActivity;
 import com.huizhi.manage.activity.home.HomeWorkDailyActivity;
 import com.huizhi.manage.activity.home.course.CourseListActivity;
 import com.huizhi.manage.adapter.home.ImagePagerAdapter;
@@ -102,6 +103,9 @@ public class ItemHomeFragment extends Fragment {
         ImageView jxhlIV = messageLayout.findViewById(R.id.jxhl_fl);
         jxhlIV.setOnClickListener(itemOnClick);
 
+        LinearLayout morexwLL = messageLayout.findViewById(R.id.more_xw_ll);
+        morexwLL.setOnClickListener(itemOnClick);
+
         LinearLayout morejsLL = messageLayout.findViewById(R.id.more_teacher_ll);
         morejsLL.setOnClickListener(itemOnClick);
 
@@ -177,6 +181,7 @@ public class ItemHomeFragment extends Fragment {
     private void initBanner(List<BannerNode> bannerNodes){
         if(bannerNodes==null)
             return;
+        pointsLL.removeAllViews();
         List<String> imgsList = new ArrayList<>();
         List<String> urlList = new ArrayList<>();
         List<String> titleList = new ArrayList<>();
@@ -185,12 +190,12 @@ public class ItemHomeFragment extends Fragment {
             imgsList.add(node.getImgUrl());
             urlList.add(node.getNewsId());
         }
-        viewFlow.setAdapter(new ImagePagerAdapter(activity, imgsList, urlList, titleList).setInfiniteLoop(true));
+        viewFlow.setAdapter(new ImagePagerAdapter(activity, imgsList, urlList, titleList, bannerNodes).setInfiniteLoop(true));
         viewFlow.setmSideBuffer(bannerNodes.size());
         viewFlow.setTimeSpan(4000);
         viewFlow.setSelection(bannerNodes.size() * 1000);
         viewFlow.startAutoFlowTimer();
-        pointView = new PointView(activity);
+        pointView = new PointView(activity, 1);
         pointView.addViews(pointsLL, bannerNodes.size());
     }
 
@@ -210,7 +215,9 @@ public class ItemHomeFragment extends Fragment {
         @Override
         public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
             refreshLayout = pullToRefreshLayout;
-            handler.sendEmptyMessageDelayed(2, 3000);
+//            handler.sendEmptyMessageDelayed(2, 3000);
+            getDatas();
+            getTZDatas();
         }
 
         @Override
@@ -260,6 +267,11 @@ public class ItemHomeFragment extends Fragment {
                     intent.setClass(activity, HomeMessageActivity.class);
                     startActivity(intent);
                     break;
+                case R.id.more_xw_ll://新闻more
+                    intent = new Intent();
+                    intent.setClass(activity, HomeNewsActivity.class);
+                    startActivity(intent);
+                    break;
                 case R.id.more_teacher_ll://教师more
                     intent = new Intent(activity, HtmlWebActivity.class);
                     intent.putExtra("Title", "教师");
@@ -277,6 +289,7 @@ public class ItemHomeFragment extends Fragment {
     };
 
     private void addNewsLL(List<HomeInfoNode.ObjNew> items){
+        itemNewsLL.removeAllViews();
         if(items==null)
             return;
         for (int i=0; i<items.size();i++){
@@ -289,6 +302,7 @@ public class ItemHomeFragment extends Fragment {
     }
 
     private void addTeacherLL(List<TeacherTrainingNode.ObjTeachingTrainingItem> items){
+        itemTeacherLL.removeAllViews();
         if(items==null)
             return;
         for (int i=0; i<items.size();){
@@ -310,6 +324,7 @@ public class ItemHomeFragment extends Fragment {
     }
 
     private void addOperateLL(List<HomeOperateNode.ObjNew> items){
+        itemCategoryLL.removeAllViews();
         if(items==null)
             return;
         for (int i=0; i<items.size();){

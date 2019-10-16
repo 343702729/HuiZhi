@@ -1,6 +1,7 @@
 package com.huizhi.manage.wiget.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.huizhi.manage.R;
+import com.huizhi.manage.activity.home.HomeNewsInfoActivity;
 import com.huizhi.manage.node.HomeInfoNode;
 
 public class ItemNewsView extends LinearLayout {
@@ -40,5 +42,16 @@ public class ItemNewsView extends LinearLayout {
         contentTV.setText(item.getNewsTitle());
         timeTV.setText(item.getStrCreateTime1());
         Glide.with(context).load(item.getThumbImgUrl()).into(item1IV);
+
+        LinearLayout itemLL = findViewById(R.id.item_ll);
+        itemLL.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(context, HomeNewsInfoActivity.class);
+                intent.putExtra("Id", item.getNewsId());
+                context.startActivity(intent);
+            }
+        });
     }
 }
