@@ -29,14 +29,14 @@ public class ItemOperateTaskView extends LinearLayout {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.item_operate_task, this);
         TextView titleTV = findViewById(R.id.task_title_tv);
-        if(node.getExecuteType()==0){
-            titleTV.setText("新任务");
-        }else {
-            titleTV.setText("已完成");
-            titleTV.setTextColor(context.getResources().getColor(R.color.light_green_s));
-        }
         TextView taskNTV = findViewById(R.id.task_name_tv);
-        taskNTV.setText(node.getTaskName());
+        titleTV.setText(node.getTaskName());
+        if(node.getExecuteType()==0){
+            taskNTV.setText(node.getStrBlockingDate() + "前执行");
+        }else {
+            taskNTV.setText("已完成");
+//            titleTV.setTextColor(context.getResources().getColor(R.color.light_green_s));
+        }
 
         FrameLayout taskFL = findViewById(R.id.task_fl);
         taskFL.setOnClickListener(new OnClickListener() {

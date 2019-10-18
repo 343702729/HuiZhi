@@ -3,6 +3,7 @@ package com.huizhi.manage.node;
 public class CourseWareCategoryNode {
     private String CategoryId;
     private String CategoryName;
+    private String CategoryNameLabel;
     private String CategoryCover;
     private String FullCategoryCover;
     private String TrialAge;
@@ -25,6 +26,14 @@ public class CourseWareCategoryNode {
 
     public void setCategoryName(String categoryName) {
         CategoryName = categoryName;
+    }
+
+    public String getCategoryNameLabel() {
+        return CategoryNameLabel;
+    }
+
+    public void setCategoryNameLabel(String categoryNameLabel) {
+        CategoryNameLabel = categoryNameLabel;
     }
 
     public String getCategoryCover() {

@@ -159,12 +159,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginLeft="20dp"
+                    android:visibility="gone"
                     android:background="@color/app_bg"/>
 
                 <!-- 企业邮箱 -->
                 <LinearLayout
                     android:id="@+id/user_yj_ll"
-                    style="@style/item_line_ll">
+                    style="@style/item_line_ll"
+                    android:visibility="gone">
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

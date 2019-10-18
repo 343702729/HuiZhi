@@ -81,7 +81,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="运营动态"
+                            android:text="校区动态"
                             android:textColor="@color/gray_dark_text"
                             android:textSize="12sp"/>
                     </LinearLayout>
@@ -100,7 +100,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="运营方案"
+                            android:text="运营指南"
                             android:textColor="@color/gray_dark_text"
                             android:textSize="12sp"/>
                     </LinearLayout>
@@ -135,7 +135,7 @@
 
             </LinearLayout>
 
-            <!--运营动态-->
+            <!--校区动态-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -153,7 +153,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="运营动态"
+                        android:text="校区动态"
                         android:textStyle="bold"
                         android:textSize="14sp"
                         android:textColor="@color/black_light"/>
@@ -169,7 +169,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:layout_marginBottom="2dp"
-                            android:text="more"
+                            android:text="更多"
                             android:textSize="12sp"
                             android:textColor="@color/gray"/>
                         <ImageView
@@ -189,7 +189,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!--运营方案-->
+            <!--运营指南-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -207,7 +207,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="运营方案"
+                        android:text="运营指南"
                         android:textStyle="bold"
                         android:textSize="14sp"
                         android:textColor="@color/black_light"/>
@@ -223,7 +223,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:layout_marginBottom="2dp"
-                            android:text="more"
+                            android:text="更多"
                             android:textSize="12sp"
                             android:textColor="@color/gray"/>
                         <ImageView
@@ -276,7 +276,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:layout_marginBottom="2dp"
-                            android:text="more"
+                            android:text="更多"
                             android:textSize="12sp"
                             android:textColor="@color/gray"/>
                         <ImageView

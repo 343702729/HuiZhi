@@ -235,7 +235,7 @@
                                 android:layout_marginRight="50dp"
                                 android:layout_gravity="center_vertical"
                                 style="?android:attr/progressBarStyleHorizontal"
-                                android:max="100"
+                                android:max="0"
                                 android:progress="0"
                                 android:progressDrawable="@drawable/progress_bar_blue"/>
                             <TextView
@@ -272,8 +272,8 @@
                                 android:layout_marginRight="50dp"
                                 android:layout_gravity="center_vertical"
                                 style="?android:attr/progressBarStyleHorizontal"
-                                android:max="100"
-                                android:progress="60"
+                                android:max="0"
+                                android:progress="0"
                                 android:progressDrawable="@drawable/progress_bar_green"/>
                             <TextView
                                 android:id="@+id/bk_tv"
@@ -281,7 +281,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right|center_vertical"
                                 android:gravity="right"
-                                android:text="7/10"
+                                android:text=""
                                 android:textColor="@color/gray_dark_text"
                                 android:textSize="14sp"/>
                         </FrameLayout>
@@ -308,8 +308,8 @@
                                 android:layout_marginRight="50dp"
                                 android:layout_gravity="center_vertical"
                                 style="?android:attr/progressBarStyleHorizontal"
-                                android:max="100"
-                                android:progress="60"
+                                android:max="0"
+                                android:progress="0"
                                 android:progressDrawable="@drawable/progress_bar_orange"/>
                             <TextView
                                 android:id="@+id/py_tv"
@@ -317,7 +317,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right|center_vertical"
                                 android:gravity="right"
-                                android:text="3/10"
+                                android:text=""
                                 android:textColor="@color/gray_dark_text"
                                 android:textSize="14sp"/>
                         </FrameLayout>
@@ -358,7 +358,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:layout_marginBottom="2dp"
-                            android:text="more"
+                            android:text="更多"
                             android:textSize="12sp"
                             android:textColor="@color/gray"/>
                         <ImageView
@@ -411,7 +411,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:layout_marginBottom="2dp"
-                            android:text="more"
+                            android:text="更多"
                             android:textSize="12sp"
                             android:textColor="@color/gray"/>
                         <ImageView

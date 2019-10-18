@@ -172,6 +172,16 @@ public class MainActivity extends FragmentActivity {
                 break;
                  */
             case 2:
+                NavigationBarUtil.MIUISetStatusBarLightMode(getWindow(), false);
+                if(materialFragment==null){
+                    materialFragment = new MaterialFragment();
+                    transaction.add(R.id.content, materialFragment);
+                }else{
+                    transaction.show(materialFragment);
+                    materialFragment.onResume();
+                }
+                break;
+            case 3:
                 NavigationBarUtil.MIUISetStatusBarLightMode(getWindow(), true);
                 if(userFragment==null){
 //                    userFragment = new UserFragment();
@@ -183,6 +193,7 @@ public class MainActivity extends FragmentActivity {
                 }
                 currentFG = userFragment;
                 break;
+
         }
         transaction.commit();
     }
@@ -196,8 +207,8 @@ public class MainActivity extends FragmentActivity {
             transaction.hide(homeFragment);
         if(messageFragment!=null)
             transaction.hide(messageFragment);
-//        if(materialFragment!=null)
-//            transaction.hide(materialFragment);
+        if(materialFragment!=null)
+            transaction.hide(materialFragment);
 //        if(communicateListFragment !=null)
 //            transaction.hide(communicateListFragment);
         if(userFragment!=null)
@@ -210,13 +221,13 @@ public class MainActivity extends FragmentActivity {
 //        int[] bgs = {R.mipmap.home_bg, R.mipmap.task_bg, R.mipmap.material_bg, R.mipmap.communicate_bg, R.mipmap.user_bg};
 //        int[] fcs = {R.mipmap.home_bg_fc, R.mipmap.task_bg_fc, R.mipmap.material_bg_fc, R.mipmap.communicate_bg_fc, R.mipmap.user_bg_fc};
 
-        int[] ivs = {R.id.home_home_iv, R.id.home_task_iv, R.id.home_user_iv};
-        int[] tvs = {R.id.home_home_tv, R.id.home_task_tv, R.id.home_user_tv};
-        int[] bgs = {R.mipmap.home_bg, R.mipmap.icon_message_bg, R.mipmap.icon_user_bg};
-        int[] fcs = {R.mipmap.home_bg_fc, R.mipmap.icon_message_fc, R.mipmap.icon_user_fc};
+        int[] ivs = {R.id.home_home_iv, R.id.home_task_iv, R.id.home_material_iv, R.id.home_user_iv};
+        int[] tvs = {R.id.home_home_tv, R.id.home_task_tv, R.id.home_material_tv, R.id.home_user_tv};
+        int[] bgs = {R.mipmap.home_bg, R.mipmap.icon_message_bg, R.mipmap.icon_material_bg, R.mipmap.icon_user_bg};
+        int[] fcs = {R.mipmap.home_bg_fc, R.mipmap.icon_message_fc, R.mipmap.icon_material_fc, R.mipmap.icon_user_fc};
         ImageView imageView;
         TextView textView;
-        for(int i=0; i<3; i++){
+        for(int i=0; i<4; i++){
             imageView = findViewById(ivs[i]);
             textView = findViewById(tvs[i]);
             if(index==i){
@@ -246,7 +257,7 @@ public class MainActivity extends FragmentActivity {
                     setTabSelection(3);
                     break;
                 case R.id.user_btn:
-                    setTabSelection(2);
+                    setTabSelection(3);
                     break;
             }
 

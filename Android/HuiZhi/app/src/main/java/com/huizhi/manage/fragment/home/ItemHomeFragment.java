@@ -140,8 +140,8 @@ public class ItemHomeFragment extends Fragment {
     }
 
     private void getDatas(){
-        TeacherRequest request = new TeacherRequest();
-        request.getProgressData(UserInfo.getInstance().getUser().getTeacherId(), handler);
+//        TeacherRequest request = new TeacherRequest();
+//        request.getProgressData(UserInfo.getInstance().getUser().getTeacherId(), handler);
         HomeNewRequest newRequest = new HomeNewRequest();
         newRequest.getHomeInfo(handler);
     }
@@ -274,13 +274,13 @@ public class ItemHomeFragment extends Fragment {
                     break;
                 case R.id.more_teacher_ll://教师more
                     intent = new Intent(activity, HtmlWebActivity.class);
-                    intent.putExtra("Title", "教师");
+                    intent.putExtra("Title", "教学中心");
                     intent.putExtra("Url", URLHtmlData.getTrainingListUrl(UserInfo.getInstance().getUser().getTeacherId()));
                     activity.startActivity(intent);
                     break;
                 case R.id.more_yy_ll:
                     intent = new Intent(activity, HtmlWebActivity.class);
-                    intent.putExtra("Title", "运营方案");
+                    intent.putExtra("Title", "运营中心");
                     intent.putExtra("Url", URLHtmlData.getOperatePlanUrl(UserInfo.getInstance().getUser().getTeacherId()));
                     activity.startActivity(intent);
                     break;

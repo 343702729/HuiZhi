@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -19,6 +20,7 @@ import com.huizhi.manage.activity.base.HtmlWebActivity;
 import com.huizhi.manage.adapter.home.ViewPagerAdapter;
 import com.huizhi.manage.adapter.topic.TopicItemGVAdapter;
 import com.huizhi.manage.adapter.topic.TopicItemLVAdapter;
+import com.huizhi.manage.adapter.topic.TopicItemPLVAdapter;
 import com.huizhi.manage.base.BaseInfoUpdate;
 import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.data.UserInfo;
@@ -28,6 +30,7 @@ import com.huizhi.manage.node.CourseWareCategoryNode;
 import com.huizhi.manage.node.CourseWareTypeNode;
 import com.huizhi.manage.request.topic.TopicRequest;
 import com.huizhi.manage.util.TLog;
+import com.huizhi.manage.wiget.ProgressWebView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,30 +38,36 @@ import java.util.List;
 public class ItemTopicBody2View extends LinearLayout {
     private Context context;
     private String category;
-    private TopicItemGVAdapter topicItemGVAdapter;
+    private TopicItemPLVAdapter topicItemGVAdapter;
     private LinearLayout level3LL;
-    private GridView gridView;
+    private ListView listView;
+    private ProgressWebView webView;
+//    private GridView gridView;
 
     private TextView titleTV;
     private List<CourseWareTypeNode.ObjTypeItem> items = new ArrayList<>();
     private TopicItemLVAdapter adapter;
+    private int index;
 
-    public ItemTopicBody2View(Context context, String category){
+    public ItemTopicBody2View(Context context, String category, int index){
         super(context);
         this.context = context;
         this.category = category;
+        this.index = index;
         initViews();
         getDatas();
     }
 
     public void initViews() {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.item_topic_body2, this);
+        inflater.inflate(R.layout.item_topic_body2_new, this);
+        webView = findViewById(R.id.webview);
+        webView.loadUrl("http://www.baidu.com");
         level3LL = findViewById(R.id.level3_ll);
-        gridView = findViewById(R.id.gridview);
-        topicItemGVAdapter = new TopicItemGVAdapter(context, null);
-        gridView.setAdapter(topicItemGVAdapter);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView = findViewById(R.id.listview);
+        topicItemGVAdapter = new TopicItemPLVAdapter(context, null);
+        listView.setAdapter(topicItemGVAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 CourseWareCategoryNode node = (CourseWareCategoryNode)topicItemGVAdapter.getItem(i);
@@ -78,10 +87,19 @@ public class ItemTopicBody2View extends LinearLayout {
                 }
                 level3LL.removeAllViews();
                 level3LL.addView(new ItemTopicBody3View(context, node.getCategoryId(), level3InfoUpdate));
-                gridView.setVisibility(View.GONE);
-                level3LL.setVerticalGravity(View.VISIBLE);
+                listView.setVisibility(View.GONE);
+                level3LL.setVisibility(View.VISIBLE);
             }
         });
+        if(index==0){
+            listView.setVisibility(View.GONE);
+            level3LL.setVisibility(View.GONE);
+            webView.setVisibility(View.VISIBLE);
+        }else {
+            webView.setVisibility(View.GONE);
+            level3LL.setVisibility(View.GONE);
+            listView.setVisibility(View.VISIBLE);
+        }
     }
 
     private void getDatas(){
@@ -93,7 +111,10 @@ public class ItemTopicBody2View extends LinearLayout {
         getDatas();
         level3LL.removeAllViews();
         level3LL.setVerticalGravity(View.GONE);
-        gridView.setVisibility(View.VISIBLE);
+        if(index==0)
+            webView.setVisibility(View.VISIBLE);
+        else
+            listView.setVisibility(View.VISIBLE);
     }
 
     private BaseInfoUpdate level3InfoUpdate = new BaseInfoUpdate(){
@@ -106,7 +127,7 @@ public class ItemTopicBody2View extends LinearLayout {
                 return;
             level3LL.removeAllViews();
             level3LL.setVerticalGravity(View.GONE);
-            gridView.setVisibility(View.VISIBLE);
+            listView.setVisibility(View.VISIBLE);
 
         }
     };

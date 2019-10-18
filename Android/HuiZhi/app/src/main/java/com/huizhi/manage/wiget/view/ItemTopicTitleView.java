@@ -1,6 +1,7 @@
 package com.huizhi.manage.wiget.view;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,6 +13,7 @@ import com.huizhi.manage.R;
 import com.huizhi.manage.adapter.home.ViewPagerAdapter;
 import com.huizhi.manage.base.BaseInfoUpdate;
 import com.huizhi.manage.node.CourseWareCategoryNode;
+import com.ruffian.library.RTextView;
 
 public class ItemTopicTitleView extends LinearLayout {
     private Context context;
@@ -22,7 +24,7 @@ public class ItemTopicTitleView extends LinearLayout {
     private int index;
     private LinearLayout bgLL;
     private TextView titleTV;
-    private TextView typeTV;
+    private RTextView typeTV;
     private ItemTopicBody2View bodyView;
 
     public ItemTopicTitleView(Context context, boolean flag, CourseWareCategoryNode categoryNode, int index, BaseInfoUpdate infoUpdate){
@@ -51,6 +53,10 @@ public class ItemTopicTitleView extends LinearLayout {
         bgLL.setOnClickListener(itemClick);
         titleTV = findViewById(R.id.item_title_tv);
         typeTV = findViewById(R.id.item_type_tv);
+        if(categoryNode!=null&&!TextUtils.isEmpty(categoryNode.getCategoryNameLabel())) {
+            typeTV.setText(categoryNode.getCategoryNameLabel());
+            typeTV.setVisibility(View.VISIBLE);
+        }
         if(categoryNode!=null){
             titleTV.setText(categoryNode.getCategoryName());
         }
@@ -62,7 +68,7 @@ public class ItemTopicTitleView extends LinearLayout {
         String category = "";
         if(categoryNode!=null)
             category = categoryNode.getCategoryId();
-        bodyView = new ItemTopicBody2View(context, category);
+        bodyView = new ItemTopicBody2View(context, category, index);
 //        bodyView = new ItemTopicBody3View(context, "fef7a99eeab94cee9023f0668f7b4fa2");
 //        if(index==2)
 //            bodyView = new ItemTopicBody2View(context);
@@ -75,13 +81,13 @@ public class ItemTopicTitleView extends LinearLayout {
     public void setStatus(boolean flag){
         this.flag = flag;
         if(flag){
-            titleTV.setTextColor(context.getResources().getColor(R.color.white));
-            typeTV.setTextColor(context.getResources().getColor(R.color.white));
-            bgLL.setBackgroundColor(context.getResources().getColor(R.color.blue_light));
+//            titleTV.setTextColor(context.getResources().getColor(R.color.white));
+//            typeTV.setTextColor(context.getResources().getColor(R.color.white));
+            bgLL.setBackgroundColor(context.getResources().getColor(R.color.white));
         }else {
-            titleTV.setTextColor(context.getResources().getColor(R.color.dark_gray_light));
-            typeTV.setTextColor(context.getResources().getColor(R.color.dark_gray_light));
-            bgLL.setBackgroundColor(context.getResources().getColor(R.color.app_bg));
+//            titleTV.setTextColor(context.getResources().getColor(R.color.dark_gray_light));
+//            typeTV.setTextColor(context.getResources().getColor(R.color.dark_gray_light));
+            bgLL.setBackgroundColor(context.getResources().getColor(R.color.blue_light_s));
         }
     }
 

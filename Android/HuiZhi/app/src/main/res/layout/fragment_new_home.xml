@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:tag="itemTV"
-                android:text="教师"
+                android:text="教师中心"
                 android:textSize="14sp"
                 android:textColor="@color/gray_dark_text"/>
             <View
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:tag="itemTV"
-                android:text="运营"
+                android:text="运营中心"
                 android:textSize="14sp"
                 android:textColor="@color/gray_dark_text"/>
             <View
@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:tag="itemTV"
-                android:text="课题中心"
+                android:text="课程中心"
                 android:textSize="14sp"
                 android:textColor="@color/gray_dark_text"/>
             <View
