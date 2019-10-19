@@ -398,7 +398,7 @@
                 android:background="@color/white"
                 android:visibility="gone">
 
-                <com.huizhi.manage.wiget.banner.MyViewFlow
+                <com.huizhi.manage.wiget.banner.BannerViewFlow
                     android:id="@+id/viewflow"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />

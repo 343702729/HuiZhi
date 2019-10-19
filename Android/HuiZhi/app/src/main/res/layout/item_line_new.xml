@@ -32,14 +32,15 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginTop="5dp"
-            android:text="每个学期，都是一场新的退不。"
+            android:maxLines="2"
+            android:text=""
             android:textColor="@color/dark_gray"
             android:textSize="16sp"/>
         <TextView
             android:id="@+id/new1_time_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="2017-10-29"
+            android:text=""
             android:textColor="@android:color/darker_gray"
             android:textSize="14sp"/>
     </LinearLayout>
@@ -65,14 +66,15 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginTop="5dp"
-            android:text="每个学期，都是一场新的退不。"
+            android:maxLines="2"
+            android:text=""
             android:textColor="@color/dark_gray"
             android:textSize="16sp"/>
         <TextView
             android:id="@+id/new2_time_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="2017-10-29"
+            android:text=""
             android:textColor="@android:color/darker_gray"
             android:textSize="14sp"/>
     </LinearLayout>

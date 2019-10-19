@@ -19,7 +19,7 @@
                 android:layout_gravity="center"
                 android:text="邮件详情"
                 android:textSize="@dimen/title_text"
-                android:textColor="@android:color/white"/>
+                android:textColor="@color/title_color"/>
 
             <ImageButton
                 android:id="@+id/back_btn"

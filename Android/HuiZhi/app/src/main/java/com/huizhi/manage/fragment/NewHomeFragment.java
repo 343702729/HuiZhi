@@ -52,6 +52,13 @@ public class NewHomeFragment extends Fragment {
         setTabSelection(1);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(currentFG!=null)
+            currentFG.onResume();
+    }
+
     private View.OnClickListener itemFLClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {

@@ -21,11 +21,11 @@ import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.http.URLHtmlData;
 import com.huizhi.manage.node.BannerNode;
 import com.huizhi.manage.node.HomeOperateNode;
-import com.huizhi.manage.request.home.HomeUserGetRequest;
 import com.huizhi.manage.request.operate.OperateRequest;
-import com.huizhi.manage.wiget.banner.MyViewFlow;
+import com.huizhi.manage.wiget.banner.BannerViewFlow;
 import com.huizhi.manage.wiget.banner.PointView;
 import com.huizhi.manage.wiget.banner.ViewFlow;
+import com.huizhi.manage.wiget.pullableview.PullToRefreshLayout;
 import com.huizhi.manage.wiget.view.ItemOperateTaskView;
 import com.huizhi.manage.wiget.view.ItemOperateView;
 import com.huizhi.manage.wiget.view.ItemProgrammeView;
@@ -37,13 +37,14 @@ import java.util.List;
 public class ItemOperateFragment extends Fragment {
     private View messageLayout;
     private Activity activity;
-    private MyViewFlow viewFlow;
+    private BannerViewFlow viewFlow;
     private LinearLayout pointsLL;
     private PointView pointView;
     private LinearLayout taskLL;
     private LinearLayout yyLL;
     private LinearLayout faLL;
     private LinearLayout wbLL;
+    private PullRefreshListener pullRefreshListener;
 
     private int imgSize = 0;
 
@@ -58,6 +59,11 @@ public class ItemOperateFragment extends Fragment {
     }
 
     private void initViews() {
+        pullRefreshListener = new PullRefreshListener();
+        PullToRefreshLayout pullRL = (PullToRefreshLayout)messageLayout.findViewById(R.id.refreshview);
+        pullRL.isPullUp(false);
+        pullRL.setOnRefreshListener(pullRefreshListener);
+
         viewFlow = messageLayout.findViewById(R.id.viewflow);
         viewFlow.setOnViewSwitchListener(imageSwitchListener);
         pointsLL = messageLayout.findViewById(R.id.points_ll);
@@ -186,6 +192,7 @@ public class ItemOperateFragment extends Fragment {
     }
 
     private void addOperateDatas(List<HomeOperateNode.ObjNew> items){
+        yyLL.removeAllViews();
         if(items==null)
             return;
         for (int i=0; i<items.size();){
@@ -205,6 +212,7 @@ public class ItemOperateFragment extends Fragment {
     }
 
     private void addProgrammeDatas(List<HomeOperateNode.ObjKnowledge> nodes){
+        faLL.removeAllViews();
         if(nodes==null)
             return;
         for (HomeOperateNode.ObjKnowledge node:nodes){
@@ -213,19 +221,42 @@ public class ItemOperateFragment extends Fragment {
     }
 
     private void addQuesstionData(List<HomeOperateNode.ObjAsk> items){
+        wbLL.removeAllViews();
         if(items==null)
             return;
-        wbLL.removeAllViews();
         for (HomeOperateNode.ObjAsk item:items){
             wbLL.addView(new ItemQuestionView(activity, item));
         }
 
     }
 
+    private class PullRefreshListener implements PullToRefreshLayout.OnRefreshListener {
+        private PullToRefreshLayout refreshLayout, loadLayout;
+        @Override
+        public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
+            refreshLayout = pullToRefreshLayout;
+            getDatas();
+        }
+
+        @Override
+        public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
+            loadLayout = pullToRefreshLayout;
+        }
+
+        public void closeRefreshLoad(){
+            if(refreshLayout!=null)
+                refreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+            if(loadLayout!=null)
+                loadLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+        }
+    };
+
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            if(pullRefreshListener!=null)
+                pullRefreshListener.closeRefreshLoad();
             switch (msg.what) {
                 case Constants.MSG_SUCCESS_ONE:
                     if (msg.obj == null)

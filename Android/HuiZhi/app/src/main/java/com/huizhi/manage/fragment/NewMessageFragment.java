@@ -14,8 +14,10 @@ import android.widget.LinearLayout;
 import com.huizhi.manage.R;
 import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.data.UserInfo;
+import com.huizhi.manage.fragment.home.ItemHomeFragment;
 import com.huizhi.manage.node.MessageListNode;
 import com.huizhi.manage.request.message.MessageRequest;
+import com.huizhi.manage.wiget.pullableview.PullToRefreshLayout;
 import com.huizhi.manage.wiget.view.ItemMessageView;
 
 import java.util.List;
@@ -26,6 +28,7 @@ public class NewMessageFragment extends Fragment {
     private LinearLayout messagesLL;
     private int page = 1;
     private int limit = 20;
+    private PullRefreshListener pullRefreshListener;
 
     @Nullable
     @Override
@@ -38,16 +41,22 @@ public class NewMessageFragment extends Fragment {
     }
 
     private void initViews(){
+        pullRefreshListener = new PullRefreshListener();
+        PullToRefreshLayout pullRL = (PullToRefreshLayout)messageLayout.findViewById(R.id.refreshview);
+        pullRL.isPullUp(false);
+        pullRL.setOnRefreshListener(pullRefreshListener);
+
         messagesLL = messageLayout.findViewById(R.id.messages_ll);
     }
 
     private void getDatas(){
         MessageRequest request = new MessageRequest();
-//        request.getMessageList(UserInfo.getInstance().getUser().getTeacherId(), String.valueOf(page), String.valueOf(limit), handler);
-        request.getMessageList("D578E213-0657-4A7A-955B-7B657D5596C6", String.valueOf(page), String.valueOf(limit), handler);
+        request.getMessageList(UserInfo.getInstance().getUser().getTeacherId(), String.valueOf(page), String.valueOf(limit), handler);
+//        request.getMessageList("D578E213-0657-4A7A-955B-7B657D5596C6", String.valueOf(page), String.valueOf(limit), handler);
     }
 
     private void addMessages(List<MessageListNode.MessageItemNode> items){
+        messagesLL.removeAllViews();
         if(items==null)
             return;
         for (MessageListNode.MessageItemNode item:items){
@@ -56,10 +65,33 @@ public class NewMessageFragment extends Fragment {
 
     }
 
+    private class PullRefreshListener implements PullToRefreshLayout.OnRefreshListener {
+        private PullToRefreshLayout refreshLayout, loadLayout;
+        @Override
+        public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
+            refreshLayout = pullToRefreshLayout;
+            getDatas();
+        }
+
+        @Override
+        public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
+            loadLayout = pullToRefreshLayout;
+        }
+
+        public void closeRefreshLoad(){
+            if(refreshLayout!=null)
+                refreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+            if(loadLayout!=null)
+                loadLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+        }
+    };
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            if(pullRefreshListener!=null)
+                pullRefreshListener.closeRefreshLoad();
             switch (msg.what){
                 case Constants.MSG_SUCCESS:
                     MessageListNode node = (MessageListNode)msg.obj;

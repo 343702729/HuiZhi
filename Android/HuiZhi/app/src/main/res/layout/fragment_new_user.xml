@@ -17,7 +17,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:gravity="center_vertical"
-                android:paddingTop="25dp"
+                android:paddingTop="@dimen/navigation_padding"
                 android:background="@mipmap/user_show_bg"
                 android:orientation="horizontal">
                 <ImageView
@@ -279,6 +279,7 @@
 
                 <!-- 隐私协议 -->
                 <LinearLayout
+                    android:id="@+id/user_ys_ll"
                     style="@style/item_line_ll">
                     <ImageView
                         android:layout_width="wrap_content"

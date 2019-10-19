@@ -125,4 +125,12 @@ public class URLHtmlData {
     public static String getTrainingDetailUrl(String teacherid, String trainingid){
         return URL_HOST + "/training/details/" + teacherid + "/" + trainingid;
     }
+
+    /**
+     * 隐私协议的H5地址
+     * @return
+     */
+    public static String getPrivacyPolicyUrl(){
+        return URL_HOST + "/privacypolicy/";
+    }
 }

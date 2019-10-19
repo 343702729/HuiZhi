@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,15 +27,14 @@ import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.http.AsyncFileUpload;
 import com.huizhi.manage.http.URLHtmlData;
 import com.huizhi.manage.node.BannerNode;
-import com.huizhi.manage.node.HomeOperateNode;
 import com.huizhi.manage.node.TeacherTrainingNode;
-import com.huizhi.manage.request.home.HomeUserGetRequest;
 import com.huizhi.manage.request.teacher.TeacherRequest;
 import com.huizhi.manage.util.TLog;
 import com.huizhi.manage.wiget.GlideCircleTransform;
-import com.huizhi.manage.wiget.banner.MyViewFlow;
+import com.huizhi.manage.wiget.banner.BannerViewFlow;
 import com.huizhi.manage.wiget.banner.PointView;
 import com.huizhi.manage.wiget.banner.ViewFlow;
+import com.huizhi.manage.wiget.pullableview.PullToRefreshLayout;
 import com.huizhi.manage.wiget.view.ItemCourseView;
 import com.huizhi.manage.wiget.view.ItemStudyView;
 
@@ -44,11 +44,12 @@ import java.util.List;
 public class ItemTeacherFragment extends Fragment {
     private View messageLayout;
     private Activity activity;
-    private MyViewFlow viewFlow;
+    private BannerViewFlow viewFlow;
     private LinearLayout pointsLL;
     private PointView pointView;
     private LinearLayout studyLL;
     private LinearLayout courseLL;
+    private PullRefreshListener pullRefreshListener;
 
     private int imgSize = 0;
 
@@ -63,6 +64,11 @@ public class ItemTeacherFragment extends Fragment {
     }
 
     private void initViews(){
+        pullRefreshListener = new PullRefreshListener();
+        PullToRefreshLayout pullRL = (PullToRefreshLayout)messageLayout.findViewById(R.id.refreshview);
+        pullRL.isPullUp(false);
+        pullRL.setOnRefreshListener(pullRefreshListener);
+
         viewFlow = messageLayout.findViewById(R.id.viewflow);
         viewFlow.setOnViewSwitchListener(imageSwitchListener);
         pointsLL = messageLayout.findViewById(R.id.points_ll);
@@ -153,6 +159,7 @@ public class ItemTeacherFragment extends Fragment {
     private void initBanner(List<BannerNode> bannerNodes){
         if(bannerNodes==null)
             return;
+        pointsLL.removeAllViews();
         List<String> imgsList = new ArrayList<>();
         List<String> urlList = new ArrayList<>();
         List<String> titleList = new ArrayList<>();
@@ -188,22 +195,26 @@ public class ItemTeacherFragment extends Fragment {
 		TextView kcTV = messageLayout.findViewById(R.id.kc_tv);
 		kcPB.setMax(node.getTotLessonNum());
 		kcPB.setProgress(node.getDoneLessonNum());
-		kcTV.setText(node.getLessonFinishPercent());
+		if(!TextUtils.isEmpty(node.getLessonFinishPercent()))
+		    kcTV.setText(node.getLessonFinishPercent());
 
 		ProgressBar bkPB = messageLayout.findViewById(R.id.bk_pg);
 		TextView bkTV = messageLayout.findViewById(R.id.bk_tv);
 		bkPB.setMax(node.getTotLessonNum());
 		bkPB.setProgress(node.getDoneLessonPrepareNum());
-		bkTV.setText(node.getLessonPreparedPercent());
+        if(!TextUtils.isEmpty(node.getLessonPreparedPercent()))
+		    bkTV.setText(node.getLessonPreparedPercent());
 
 		ProgressBar pyPB = messageLayout.findViewById(R.id.py_pg);
 		TextView pyTV = messageLayout.findViewById(R.id.py_tv);
 		pyPB.setMax(node.getCommentedNum());
 		pyPB.setProgress(node.getToBeCommentNum());
-		pyTV.setText(node.getCommentFinishPercent());
+        if(!TextUtils.isEmpty(node.getCommentFinishPercent()))
+		    pyTV.setText(node.getCommentFinishPercent());
 	}
 
     private void addStudyDatas(List<TeacherTrainingNode.ObjTrainingItem> nodes){
+        studyLL.removeAllViews();
     	if(nodes==null)
     		return;
     	for (TeacherTrainingNode.ObjTrainingItem node:nodes){
@@ -213,6 +224,7 @@ public class ItemTeacherFragment extends Fragment {
     }
 
     private void addCourseDatas(List<TeacherTrainingNode.ObjTeachingTrainingItem> nodes){
+        courseLL.removeAllViews();
     	if(nodes==null)
     		return;
 		for (int i=0; i<nodes.size();){
@@ -230,10 +242,33 @@ public class ItemTeacherFragment extends Fragment {
 		}
     }
 
+    private class PullRefreshListener implements PullToRefreshLayout.OnRefreshListener {
+        private PullToRefreshLayout refreshLayout, loadLayout;
+        @Override
+        public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
+            refreshLayout = pullToRefreshLayout;
+            getDatas();
+        }
+
+        @Override
+        public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
+            loadLayout = pullToRefreshLayout;
+        }
+
+        public void closeRefreshLoad(){
+            if(refreshLayout!=null)
+                refreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+            if(loadLayout!=null)
+                loadLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+        }
+    };
+
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            if(pullRefreshListener!=null)
+                pullRefreshListener.closeRefreshLoad();
             switch (msg.what) {
                 case Constants.MSG_SUCCESS_ONE:
                     if (msg.obj == null)

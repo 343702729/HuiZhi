@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.huizhi.manage.R;
+import com.huizhi.manage.activity.base.HtmlWebActivity;
 import com.huizhi.manage.activity.home.HomeEmailInfoActivity;
 import com.huizhi.manage.activity.home.task.HomeTaskAgencyActivity;
 import com.huizhi.manage.activity.home.task.HomeTaskAllocationActivity;
@@ -30,6 +31,7 @@ import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.dialog.JudgeDialog;
 import com.huizhi.manage.http.AsyncFileUpload;
+import com.huizhi.manage.http.URLHtmlData;
 import com.huizhi.manage.login.LoginActivity;
 import com.huizhi.manage.node.EmailInfoNode;
 import com.huizhi.manage.request.home.HomeUserGetRequest;
@@ -72,6 +74,8 @@ public class NewUserFragment extends Fragment {
         mmLL.setOnClickListener(itemOnClick);
         LinearLayout gyLL = messageLayout.findViewById(R.id.user_gy_ll);
         gyLL.setOnClickListener(itemOnClick);
+        LinearLayout ysLL = messageLayout.findViewById(R.id.user_ys_ll);
+        ysLL.setOnClickListener(itemOnClick);
 
         TextView nameTV = messageLayout.findViewById(R.id.name_tv);
         nameTV.setText(UserInfo.getInstance().getUser().getTeacherName());
@@ -89,6 +93,11 @@ public class NewUserFragment extends Fragment {
             dbV.setVisibility(View.VISIBLE);
         }
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         String headImg = AsyncFileUpload.getInstance().getFileUrl(UserInfo.getInstance().getUser().getHeadImgUrl());
         TLog.log("The headimg is:" + headImg);
         ImageView headIV = messageLayout.findViewById(R.id.user_iv);
@@ -144,6 +153,12 @@ public class NewUserFragment extends Fragment {
                     intent = new Intent();
                     intent.setClass(activity, UserHuiZhiAboutActivity.class);
                     startActivity(intent);
+                    break;
+                case R.id.user_ys_ll:
+                    intent = new Intent(activity, HtmlWebActivity.class);
+                    intent.putExtra("Title", "隐私协议");
+                    intent.putExtra("Url", URLHtmlData.getPrivacyPolicyUrl());
+                    activity.startActivity(intent);
                     break;
             }
         }

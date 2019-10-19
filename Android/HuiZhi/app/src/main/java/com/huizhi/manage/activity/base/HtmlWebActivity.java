@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.huizhi.manage.R;
 import com.huizhi.manage.base.BackCliclListener;
 import com.huizhi.manage.data.UserInfo;
+import com.huizhi.manage.util.AppUtil;
 import com.huizhi.manage.util.TLog;
 import com.huizhi.manage.wiget.ProgressWebView;
 
@@ -35,6 +36,7 @@ public class HtmlWebActivity extends Activity {
     }
 
     private void initViews(){
+        AppUtil.setNavigationBar(this);
         ImageButton backBtn = findViewById(R.id.back_btn);
         backBtn.setOnClickListener(backBtnClick);
         closeBtn = findViewById(R.id.close_btn);

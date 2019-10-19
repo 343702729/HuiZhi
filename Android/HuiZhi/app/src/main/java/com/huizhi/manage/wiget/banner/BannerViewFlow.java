@@ -5,15 +5,15 @@ import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-public class MyViewFlow extends ViewFlow{
+public class BannerViewFlow extends ViewFlow{
 	private ViewPager mPager;
 	
-	public MyViewFlow(Context context) {
+	public BannerViewFlow(Context context) {
 		super(context);
 		// TODO Auto-generated constructor stub
 	}
 
-	public MyViewFlow(Context context, AttributeSet attrs) {
+	public BannerViewFlow(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		// TODO Auto-generated constructor stub
 	}
@@ -25,19 +25,19 @@ public class MyViewFlow extends ViewFlow{
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent ev) {
 		// TODO Auto-generated method stub
-		if (mPager != null)
+//		if (mPager != null)
             switch (ev.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    mPager.requestDisallowInterceptTouchEvent(true);
+                    getParent().requestDisallowInterceptTouchEvent(true);
                     break;
                 case MotionEvent.ACTION_UP:
-                    mPager.requestDisallowInterceptTouchEvent(false);
+                    getParent().requestDisallowInterceptTouchEvent(false);
                     break;
                 case MotionEvent.ACTION_CANCEL:
-                    mPager.requestDisallowInterceptTouchEvent(false);
+                    getParent().requestDisallowInterceptTouchEvent(false);
                     break;
                 case MotionEvent.ACTION_MOVE:
-                    mPager.requestDisallowInterceptTouchEvent(true);
+                    getParent().requestDisallowInterceptTouchEvent(true);
                     break;
             }
 		return super.onInterceptTouchEvent(ev);

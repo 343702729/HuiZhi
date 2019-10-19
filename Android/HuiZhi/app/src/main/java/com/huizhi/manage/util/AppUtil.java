@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import com.huizhi.manage.R;
 import com.huizhi.manage.data.Constants;
 import com.jaeger.library.StatusBarUtil;
 
@@ -62,7 +63,14 @@ public class AppUtil {
     }
 
     public static void setNavigationBar(Activity context){
-        StatusBarUtil.setTranslucentForImageViewInFragment(context, null);
+        Window window = context.getWindow();
+        //After LOLLIPOP not translucent status bar
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        //Then call setStatusBarColor.
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(context.getResources().getColor(R.color.white));
+        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+//        StatusBarUtil.setTranslucentForImageViewInFragment(context, null);
     }
 
     public static void setNavigationBarAlpha(Activity context, int alpha){

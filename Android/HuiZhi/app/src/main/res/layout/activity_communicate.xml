@@ -21,7 +21,7 @@
                 android:layout_gravity="center"
                 android:text="聊天"
                 android:textSize="@dimen/title_text"
-                android:textColor="@android:color/white"/>
+                android:textColor="@color/title_color"/>
 
             <ImageButton
                 android:id="@+id/back_btn"

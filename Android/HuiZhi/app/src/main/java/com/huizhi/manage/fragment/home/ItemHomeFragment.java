@@ -37,14 +37,12 @@ import com.huizhi.manage.node.HomeOperateNode;
 import com.huizhi.manage.node.TeacherTrainingNode;
 import com.huizhi.manage.request.home.HomeNewRequest;
 import com.huizhi.manage.request.home.HomeUserGetRequest;
-import com.huizhi.manage.request.teacher.TeacherRequest;
 import com.huizhi.manage.util.TLog;
 import com.huizhi.manage.wiget.GlideCircleTransform;
-import com.huizhi.manage.wiget.banner.MyViewFlow;
+import com.huizhi.manage.wiget.banner.BannerViewFlow;
 import com.huizhi.manage.wiget.banner.PointView;
 import com.huizhi.manage.wiget.banner.ViewFlow;
 import com.huizhi.manage.wiget.pullableview.PullToRefreshLayout;
-import com.huizhi.manage.wiget.view.ItemCategoryView;
 import com.huizhi.manage.wiget.view.ItemCourseView;
 import com.huizhi.manage.wiget.view.ItemNewsView;
 import com.huizhi.manage.wiget.view.ItemOperateView;
@@ -57,13 +55,14 @@ import static android.app.Activity.RESULT_OK;
 public class ItemHomeFragment extends Fragment {
     private View messageLayout;
     private Activity activity;
-    private MyViewFlow viewFlow;
+    private BannerViewFlow viewFlow;
     private LinearLayout pointsLL;
     private PointView pointView;
     private LinearLayout itemNewsLL;
     private LinearLayout itemTeacherLL;
     private LinearLayout itemCategoryLL;
     private ImageView scanIV;
+    private ImageView headIV;
 
     private PullRefreshListener pullRefreshListener;
 
@@ -121,14 +120,8 @@ public class ItemHomeFragment extends Fragment {
         TextView schoolTV = messageLayout.findViewById(R.id.school_tv);
         schoolTV.setText(UserInfo.getInstance().getUser().getSchoolName());
 
-        String headImg = AsyncFileUpload.getInstance().getFileUrl(UserInfo.getInstance().getUser().getHeadImgUrl());
-        TLog.log("The headimg is:" + headImg);
-        ImageView headIV = messageLayout.findViewById(R.id.user_iv);
-        Glide.with(activity).load(headImg)
-                .error(R.mipmap.user_icon)
-                //圆形
-                .transform(new GlideCircleTransform(activity))
-                .into(headIV);
+
+        headIV = messageLayout.findViewById(R.id.user_iv);
 
         getDatas();
     }
@@ -136,6 +129,13 @@ public class ItemHomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        String headImg = AsyncFileUpload.getInstance().getFileUrl(UserInfo.getInstance().getUser().getHeadImgUrl());
+        TLog.log("The headimg is:" + headImg);
+        Glide.with(activity).load(headImg)
+                .error(R.mipmap.user_icon)
+                //圆形
+                .transform(new GlideCircleTransform(activity))
+                .into(headIV);
         getTZDatas();
     }
 
@@ -231,7 +231,7 @@ public class ItemHomeFragment extends Fragment {
             if(loadLayout!=null)
                 loadLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
         }
-    };
+    }
 
     private View.OnClickListener scanIVClick = new View.OnClickListener() {
         @Override
