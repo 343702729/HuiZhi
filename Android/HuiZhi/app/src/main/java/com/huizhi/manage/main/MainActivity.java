@@ -206,13 +206,13 @@ public class MainActivity extends FragmentActivity {
     }
 
     private void setSelectionIcon(int index){
-        int[] ivs = {R.id.home_home_iv, R.id.home_task_iv, R.id.home_material_iv, R.id.home_communicate_iv, R.id.home_user_iv};
-        int[] tvs = {R.id.home_home_tv, R.id.home_task_tv, R.id.home_material_tv, R.id.home_communicate_tv, R.id.home_user_tv};
-        int[] bgs = {R.mipmap.home_bg, R.mipmap.task_bg, R.mipmap.material_bg, R.mipmap.communicate_bg, R.mipmap.user_bg};
-        int[] fcs = {R.mipmap.home_bg_fc, R.mipmap.task_bg_fc, R.mipmap.material_bg_fc, R.mipmap.communicate_bg_fc, R.mipmap.user_bg_fc};
+        int[] ivs = {R.id.home_home_iv, R.id.home_task_iv, R.id.home_material_iv, R.id.home_user_iv};
+        int[] tvs = {R.id.home_home_tv, R.id.home_task_tv, R.id.home_material_tv, R.id.home_user_tv};
+        int[] bgs = {R.mipmap.home_bg, R.mipmap.task_bg, R.mipmap.material_bg, R.mipmap.user_bg};
+        int[] fcs = {R.mipmap.home_bg_fc, R.mipmap.task_bg_fc, R.mipmap.material_bg_fc, R.mipmap.user_bg_fc};
         ImageView imageView;
         TextView textView;
-        for(int i=0; i<5; i++){
+        for(int i=0; i<4; i++){
             imageView = (ImageView)findViewById(ivs[i]);
             textView = (TextView)findViewById(tvs[i]);
             if(index==i){
