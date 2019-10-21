@@ -2,11 +2,11 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <gradient
         android:startColor="@color/white"
-        android:endColor="@color/app_bg"
+        android:endColor="#dee4e8"
         android:angle="270"/>
 </shape>
 
-<!--<gradient-->
+<!--<gradient  #EDF2F5-->
 <!--android:startColor="@color/gradation_left"-->
 <!--android:endColor="@color/gradation_right"-->
 <!--android:angle="0"/>-->

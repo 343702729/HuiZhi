@@ -18,6 +18,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:maxLength="11"
                 android:text="课件库"
                 android:textSize="@dimen/title_text"
                 android:textColor="@color/title_color"/>
@@ -33,7 +34,7 @@
                 android:visibility="gone"
                 android:text="关闭"
                 android:textSize="16sp"
-                android:textColor="@color/white"
+                android:textColor="@color/title_color"
                 android:gravity="center_vertical"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="40dp"/>

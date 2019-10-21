@@ -62,7 +62,7 @@ public class ItemTopicBody2View extends LinearLayout {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.item_topic_body2_new, this);
         webView = findViewById(R.id.webview);
-        webView.loadUrl("http://www.baidu.com");
+        webView.loadUrl("http://hzapp.dewinfo.com/coursesystem/");
         level3LL = findViewById(R.id.level3_ll);
         listView = findViewById(R.id.listview);
         topicItemGVAdapter = new TopicItemPLVAdapter(context, null);

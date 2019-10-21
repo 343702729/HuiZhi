@@ -12,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.huizhi.manage.R;
@@ -33,6 +34,7 @@ public class CoursewareActivity extends Activity{
     private LinearLayout titleLL;
     private ProgressWebView webView;
     private String url = "";
+    private TextView closeBtn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +60,8 @@ public class CoursewareActivity extends Activity{
         ImageButton backBtn = (ImageButton)findViewById(R.id.back_btn);
         backBtn.setOnClickListener(backBtnClick);
 //        backBtn.setOnClickListener(new BackCliclListener(this));
+        closeBtn = findViewById(R.id.close_btn);
+        closeBtn.setOnClickListener(new BackCliclListener(this));
 
         titleLL = findViewById(R.id.title_ll);
 
@@ -76,6 +80,7 @@ public class CoursewareActivity extends Activity{
         public void onClick(View view) {
             if (webView.canGoBack()) {
                 webView.goBack();// 返回上一页面
+                closeBtn.setVisibility(View.VISIBLE);
             } else {
                 finish();
             }
@@ -86,6 +91,7 @@ public class CoursewareActivity extends Activity{
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (webView.canGoBack()) {
                 webView.goBack();// 返回上一页面
+                closeBtn.setVisibility(View.VISIBLE);
                 return true;
             } else {
                 this.finish();

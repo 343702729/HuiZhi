@@ -7,6 +7,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ public class NewHomeFragment extends Fragment {
     private int currentIndex = 0;
     private FrameLayout item1FL, item2FL, item3FL, item4FL;
     private Fragment currentFG;
+    private int changeIndex = -1;
 
     @Nullable
     @Override
@@ -128,7 +130,17 @@ public class NewHomeFragment extends Fragment {
                 currentFG = itemTopic;
                 break;
         }
+//        if(changeIndex==-1||changeIndex==index){
+//
+//        }else if(changeIndex<index)
+//            transaction.setCustomAnimations(R.animator.slide_right_in, R.animator.slide_left_out);
+//        else
+//            transaction.setCustomAnimations(R.animator.slide_left_in, R.animator.slide_right_out);
+//        transaction.replace(R.id.content_fl, currentFG);
+
+//        transaction.setCustomAnimations(R.animator.slide_right_in, R.animator.slide_left_out).replace(R.id.content_fl, currentFG).commitAllowingStateLoss();
         transaction.commit();
+        changeIndex = index;
     }
 
     private void hideFragment(FragmentTransaction transaction){
@@ -153,28 +165,36 @@ public class NewHomeFragment extends Fragment {
         View item4IV = item4FL.findViewWithTag("itemIV");
 
         item1TV.setTextColor(activity.getResources().getColor(R.color.gray_dark_text));
+        item1TV.getPaint().setFakeBoldText(false);
         item1IV.setVisibility(View.INVISIBLE);
         item2TV.setTextColor(activity.getResources().getColor(R.color.gray_dark_text));
+        item2TV.getPaint().setFakeBoldText(false);
         item2IV.setVisibility(View.INVISIBLE);
         item3TV.setTextColor(activity.getResources().getColor(R.color.gray_dark_text));
+        item3TV.getPaint().setFakeBoldText(false);
         item3IV.setVisibility(View.INVISIBLE);
         item4TV.setTextColor(activity.getResources().getColor(R.color.gray_dark_text));
+        item4TV.getPaint().setFakeBoldText(false);
         item4IV.setVisibility(View.INVISIBLE);
         switch (index){
             case 1:
                 item1TV.setTextColor(activity.getResources().getColor(R.color.blue_light));
+                item1TV.getPaint().setFakeBoldText(true);
                 item1IV.setVisibility(View.VISIBLE);
                 break;
             case 2:
                 item2TV.setTextColor(activity.getResources().getColor(R.color.blue_light));
+                item2TV.getPaint().setFakeBoldText(true);
                 item2IV.setVisibility(View.VISIBLE);
                 break;
             case 3:
                 item3TV.setTextColor(activity.getResources().getColor(R.color.blue_light));
+                item3TV.getPaint().setFakeBoldText(true);
                 item3IV.setVisibility(View.VISIBLE);
                 break;
             case 4:
                 item4TV.setTextColor(activity.getResources().getColor(R.color.blue_light));
+                item4TV.getPaint().setFakeBoldText(true);
                 item4IV.setVisibility(View.VISIBLE);
                 break;
         }
