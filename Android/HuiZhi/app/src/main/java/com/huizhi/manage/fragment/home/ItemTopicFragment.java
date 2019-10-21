@@ -40,8 +40,26 @@ public class ItemTopicFragment extends Fragment {
         messageLayout = inflater.inflate(R.layout.fragment_item_topic, container, false);
         activity = getActivity();
         initViews();
-        getDatas();
+
         return messageLayout;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        titleViews.clear();
+        titlesLL.removeAllViews();
+        itemViews.clear();
+        ItemTopicTitleView view1 = new ItemTopicTitleView(activity, true, null, 0, new ItemTitlInfoUpdate());
+        titleViews.add(view1);
+        titlesLL.addView(view1);
+        itemViews.add(view1.getBodyView());
+        if(pagerAdapter==null)
+            pagerAdapter = new ViewPagerAdapter(itemViews);
+        else
+            pagerAdapter.updateViewPager(itemViews);
+        viewPager.setCurrentItem(0, false);
+        getDatas();
     }
 
     private void initViews(){
@@ -49,12 +67,7 @@ public class ItemTopicFragment extends Fragment {
         viewPager = messageLayout.findViewById(R.id.viewpager);
 //        addTitles();
         currentSel = 0;
-        ItemTopicTitleView view1 = new ItemTopicTitleView(activity, true, null, 0, new ItemTitlInfoUpdate());
-        titleViews.add(view1);
-        titlesLL.addView(view1);
-        itemViews.add(view1.getBodyView());
-        pagerAdapter = new ViewPagerAdapter(itemViews);
-        viewPager.setCurrentItem(0, false);
+
     }
 
     private void getDatas(){
@@ -73,7 +86,10 @@ public class ItemTopicFragment extends Fragment {
             itemViews.add(view.getBodyView());
             i++;
         }
-        pagerAdapter = new ViewPagerAdapter(itemViews);
+        if(pagerAdapter==null)
+            pagerAdapter = new ViewPagerAdapter(itemViews);
+        else
+            pagerAdapter.updateViewPager(itemViews);
 //        pagerAdapter.notifyDataSetChanged();
         viewPager.setAdapter(pagerAdapter);
     }

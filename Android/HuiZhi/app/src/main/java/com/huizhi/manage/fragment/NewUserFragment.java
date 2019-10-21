@@ -93,6 +93,14 @@ public class NewUserFragment extends Fragment {
             dbV.setVisibility(View.VISIBLE);
         }
 
+        if(UserInfo.getInstance().getUser().isAdmin()){
+            //任务管理
+            fpLL.setOnClickListener(itemOnClick);
+            fpLL.setVisibility(View.VISIBLE);
+//            ImageView fpIV = messageLayout.findViewById(R.id.user_fp_iv);
+//            fpIV.setVisibility(View.VISIBLE);
+        }
+
     }
 
     @Override

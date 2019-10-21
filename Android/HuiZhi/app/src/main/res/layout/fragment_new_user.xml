@@ -137,30 +137,37 @@
                 <!-- 任务管理 -->
                 <LinearLayout
                     android:id="@+id/user_fp_ll"
-                    style="@style/item_line_ll">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@mipmap/icon_user_fp"/>
-                    <TextView
-                        style="@style/info_title_tv"
-                        android:text="任务管理"/>
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        style="@style/item_line_ll"
+                        android:visibility="gone">
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="right|center_vertical"
-                            android:background="@mipmap/icon_m_arrow_right"/>
-                    </FrameLayout>
+                            android:background="@mipmap/icon_user_fp"/>
+                        <TextView
+                            style="@style/info_title_tv"
+                            android:text="任务管理"/>
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right|center_vertical"
+                                android:background="@mipmap/icon_m_arrow_right"/>
+                        </FrameLayout>
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="20dp"
+                        android:visibility="gone"
+                        android:background="@color/app_bg"/>
                 </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="20dp"
-                    android:visibility="gone"
-                    android:background="@color/app_bg"/>
+
 
                 <!-- 企业邮箱 -->
                 <LinearLayout
