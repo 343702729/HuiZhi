@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -24,6 +26,7 @@ public class HtmlWebActivity extends Activity {
     private String url;
     private String title = "";
     private TextView closeBtn;
+    private TextView titleTV;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,13 +45,14 @@ public class HtmlWebActivity extends Activity {
         closeBtn = findViewById(R.id.close_btn);
         closeBtn.setOnClickListener(new BackCliclListener(this));
 
-        TextView titleTV = findViewById(R.id.title_tv);
-        titleTV.setText(title);
+        titleTV = findViewById(R.id.title_tv);
+//        titleTV.setText(title);
         initWebView();
     }
 
     private void initWebView(){
         webView =  findViewById(R.id.webview);
+        webView.setWebChromeClient(wcc);
         Map<String, String > map = new HashMap<String, String>() ;
         map.put( "LogonUserId" , UserInfo.getInstance().getUser().getTeacherId()) ;
         if(!TextUtils.isEmpty(url))
@@ -77,5 +81,14 @@ public class HtmlWebActivity extends Activity {
         }
         return super.onKeyDown(keyCode, event);//退出H5界面
     }
+
+    private WebChromeClient wcc = new WebChromeClient(){
+        @Override
+        public void onReceivedTitle(WebView view, String title) {
+            super.onReceivedTitle(view, title);
+            if(!TextUtils.isEmpty(title))
+                titleTV.setText(title);
+        }
+    };
 
 }

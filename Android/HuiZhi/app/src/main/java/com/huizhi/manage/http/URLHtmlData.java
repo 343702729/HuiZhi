@@ -133,4 +133,12 @@ public class URLHtmlData {
     public static String getPrivacyPolicyUrl(){
         return URL_HOST + "/privacypolicy/";
     }
+
+    /**
+     * 备课详情
+     * @return
+     */
+    public static String getPrepareDetailUrl(String courseNo){
+        return URL_HOST + "/prepare/details/testnum/" + courseNo;
+    }
 }

@@ -16,6 +16,7 @@ public class CourseNode {
     private boolean isSignInTeacher;
     private boolean isSignInTutor;
     private int isUploadedWork;
+    private int IsPrepared;
     private List<StudentNode> studentNodes;
 
     public String getLessonNum() {
@@ -128,5 +129,13 @@ public class CourseNode {
 
     public void setLessonStatus(String lessonStatus) {
         this.lessonStatus = lessonStatus;
+    }
+
+    public int getIsPrepared() {
+        return IsPrepared;
+    }
+
+    public void setIsPrepared(int isPrepared) {
+        IsPrepared = isPrepared;
     }
 }

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.huizhi.manage.R;
 import com.huizhi.manage.node.CourseNode;
 import com.huizhi.manage.node.TaskMouldNode;
+import com.ruffian.library.RTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +69,7 @@ public class CourseAdapter extends BaseAdapter {
             viewItem.workStuTV = view.findViewById(R.id.work_count_tv);
             viewItem.commentTV = view.findViewById(R.id.comment_count_tv);
             viewItem.completeRateTV = view.findViewById(R.id.complete_rate_tv);
+            viewItem.bkRTV = view.findViewById(R.id.bk_tv);
             view.setTag(viewItem);
         }else{
             viewItem = (ViewItem)view.getTag();
@@ -86,6 +88,15 @@ public class CourseAdapter extends BaseAdapter {
         viewItem.workStuTV.setText(String.valueOf(node.getPublishWorkCount()));
         viewItem.commentTV.setText(String.valueOf(node.getCommentedCount()));
         viewItem.completeRateTV.setText(node.getCompletionRate());
+        if(1==node.getIsPrepared()){//0是没备课，1已备课。
+            viewItem.bkRTV.setText("已备课");
+            viewItem.bkRTV.setBorderColorNormal(context.getResources().getColor(R.color.app_green));
+            viewItem.bkRTV.setBackgroundColorNormal(context.getResources().getColor(R.color.app_green));
+        }else {
+            viewItem.bkRTV.setText("未备课");
+            viewItem.bkRTV.setBorderColorNormal(context.getResources().getColor(R.color.light_red));
+            viewItem.bkRTV.setBackgroundColorNormal(context.getResources().getColor(R.color.light_red));
+        }
         return view;
     }
 
@@ -99,5 +110,6 @@ public class CourseAdapter extends BaseAdapter {
         TextView workStuTV;
         TextView commentTV;
         TextView completeRateTV;
+        RTextView bkRTV;
     }
 }

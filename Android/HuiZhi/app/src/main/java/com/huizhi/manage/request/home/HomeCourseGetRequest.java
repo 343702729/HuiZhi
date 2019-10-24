@@ -98,6 +98,7 @@ public class HomeCourseGetRequest {
                         node.setPublishWorkCount(JSONUtil.parseInt(itemJS, "PublishWorkCount"));
                         node.setCommentedCount(JSONUtil.parseInt(itemJS, "CommentedCount"));
                         node.setCompletionRate(JSONUtil.parseString(itemJS, "CompletionRate"));
+                        node.setIsPrepared(JSONUtil.parseInt(itemJS, "IsPrepared"));
                         nodes.add(node);
                     }
                     infoNode.setLessons(nodes);
@@ -174,6 +175,7 @@ public class HomeCourseGetRequest {
                 node.setSignInTeacher(JSONUtil.parseBoolean(lessonJS, "IsSignInTeacher"));
                 node.setSignInTutor(JSONUtil.parseBoolean(lessonJS, "IsSignInTutor"));
                 node.setIsUploadedWork(JSONUtil.parseInt(lessonJS, "IsUploadedWork"));
+                node.setIsPrepared(JSONUtil.parseInt(lessonJS, "IsPrepared"));
 
                 JSONArray studentsJS = jsonOb.getJSONArray("Students");
                 if(studentsJS!=null){

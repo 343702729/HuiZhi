@@ -1,5 +1,6 @@
 package com.huizhi.manage.wiget.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -13,13 +14,14 @@ import com.huizhi.manage.R;
 import com.huizhi.manage.activity.home.HomeMessageInfoActivity;
 import com.huizhi.manage.activity.home.HomeNewsInfoActivity;
 import com.huizhi.manage.activity.task.TaskDetailActivity;
+import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.node.MessageListNode;
 
 public class ItemMessageView extends LinearLayout {
-    private Context context;
+    private Activity context;
     private MessageListNode.MessageItemNode node;
 
-    public ItemMessageView(Context context, MessageListNode.MessageItemNode node){
+    public ItemMessageView(Activity context, MessageListNode.MessageItemNode node){
         super(context);
         this.context = context;
         this.node = node;
@@ -38,6 +40,7 @@ public class ItemMessageView extends LinearLayout {
         timeTV.setText(node.getStrCreateTime());
         ImageView tagIV = findViewById(R.id.tag_iv);
         TextView typeTV = findViewById(R.id.type_tv);
+        ImageView statusIV = findViewById(R.id.msg_status_iv);
         if(node.getFunctionType()==1) {
             typeTV.setText("公告");
             Glide.with(context).load(R.mipmap.icon_msg_gg).into(tagIV);
@@ -55,6 +58,10 @@ public class ItemMessageView extends LinearLayout {
             Glide.with(context).load(R.mipmap.icon_msg_rw).into(tagIV);
             itemLL.setOnClickListener(new MsgItemClick(3));
         }
+        if(!node.isRead())
+            statusIV.setVisibility(View.VISIBLE);
+        else
+            statusIV.setVisibility(View.GONE);
     }
 
     private class MsgItemClick implements OnClickListener{
@@ -68,15 +75,18 @@ public class ItemMessageView extends LinearLayout {
             if(type==2){
                 Intent intent = new Intent(context, HomeNewsInfoActivity.class);
                 intent.putExtra("Id", node.getBizId());
-                context.startActivity(intent);
+                context.startActivityForResult(intent, Constants.REQUEST_CODE);
+//                context.startActivity(intent);
             }else if(type==3){
                 Intent intent = new Intent(context, TaskDetailActivity.class);
                 intent.putExtra("TaskId", node.getBizId());
-                context.startActivity(intent);
+                context.startActivityForResult(intent, Constants.REQUEST_CODE);
+//                context.startActivity(intent);
             }else if(type==1){
                 Intent intent = new Intent(context, HomeMessageInfoActivity.class);
                 intent.putExtra("Id", node.getBizId());
-                context.startActivity(intent);
+                context.startActivityForResult(intent, Constants.REQUEST_CODE);
+//                context.startActivity(intent);
             }
         }
     }

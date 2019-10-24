@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/app_bg"
     android:orientation="vertical">
 
@@ -270,10 +271,23 @@
         android:gravity="center"
         android:background="@color/white"
         android:orientation="horizontal">
+        <com.ruffian.library.RTextView
+            android:id="@+id/bk_tv"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:gravity="center"
+            app:corner_radius="5dp"
+            android:text="未备课"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            app:border_color_normal="@color/light_red"
+            app:background_normal="@color/light_red"/>
+
         <Button
             android:id="@+id/teacher_sign_btn"
             android:layout_width="100dp"
             android:layout_height="35dp"
+            android:layout_marginLeft="15dp"
             android:gravity="center"
             android:background="@drawable/frame_bg_s_red_c"
             android:text="老师签到"

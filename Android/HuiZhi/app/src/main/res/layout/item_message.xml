@@ -7,10 +7,21 @@
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
     android:orientation="horizontal">
-    <ImageView
-        android:id="@+id/tag_iv"
-        android:layout_width="45dp"
-        android:layout_height="45dp"/>
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/tag_iv"
+            android:layout_width="45dp"
+            android:layout_height="45dp"/>
+        <ImageView
+            android:id="@+id/msg_status_iv"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_gravity="right|top"
+            android:background="@drawable/frame_circle_dark_red"/>
+    </FrameLayout>
+
     <LinearLayout
         android:id="@+id/item_ll"
         android:layout_width="match_parent"

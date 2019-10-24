@@ -203,5 +203,7 @@ public class NewHomeFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if(currentFG!=null)
+            currentFG.onActivityResult(requestCode, resultCode, data);
     }
 }

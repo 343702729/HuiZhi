@@ -2,6 +2,7 @@ package com.huizhi.manage.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -36,8 +37,14 @@ public class NewMessageFragment extends Fragment {
         messageLayout = inflater.inflate(R.layout.fragment_new_message, container, false);
         activity = getActivity();
         initViews();
-        getDatas();
+
         return messageLayout;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDatas();
     }
 
     private void initViews(){
@@ -100,4 +107,12 @@ public class NewMessageFragment extends Fragment {
             }
         }
     };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==Constants.REQUEST_CODE){
+            getDatas();
+        }
+    }
 }
