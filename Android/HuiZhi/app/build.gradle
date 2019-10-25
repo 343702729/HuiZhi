@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         keystore {
-            storeFile file('D:\\workspace_hz\\Android\\HuiZhi\\app\\keystore.keystore')
+            storeFile file('/Users/cl/Documents/Android/KEY/keystore.keystore')
             storePassword '123456'
             keyAlias 'keystore'
             keyPassword '123456'
