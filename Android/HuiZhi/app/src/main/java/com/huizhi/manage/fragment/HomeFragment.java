@@ -44,7 +44,7 @@ import com.huizhi.manage.node.EmailInfoNode;
 import com.huizhi.manage.node.TaskSummaryNode;
 import com.huizhi.manage.request.home.HomeUserGetRequest;
 import com.huizhi.manage.util.PictureUtil;
-import com.huizhi.manage.wiget.banner.MyViewFlow;
+import com.huizhi.manage.wiget.banner.BannerViewFlow;
 import com.huizhi.manage.wiget.banner.PointView;
 import com.huizhi.manage.wiget.banner.ViewFlow;
 
@@ -58,7 +58,7 @@ import java.util.List;
 public class HomeFragment extends Fragment {
     private View messageLayout;
     private Activity activity;
-    private MyViewFlow viewFlow;
+    private BannerViewFlow viewFlow;
     private LinearLayout pointsLL;
     private PointView pointView;
     private int imgSize = 0;
@@ -172,7 +172,7 @@ public class HomeFragment extends Fragment {
             imgsList.add(node.getImgUrl());
             urlList.add(node.getNewsId());
         }
-        viewFlow.setAdapter(new ImagePagerAdapter(activity, imgsList, urlList, titleList).setInfiniteLoop(true));
+        viewFlow.setAdapter(new ImagePagerAdapter(activity, imgsList, urlList, titleList, bannerNodes).setInfiniteLoop(true));
         viewFlow.setmSideBuffer(bannerNodes.size());
         viewFlow.setTimeSpan(4000);
         viewFlow.setSelection(bannerNodes.size() * 1000);

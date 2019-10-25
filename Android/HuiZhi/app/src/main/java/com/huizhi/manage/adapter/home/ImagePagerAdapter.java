@@ -16,9 +16,14 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.huizhi.manage.activity.base.HtmlWebActivity;
 import com.huizhi.manage.activity.home.HomeNewsInfoActivity;
+import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.http.AsyncBitmapLoader;
 import com.huizhi.manage.http.URLData;
+import com.huizhi.manage.http.URLHtmlData;
+import com.huizhi.manage.node.BannerNode;
+import com.huizhi.manage.util.TLog;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -39,9 +44,10 @@ public class ImagePagerAdapter extends BaseAdapter {
 	private ImageLoader imageLoader;
 	private DisplayImageOptions options;
 	private AsyncBitmapLoader asyncBitmapLoader;
+	private List<BannerNode> bannerNodes;
 
 	public ImagePagerAdapter(Context context, List<String> imageIdList,
-                             List<String> urllist, List<String> urlTitlesList) {
+                             List<String> urllist, List<String> urlTitlesList, List<BannerNode> bannerNodes) {
 		this.context = context;
 		this.imageIdList = imageIdList;
 		if (imageIdList != null) {
@@ -49,6 +55,7 @@ public class ImagePagerAdapter extends BaseAdapter {
 		}
 		this.linkUrlArray = urllist;
 		this.urlTitlesList = urlTitlesList;
+		this.bannerNodes = bannerNodes;
 		isInfiniteLoop = false;
 		asyncBitmapLoader=new AsyncBitmapLoader();
 		// 初始化imageLoader 否则会报错
@@ -123,15 +130,30 @@ public class ImagePagerAdapter extends BaseAdapter {
 
 			@Override
 			public void onClick(View arg0) {
+				final BannerNode node = bannerNodes.get(getPosition(position));
+				TLog.log("The banner position:" + position);
 				String url = linkUrlArray.get(ImagePagerAdapter.this
 						.getPosition(position));
 //				String title = urlTitlesList.get(ImagePagerAdapter.this
 //						.getPosition(position));
-				if(!TextUtils.isEmpty(url)) {
-					Intent intent = new Intent();
-					intent.setClass(context, HomeNewsInfoActivity.class);
-					intent.putExtra("Id", url);
-					context.startActivity(intent);
+				if(node!=null) {
+					if(node.getType()==1){
+						Intent intent = new Intent();
+						intent.setClass(context, HomeNewsInfoActivity.class);
+						intent.putExtra("Id", node.getNewsId());
+						context.startActivity(intent);
+					}else if (node.getType()==2){
+						Intent intent = new Intent(context, HtmlWebActivity.class);
+						intent.putExtra("Title", "运营");
+						intent.putExtra("Url", URLHtmlData.getOperateNewDetail(UserInfo.getInstance().getUser().getTeacherId(), node.getNewsId()));
+						context.startActivity(intent);
+					}else if(node.getType()==3){
+						Intent intent = new Intent(context, HtmlWebActivity.class);
+						intent.putExtra("Title", "教研");
+						intent.putExtra("Url", URLHtmlData.getTrainingDetailUrl(UserInfo.getInstance().getUser().getTeacherId(), node.getNewsId()));
+						context.startActivity(intent);
+					}
+
 				}
 //				if(!TextUtils.isEmpty(title))
 //					Toast.makeText(context, title, Toast.LENGTH_LONG).show();

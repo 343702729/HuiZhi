@@ -24,7 +24,7 @@
                     android:layout_gravity="center"
                     android:text="课程列表"
                     android:textSize="@dimen/title_text"
-                    android:textColor="@android:color/white"/>
+                    android:textColor="@color/title_color"/>
 
                 <ImageButton
                     android:id="@+id/back_btn"

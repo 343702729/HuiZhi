@@ -10,7 +10,7 @@ import com.huizhi.manage.data.UserInfo;
 
 public class URLData {
 //    private static final String URL_HOST = "http://app.huizhiart.com";    //http://app.huizhiart.com    http://hzapp.dewinfo.com
-    private static final String URL_HOST = "http://hzapp.dewinfo.com";    //http://app.huizhiart.com    http://hzapp.dewinfo.com
+    public static final String URL_HOST = "http://hzapp.dewinfo.com";    //http://app.huizhiart.com    http://hzapp.dewinfo.com
 
     public static final String URL_ABOUT = URL_HOST + "/app/aboutus/";
 
@@ -205,6 +205,21 @@ public class URLData {
 
     private static final String URL_BUSINESS_TASK_SERVICE = "/ServiceII/BusinessTaskService.ashx";
     public static final String METHORD_HOME_OPERATE = "GetHomeInfo";
+
+    private static final String URL_TEACHER_TRAINING_SERVICE = "/ServiceII/TeachingTrainingService.ashx";
+    public static final String METHORD_TEACHER_TRAINING = "GetHomeInfo";
+
+    public static final String METHORD_TEACHER_PROGRESS = "GetProgress";
+
+    private static final String URL_MESSAGE_SERVICE = "/ServiceII/MessageService.ashx";
+    public static final String METHORD_MESSAGE_LIST = "GetMessageList";
+    public static final String METHORD_MESSAGE_READ = "ReadMessage";
+
+    private static final String URL_HOME_SERVICE = "/ServiceII/HomeService.ashx";
+    public static final String METHORD_HOME_INFO = "GetHomeInfo";
+
+    private static final String URL_LOGIN_SERVICE = "/ServiceII/LoginService.ashx";
+    public static final String METHORD_SUBMIT_LOGIN_INFO = "SubmitLoginInfo";
 
 
     /**
@@ -747,6 +762,38 @@ public class URLData {
      */
     public static String getUrlBusinessTaskService(){
         return URL_HOST + URL_BUSINESS_TASK_SERVICE;
+    }
+
+	/**
+	 * 教学主界面信息
+	 * @return
+	 */
+	public static String getUrlTeacherTrainingService(){
+    	return URL_HOST + URL_TEACHER_TRAINING_SERVICE;
+	}
+
+    /**
+     * 取用户的消息
+     * @return
+     */
+	public static String getUrlMessageService(){
+        return URL_HOST + URL_MESSAGE_SERVICE;
+    }
+
+    /**
+     * 主界面信息
+     * @return
+     */
+    public static String getUrlHomeService(){
+	    return URL_HOST + URL_HOME_SERVICE;
+    }
+
+    /**
+     * 提交登录信息
+     * @return
+     */
+    public static String getUrlLoginService(){
+        return URL_HOST + URL_LOGIN_SERVICE;
     }
 
 }

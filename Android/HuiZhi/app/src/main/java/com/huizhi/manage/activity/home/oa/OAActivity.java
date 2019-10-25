@@ -15,12 +15,14 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.huizhi.manage.R;
@@ -36,6 +38,7 @@ import java.util.Map;
 public class OAActivity extends Activity{
     private ProgressWebView webView;
     private String url = "";
+    private TextView closeBtn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,7 +58,9 @@ public class OAActivity extends Activity{
     private void initViews(){
         AppUtil.setNavigationBar(this);
         ImageButton backBtn = (ImageButton)findViewById(R.id.back_btn);
-        backBtn.setOnClickListener(new BackCliclListener(this));
+        backBtn.setOnClickListener(backBtnClick);
+        closeBtn = findViewById(R.id.close_btn);
+        closeBtn.setOnClickListener(new BackCliclListener(this));
 
         initWebView();
     }
@@ -67,10 +72,23 @@ public class OAActivity extends Activity{
         webView.loadUrl(url, map);
     }
 
+    private View.OnClickListener backBtnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (webView.canGoBack()) {
+                webView.goBack();// 返回上一页面
+                closeBtn.setVisibility(View.VISIBLE);
+            } else {
+                finish();
+            }
+        }
+    };
+
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (webView.canGoBack()) {
                 webView.goBack();// 返回上一页面
+                closeBtn.setVisibility(View.VISIBLE);
                 return true;
             } else {
                 this.finish();

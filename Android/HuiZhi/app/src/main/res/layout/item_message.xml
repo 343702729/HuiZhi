@@ -7,11 +7,23 @@
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
     android:orientation="horizontal">
-    <ImageView
+    <FrameLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@mipmap/icon_message_1"/>
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/tag_iv"
+            android:layout_width="45dp"
+            android:layout_height="45dp"/>
+        <ImageView
+            android:id="@+id/msg_status_iv"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_gravity="right|top"
+            android:background="@drawable/frame_circle_dark_red"/>
+    </FrameLayout>
+
     <LinearLayout
+        android:id="@+id/item_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
@@ -19,10 +31,11 @@
         android:background="@drawable/frame_message_gray"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/message_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="2"
-            android:text="绘智与您相约2019中国国际教育品牌连锁加盟博览会"
+            android:text=""
             android:textSize="14sp"
             android:textColor="@color/black_light"/>
         <FrameLayout
@@ -34,16 +47,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
+                    android:id="@+id/type_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="新闻"
+                    android:text=""
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
                 <TextView
+                    android:id="@+id/time_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="6分钟前"
+                    android:text=""
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
             </LinearLayout>
@@ -51,7 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:background="@mipmap/icon_s_arrow_right"/>
+                android:background="@mipmap/icon_message_right"/>
         </FrameLayout>
     </LinearLayout>
 </LinearLayout>

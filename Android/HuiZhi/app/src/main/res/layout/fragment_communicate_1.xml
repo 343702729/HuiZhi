@@ -19,7 +19,7 @@
                 android:layout_gravity="center"
                 android:text="团队沟通"
                 android:textSize="@dimen/title_text"
-                android:textColor="@android:color/white"/>
+                android:textColor="@color/title_color"/>
 
         </FrameLayout>
     </LinearLayout>

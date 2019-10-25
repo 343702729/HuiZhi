@@ -33,7 +33,7 @@
         <item name="android:layout_height">50dp</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:paddingRight">30dp</item>
-        <item name="android:src">@mipmap/icon_back</item>
+        <item name="android:src">@mipmap/icon_back_black</item>
         <item name="android:background">@null</item>
     </style>
 

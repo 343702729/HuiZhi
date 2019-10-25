@@ -13,6 +13,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.huizhi.manage.R;
 import com.huizhi.manage.base.BackCliclListener;
@@ -31,6 +32,7 @@ import java.util.Map;
 public class HomeYunYinFXActivity extends Activity {
     private WebView webView;
     private String url = "";
+    private TextView closeBtn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +55,8 @@ public class HomeYunYinFXActivity extends Activity {
         ImageButton backBtn = (ImageButton)findViewById(R.id.back_btn);
 //        backBtn.setOnClickListener(new BackCliclListener(this));
         backBtn.setOnClickListener(backBtnClick);
+        closeBtn = findViewById(R.id.close_btn);
+        closeBtn.setOnClickListener(new BackCliclListener(this));
 
         webView = (WebView)findViewById(R.id.webview);
         WebSettings webSettings = webView.getSettings();
@@ -101,6 +105,7 @@ public class HomeYunYinFXActivity extends Activity {
     onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {
             webView.goBack();//返回上个页面
+            closeBtn.setVisibility(View.VISIBLE);
             return true;
         }
         return super.onKeyDown(keyCode, event);//退出H5界面
@@ -111,6 +116,7 @@ public class HomeYunYinFXActivity extends Activity {
         public void onClick(View view) {
             if (webView.canGoBack()) {
                 webView.goBack();// 返回上一页面
+                closeBtn.setVisibility(View.VISIBLE);
             } else {
                 finish();
             }

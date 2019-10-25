@@ -5,6 +5,7 @@
     android:paddingBottom="15dp"
     android:orientation="vertical">
     <LinearLayout
+        android:id="@+id/item_ll"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:orientation="horizontal">
@@ -18,6 +19,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp">
             <TextView
+                android:id="@+id/train_title_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="2"
@@ -29,13 +31,15 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom">
                 <TextView
+                    android:id="@+id/time_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="2019-07-03 12:00"
+                    android:text=""
                     android:textSize="12sp"
                     android:textColor="@color/gray"/>
                 <TextView
+                    android:id="@+id/type_tv"
                     android:layout_width="50dp"
                     android:layout_height="20dp"
                     android:layout_gravity="right"

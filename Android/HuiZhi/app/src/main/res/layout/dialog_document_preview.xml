@@ -20,7 +20,7 @@
                 android:singleLine="true"
                 android:text="任务标题"
                 android:textSize="@dimen/title_text"
-                android:textColor="@android:color/white"/>
+                android:textColor="@color/title_color"/>
             <ImageButton
                 android:id="@+id/back_btn"
                 android:layout_width="50dp"

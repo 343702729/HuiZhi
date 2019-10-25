@@ -44,25 +44,49 @@ public class ItemTopicFragment extends Fragment {
         return messageLayout;
     }
 
+    public void reLoadData(){
+        getDatas();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        TLog.log("Come into item topic resume");
+
+    }
+
     private void initViews(){
         titlesLL = messageLayout.findViewById(R.id.item_title_ll);
         viewPager = messageLayout.findViewById(R.id.viewpager);
 //        addTitles();
         currentSel = 0;
-        ItemTopicTitleView view1 = new ItemTopicTitleView(activity, true, null, 0, new ItemTitlInfoUpdate());
-        titleViews.add(view1);
-        titlesLL.addView(view1);
-        itemViews.add(view1.getBodyView());
-        pagerAdapter = new ViewPagerAdapter(itemViews);
-        viewPager.setCurrentItem(0, false);
+
     }
 
     private void getDatas(){
+        TLog.log("Come into item topic getDatas");
         TopicRequest request = new TopicRequest();
         request.getCourseCategory("", handler);
     }
 
+    private void initAllViews(){
+        titleViews.clear();
+        titlesLL.removeAllViews();
+        itemViews.clear();
+        ItemTopicTitleView view1 = new ItemTopicTitleView(activity, true, null, 0, new ItemTitlInfoUpdate());
+        titleViews.add(view1);
+        titlesLL.addView(view1);
+        itemViews.add(view1.getBodyView());
+        if(pagerAdapter==null)
+            pagerAdapter = new ViewPagerAdapter(itemViews);
+        else
+            pagerAdapter.updateViewPager(itemViews);
+        viewPager.setCurrentItem(0, false);
+    }
+
     private void addTitles(List<CourseWareCategoryNode> nodes){
+        initAllViews();
+        TLog.log("Come into item topic addTitles");
         if(nodes==null||nodes.size()==0)
             return;
         int i = 1;
@@ -73,7 +97,10 @@ public class ItemTopicFragment extends Fragment {
             itemViews.add(view.getBodyView());
             i++;
         }
-        pagerAdapter = new ViewPagerAdapter(itemViews);
+        if(pagerAdapter==null)
+            pagerAdapter = new ViewPagerAdapter(itemViews);
+        else
+            pagerAdapter.updateViewPager(itemViews);
 //        pagerAdapter.notifyDataSetChanged();
         viewPager.setAdapter(pagerAdapter);
     }

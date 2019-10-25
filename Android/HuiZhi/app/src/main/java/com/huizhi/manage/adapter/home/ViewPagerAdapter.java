@@ -18,6 +18,11 @@ public class ViewPagerAdapter extends PagerAdapter {
         this.views = views;
     }
 
+    public void updateViewPager(List<View> views){
+        this.views = views;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return views.size();

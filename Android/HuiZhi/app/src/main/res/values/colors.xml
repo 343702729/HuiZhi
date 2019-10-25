@@ -22,6 +22,7 @@
     <color name="light_s_red">#EA6F9A</color>
     <color name="light_d_red">#E5286C</color>
     <color name="light_green">#66BB72</color>
+    <color name="light_green_s">#94D050</color>
     <color name="app_green">#54B264</color>
     <color name="green">#00FF00</color>
     <color name="dark_green">#238E23</color>
@@ -49,10 +50,14 @@
 
     <color name="black_light">#535354</color>
     <color name="black">#000000</color>
+    <color name="black_light_s">#0E2C40</color>
     <color name="gray_light">#EDECF2</color>
     <color name="gray_text">#9FA6B5</color>
     <color name="blue_light">#3EB4FE</color>
+    <color name="blue_light_s">#D0E9F6</color>
     <color name="gray_dark_text">#666666</color>
+
+    <color name="title_color">#000000</color>
 
     <color name="kprogresshud_default_color">#b1000000</color>
     <color name="kprogresshud_grey_color">#449E9E9E</color>

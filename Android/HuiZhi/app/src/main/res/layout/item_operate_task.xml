@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <LinearLayout
+        android:id="@+id/task_item_ll"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="30dp"
@@ -10,16 +11,23 @@
         android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:paddingLeft="20dp"
+        android:paddingLeft="15dp"
         android:paddingRight="20dp"
-        android:background="@drawable/frame_circle_graylight">
+        android:background="@drawable/frame_blue_blue_light">
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:background="@color/white"/>
         <TextView
+            android:id="@+id/task_title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:text="新任务"
             android:textSize="14sp"
-            android:textColor="#F3A432"/>
+            android:textColor="@color/white"/>
         <FrameLayout
+            android:id="@+id/task_fl"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
@@ -27,18 +35,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:singleLine="true"
-                android:gravity="center_vertical"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="10dp"
+                android:gravity="center_vertical|right"
+                android:layout_marginLeft="10dp"
                 android:text=""
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:textColor="@color/black_light"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right|center_vertical"
-                android:background="@mipmap/icon_s_arrow_right"/>
+                android:textSize="12sp"
+                android:textColor="#ffc000"/>
         </FrameLayout>
 
     </LinearLayout>

@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.huizhi.manage.R;
+import com.huizhi.manage.activity.base.HtmlWebActivity;
 import com.huizhi.manage.activity.home.HomeEmailInfoActivity;
 import com.huizhi.manage.activity.home.task.HomeTaskAgencyActivity;
 import com.huizhi.manage.activity.home.task.HomeTaskAllocationActivity;
@@ -30,8 +31,10 @@ import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.dialog.JudgeDialog;
 import com.huizhi.manage.http.AsyncFileUpload;
+import com.huizhi.manage.http.URLHtmlData;
 import com.huizhi.manage.login.LoginActivity;
 import com.huizhi.manage.node.EmailInfoNode;
+import com.huizhi.manage.node.TaskSummaryNode;
 import com.huizhi.manage.request.home.HomeUserGetRequest;
 import com.huizhi.manage.util.SharedPrefsUtil;
 import com.huizhi.manage.util.TLog;
@@ -72,6 +75,8 @@ public class NewUserFragment extends Fragment {
         mmLL.setOnClickListener(itemOnClick);
         LinearLayout gyLL = messageLayout.findViewById(R.id.user_gy_ll);
         gyLL.setOnClickListener(itemOnClick);
+        LinearLayout ysLL = messageLayout.findViewById(R.id.user_ys_ll);
+        ysLL.setOnClickListener(itemOnClick);
 
         TextView nameTV = messageLayout.findViewById(R.id.name_tv);
         nameTV.setText(UserInfo.getInstance().getUser().getTeacherName());
@@ -84,11 +89,18 @@ public class NewUserFragment extends Fragment {
         logoutBtn.setOnClickListener(logoutBtnClick);
 
         if(UserInfo.getInstance().getUser().isAdmin()){
-            dbLL.setVisibility(View.VISIBLE);
-            View dbV = messageLayout.findViewById(R.id.user_db_v);
-            dbV.setVisibility(View.VISIBLE);
+            //任务管理
+            fpLL.setOnClickListener(itemOnClick);
+            fpLL.setVisibility(View.VISIBLE);
+//            ImageView fpIV = messageLayout.findViewById(R.id.user_fp_iv);
+//            fpIV.setVisibility(View.VISIBLE);
         }
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         String headImg = AsyncFileUpload.getInstance().getFileUrl(UserInfo.getInstance().getUser().getHeadImgUrl());
         TLog.log("The headimg is:" + headImg);
         ImageView headIV = messageLayout.findViewById(R.id.user_iv);
@@ -101,6 +113,14 @@ public class NewUserFragment extends Fragment {
     private void getDates() {
         HomeUserGetRequest getRequest = new HomeUserGetRequest();
         getRequest.getEmailInfo(UserInfo.getInstance().getUser().getEmail(), handler);
+        getRequest.getUserTaskSummary(UserInfo.getInstance().getUser().getTeacherId(), UserInfo.getInstance().getUser().getSchoolId(), handler);
+    }
+
+    private void updateTaskInfo(TaskSummaryNode node){
+        TextView totalTTV = messageLayout.findViewById(R.id.db_count_tv);
+        if(node.getTotalToDoTaskCount()>0)
+            totalTTV.setVisibility(View.VISIBLE);
+//        totalTTV.setText(String.valueOf(node.getTotalToDoTaskCount()));
     }
 
     private View.OnClickListener itemOnClick = new View.OnClickListener() {
@@ -145,6 +165,12 @@ public class NewUserFragment extends Fragment {
                     intent.setClass(activity, UserHuiZhiAboutActivity.class);
                     startActivity(intent);
                     break;
+                case R.id.user_ys_ll:
+                    intent = new Intent(activity, HtmlWebActivity.class);
+                    intent.putExtra("Title", "隐私协议");
+                    intent.putExtra("Url", URLHtmlData.getPrivacyPolicyUrl());
+                    activity.startActivity(intent);
+                    break;
             }
         }
     };
@@ -162,7 +188,7 @@ public class NewUserFragment extends Fragment {
                 SharedPrefsUtil.putValue(activity, "Account", "");
                 SharedPrefsUtil.putValue(activity, "Password", "");
                 UserInfo.getInstance().setLogin(false);
-                RongIM.getInstance().logout();
+//                RongIM.getInstance().logout();
                 JPushInterface.stopPush(activity);
 //            Intent intent = new Intent(Intent.ACTION_MAIN);
 //            intent.addCategory(Intent.CATEGORY_HOME);
@@ -185,6 +211,12 @@ public class NewUserFragment extends Fragment {
                         return;
                     emailInfoNode = (EmailInfoNode)msg.obj;
 //                    setEmailInfo(emailInfoNode);
+                    break;
+                case Constants.MSG_SUCCESS_TWO:
+                    if(msg.obj==null)
+                        return;
+                    TaskSummaryNode summaryNode = (TaskSummaryNode)msg.obj;
+                    updateTaskInfo(summaryNode);
                     break;
             }
         }

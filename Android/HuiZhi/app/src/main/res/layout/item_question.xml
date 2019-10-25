@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <FrameLayout
+        android:id="@+id/item_fl"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:paddingRight="10dp">

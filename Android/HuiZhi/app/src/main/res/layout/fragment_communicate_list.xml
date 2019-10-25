@@ -19,7 +19,7 @@
                 android:layout_gravity="center"
                 android:text="通讯列表"
                 android:textSize="@dimen/title_text"
-                android:textColor="@android:color/white"/>
+                android:textColor="@color/title_color"/>
 
             <Button
                 android:id="@+id/communicate_users_btn"

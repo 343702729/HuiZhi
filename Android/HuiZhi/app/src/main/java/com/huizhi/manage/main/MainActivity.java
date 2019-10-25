@@ -12,6 +12,7 @@ import android.os.Message;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -34,6 +35,7 @@ import com.huizhi.manage.request.main.MainRequest;
 import com.huizhi.manage.util.AppUtil;
 import com.huizhi.manage.util.NavigationBarUtil;
 import com.huizhi.manage.util.RongUtil;
+import com.huizhi.manage.util.TLog;
 import com.huizhi.manage.version.VersionUtil;
 
 import io.rong.imkit.RongIM;
@@ -42,13 +44,15 @@ import io.rong.imlib.RongIMClient;
 
 public class MainActivity extends FragmentActivity {
     private FragmentManager fragmentManager;
-    private Fragment homeFragment, taskFragment, materialFragment, communicateFragment, communicateListFragment, messageFragment, userFragment;
+    private Fragment homeFragment, taskFragment, materialFragment, communicateFragment, communicateListFragment, userFragment;
+    private NewMessageFragment messageFragment;
     private View homeV, taskV, materialV, communicateV, userV;
     private int currentIndex = -1;
     private boolean isExit = false;
     private int index = 0;
     private boolean isChat = false;
     private Fragment currentFG;
+    private int changeIndex = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,9 +131,11 @@ public class MainActivity extends FragmentActivity {
             case 0:
                 NavigationBarUtil.MIUISetStatusBarLightMode(getWindow(), false);
                 if(homeFragment==null){
+                    TLog.log("Come into main  NewHomeFragment new");
                     homeFragment = new NewHomeFragment();
                     transaction.add(R.id.content, homeFragment);
                 }else{
+                    TLog.log("Come into main  NewHomeFragment onResume");
                     transaction.show(homeFragment);
                     homeFragment.onResume();
                 }
@@ -138,12 +144,14 @@ public class MainActivity extends FragmentActivity {
             case 1:
                 NavigationBarUtil.MIUISetStatusBarLightMode(getWindow(), false);
                 if(messageFragment==null){
+                    TLog.log("Come into main  NewMessageFragment new");
                     messageFragment = new NewMessageFragment();
-//                    messageFragment = new MaterialFragment();
                     transaction.add(R.id.content, messageFragment);
                 }else{
+                    TLog.log("Come into main  NewMessageFragment onResume");
                     transaction.show(messageFragment);
                     messageFragment.onResume();
+                    messageFragment.reloadData();
                 }
                 currentFG = messageFragment;
                 break;
@@ -172,19 +180,43 @@ public class MainActivity extends FragmentActivity {
                 break;
                  */
             case 2:
+                NavigationBarUtil.MIUISetStatusBarLightMode(getWindow(), false);
+                if(materialFragment==null){
+                    TLog.log("Come into main  MaterialFragment new");
+                    materialFragment = new MaterialFragment();
+                    transaction.add(R.id.content, materialFragment);
+                }else{
+                    TLog.log("Come into main  MaterialFragment onResume");
+                    transaction.show(materialFragment);
+                    materialFragment.onResume();
+                }
+                currentFG = materialFragment;
+                break;
+            case 3:
                 NavigationBarUtil.MIUISetStatusBarLightMode(getWindow(), true);
                 if(userFragment==null){
-//                    userFragment = new UserFragment();
+                    TLog.log("Come into main  NewUserFragment new");
                     userFragment = new NewUserFragment();
                     transaction.add(R.id.content, userFragment);
                 }else{
+                    TLog.log("Come into main  NewUserFragment onResume");
                     transaction.show(userFragment);
                     userFragment.onResume();
                 }
                 currentFG = userFragment;
                 break;
+
         }
+//        if(changeIndex==-1||changeIndex==index){
+//
+//        }else if(changeIndex<index)
+//            transaction.setCustomAnimations(R.animator.slide_right_in, R.animator.slide_left_out);
+//        else
+//            transaction.setCustomAnimations(R.animator.slide_left_in, R.animator.slide_right_out);
+//        transaction.replace(R.id.content, currentFG);
+
         transaction.commit();
+        changeIndex = index;
     }
 
     /**
@@ -196,8 +228,8 @@ public class MainActivity extends FragmentActivity {
             transaction.hide(homeFragment);
         if(messageFragment!=null)
             transaction.hide(messageFragment);
-//        if(materialFragment!=null)
-//            transaction.hide(materialFragment);
+        if(materialFragment!=null)
+            transaction.hide(materialFragment);
 //        if(communicateListFragment !=null)
 //            transaction.hide(communicateListFragment);
         if(userFragment!=null)
@@ -210,13 +242,13 @@ public class MainActivity extends FragmentActivity {
 //        int[] bgs = {R.mipmap.home_bg, R.mipmap.task_bg, R.mipmap.material_bg, R.mipmap.communicate_bg, R.mipmap.user_bg};
 //        int[] fcs = {R.mipmap.home_bg_fc, R.mipmap.task_bg_fc, R.mipmap.material_bg_fc, R.mipmap.communicate_bg_fc, R.mipmap.user_bg_fc};
 
-        int[] ivs = {R.id.home_home_iv, R.id.home_task_iv, R.id.home_user_iv};
-        int[] tvs = {R.id.home_home_tv, R.id.home_task_tv, R.id.home_user_tv};
-        int[] bgs = {R.mipmap.home_bg, R.mipmap.icon_message_bg, R.mipmap.icon_user_bg};
-        int[] fcs = {R.mipmap.home_bg_fc, R.mipmap.icon_message_fc, R.mipmap.icon_user_fc};
+        int[] ivs = {R.id.home_home_iv, R.id.home_task_iv, R.id.home_material_iv, R.id.home_user_iv};
+        int[] tvs = {R.id.home_home_tv, R.id.home_task_tv, R.id.home_material_tv, R.id.home_user_tv};
+        int[] bgs = {R.mipmap.home_bg, R.mipmap.icon_message_bg, R.mipmap.icon_material_bg, R.mipmap.icon_user_bg};
+        int[] fcs = {R.mipmap.home_bg_fc, R.mipmap.icon_message_fc, R.mipmap.icon_material_fc, R.mipmap.icon_user_fc};
         ImageView imageView;
         TextView textView;
-        for(int i=0; i<3; i++){
+        for(int i=0; i<4; i++){
             imageView = findViewById(ivs[i]);
             textView = findViewById(tvs[i]);
             if(index==i){
@@ -246,7 +278,7 @@ public class MainActivity extends FragmentActivity {
                     setTabSelection(3);
                     break;
                 case R.id.user_btn:
-                    setTabSelection(2);
+                    setTabSelection(3);
                     break;
             }
 

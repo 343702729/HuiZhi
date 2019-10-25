@@ -20,9 +20,10 @@ import java.util.List;
 
 public class OperateRequest {
 
-    public void getHomeOperate(Handler handler){
+    public void getHomeOperate(String teacherId, Handler handler){
         List<BasicNameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("Method", URLData.METHORD_HOME_OPERATE));
+        params.add(new BasicNameValuePair("teacherId", teacherId));
         ThreadPoolDo.getInstance().executeThread(new HomeOperateThread(params, handler));
     }
 

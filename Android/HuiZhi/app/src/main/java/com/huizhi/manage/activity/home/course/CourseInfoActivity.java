@@ -22,12 +22,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.huizhi.manage.R;
+import com.huizhi.manage.activity.base.HtmlWebActivity;
 import com.huizhi.manage.adapter.home.ViewPagerAdapter;
 import com.huizhi.manage.base.BackCliclListener;
 import com.huizhi.manage.base.BaseInfoUpdate;
 import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.dialog.CourseFilterDialog;
+import com.huizhi.manage.http.URLHtmlData;
 import com.huizhi.manage.node.CourseNode;
 import com.huizhi.manage.node.StudentNode;
 import com.huizhi.manage.request.home.HomeCourseGetRequest;
@@ -35,6 +37,7 @@ import com.huizhi.manage.request.home.HomeCoursePostRequest;
 import com.huizhi.manage.util.AppUtil;
 import com.huizhi.manage.wiget.course.SignMode;
 import com.huizhi.manage.wiget.course.StandardMode;
+import com.ruffian.library.RTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +54,7 @@ public class CourseInfoActivity extends Activity {
     private Button teacherSignBtn, assistantSignBtn;
     private String stuName;
     private String status = "0";
+    private RTextView bkRTV;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,13 +62,13 @@ public class CourseInfoActivity extends Activity {
         setContentView(R.layout.activity_home_course_info);
         initDatas();
         initViews();
-        getDatas();
+//        getDatas();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        getDatas();
+        getDatas();
     }
 
     private void initDatas(){
@@ -84,8 +88,10 @@ public class CourseInfoActivity extends Activity {
         EditText searchET = findViewById(R.id.search_et);
         searchET.setOnEditorActionListener(searchETSearch);
 
+        bkRTV = findViewById(R.id.bk_tv);
         teacherSignBtn = findViewById(R.id.teacher_sign_btn);
         assistantSignBtn = findViewById(R.id.assistant_sign_btn);
+        bkRTV.setOnClickListener(signBtnClick);
         teacherSignBtn.setOnClickListener(signBtnClick);
         assistantSignBtn.setOnClickListener(signBtnClick);
 
@@ -178,6 +184,11 @@ public class CourseInfoActivity extends Activity {
                     return;
                 HomeCoursePostRequest postRequest = new HomeCoursePostRequest();
                 postRequest.postTutorSign(lessonNum, handler);
+            }else if(view.getId()==R.id.bk_tv){
+                Intent intent = new Intent(CourseInfoActivity.this, HtmlWebActivity.class);
+                intent.putExtra("Title", courseNode.getLessonName());
+                intent.putExtra("Url", URLHtmlData.getPrepareDetailUrl(courseNode.getLessonNum()));
+                startActivity(intent);
             }
         }
     };
@@ -318,6 +329,16 @@ public class CourseInfoActivity extends Activity {
             standardMode.setDatas(node.getStudentNodes());
         if(signMode!=null)
             signMode.setDatas(node.getStudentNodes());
+
+        if(node.getIsPrepared()==1){//0是没备课，1已备课。
+            bkRTV.setText("已备课");
+            bkRTV.setBorderColorNormal(getResources().getColor(R.color.app_green));
+            bkRTV.setBackgroundColorNormal(getResources().getColor(R.color.app_green));
+        }else {
+            bkRTV.setText("未备课");
+            bkRTV.setBorderColorNormal(getResources().getColor(R.color.light_red));
+            bkRTV.setBackgroundColorNormal(getResources().getColor(R.color.light_red));
+        }
     }
 
     @Override
