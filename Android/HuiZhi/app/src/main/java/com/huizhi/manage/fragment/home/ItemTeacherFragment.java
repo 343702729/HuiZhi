@@ -165,6 +165,7 @@ public class ItemTeacherFragment extends Fragment {
         List<String> titleList = new ArrayList<>();
 
         for(BannerNode node:bannerNodes){
+            node.setType(3);
             imgsList.add(node.getImgUrl());
             urlList.add(node.getNewsId());
         }

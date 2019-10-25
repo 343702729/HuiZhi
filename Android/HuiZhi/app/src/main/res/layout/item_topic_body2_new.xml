@@ -18,9 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="15dp"
-            android:dividerHeight="1dp"
             android:visibility="gone"
-            android:divider="@color/app_bg"/>
+            android:divider="@null"/>
         <LinearLayout
             android:id="@+id/level3_ll"
             android:layout_width="match_parent"

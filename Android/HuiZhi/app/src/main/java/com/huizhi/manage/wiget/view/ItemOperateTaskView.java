@@ -31,15 +31,15 @@ public class ItemOperateTaskView extends LinearLayout {
         TextView titleTV = findViewById(R.id.task_title_tv);
         TextView taskNTV = findViewById(R.id.task_name_tv);
         titleTV.setText(node.getTaskName());
-        if(node.getExecuteType()==0){
-            taskNTV.setText(node.getStrBlockingDate() + "前执行");
-        }else {
+        if(node.getExecuteStatus()==1){
             taskNTV.setText("已完成");
+        }else {
+            taskNTV.setText(node.getStrBlockingDate() + "前执行");
 //            titleTV.setTextColor(context.getResources().getColor(R.color.light_green_s));
         }
 
-        FrameLayout taskFL = findViewById(R.id.task_fl);
-        taskFL.setOnClickListener(new OnClickListener() {
+        LinearLayout taskLL = findViewById(R.id.task_item_ll);
+        taskLL.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, HtmlWebActivity.class);

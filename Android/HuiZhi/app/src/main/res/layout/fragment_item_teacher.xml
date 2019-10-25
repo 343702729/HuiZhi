@@ -20,7 +20,7 @@
                 <FrameLayout
                     android:id="@+id/banner_fl"
                     android:layout_width="match_parent"
-                    android:layout_height="130dp"
+                    android:layout_height="150dp"
                     android:background="@color/white">
 
                     <com.huizhi.manage.wiget.banner.BannerViewFlow
@@ -124,7 +124,7 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="@mipmap/icon_tch_sk"/>
+                                android:background="@mipmap/icon_tch_bk"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -144,7 +144,7 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="@mipmap/icon_tch_bk"/>
+                                android:background="@mipmap/icon_tch_sk"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"

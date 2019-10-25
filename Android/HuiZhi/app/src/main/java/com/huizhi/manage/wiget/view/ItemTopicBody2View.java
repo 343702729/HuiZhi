@@ -1,5 +1,6 @@
 package com.huizhi.manage.wiget.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import com.huizhi.manage.R;
 import com.huizhi.manage.activity.base.HtmlWebActivity;
+import com.huizhi.manage.activity.home.course.CoursewareActivity;
 import com.huizhi.manage.adapter.home.ViewPagerAdapter;
 import com.huizhi.manage.adapter.topic.TopicItemGVAdapter;
 import com.huizhi.manage.adapter.topic.TopicItemLVAdapter;
@@ -36,7 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemTopicBody2View extends LinearLayout {
-    private Context context;
+    private Activity context;
     private String category;
     private TopicItemPLVAdapter topicItemGVAdapter;
     private LinearLayout level3LL;
@@ -49,7 +51,7 @@ public class ItemTopicBody2View extends LinearLayout {
     private TopicItemLVAdapter adapter;
     private int index;
 
-    public ItemTopicBody2View(Context context, String category, int index){
+    public ItemTopicBody2View(Activity context, String category, int index){
         super(context);
         this.context = context;
         this.category = category;
@@ -78,7 +80,7 @@ public class ItemTopicBody2View extends LinearLayout {
                 }
                 if(node.getTypeCount()==0){
                     //直接架载网页
-                    Intent intent = new Intent(context, HtmlWebActivity.class);
+                    Intent intent = new Intent(context, CoursewareActivity.class);
                     intent.putExtra("Title", node.getCategoryName());
                     intent.putExtra("Url", URLHtmlData.getCourseUrl(UserInfo.getInstance().getUser().getTeacherId(), node.getCategoryId(), "1"));
                     context.startActivity(intent);

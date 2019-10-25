@@ -40,13 +40,36 @@ public class ItemTopicFragment extends Fragment {
         messageLayout = inflater.inflate(R.layout.fragment_item_topic, container, false);
         activity = getActivity();
         initViews();
-
+        getDatas();
         return messageLayout;
+    }
+
+    public void reLoadData(){
+        getDatas();
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        TLog.log("Come into item topic resume");
+
+    }
+
+    private void initViews(){
+        titlesLL = messageLayout.findViewById(R.id.item_title_ll);
+        viewPager = messageLayout.findViewById(R.id.viewpager);
+//        addTitles();
+        currentSel = 0;
+
+    }
+
+    private void getDatas(){
+        TLog.log("Come into item topic getDatas");
+        TopicRequest request = new TopicRequest();
+        request.getCourseCategory("", handler);
+    }
+
+    private void initAllViews(){
         titleViews.clear();
         titlesLL.removeAllViews();
         itemViews.clear();
@@ -59,23 +82,11 @@ public class ItemTopicFragment extends Fragment {
         else
             pagerAdapter.updateViewPager(itemViews);
         viewPager.setCurrentItem(0, false);
-        getDatas();
-    }
-
-    private void initViews(){
-        titlesLL = messageLayout.findViewById(R.id.item_title_ll);
-        viewPager = messageLayout.findViewById(R.id.viewpager);
-//        addTitles();
-        currentSel = 0;
-
-    }
-
-    private void getDatas(){
-        TopicRequest request = new TopicRequest();
-        request.getCourseCategory("", handler);
     }
 
     private void addTitles(List<CourseWareCategoryNode> nodes){
+        initAllViews();
+        TLog.log("Come into item topic addTitles");
         if(nodes==null||nodes.size()==0)
             return;
         int i = 1;

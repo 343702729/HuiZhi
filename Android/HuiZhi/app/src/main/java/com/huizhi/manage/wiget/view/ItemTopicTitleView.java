@@ -1,5 +1,6 @@
 package com.huizhi.manage.wiget.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -16,7 +17,7 @@ import com.huizhi.manage.node.CourseWareCategoryNode;
 import com.ruffian.library.RTextView;
 
 public class ItemTopicTitleView extends LinearLayout {
-    private Context context;
+    private Activity context;
     private boolean flag;
     private CourseWareCategoryNode categoryNode;
 //    private String category;
@@ -27,7 +28,7 @@ public class ItemTopicTitleView extends LinearLayout {
     private RTextView typeTV;
     private ItemTopicBody2View bodyView;
 
-    public ItemTopicTitleView(Context context, boolean flag, CourseWareCategoryNode categoryNode, int index, BaseInfoUpdate infoUpdate){
+    public ItemTopicTitleView(Activity context, boolean flag, CourseWareCategoryNode categoryNode, int index, BaseInfoUpdate infoUpdate){
         super(context);
         this.context = context;
         this.flag = flag;

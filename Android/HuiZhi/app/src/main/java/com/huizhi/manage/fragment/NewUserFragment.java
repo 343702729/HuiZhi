@@ -34,6 +34,7 @@ import com.huizhi.manage.http.AsyncFileUpload;
 import com.huizhi.manage.http.URLHtmlData;
 import com.huizhi.manage.login.LoginActivity;
 import com.huizhi.manage.node.EmailInfoNode;
+import com.huizhi.manage.node.TaskSummaryNode;
 import com.huizhi.manage.request.home.HomeUserGetRequest;
 import com.huizhi.manage.util.SharedPrefsUtil;
 import com.huizhi.manage.util.TLog;
@@ -88,12 +89,6 @@ public class NewUserFragment extends Fragment {
         logoutBtn.setOnClickListener(logoutBtnClick);
 
         if(UserInfo.getInstance().getUser().isAdmin()){
-            dbLL.setVisibility(View.VISIBLE);
-            View dbV = messageLayout.findViewById(R.id.user_db_v);
-            dbV.setVisibility(View.VISIBLE);
-        }
-
-        if(UserInfo.getInstance().getUser().isAdmin()){
             //任务管理
             fpLL.setOnClickListener(itemOnClick);
             fpLL.setVisibility(View.VISIBLE);
@@ -118,6 +113,14 @@ public class NewUserFragment extends Fragment {
     private void getDates() {
         HomeUserGetRequest getRequest = new HomeUserGetRequest();
         getRequest.getEmailInfo(UserInfo.getInstance().getUser().getEmail(), handler);
+        getRequest.getUserTaskSummary(UserInfo.getInstance().getUser().getTeacherId(), UserInfo.getInstance().getUser().getSchoolId(), handler);
+    }
+
+    private void updateTaskInfo(TaskSummaryNode node){
+        TextView totalTTV = messageLayout.findViewById(R.id.db_count_tv);
+        if(node.getTotalToDoTaskCount()>0)
+            totalTTV.setVisibility(View.VISIBLE);
+//        totalTTV.setText(String.valueOf(node.getTotalToDoTaskCount()));
     }
 
     private View.OnClickListener itemOnClick = new View.OnClickListener() {
@@ -208,6 +211,12 @@ public class NewUserFragment extends Fragment {
                         return;
                     emailInfoNode = (EmailInfoNode)msg.obj;
 //                    setEmailInfo(emailInfoNode);
+                    break;
+                case Constants.MSG_SUCCESS_TWO:
+                    if(msg.obj==null)
+                        return;
+                    TaskSummaryNode summaryNode = (TaskSummaryNode)msg.obj;
+                    updateTaskInfo(summaryNode);
                     break;
             }
         }

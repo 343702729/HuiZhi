@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.huizhi.manage.R;
 import com.huizhi.manage.activity.base.HtmlWebActivity;
+import com.huizhi.manage.activity.home.course.CoursewareActivity;
 import com.huizhi.manage.adapter.topic.TopicItemLVAdapter;
 import com.huizhi.manage.base.BaseInfoUpdate;
 import com.huizhi.manage.data.Constants;
@@ -66,7 +67,7 @@ public class ItemTopicBody3View extends LinearLayout {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 CourseWareTypeNode.ObjTypeItem item = (CourseWareTypeNode.ObjTypeItem)adapter.getItem(i-1);
                 TLog.log("Come into listview item click" + i );
-                Intent intent = new Intent(context, HtmlWebActivity.class);
+                Intent intent = new Intent(context, CoursewareActivity.class);
                 intent.putExtra("Title", courseNode.getObjCategory().getCategoryName());
                 intent.putExtra("Url", URLHtmlData.getCourseUrl(UserInfo.getInstance().getUser().getTeacherId(), category, item.getCode() + ""));
 

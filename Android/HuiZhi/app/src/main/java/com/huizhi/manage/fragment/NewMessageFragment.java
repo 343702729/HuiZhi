@@ -18,6 +18,7 @@ import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.fragment.home.ItemHomeFragment;
 import com.huizhi.manage.node.MessageListNode;
 import com.huizhi.manage.request.message.MessageRequest;
+import com.huizhi.manage.util.TLog;
 import com.huizhi.manage.wiget.pullableview.PullToRefreshLayout;
 import com.huizhi.manage.wiget.view.ItemMessageView;
 
@@ -37,14 +38,18 @@ public class NewMessageFragment extends Fragment {
         messageLayout = inflater.inflate(R.layout.fragment_new_message, container, false);
         activity = getActivity();
         initViews();
-
+        getDatas();
         return messageLayout;
+    }
+
+    public void reloadData(){
+        getDatas();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        getDatas();
+
     }
 
     private void initViews(){
@@ -57,6 +62,7 @@ public class NewMessageFragment extends Fragment {
     }
 
     private void getDatas(){
+        TLog.log("Come into message getDatas");
         MessageRequest request = new MessageRequest();
         request.getMessageList(UserInfo.getInstance().getUser().getTeacherId(), String.valueOf(page), String.valueOf(limit), handler);
 //        request.getMessageList("D578E213-0657-4A7A-955B-7B657D5596C6", String.valueOf(page), String.valueOf(limit), handler);

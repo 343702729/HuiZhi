@@ -6,10 +6,13 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,6 +36,7 @@ import static android.view.View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
 public class CoursewareActivity extends Activity{
     private LinearLayout titleLL;
     private ProgressWebView webView;
+    private TextView titleTV;
     private String url = "";
     private TextView closeBtn;
 
@@ -44,7 +48,12 @@ public class CoursewareActivity extends Activity{
         setContentView(R.layout.activity_home_course_ware);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 //        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        initDates();
+        String courseUrl = getIntent().getStringExtra("Url");
+        if(TextUtils.isEmpty(courseUrl))
+            url = "http://app.huizhiart.com/courseware/category/" + UserInfo.getInstance().getUser().getTeacherId();
+        else
+            url = courseUrl;
+//        initDates();
         initViews();
     }
 
@@ -59,6 +68,7 @@ public class CoursewareActivity extends Activity{
 //        AppUtil.setNavigationBar(this);
         ImageButton backBtn = (ImageButton)findViewById(R.id.back_btn);
         backBtn.setOnClickListener(backBtnClick);
+        titleTV = findViewById(R.id.title_tv);
 //        backBtn.setOnClickListener(new BackCliclListener(this));
         closeBtn = findViewById(R.id.close_btn);
         closeBtn.setOnClickListener(new BackCliclListener(this));
@@ -70,6 +80,7 @@ public class CoursewareActivity extends Activity{
 
     private void initWebView(){
         webView =  findViewById(R.id.webview);
+        webView.setWebChromeClient(wcc);
         Map<String, String > map = new HashMap<String, String>() ;
         map.put( "LogonUserId" , UserInfo.getInstance().getUser().getTeacherId()) ;
         webView.loadUrl(url, map);
@@ -171,4 +182,13 @@ public class CoursewareActivity extends Activity{
             getWindow().getDecorView().setSystemUiVisibility(uiFlags);
         }
     }
+
+    private WebChromeClient wcc = new WebChromeClient(){
+        @Override
+        public void onReceivedTitle(WebView view, String title) {
+            super.onReceivedTitle(view, title);
+            if(!TextUtils.isEmpty(title))
+                titleTV.setText(title);
+        }
+    };
 }

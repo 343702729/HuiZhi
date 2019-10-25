@@ -80,8 +80,7 @@
                 <!-- 代办任务 -->
                 <LinearLayout
                     android:id="@+id/user_db_ll"
-                    style="@style/item_line_ll"
-                    android:visibility="gone">
+                    style="@style/item_line_ll">
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -89,6 +88,19 @@
                     <TextView
                         style="@style/info_title_tv"
                         android:text="待办任务"/>
+                    <TextView
+                        android:id="@+id/db_count_tv"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginBottom="10dp"
+                        android:visibility="gone"
+                        android:background="@drawable/frame_circle_dark_red"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
@@ -103,7 +115,6 @@
                     android:id="@+id/user_db_v"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:visibility="gone"
                     android:layout_marginLeft="20dp"
                     android:background="@color/app_bg"/>
 

@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.zxing.activity.CaptureActivity;
@@ -362,6 +363,10 @@ public class ItemHomeFragment extends Fragment {
                     List<BannerNode> bannerNodes = (List<BannerNode>) msg.obj;
                     setNewsBanner(bannerNodes);
                     break;
+                case Constants.MSG_SUCCESS_TWO:
+                    String mesg = (String)msg.obj;
+                    Toast.makeText(activity, mesg, Toast.LENGTH_LONG).show();
+                    break;
                 case Constants.MSG_SUCCESS_FOUR:
                     TeacherTrainingNode.ObjProgress progressNode = (TeacherTrainingNode.ObjProgress)msg.obj;
                     setProgressData(progressNode);
@@ -388,6 +393,8 @@ public class ItemHomeFragment extends Fragment {
             Bundle bundle = data.getExtras();
             String scanResult = bundle.getString(Constant.INTENT_EXTRA_KEY_QR_SCAN);
             TLog.log("The scan result:" + scanResult);
+            HomeNewRequest newRequest = new HomeNewRequest();
+            newRequest.submitLoginInfo(UserInfo.getInstance().getUser().getTeacherId(), scanResult, handler);
         }
     }
 }

@@ -44,7 +44,8 @@ import io.rong.imlib.RongIMClient;
 
 public class MainActivity extends FragmentActivity {
     private FragmentManager fragmentManager;
-    private Fragment homeFragment, taskFragment, materialFragment, communicateFragment, communicateListFragment, messageFragment, userFragment;
+    private Fragment homeFragment, taskFragment, materialFragment, communicateFragment, communicateListFragment, userFragment;
+    private NewMessageFragment messageFragment;
     private View homeV, taskV, materialV, communicateV, userV;
     private int currentIndex = -1;
     private boolean isExit = false;
@@ -150,6 +151,7 @@ public class MainActivity extends FragmentActivity {
                     TLog.log("Come into main  NewMessageFragment onResume");
                     transaction.show(messageFragment);
                     messageFragment.onResume();
+                    messageFragment.reloadData();
                 }
                 currentFG = messageFragment;
                 break;

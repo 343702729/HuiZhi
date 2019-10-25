@@ -16,6 +16,7 @@ import com.huizhi.manage.activity.home.HomeNewsInfoActivity;
 import com.huizhi.manage.activity.task.TaskDetailActivity;
 import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.node.MessageListNode;
+import com.huizhi.manage.request.message.MessageRequest;
 
 public class ItemMessageView extends LinearLayout {
     private Activity context;
@@ -72,6 +73,10 @@ public class ItemMessageView extends LinearLayout {
         }
         @Override
         public void onClick(View view) {
+            if(node==null)
+                return;
+            MessageRequest request = new MessageRequest();
+            request.readMessageDo(node.getMessageId(), null);
             if(type==2){
                 Intent intent = new Intent(context, HomeNewsInfoActivity.class);
                 intent.putExtra("Id", node.getBizId());

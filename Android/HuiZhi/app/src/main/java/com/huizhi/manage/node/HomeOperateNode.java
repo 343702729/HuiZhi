@@ -53,6 +53,7 @@ public class HomeOperateNode {
         private String TaskId;
         private String TaskName;
         private int ExecuteType;
+        private int ExecuteStatus;
         private String BlockingDate;
         private String StrBlockingDate;
         private String Details;
@@ -130,6 +131,14 @@ public class HomeOperateNode {
 
         public void setActiveFlg(boolean activeFlg) {
             ActiveFlg = activeFlg;
+        }
+
+        public int getExecuteStatus() {
+            return ExecuteStatus;
+        }
+
+        public void setExecuteStatus(int executeStatus) {
+            ExecuteStatus = executeStatus;
         }
     }
 

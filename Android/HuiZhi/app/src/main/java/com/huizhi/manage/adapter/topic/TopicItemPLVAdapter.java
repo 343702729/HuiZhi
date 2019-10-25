@@ -6,8 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.huizhi.manage.R;
 import com.huizhi.manage.node.CourseWareCategoryNode;
 
@@ -60,17 +62,19 @@ public class TopicItemPLVAdapter extends BaseAdapter {
             viewHolder.ageTV = convertView.findViewById(R.id.age_tv);
             viewHolder.contentTV = convertView.findViewById(R.id.content_tv);
             viewHolder.enhanceTV = convertView.findViewById(R.id.enhance_tv);
+            viewHolder.bgIV = convertView.findViewById(R.id.item_pic_iv);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.titleTV.setText(node.getCategoryName());
-        if(!TextUtils.isEmpty(node.getTrialAge())) {
-            viewHolder.ageTV.setText(node.getTrialAge());
-            viewHolder.ageTV.setVisibility(View.VISIBLE);
-        }
-        viewHolder.contentTV.setText(node.getStudyDesc());
-        viewHolder.enhanceTV.setText(node.getEnhanceDesc());
+        Glide.with(context).load(node.getFullCategoryCover()).into(viewHolder.bgIV);
+//        viewHolder.titleTV.setText(node.getCategoryName());
+//        if(!TextUtils.isEmpty(node.getTrialAge())) {
+//            viewHolder.ageTV.setText(node.getTrialAge());
+//            viewHolder.ageTV.setVisibility(View.VISIBLE);
+//        }
+//        viewHolder.contentTV.setText(node.getStudyDesc());
+//        viewHolder.enhanceTV.setText(node.getEnhanceDesc());
         return convertView;
     }
 
@@ -79,5 +83,6 @@ public class TopicItemPLVAdapter extends BaseAdapter {
         TextView ageTV;
         TextView contentTV;
         TextView enhanceTV;
+        ImageView bgIV;
     }
 }

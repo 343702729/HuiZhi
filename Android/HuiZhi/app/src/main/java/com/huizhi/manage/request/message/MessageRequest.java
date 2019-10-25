@@ -65,4 +65,39 @@ public class MessageRequest {
             }
         }
     }
+
+    public void readMessageDo(String messageId, Handler handler){
+        List<BasicNameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("Method", URLData.METHORD_MESSAGE_READ));
+        params.add(new BasicNameValuePair("MessageId", messageId));
+        params.add(new BasicNameValuePair("PhoneType", "2"));
+        ThreadPoolDo.getInstance().executeThread(new MessageReadThread(params, handler));
+    }
+
+    private class MessageReadThread extends Thread {
+        private List<BasicNameValuePair> params;
+        private Handler handler;
+
+        public MessageReadThread(List<BasicNameValuePair> params, Handler handler) {
+            this.params = params;
+            this.handler = handler;
+        }
+
+        @Override
+        public void run() {
+            super.run();
+            try {
+                String result = HttpConnect.getHttpConnect(URLData.getUrlMessageService(), params);
+                Log.i("HuiZhi", "The result:" + result);
+                if(TextUtils.isEmpty(result))
+                    return;
+                ResultNode resultNode = JSONUtil.parseResult(result);
+                Log.i("HuiZhi", "The result:" + resultNode.getResult() + "  message:" + resultNode.getMessage() + "  returnObj:" + resultNode.getReturnObj());
+                if(resultNode == null)
+                    return;
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
 }

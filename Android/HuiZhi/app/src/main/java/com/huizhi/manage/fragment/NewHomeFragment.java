@@ -24,7 +24,8 @@ public class NewHomeFragment extends Fragment {
     private View messageLayout;
     private Activity activity;
     private FragmentManager fragmentManager;
-    private Fragment itemHome,itemTeacher, itemOperate, itemTopic;
+    private Fragment itemHome,itemTeacher, itemOperate;
+    private ItemTopicFragment itemTopic;
     private int currentIndex = 0;
     private FrameLayout item1FL, item2FL, item3FL, item4FL;
     private Fragment currentFG;
@@ -126,6 +127,7 @@ public class NewHomeFragment extends Fragment {
                 }else{
                     transaction.show(itemTopic);
                     itemTopic.onResume();
+                    itemTopic.reLoadData();
                 }
                 currentFG = itemTopic;
                 break;

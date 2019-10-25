@@ -124,7 +124,7 @@ public class ItemOperateFragment extends Fragment {
 
     private void getDatas(){
         OperateRequest request = new OperateRequest();
-        request.getHomeOperate(handler);
+        request.getHomeOperate(UserInfo.getInstance().getUser().getTeacherId(), handler);
     }
 
     private void setViewsData(HomeOperateNode node){
@@ -154,11 +154,13 @@ public class ItemOperateFragment extends Fragment {
     private void initBanner(List<BannerNode> bannerNodes){
         if(bannerNodes==null)
             return;
+        pointsLL.removeAllViews();
         List<String> imgsList = new ArrayList<>();
         List<String> urlList = new ArrayList<>();
         List<String> titleList = new ArrayList<>();
 
         for(BannerNode node:bannerNodes){
+            node.setType(2);
             imgsList.add(node.getImgUrl());
             urlList.add(node.getNewsId());
         }

@@ -66,4 +66,47 @@ public class HomeNewRequest {
             }
         }
     }
+
+    /**
+     * 提交登录信息
+     * @param teacherId
+     * @param loginCode
+     * @param handler
+     */
+    public void submitLoginInfo(String teacherId, String loginCode, Handler handler){
+        List<BasicNameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("Method", URLData.METHORD_SUBMIT_LOGIN_INFO));
+        params.add(new BasicNameValuePair("TeacherId", teacherId));
+        params.add(new BasicNameValuePair("PhoneType", "2"));
+        params.add(new BasicNameValuePair("LoginCode", loginCode));
+        ThreadPoolDo.getInstance().executeThread(new SubmitLoginInfoThread(params, handler));
+    }
+
+    private class SubmitLoginInfoThread extends Thread {
+        private List<BasicNameValuePair> params;
+        private Handler handler;
+
+        public SubmitLoginInfoThread(List<BasicNameValuePair> params, Handler handler) {
+            this.params = params;
+            this.handler = handler;
+        }
+
+        @Override
+        public void run() {
+            super.run();
+            try {
+                String result = HttpConnect.getHttpConnect(URLData.getUrlLoginService(), params);
+                Log.i("HuiZhi", "The result:" + result);
+                if(TextUtils.isEmpty(result))
+                    return;
+                ResultNode resultNode = JSONUtil.parseResult(result);
+                Log.i("HuiZhi", "The new home result:" + resultNode.getResult() + "  message:" + resultNode.getMessage() + "  returnObj:" + resultNode.getReturnObj());
+                if(resultNode == null)
+                    return;
+                handler.sendMessage(handler.obtainMessage(Constants.MSG_SUCCESS_TWO, resultNode.getMessage()));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
 }

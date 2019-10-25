@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <LinearLayout
+        android:id="@+id/task_item_ll"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="30dp"
@@ -10,7 +11,7 @@
         android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:paddingLeft="20dp"
+        android:paddingLeft="15dp"
         android:paddingRight="20dp"
         android:background="@drawable/frame_blue_blue_light">
         <ImageView
@@ -21,7 +22,7 @@
             android:id="@+id/task_title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             android:text="新任务"
             android:textSize="14sp"
             android:textColor="@color/white"/>
@@ -35,10 +36,9 @@
                 android:layout_height="match_parent"
                 android:singleLine="true"
                 android:gravity="center_vertical|right"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginLeft="10dp"
                 android:text=""
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textColor="#ffc000"/>
         </FrameLayout>
 

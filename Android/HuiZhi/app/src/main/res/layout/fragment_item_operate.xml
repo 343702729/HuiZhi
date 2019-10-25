@@ -20,7 +20,7 @@
                 <FrameLayout
                     android:id="@+id/banner_fl"
                     android:layout_width="match_parent"
-                    android:layout_height="130dp"
+                    android:layout_height="150dp"
                     android:background="@color/white">
 
                     <com.huizhi.manage.wiget.banner.BannerViewFlow
