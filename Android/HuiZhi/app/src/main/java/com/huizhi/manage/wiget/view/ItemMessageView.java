@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.huizhi.manage.R;
 import com.huizhi.manage.activity.home.HomeMessageInfoActivity;
 import com.huizhi.manage.activity.home.HomeNewsInfoActivity;
+import com.huizhi.manage.activity.home.task.HomeTaskVerifyActivity;
 import com.huizhi.manage.activity.task.TaskDetailActivity;
 import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.node.MessageListNode;
@@ -58,6 +59,10 @@ public class ItemMessageView extends LinearLayout {
             typeTV.setText("任务");
             Glide.with(context).load(R.mipmap.icon_msg_rw).into(tagIV);
             itemLL.setOnClickListener(new MsgItemClick(3));
+        }else if(node.getFunctionType()==4) {   //待审核任务
+            typeTV.setText("任务");
+            Glide.with(context).load(R.mipmap.icon_msg_rw).into(tagIV);
+            itemLL.setOnClickListener(new MsgItemClick(4));
         }
         if(!node.isRead())
             statusIV.setVisibility(View.VISIBLE);
@@ -92,6 +97,10 @@ public class ItemMessageView extends LinearLayout {
                 intent.putExtra("Id", node.getBizId());
                 context.startActivityForResult(intent, Constants.REQUEST_CODE);
 //                context.startActivity(intent);
+            }else if(type==4){
+                Intent intent = new Intent(context, HomeTaskVerifyActivity.class);
+                intent.putExtra("TaskId", node.getBizId());
+                context.startActivityForResult(intent, Constants.REQUEST_CODE);
             }
         }
     }
