@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -47,6 +48,7 @@ import com.huizhi.manage.wiget.pullableview.PullToRefreshLayout;
 import com.huizhi.manage.wiget.view.ItemCourseView;
 import com.huizhi.manage.wiget.view.ItemNewsView;
 import com.huizhi.manage.wiget.view.ItemOperateView;
+import com.huizhi.manage.wiget.view.ItemProductsView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,9 +62,10 @@ public class ItemHomeFragment extends Fragment {
     private LinearLayout pointsLL;
     private PointView pointView;
     private LinearLayout itemNewsLL;
+    private LinearLayout itemProductsLL;
     private LinearLayout itemTeacherLL;
     private LinearLayout itemCategoryLL;
-    private ImageView scanIV;
+    private ImageButton scanIV;
     private ImageView headIV;
 
     private PullRefreshListener pullRefreshListener;
@@ -106,6 +109,9 @@ public class ItemHomeFragment extends Fragment {
         LinearLayout morexwLL = messageLayout.findViewById(R.id.more_xw_ll);
         morexwLL.setOnClickListener(itemOnClick);
 
+        LinearLayout morecpLL = messageLayout.findViewById(R.id.more_cp_ll);
+        morecpLL.setOnClickListener(itemOnClick);
+
         LinearLayout morejsLL = messageLayout.findViewById(R.id.more_teacher_ll);
         morejsLL.setOnClickListener(itemOnClick);
 
@@ -113,6 +119,7 @@ public class ItemHomeFragment extends Fragment {
         moreyyLL.setOnClickListener(itemOnClick);
 
         itemNewsLL = messageLayout.findViewById(R.id.item_news_ll);
+        itemProductsLL = messageLayout.findViewById(R.id.item_products_ll);
         itemTeacherLL = messageLayout.findViewById(R.id.item_teacher_ll);
         itemCategoryLL = messageLayout.findViewById(R.id.item_operate_ll);
 
@@ -157,6 +164,7 @@ public class ItemHomeFragment extends Fragment {
             return;
         setNewsBanner(node.getObjBanner());
         addNewsLL(node.getObjNews());
+        addProductsLL(node.getObjNews2());
         addTeacherLL(node.getObjTeachingTraining());
         addOperateLL(node.getObjBusinessNews());
     }
@@ -271,6 +279,13 @@ public class ItemHomeFragment extends Fragment {
                 case R.id.more_xw_ll://新闻more
                     intent = new Intent();
                     intent.setClass(activity, HomeNewsActivity.class);
+                    intent.putExtra("CategoryId", "1");
+                    startActivity(intent);
+                    break;
+                case R.id.more_cp_ll://产品more
+                    intent = new Intent();
+                    intent.setClass(activity, HomeNewsActivity.class);
+                    intent.putExtra("CategoryId", "2");
                     startActivity(intent);
                     break;
                 case R.id.more_teacher_ll://教师more
@@ -298,6 +313,29 @@ public class ItemHomeFragment extends Fragment {
                 itemNewsLL.addView(new ItemNewsView(activity, items.get(i), false));
             else
                 itemNewsLL.addView(new ItemNewsView(activity, items.get(i), true));
+        }
+
+    }
+
+    private void addProductsLL(List<HomeInfoNode.ObjNew> items){
+        itemProductsLL.removeAllViews();
+        if(items==null)
+            return;
+        for (int i=0; i<items.size();){
+            if(i>=items.size())
+                return;
+            HomeInfoNode.ObjNew item1 = null, item2 = null;
+            item1 = items.get(i);
+            i++;
+            if(i<items.size()) {
+                item2 = items.get(i);
+                i++;
+            }
+
+            if(i+1<items.size())
+                itemProductsLL.addView(new ItemProductsView(activity, item1, item2));
+            else
+                itemProductsLL.addView(new ItemProductsView(activity, item1, item2, true));
         }
 
     }

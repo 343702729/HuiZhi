@@ -118,11 +118,12 @@ public class HomeUserGetRequest {
      * @param pagesize
      * @param handler
      */
-    public void getNewList(int page, int pagesize, Handler handler){
+    public void getNewList(int page, int pagesize, String catrgoryId, Handler handler){
         List<BasicNameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("Method", URLData.METHORD_NEWS_LIST));
         params.add(new BasicNameValuePair("page", String.valueOf(page)));
         params.add(new BasicNameValuePair("pagesize", String.valueOf(pagesize)));
+        params.add(new BasicNameValuePair("CategoryId", catrgoryId));
         ThreadPoolDo.getInstance().executeThread(new NewListThread(params, handler));
     }
 

@@ -75,18 +75,19 @@
                                     android:src="@mipmap/user_icon"/>
                                 <TextView
                                     android:id="@+id/name_tv"
-                                    android:layout_width="65dp"
+                                    android:layout_width="60dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="3dp"
                                     android:singleLine="true"
                                     android:text=""
                                     android:textSize="12sp"
                                     android:textColor="@color/gray_dark_text"/>
-                                <ImageView
+                                <ImageButton
                                     android:id="@+id/scan_iv"
-                                    android:layout_width="15dp"
-                                    android:layout_height="15dp"
-                                    android:background="@mipmap/icon_scan"/>
+                                    android:layout_width="20dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@null"
+                                    android:src="@mipmap/icon_scan"/>
                             </LinearLayout>
 
 
@@ -331,6 +332,66 @@
                         android:orientation="vertical">
 
                     </LinearLayout>
+
+                    <View
+                        android:id="@+id/item_line_v"
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/app_bg"/>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:layout_marginBottom="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="绘智产品"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:textColor="#0E2C40"/>
+                        <LinearLayout
+                            android:id="@+id/more_cp_ll"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|center_vertical"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:layout_marginBottom="2dp"
+                                android:text="更多"
+                                android:textSize="12sp"
+                                android:textColor="@color/gray"/>
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:background="@mipmap/icon_s_arrow_right"/>
+                        </LinearLayout>
+
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:id="@+id/item_products_ll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:orientation="vertical">
+
+                    </LinearLayout>
+
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">

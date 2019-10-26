@@ -5,6 +5,7 @@ import java.util.List;
 public class HomeInfoNode {
     private List<BannerNode> ObjBanner;
     private List<ObjNew> ObjNews;
+    private List<ObjNew> ObjNews2;
     private List<TeacherTrainingNode.ObjTeachingTrainingItem> ObjTeachingTraining;
     private List<HomeOperateNode.ObjNew> ObjBusinessNews;
 
@@ -22,6 +23,14 @@ public class HomeInfoNode {
 
     public void setObjNews(List<ObjNew> objNews) {
         ObjNews = objNews;
+    }
+
+    public List<ObjNew> getObjNews2() {
+        return ObjNews2;
+    }
+
+    public void setObjNews2(List<ObjNew> objNews2) {
+        ObjNews2 = objNews2;
     }
 
     public List<TeacherTrainingNode.ObjTeachingTrainingItem> getObjTeachingTraining() {
@@ -49,6 +58,9 @@ public class HomeInfoNode {
         private String strCreateTime;
         private String strCreateTime1;
         private String IsNotPreview;
+        private int IsRecommend;
+        private String CategoryId;
+        private String CategoryName;
 
         public String getNewsId() {
             return NewsId;
@@ -112,6 +124,30 @@ public class HomeInfoNode {
 
         public void setIsNotPreview(String isNotPreview) {
             IsNotPreview = isNotPreview;
+        }
+
+        public int getIsRecommend() {
+            return IsRecommend;
+        }
+
+        public void setIsRecommend(int isRecommend) {
+            IsRecommend = isRecommend;
+        }
+
+        public String getCategoryId() {
+            return CategoryId;
+        }
+
+        public void setCategoryId(String categoryId) {
+            CategoryId = categoryId;
+        }
+
+        public String getCategoryName() {
+            return CategoryName;
+        }
+
+        public void setCategoryName(String categoryName) {
+            CategoryName = categoryName;
         }
     }
 

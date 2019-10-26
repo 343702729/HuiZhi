@@ -7,6 +7,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.huizhi.manage.R;
 import com.huizhi.manage.base.BackCliclListener;
@@ -33,11 +34,13 @@ public class HomeNewsActivity extends Activity {
     private int page = 1;
     private int totalPages = 1;
     private int pagesize = 10;
+    private String catrgoryId = "1";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_news);
+        catrgoryId = getIntent().getStringExtra("CategoryId");
         initViews();
         getDates(page, pagesize, handler);
     }
@@ -46,6 +49,12 @@ public class HomeNewsActivity extends Activity {
         AppUtil.setNavigationBar(this);
         ImageButton backBtn = (ImageButton)findViewById(R.id.back_btn);
         backBtn.setOnClickListener(new BackCliclListener(this));
+
+        TextView titleTV = findViewById(R.id.title_tv);
+        if("2".equals(catrgoryId))
+            titleTV.setText("绘智产品");
+        else
+            titleTV.setText("绘智新闻");
 
         pullRefreshListener = new PullRefreshListener();
         pullRL = (PullToRefreshLayout)findViewById(R.id.refreshview);
@@ -58,7 +67,7 @@ public class HomeNewsActivity extends Activity {
 
     private void getDates(int page, int pagesize, Handler handler){
         HomeUserGetRequest getRequest = new HomeUserGetRequest();
-        getRequest.getNewList(page, pagesize, handler);
+        getRequest.getNewList(page, pagesize, catrgoryId, handler);
     }
 
     private void refreshDates(){
