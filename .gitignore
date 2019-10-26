@@ -42,3 +42,6 @@ captures/
 *.jks
 Android/HuiZhiBox/
 .idea/
+
+IMLib/
+IMKit/
