@@ -63,7 +63,7 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:layout_width="125dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:gravity="center_vertical|right"
                                 android:layout_gravity="right"
@@ -75,9 +75,10 @@
                                     android:src="@mipmap/user_icon"/>
                                 <TextView
                                     android:id="@+id/name_tv"
-                                    android:layout_width="65dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="3dp"
+                                    android:layout_marginRight="20dp"
                                     android:singleLine="true"
                                     android:text=""
                                     android:textSize="12sp"
