@@ -308,13 +308,29 @@ public class ItemHomeFragment extends Fragment {
         itemNewsLL.removeAllViews();
         if(items==null)
             return;
-        for (int i=0; i<items.size();i++){
-            if(i==0)
-                itemNewsLL.addView(new ItemNewsView(activity, items.get(i), false));
-            else
-                itemNewsLL.addView(new ItemNewsView(activity, items.get(i), true));
-        }
+//        for (int i=0; i<items.size();i++){
+//            if(i==0)
+//                itemNewsLL.addView(new ItemNewsView(activity, items.get(i), false));
+//            else
+//                itemNewsLL.addView(new ItemNewsView(activity, items.get(i), true));
+//        }
 
+        for (int i=0; i<items.size();){
+            if(i>=items.size())
+                return;
+            HomeInfoNode.ObjNew item1 = null, item2 = null;
+            item1 = items.get(i);
+            i++;
+            if(i<items.size()) {
+                item2 = items.get(i);
+                i++;
+            }
+
+            if(i+1<items.size())
+                itemNewsLL.addView(new ItemProductsView(activity, item1, item2));
+            else
+                itemNewsLL.addView(new ItemProductsView(activity, item1, item2, true));
+        }
     }
 
     private void addProductsLL(List<HomeInfoNode.ObjNew> items){

@@ -135,7 +135,8 @@ public class PictureUsualShowActivity extends Activity {
         @Override
         public void onClick(View view) {
             final String url = picList.get(index);
-            final String filename = url.substring(url.lastIndexOf("/") + 1, url.length());
+            String filename = url.substring(url.lastIndexOf("/") + 1, url.length());
+            filename = filename.substring(0, filename.indexOf("?"));
             Log.i("HuiZhi", "The url:" + url + "  filename:" + filename);
             ThreadPoolDo.getInstance().executeThread(new FileUtil.LoadPictureThread(url, filename, Constants.PATH_DOWNLOAD, downloadUpdate));
 
