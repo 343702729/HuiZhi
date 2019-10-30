@@ -5,8 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.huizhi.manage.R;
 import com.huizhi.manage.node.CourseWareTypeNode;
 
@@ -57,16 +59,19 @@ public class TopicItemLVAdapter extends BaseAdapter {
             viewHolder = new ViewHolder();
             viewHolder.titleTV = convertView.findViewById(R.id.item_title_tv);
             viewHolder.descTV = convertView.findViewById(R.id.item_desc_tv);
+            viewHolder.itemIV = convertView.findViewById(R.id.item_iv);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.titleTV.setText(node.getName());
-        viewHolder.descTV.setText(node.getDesc());
+//        viewHolder.descTV.setText(node.getDesc());
+        Glide.with(context).load(node.getCoursewareUrl()).into(viewHolder.itemIV);
         return convertView;
     }
     class ViewHolder {
         TextView titleTV;
         TextView descTV;
+        ImageView itemIV;
     }
 }

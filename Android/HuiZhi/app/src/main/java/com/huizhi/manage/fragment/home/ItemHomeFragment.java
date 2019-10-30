@@ -33,12 +33,14 @@ import com.huizhi.manage.data.Constants;
 import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.http.AsyncFileUpload;
 import com.huizhi.manage.http.URLHtmlData;
+import com.huizhi.manage.login.LoginActivity;
 import com.huizhi.manage.node.BannerNode;
 import com.huizhi.manage.node.HomeInfoNode;
 import com.huizhi.manage.node.HomeOperateNode;
 import com.huizhi.manage.node.TeacherTrainingNode;
 import com.huizhi.manage.request.home.HomeNewRequest;
 import com.huizhi.manage.request.home.HomeUserGetRequest;
+import com.huizhi.manage.util.SharedPrefsUtil;
 import com.huizhi.manage.util.TLog;
 import com.huizhi.manage.wiget.GlideCircleTransform;
 import com.huizhi.manage.wiget.banner.BannerViewFlow;
@@ -52,6 +54,8 @@ import com.huizhi.manage.wiget.view.ItemProductsView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.jpush.android.api.JPushInterface;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -151,7 +155,7 @@ public class ItemHomeFragment extends Fragment {
 //        TeacherRequest request = new TeacherRequest();
 //        request.getProgressData(UserInfo.getInstance().getUser().getTeacherId(), handler);
         HomeNewRequest newRequest = new HomeNewRequest();
-        newRequest.getHomeInfo(handler);
+        newRequest.getHomeInfo(UserInfo.getInstance().getUser().getTeacherId(), handler);
     }
 
     private void getTZDatas(){
@@ -162,6 +166,16 @@ public class ItemHomeFragment extends Fragment {
     private void setViewsData(HomeInfoNode node){
         if(node==null)
             return;
+        if(node.getJobStatus()==1){
+            SharedPrefsUtil.putValue(activity, "Account", "");
+            SharedPrefsUtil.putValue(activity, "Password", "");
+            UserInfo.getInstance().setLogin(false);
+            JPushInterface.stopPush(activity);
+            Intent intent = new Intent();
+            intent.setClass(activity, LoginActivity.class);
+            startActivity(intent);
+            activity.finish();
+        }
         setNewsBanner(node.getObjBanner());
         addNewsLL(node.getObjNews());
         addProductsLL(node.getObjNews2());

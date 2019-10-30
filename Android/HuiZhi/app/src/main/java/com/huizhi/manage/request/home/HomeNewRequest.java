@@ -25,9 +25,10 @@ public class HomeNewRequest {
      * 主界面信息
      * @param handler
      */
-    public void getHomeInfo(Handler handler){
+    public void getHomeInfo(String teacherid, Handler handler){
         List<BasicNameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("Method", URLData.METHORD_HOME_INFO));
+        params.add(new BasicNameValuePair("teacherId", teacherid));
         ThreadPoolDo.getInstance().executeThread(new HomeInfoThread(params, handler));
     }
 

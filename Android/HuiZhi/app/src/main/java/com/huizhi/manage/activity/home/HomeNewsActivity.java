@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.huizhi.manage.R;
 import com.huizhi.manage.base.BackCliclListener;
 import com.huizhi.manage.data.Constants;
+import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.node.NewNode;
 import com.huizhi.manage.node.NewPageNode;
 import com.huizhi.manage.request.home.HomeUserGetRequest;
@@ -67,7 +68,7 @@ public class HomeNewsActivity extends Activity {
 
     private void getDates(int page, int pagesize, Handler handler){
         HomeUserGetRequest getRequest = new HomeUserGetRequest();
-        getRequest.getNewList(page, pagesize, catrgoryId, handler);
+        getRequest.getNewList(page, pagesize, catrgoryId, UserInfo.getInstance().getUser().getTeacherId(), handler);
     }
 
     private void refreshDates(){

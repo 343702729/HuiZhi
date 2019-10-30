@@ -263,8 +263,8 @@ public class URLData {
      * @param newsId
      * @return
      */
-    public static String getUrlNews(String newsId){
-        return URL_HOST + "/news/" + newsId;
+    public static String getUrlNews(String newsId, String teacherid){
+        return URL_HOST + "/news/" + teacherid + "/" + newsId;
     }
 
     /**

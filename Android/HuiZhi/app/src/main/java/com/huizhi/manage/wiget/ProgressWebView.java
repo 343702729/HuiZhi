@@ -161,6 +161,7 @@ public class ProgressWebView extends WebView {
         public boolean onShowFileChooser(WebView webView,
                                          ValueCallback<Uri[]> uploadMsg,
                                          FileChooserParams fileChooserParams) {
+//            Toast.makeText(context, "file chooser", Toast.LENGTH_LONG).show();
             mUploadCallbackAboveL = uploadMsg;
             showOptions();
             return true;

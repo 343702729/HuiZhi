@@ -3,11 +3,20 @@ package com.huizhi.manage.node;
 import java.util.List;
 
 public class HomeInfoNode {
+    private int JobStatus;
     private List<BannerNode> ObjBanner;
     private List<ObjNew> ObjNews;
     private List<ObjNew> ObjNews2;
     private List<TeacherTrainingNode.ObjTeachingTrainingItem> ObjTeachingTraining;
     private List<HomeOperateNode.ObjNew> ObjBusinessNews;
+
+    public int getJobStatus() {
+        return JobStatus;
+    }
+
+    public void setJobStatus(int jobStatus) {
+        JobStatus = jobStatus;
+    }
 
     public List<BannerNode> getObjBanner() {
         return ObjBanner;

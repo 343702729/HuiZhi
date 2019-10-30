@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 
 import com.huizhi.manage.R;
 import com.huizhi.manage.base.BackCliclListener;
+import com.huizhi.manage.data.UserInfo;
 import com.huizhi.manage.http.URLData;
 import com.huizhi.manage.util.AppUtil;
 
@@ -35,7 +36,7 @@ public class HomeNewsInfoActivity extends Activity {
     }
     private void initDates(){
         newsId = getIntent().getStringExtra("Id");
-        newsUrl = URLData.getUrlNews(newsId);
+        newsUrl = URLData.getUrlNews(newsId, UserInfo.getInstance().getUser().getTeacherId());
     }
 
     private void initViews(){

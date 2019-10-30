@@ -8,10 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.huizhi.manage.R;
 import com.huizhi.manage.activity.base.HtmlWebActivity;
 import com.huizhi.manage.activity.home.course.CoursewareActivity;
@@ -35,6 +37,8 @@ public class ItemTopicBody3View extends LinearLayout {
     private TopicItemLVAdapter adapter;
     private BaseInfoUpdate infoUpdate;
     private CourseWareTypeNode courseNode;
+    private LinearLayout itemsLL;
+//    private View headV;
 
     public ItemTopicBody3View(Context context, String category, BaseInfoUpdate infoUpdate){
         super(context);
@@ -56,24 +60,25 @@ public class ItemTopicBody3View extends LinearLayout {
                 infoUpdate.update(true);
             }
         });
-        View headV= View.inflate(context, R.layout.item_topic_lv_title, null);
-        titleTV = headV.findViewById(R.id.title_tv);
-        ListView listView = findViewById(R.id.listview);
-        listView.addHeaderView(headV);
-        adapter = new TopicItemLVAdapter(context, items);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                CourseWareTypeNode.ObjTypeItem item = (CourseWareTypeNode.ObjTypeItem)adapter.getItem(i-1);
-                TLog.log("Come into listview item click" + i );
-                Intent intent = new Intent(context, CoursewareActivity.class);
-                intent.putExtra("Title", courseNode.getObjCategory().getCategoryName());
-                intent.putExtra("Url", URLHtmlData.getCourseUrl(UserInfo.getInstance().getUser().getTeacherId(), category, item.getCode() + ""));
-
-                context.startActivity(intent);
-            }
-        });
+        itemsLL = findViewById(R.id.items_ll);
+//        headV= View.inflate(context, R.layout.item_topic_lv_title, null);
+        titleTV = findViewById(R.id.title_tv);
+//        ListView listView = findViewById(R.id.listview);
+//        listView.addHeaderView(headV);
+//        adapter = new TopicItemLVAdapter(context, items);
+//        listView.setAdapter(adapter);
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                CourseWareTypeNode.ObjTypeItem item = (CourseWareTypeNode.ObjTypeItem)adapter.getItem(i-1);
+//                TLog.log("Come into listview item click" + i );
+//                Intent intent = new Intent(context, CoursewareActivity.class);
+//                intent.putExtra("Title", courseNode.getObjCategory().getCategoryName());
+//                intent.putExtra("Url", URLHtmlData.getCourseUrl(UserInfo.getInstance().getUser().getTeacherId(), category, item.getCode() + ""));
+//
+//                context.startActivity(intent);
+//            }
+//        });
     }
 
     private void getDatas(){
@@ -96,9 +101,25 @@ public class ItemTopicBody3View extends LinearLayout {
     };
 
     private void setViewsData(CourseWareTypeNode node){
+        itemsLL.removeAllViews();
         if(node==null)
             return;
         titleTV.setText(node.getObjCategory().getCategoryName());
-        adapter.updateList(node.getObjTypeList());
+        for (final CourseWareTypeNode.ObjTypeItem item:node.getObjTypeList()){
+            ImageView imageView = new ImageView(context);
+            itemsLL.addView(imageView);
+            Glide.with(context).load(item.getCoursewareUrl()).into(imageView);
+            imageView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, CoursewareActivity.class);
+                    intent.putExtra("Title", courseNode.getObjCategory().getCategoryName());
+                    intent.putExtra("Url", URLHtmlData.getCourseUrl(UserInfo.getInstance().getUser().getTeacherId(), category, item.getCode() + ""));
+
+                    context.startActivity(intent);
+                }
+            });
+        }
+//        adapter.updateList(node.getObjTypeList());
     }
 }

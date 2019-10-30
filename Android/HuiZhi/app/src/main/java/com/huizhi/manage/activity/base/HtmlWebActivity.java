@@ -13,6 +13,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.huizhi.manage.R;
 import com.huizhi.manage.base.BackCliclListener;
@@ -58,8 +59,8 @@ public class HtmlWebActivity extends Activity {
         webView =  findViewById(R.id.webview);
         webView.setWebView(webView);
         webView.setActivity(this);
-        webView.setWebChromeClient(wcc);
-        webView.setDownloadListener(new MyWebViewDownLoadListener());
+//        webView.setWebChromeClient(wcc);
+//        webView.setDownloadListener(new MyWebViewDownLoadListener());
         Map<String, String > map = new HashMap<String, String>() ;
         map.put( "LogonUserId" , UserInfo.getInstance().getUser().getTeacherId()) ;
         if(!TextUtils.isEmpty(url))
@@ -104,6 +105,34 @@ public class HtmlWebActivity extends Activity {
             Uri uri = Uri.parse(url);
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(intent);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == ProgressWebView.TYPE_CAMERA) { // 相册选择
+                webView.onActivityCallBack(true, null);
+            } else if (requestCode == ProgressWebView.TYPE_GALLERY) {// 相册选择
+                if (data != null) {
+                    Uri uri = data.getData();
+                    if (uri != null) {
+                        webView.onActivityCallBack(false, uri);
+                    } else {
+                        Toast.makeText(this, "获取数据为空", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        }
+    }
+
+    // 权限回调
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == ProgressWebView.TYPE_REQUEST_PERMISSION) {
+            webView.toCamera();// 到相机
         }
     }
 
