@@ -97,6 +97,9 @@ public class ItemTeacherFragment extends Fragment {
         LinearLayout itemxxLL = messageLayout.findViewById(R.id.item_xx_ll);
         itemxxLL.setOnClickListener(itemClick);
 
+        LinearLayout itemjlLL = messageLayout.findViewById(R.id.item_jl_ll);
+        itemjlLL.setOnClickListener(itemClick);
+
         LinearLayout morexxLL = messageLayout.findViewById(R.id.more_xx_ll);
         morexxLL.setOnClickListener(itemClick);
 
@@ -127,6 +130,12 @@ public class ItemTeacherFragment extends Fragment {
                     intent = new Intent(activity, HtmlWebActivity.class);
                     intent.putExtra("Title", "教研");
                     intent.putExtra("Url", URLHtmlData.getTrainingListUrl(UserInfo.getInstance().getUser().getTeacherId()));
+                    activity.startActivity(intent);
+                    break;
+                case R.id.item_jl_ll:
+                    intent = new Intent(activity, HtmlWebActivity.class);
+                    intent.putExtra("Title", "学习记录");
+                    intent.putExtra("Url", URLHtmlData.getTeacherLearning(UserInfo.getInstance().getUser().getTeacherId()));
                     activity.startActivity(intent);
                     break;
             }

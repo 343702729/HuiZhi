@@ -110,4 +110,39 @@ public class HomeNewRequest {
             }
         }
     }
+
+    public void getTeacherStatus(String teacherId, Handler handler){
+        List<BasicNameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("Method", URLData.METHORD_TEACHER_STATUS));
+        params.add(new BasicNameValuePair("TeacherId", teacherId));
+        ThreadPoolDo.getInstance().executeThread(new GetTeacherStatusThread(params, handler));
+    }
+
+    private class GetTeacherStatusThread extends Thread {
+        private List<BasicNameValuePair> params;
+        private Handler handler;
+
+        public GetTeacherStatusThread(List<BasicNameValuePair> params, Handler handler) {
+            this.params = params;
+            this.handler = handler;
+        }
+
+        @Override
+        public void run() {
+            super.run();
+            try{
+                String result = HttpConnect.getHttpConnect(URLData.getUrlHomeService(), params);
+                Log.i("HuiZhi", "The result:" + result);
+                if(TextUtils.isEmpty(result))
+                    return;
+                ResultNode resultNode = JSONUtil.parseResult(result);
+                Log.i("HuiZhi", "The new home result:" + resultNode.getResult() + "  message:" + resultNode.getMessage() + "  returnObj:" + resultNode.getReturnObj());
+                if(resultNode == null)
+                    return;
+                handler.sendMessage(handler.obtainMessage(Constants.MSG_SUCCESS_THREE, resultNode.getReturnObj()));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
 }

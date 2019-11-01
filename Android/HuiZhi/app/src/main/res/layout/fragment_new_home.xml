@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:tag="itemTV"
-                android:text="教师中心"
+                android:text="教学中心"
                 android:textSize="14sp"
                 android:textColor="@color/gray_dark_text"/>
             <View

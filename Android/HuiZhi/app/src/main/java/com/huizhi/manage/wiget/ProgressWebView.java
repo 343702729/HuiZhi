@@ -9,9 +9,12 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -26,12 +29,15 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.huizhi.manage.R;
 import com.huizhi.manage.main.MainApplication;
 import com.huizhi.manage.util.TLog;
 import com.huizhi.manage.wiget.util.FileManager;
+
+import java.io.File;
 
 
 /**
@@ -44,6 +50,7 @@ public class ProgressWebView extends WebView {
     private Activity activity;
     private ProgressBar progressBar;
     private ProgressWebView webView;
+    private TextView titleTV;
 
     /** 视频全屏参数 */
     protected static final FrameLayout.LayoutParams COVER_SCREEN_PARAMS = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -63,6 +70,10 @@ public class ProgressWebView extends WebView {
 
     public ProgressWebView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+    }
+
+    public void setTitleTV(TextView titleTV){
+        this.titleTV = titleTV;
     }
 
     public ProgressWebView getWebView() {
@@ -121,6 +132,14 @@ public class ProgressWebView extends WebView {
     public static final int SELECT_PIC_BY_TACK_PHOTO = 100;
 
     class MyWebChromeClient extends WebChromeClient {
+
+        @Override
+        public void onReceivedTitle(WebView view, String title) {
+            super.onReceivedTitle(view, title);
+            if(!TextUtils.isEmpty(title)&&titleTV!=null)
+                titleTV.setText(title);
+        }
+
         // 配置权限（同样在WebChromeClient中实现）
         @Override
         public void onGeolocationPermissionsShowPrompt(String origin,
@@ -257,7 +276,15 @@ public class ProgressWebView extends WebView {
     public void toCamera() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);// 调用android的相机
         // 创建一个文件保存图片
-        fileUri = getOutputMediaFileUri();
+        File file = FileManager.getImgFile(MainApplication.getInstance().getApplicationContext());
+//        fileUri = getOutputMediaFileUri();
+        fileUri = Uri.fromFile(file);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            fileUri = FileProvider.getUriForFile(context, context.getPackageName() + ".FileProvider", file);//通过FileProvider创建一个content类型的Uri
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); //添加这一句表示对目标应用临时授权该Uri所代表的文件
+        }
         Log.d("MainActivity", "fileUri=" + fileUri);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
         ((Activity) context).startActivityForResult(intent, TYPE_CAMERA);

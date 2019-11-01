@@ -645,15 +645,15 @@
         <activity android:name="com.google.zxing.activity.CaptureActivity" android:windowSoftInputMode="stateHidden|stateUnchanged"
             android:screenOrientation="portrait" />
 
-        <!--<provider-->
-            <!--android:name="android.support.v4.content.FileProvider"-->
-            <!--android:authorities="chao.example.instantchat.FileProvider"-->
-            <!--android:exported="false"-->
-            <!--android:grantUriPermissions="true">-->
-            <!--<meta-data-->
-                <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
-                <!--android:resource="@xml/rc_file_path" />-->
-        <!--</provider>-->
+<!--        <provider-->
+<!--            android:name="android.support.v4.content.FileProvider"-->
+<!--            android:authorities="com.huizhi.manage.FileProvider"-->
+<!--            android:exported="false"-->
+<!--            android:grantUriPermissions="true">-->
+<!--            <meta-data-->
+<!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
+<!--                android:resource="@xml/rc_file_path" />-->
+<!--        </provider>-->
 
 
         <!-- packagename.fileprovider -->

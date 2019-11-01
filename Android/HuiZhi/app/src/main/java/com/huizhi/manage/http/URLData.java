@@ -221,6 +221,8 @@ public class URLData {
     private static final String URL_LOGIN_SERVICE = "/ServiceII/LoginService.ashx";
     public static final String METHORD_SUBMIT_LOGIN_INFO = "SubmitLoginInfo";
 
+    public static final String METHORD_TEACHER_STATUS = "GetTeacherJobStatus";
+
 
     /**
      * 用户登录

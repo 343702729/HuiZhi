@@ -2,9 +2,12 @@ package com.huizhi.manage.activity.base;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -40,6 +43,7 @@ public class HtmlWebActivity extends Activity {
         url = getIntent().getStringExtra("Url");
 //        url = "http://app.huizhiart.com/knowledge/c8fc9f64-b193-4d6c-99a0-1a074b7b0c03";
         TLog.log("The url is:" + url);
+        getPermission();
         initViews();
     }
 
@@ -58,6 +62,7 @@ public class HtmlWebActivity extends Activity {
     private void initWebView(){
         webView =  findViewById(R.id.webview);
         webView.setWebView(webView);
+        webView.setTitleTV(titleTV);
         webView.setActivity(this);
 //        webView.setWebChromeClient(wcc);
 //        webView.setDownloadListener(new MyWebViewDownLoadListener());
@@ -136,4 +141,17 @@ public class HtmlWebActivity extends Activity {
         }
     }
 
+    private void getPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ||
+                    ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                            != PackageManager.PERMISSION_GRANTED  ) {
+                requestPermissions(new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.READ_EXTERNAL_STORAGE}, 103);
+            } else {
+//                gotoWebActivity();
+            }
+        } else {
+//            gotoWebActivity();
+        }
+    }
 }

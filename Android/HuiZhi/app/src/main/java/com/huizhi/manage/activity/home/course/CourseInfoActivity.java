@@ -56,6 +56,8 @@ public class CourseInfoActivity extends Activity {
     private String status = "0";
     private RTextView bkRTV;
 
+    private LinearLayout loadingLL;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +83,8 @@ public class CourseInfoActivity extends Activity {
         backBtn.setOnClickListener(new BackCliclListener(this));
         ImageButton settingIB = findViewById(R.id.setting_ib);
         settingIB.setOnClickListener(settingBtnClick);
+
+        loadingLL = findViewById(R.id.loading_ll);
 
         Button filterBtn = findViewById(R.id.filter_btn);
         filterBtn.setOnClickListener(filterBtnClick);
@@ -111,6 +115,7 @@ public class CourseInfoActivity extends Activity {
     }
 
     private void getDatas(){
+        loadingLL.setVisibility(View.VISIBLE);
         HomeCourseGetRequest getRequest = new HomeCourseGetRequest();
         getRequest.getCourseInfo(UserInfo.getInstance().getUser().getTeacherName(), lessonNum,stuName, status,  handler);
     }
@@ -187,7 +192,7 @@ public class CourseInfoActivity extends Activity {
             }else if(view.getId()==R.id.bk_tv){
                 Intent intent = new Intent(CourseInfoActivity.this, HtmlWebActivity.class);
                 intent.putExtra("Title", courseNode.getLessonName());
-                intent.putExtra("Url", URLHtmlData.getPrepareDetailUrl(courseNode.getLessonNum()));
+                intent.putExtra("Url", URLHtmlData.getPrepareDetailUrl(lessonNum));
                 startActivity(intent);
             }
         }
@@ -251,6 +256,7 @@ public class CourseInfoActivity extends Activity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            loadingLL.setVisibility(View.GONE);
             String mesg;
             switch (msg.what){
                 case Constants.MSG_SUCCESS:

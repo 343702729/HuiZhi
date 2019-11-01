@@ -148,6 +148,7 @@ public class ItemHomeFragment extends Fragment {
                 //圆形
                 .transform(new GlideCircleTransform(activity))
                 .into(headIV);
+        getTeacherStatusData();
         getTZDatas();
     }
 
@@ -158,6 +159,11 @@ public class ItemHomeFragment extends Fragment {
         newRequest.getHomeInfo(UserInfo.getInstance().getUser().getTeacherId(), handler);
     }
 
+    private void getTeacherStatusData(){
+        HomeNewRequest request = new HomeNewRequest();
+        request.getTeacherStatus(UserInfo.getInstance().getUser().getTeacherId(), handler);
+    }
+
     private void getTZDatas(){
         HomeUserGetRequest request = new HomeUserGetRequest();
         request.getTZNoReadCount(UserInfo.getInstance().getUser().getTeacherId(), handler);
@@ -166,21 +172,25 @@ public class ItemHomeFragment extends Fragment {
     private void setViewsData(HomeInfoNode node){
         if(node==null)
             return;
-        if(node.getJobStatus()==1){
-            SharedPrefsUtil.putValue(activity, "Account", "");
-            SharedPrefsUtil.putValue(activity, "Password", "");
-            UserInfo.getInstance().setLogin(false);
-            JPushInterface.stopPush(activity);
-            Intent intent = new Intent();
-            intent.setClass(activity, LoginActivity.class);
-            startActivity(intent);
-            activity.finish();
-        }
+        chargeTeacherStatus(node.getJobStatus());
         setNewsBanner(node.getObjBanner());
         addNewsLL(node.getObjNews());
         addProductsLL(node.getObjNews2());
         addTeacherLL(node.getObjTeachingTraining());
         addOperateLL(node.getObjBusinessNews());
+    }
+
+    private void chargeTeacherStatus(int status){
+        if(status!=1)
+            return;
+        SharedPrefsUtil.putValue(activity, "Account", "");
+        SharedPrefsUtil.putValue(activity, "Password", "");
+        UserInfo.getInstance().setLogin(false);
+        JPushInterface.stopPush(activity);
+        Intent intent = new Intent();
+        intent.setClass(activity, LoginActivity.class);
+        startActivity(intent);
+        activity.finish();
     }
 
     private void setProgressData(TeacherTrainingNode.ObjProgress progressNode){
@@ -434,6 +444,14 @@ public class ItemHomeFragment extends Fragment {
                 case Constants.MSG_SUCCESS_TWO:
                     String mesg = (String)msg.obj;
                     Toast.makeText(activity, mesg, Toast.LENGTH_LONG).show();
+                    break;
+                case Constants.MSG_SUCCESS_THREE:
+                    String str = (String) msg.obj;
+                    try {
+                        chargeTeacherStatus(Integer.parseInt(str));
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                     break;
                 case Constants.MSG_SUCCESS_FOUR:
                     TeacherTrainingNode.ObjProgress progressNode = (TeacherTrainingNode.ObjProgress)msg.obj;

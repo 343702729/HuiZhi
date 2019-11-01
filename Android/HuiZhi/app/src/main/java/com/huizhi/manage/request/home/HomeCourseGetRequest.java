@@ -164,6 +164,7 @@ public class HomeCourseGetRequest {
             try {
                 JSONObject jsonOb = new JSONObject(jsonStr);
                 JSONObject lessonJS = jsonOb.getJSONObject("Lesson");
+                node.setLessonNum(JSONUtil.parseString(lessonJS, "LessonNum"));
                 node.setLessonName(JSONUtil.parseString(lessonJS, "LessonName"));
                 node.setLessonTime(JSONUtil.parseString(lessonJS, "LessonTime"));
                 node.setAllStuCount(JSONUtil.parseInt(lessonJS, "AllStuCount"));

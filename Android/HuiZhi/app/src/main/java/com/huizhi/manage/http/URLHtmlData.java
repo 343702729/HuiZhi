@@ -141,4 +141,13 @@ public class URLHtmlData {
     public static String getPrepareDetailUrl(String courseNo){
         return URL_HOST + "/prepare/details/testnum/" + courseNo;
     }
+
+    /**
+     * 学习记录
+     * @param teacherid
+     * @return
+     */
+    public static String getTeacherLearning(String teacherid){
+        return URL_HOST + "/teacher/learning/" + teacherid;
+    }
 }
