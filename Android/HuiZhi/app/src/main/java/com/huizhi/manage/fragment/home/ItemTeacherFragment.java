@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.huizhi.manage.R;
@@ -116,7 +117,8 @@ public class ItemTeacherFragment extends Fragment {
                 case R.id.item_bj_ll:
                     intent = new Intent();
                     intent.setClass(activity, CourseListActivity.class);
-                    activity.startActivity(intent);
+//                    activity.startActivity(intent);
+                    activity.startActivityForResult(intent, Constants.REQUEST_CODE);
                     break;
                 case R.id.item_xx_ll:
                 case R.id.more_xx_ll:
@@ -297,4 +299,13 @@ public class ItemTeacherFragment extends Fragment {
             }
         }
     };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==Constants.REQUEST_CODE){
+//            Toast.makeText(activity, "Come into teacher activity result", Toast.LENGTH_LONG).show();
+            getDatas();
+        }
+    }
 }
