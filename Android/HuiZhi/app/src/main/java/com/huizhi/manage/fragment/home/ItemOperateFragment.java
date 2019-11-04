@@ -106,9 +106,9 @@ public class ItemOperateFragment extends Fragment {
                     intent.putExtra("Url", URLHtmlData.getOperateNewsUrl(UserInfo.getInstance().getUser().getTeacherId()));
                     activity.startActivity(intent);
                     break;
-                case R.id.fa_ll:        //运营指南
-                case R.id.more_fa_ll:   //运营指南 more
-                    intent.putExtra("Title", "运营指南");
+                case R.id.fa_ll:        //运营指导
+                case R.id.more_fa_ll:   //运营指导 more
+                    intent.putExtra("Title", "运营指导");
                     intent.putExtra("Url", URLHtmlData.getOperatePlanUrl(UserInfo.getInstance().getUser().getTeacherId()));
                     activity.startActivity(intent);
                     break;
