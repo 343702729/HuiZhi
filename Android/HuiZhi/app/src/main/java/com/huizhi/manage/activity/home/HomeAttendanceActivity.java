@@ -421,7 +421,7 @@ public class HomeAttendanceActivity extends MapActivity {
             String netName = wifiInfo.getSSID(); //获取被连接网络的名称
             netMac = wifiInfo.getBSSID(); //获取被连接网络的mac地址
             String localMac = wifiInfo.getMacAddress();// 获得本机的MAC地址
-            Toast.makeText(context, "The netname:" + netName + "   mac:" + netMac, Toast.LENGTH_LONG).show();
+//            Toast.makeText(context, "The netname:" + netName + "   mac:" + netMac, Toast.LENGTH_LONG).show();
             Log.i("HuiZhi", "---netName:" + netName);   //---netName:HUAWEI MediaPad
             Log.i("HuiZhi", "---netMac:" + netMac);     //---netMac:78:f5:fd:ae:b9:97
             Log.i("HuiZhi", "---localMac:" + localMac); //---localMac:BC:76:70:9F:56:BD
