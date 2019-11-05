@@ -45,6 +45,7 @@ public class ImagePagerAdapter extends BaseAdapter {
 	private DisplayImageOptions options;
 	private AsyncBitmapLoader asyncBitmapLoader;
 	private List<BannerNode> bannerNodes;
+	private int bannerType = 0;		//1:运营
 
 	public ImagePagerAdapter(Context context, List<String> imageIdList,
                              List<String> urllist, List<String> urlTitlesList, List<BannerNode> bannerNodes) {
@@ -61,14 +62,25 @@ public class ImagePagerAdapter extends BaseAdapter {
 		// 初始化imageLoader 否则会报错
 		imageLoader = ImageLoader.getInstance();
 		imageLoader.init(ImageLoaderConfiguration.createDefault(context));
-		//		options = new DisplayImageOptions.Builder()
-		//				.showStubImage(R.drawable.ic_launcher) // 设置图片下载期间显示的图片
-		//				.showImageForEmptyUri(R.drawable.meinv) // 设置图片Uri为空或是错误的时候显示的图片
-		//				.showImageOnFail(R.drawable.meinv) // 设置图片加载或解码过程中发生错误显示的图片
-		//				.cacheInMemory(true) // 设置下载的图片是否缓存在内存中
-		//				.cacheOnDisc(true) // 设置下载的图片是否缓存在SD卡中
-		//				.build();
 
+	}
+
+	public ImagePagerAdapter(Context context, List<String> imageIdList,
+							 List<String> urllist, List<String> urlTitlesList, List<BannerNode> bannerNodes, int bannerType) {
+		this.context = context;
+		this.imageIdList = imageIdList;
+		if (imageIdList != null) {
+			this.size = imageIdList.size();
+		}
+		this.linkUrlArray = urllist;
+		this.urlTitlesList = urlTitlesList;
+		this.bannerNodes = bannerNodes;
+		isInfiniteLoop = false;
+		asyncBitmapLoader=new AsyncBitmapLoader();
+		// 初始化imageLoader 否则会报错
+		imageLoader = ImageLoader.getInstance();
+		imageLoader.init(ImageLoaderConfiguration.createDefault(context));
+		this.bannerType = bannerType;
 	}
 
 	@Override
@@ -137,22 +149,37 @@ public class ImagePagerAdapter extends BaseAdapter {
 //				String title = urlTitlesList.get(ImagePagerAdapter.this
 //						.getPosition(position));
 				if(node!=null) {
-					if(node.getType()==1){
-						Intent intent = new Intent();
-						intent.setClass(context, HomeNewsInfoActivity.class);
-						intent.putExtra("Id", node.getNewsId());
-						context.startActivity(intent);
-					}else if (node.getType()==2){
-						Intent intent = new Intent(context, HtmlWebActivity.class);
-						intent.putExtra("Title", "运营");
-						intent.putExtra("Url", URLHtmlData.getOperateNewDetail(UserInfo.getInstance().getUser().getTeacherId(), node.getNewsId()));
-						context.startActivity(intent);
-					}else if(node.getType()==3){
-						Intent intent = new Intent(context, HtmlWebActivity.class);
-						intent.putExtra("Title", "教研");
-						intent.putExtra("Url", URLHtmlData.getTrainingDetailUrl(UserInfo.getInstance().getUser().getTeacherId(), node.getNewsId()));
-						context.startActivity(intent);
+					if(bannerType==1){	//运营
+						if (node.getType()==2){
+							Intent intent = new Intent(context, HtmlWebActivity.class);
+							intent.putExtra("Title", "运营");
+							intent.putExtra("Url", URLHtmlData.getOperateSchemeUrl(UserInfo.getInstance().getUser().getTeacherId(), node.getKenowledgeId()));
+							context.startActivity(intent);
+						}else {
+							Intent intent = new Intent(context, HtmlWebActivity.class);
+							intent.putExtra("Title", "运营");
+							intent.putExtra("Url", URLHtmlData.getOperateNewDetail(UserInfo.getInstance().getUser().getTeacherId(), node.getNewsId()));
+							context.startActivity(intent);
+						}
+					}else {
+						if(node.getType()==1){
+							Intent intent = new Intent();
+							intent.setClass(context, HomeNewsInfoActivity.class);
+							intent.putExtra("Id", node.getNewsId());
+							context.startActivity(intent);
+						}else if (node.getType()==2){
+							Intent intent = new Intent(context, HtmlWebActivity.class);
+							intent.putExtra("Title", "运营");
+							intent.putExtra("Url", URLHtmlData.getOperateNewDetail(UserInfo.getInstance().getUser().getTeacherId(), node.getNewsId()));
+							context.startActivity(intent);
+						}else if(node.getType()==3){
+							Intent intent = new Intent(context, HtmlWebActivity.class);
+							intent.putExtra("Title", "教研");
+							intent.putExtra("Url", URLHtmlData.getTrainingDetailUrl(UserInfo.getInstance().getUser().getTeacherId(), node.getNewsId()));
+							context.startActivity(intent);
+						}
 					}
+
 
 				}
 //				if(!TextUtils.isEmpty(title))

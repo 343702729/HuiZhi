@@ -62,6 +62,15 @@ public class URLHtmlData {
     }
 
     /**
+     * 运营指南
+     * @param teacherid
+     * @return
+     */
+    public static String getOperateSchemeUrl(String teacherid, String knowledgeId){
+        return URL_HOST + "/operatescheme/details/" + teacherid + "/" + knowledgeId;
+    }
+
+    /**
      * 运营方案详情
      * @param teacherid
      * @return

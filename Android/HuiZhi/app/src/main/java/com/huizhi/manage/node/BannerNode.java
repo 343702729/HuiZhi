@@ -13,6 +13,7 @@ public class BannerNode {
     private String strCreateTime;
     private boolean activeFlg;
     private String newsTitle;
+    private String KnowledgeId;
     private int Type;
 
     public String getBannerId() {
@@ -85,5 +86,13 @@ public class BannerNode {
 
     public void setType(int type) {
         Type = type;
+    }
+
+    public String getKenowledgeId() {
+        return KnowledgeId;
+    }
+
+    public void setKenowledgeId(String kenowledgeId) {
+        this.KnowledgeId = kenowledgeId;
     }
 }

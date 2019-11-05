@@ -160,11 +160,11 @@ public class ItemOperateFragment extends Fragment {
         List<String> titleList = new ArrayList<>();
 
         for(BannerNode node:bannerNodes){
-            node.setType(2);
+//            node.setType(2);
             imgsList.add(node.getImgUrl());
             urlList.add(node.getNewsId());
         }
-        viewFlow.setAdapter(new ImagePagerAdapter(activity, imgsList, urlList, titleList, bannerNodes).setInfiniteLoop(true));
+        viewFlow.setAdapter(new ImagePagerAdapter(activity, imgsList, urlList, titleList, bannerNodes, 1).setInfiniteLoop(true));
         viewFlow.setmSideBuffer(bannerNodes.size());
         viewFlow.setTimeSpan(4000);
         viewFlow.setSelection(bannerNodes.size() * 1000);
