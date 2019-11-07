@@ -9,8 +9,8 @@ import com.huizhi.manage.data.UserInfo;
  */
 
 public class URLData {
-//    private static final String URL_HOST = "http://app.huizhiart.com";    //http://app.huizhiart.com    http://hzapp.dewinfo.com
-    public static final String URL_HOST = "http://hzapp.dewinfo.com";    //http://app.huizhiart.com    http://hzapp.dewinfo.com
+    public static final String URL_HOST = "http://app.huizhiart.com";    //http://app.huizhiart.com    http://hzapp.dewinfo.com
+//    public static final String URL_HOST = "http://hzapp.dewinfo.com";    //http://app.huizhiart.com    http://hzapp.dewinfo.com
 
     public static final String URL_ABOUT = URL_HOST + "/app/aboutus/";
 
